@@ -1,65 +1,86 @@
-Run<T = None> = fn(T)
-MatchBool<T = None> = if query(T) yes(T) else no(T)
-Fix<T = None> = fn(T)
-Shell<T = None> = fn(T)
-IsSuccess<T = None> = MatchBool<T>
-Start<T> = Run<T> . IsSuccess<T> { Fix<T> }
+Default {}
+DefaultStr str & {Default ""}
+SourceDir DefaultStr & {Default "."}
+Text DefaultStr
+Name DefaultStr
+Message {}
+TextMessage Message & {Text}
+ToolMessage Message & {Name}
+AnyMessage TextMessage | TextMessage
+AnyMessages Array<AnyMessage>
+AiContext {SourceDir,AnyMessages}
 
-SourceDir str = "."
-Message = {}
-TextMessage = Message & {text: str}
-ToolMessage = Message & {name: str}
-AnyMessage = TextMessage | ToolMessage
-AnyMessages = AnyMessage[]
-AiContext
-  SourceDir
-  AnyMessages
+Shell {
+  Log {Process.Log(<T>)}
+  Command {Process.Execute(<T>)}
+}
 
-shell
-  log Shell = process.log(message)
-  command Shell = process.execute(command str) is err | null
+isError T instanceof Error
 
-isSuccess MatchBool = match query
-        is err(_) => yes
-        else      => no
+MatchYesNo {
+    match <Query> {
+        <isError isError> {<Yes>}
+        else {<No>}
+   }
+}
 
-iterate = {
-  loop limit=100 {
-    match step()
-      is complete => break
-      is error    => break
-}}
+Loop {
+ <Do>
+ <Break return>
+ Loop(Do, Break)
+}
 
-success_log IsSuccess.Fix.Done = shell.log("Build completed successfully!")
-error_log IsSuccess.Fix.Done = shell.log("Failed to fix build automatically.")
-run_build Run = shell.command("npm run build") //, Shell<str>
+For {
+  Loop(
+    Do {
+      <Do>
+      i <i> + 1
+    }
+  )
+}
 
-ai_fix(error: str)
-  context = create_ai_context(.source_dir)
+TrueIterate {
+  loop (
+  limit=100
+  ) {
+    match (<step>){
+      case (<complete>){break}
+      case (<error>){break}
+    }
+  }
+}
+
+SuccessLog {shell.log(T="Build completed successfully!")}
+ErrorLog {shell.log(T="Failed to fix build automatically.")}
+RunBuild {shell.command(T="npm run build")}
+IsSmallError {<error:Error>.length < 500}
+IsLargeError {
+    <error:Error>
+    .split_by_double_spaces()
+    .TrueIterate(step <Fix>(_))
+}
+
+AiFix {
+  context AiContext()
   context
-    .add(.message_from_error(error))
+    .add(<error>)
     .add_tool("read_file")
     .add_tool("write_file")
     .add_prompt($"You are an AI expert. Context: {error}")
   .iterate(limit: 100)
+}
 
-is_small = error.length < 500
-
-largeError = err.split_by_double_spaces()
-    .iterate(limit: 100) -> chunk: fix(chunk)
-
-handle_error IsSuccess.Fix =
-  match err
-    is_small => Fix
-    else => Done
-
-start Start = [
+start {
   fix_build
   isSuccess {
-    error_log,
+    handle_error {
+      MatchYesNo {
+        IsSmallError {Fix}
+        IsLargeError {},
+      }
+    }
     success_log
   }
-]
+}
 
-start_with_ai() = start
-  self.isSuccess.Fix.replace(error_log, ai_fix)
+start()
