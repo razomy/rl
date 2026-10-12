@@ -5,42 +5,34 @@ Shell<T = None> = fn(T)
 IsSuccess<T = None> = MatchBool<T>
 Start<T> = Run<T> . IsSuccess<T> { Fix<T> }
 
+SourceDir str = "."
 Message = {}
 TextMessage = Message & {text: str}
 ToolMessage = Message & {name: str}
-AnyMessage = text_message | tool_message
+AnyMessage = TextMessage | ToolMessage
+AnyMessages = AnyMessage[]
+AiContext
+  SourceDir
+  AnyMessages
 
 shell
-  log Shell = (message str)
-  command Shell = (command str) err | null
+  log Shell = process.log(message)
+  command Shell = process.execute(command str) is err | null
 
-run_build Run = () // #, Shell<str>#
-  shell.command("npm run build")
-
-isSuccess MatchBool = (query, yes, no)
-      match query
+isSuccess MatchBool = match query
         is err(_) => yes
         else      => no
 
-success_log IsSuccess.Fix.Done = ()
-  shell.log("Build completed successfully!")
-
-error_log IsSuccess.Fix.Done = () 
-  shell.log("Failed to fix build automatically.")
-
-ai_context
-  source_dir: str
-  messages: any_message[] = []
-
-iterate(step, limit: int = 100)
-  loop limit
+iterate = {
+  loop limit=100 {
     match step()
       is complete => break
       is error    => break
+}}
 
-ai
-  context: ai_context
-  source_dir: str = "."
+success_log IsSuccess.Fix.Done = shell.log("Build completed successfully!")
+error_log IsSuccess.Fix.Done = shell.log("Failed to fix build automatically.")
+run_build Run = shell.command("npm run build") //, Shell<str>
 
 ai_fix(error: str)
   context = create_ai_context(.source_dir)
@@ -51,19 +43,15 @@ ai_fix(error: str)
     .add_prompt($"You are an AI expert. Context: {error}")
   .iterate(limit: 100)
 
-is_small(error: str): bool
-  return error.length < 500
+is_small = error.length < 500
 
-largeError(error: str, fix): bool
-  err.split_by_double_spaces()
-    .iterate(limit: 100) -> chunk:
-      fix(chunk)
+largeError = err.split_by_double_spaces()
+    .iterate(limit: 100) -> chunk: fix(chunk)
 
-handle_error(err: str)  as IsSuccess.Fix
+handle_error IsSuccess.Fix =
   match err
-    is_small => ai.fix(err)
-    else =>
-      // Если лог ошибки большой — делим на фрагменты
+    is_small => Fix
+    else => Done
 
 start Start = [
   fix_build
@@ -73,5 +61,5 @@ start Start = [
   }
 ]
 
-start_with_ai()  = start
-  self.isSuccess.Fix.replace(error_log, handle_error)
+start_with_ai() = start
+  self.isSuccess.Fix.replace(error_log, ai_fix)
