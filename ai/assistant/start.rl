@@ -1,56 +1,50 @@
-// --- 1. Определение типов и структур данных ---
-
+// System layer
 Default {}
-// Используем синтаксис ключ значение для свойств шаблона
-DefaultStr str & { Default "" }
-SourceDir DefaultStr & { Default "." }
+Error Default
+Array <t> & Default
+Str { Default "" }
 
-Text DefaultStr
-Name DefaultStr
+Shell {
+  Log { <message> }
+  Command { <command> }
+}
+
+IsError { <error> instanceof Error }
+
+ErrorMatch {
+  match <query> {
+    IsError(error query) { <onError> }
+    () { <on> }
+  }
+}
+
+
+// Tech Layer
+SourceDir Str & { Default "." }
+
+// Domain Layer
+Text Str
+Name Str
+
+
 Message {}
-
-TextMessage Message & { text Text }
-ToolMessage Message & { name Name }
-
-// Исправлена опечатка (было TextMessage | TextMessage)
+TextMessage Message & { Text }
+ToolMessage Message & { Name }
 AnyMessage TextMessage | ToolMessage
-AnyMessages Array<AnyMessage>
+AnyMessages Array[AnyMessage]
 
 AiContext {
   SourceDir
   AnyMessages
 }
 
-// --- 2. Системные модули ---
-
-Shell {
-  // <T> - это входной слот (аргумент) шаблона
-  Log { Process.Log(<T>) }
-  Command { Process.Execute(<T>) }
-}
-
-// --- 3. Предикаты и паттерн-матчинг ---
-
-// Компактное определение условия
-IsError { <T> instanceof Error }
-
-MatchYesNo {
-  match <Query> {
-    // Вызываем IsError, передавая ему Query в слот T
-    IsError(T <Query>) { <Yes> }
-    Default { <No> }
-  }
-}
-
-// --- 4. Циклы и итерации ---
-
 Loop {
-  <Do>()
-  if <BreakCondition>() { return }
+  <do>
+  if <breakCondition>() { return } // add return as key word
   // Рекурсивный вызов шаблона с передачей тех же параметров
   Loop{
-    Do <Do>
-    BreakCondition <BreakCondition>
+    Do <do>
+    breakCondition <breakCondition>
   }
 }
 
@@ -81,9 +75,9 @@ TrueIterate {
 // --- 5. Конкретные действия (Actions) ---
 
 // Вызов шаблона Shell.Log с передачей параметра T
-SuccessLog { Shell.Log(T "Build completed successfully!") }
-ErrorLog { Shell.Log(T "Failed to fix build automatically.") }
-RunBuild { Shell.Command(T "npm run build") }
+SuccessLog { Shell.Log("Build completed successfully!") }
+ErrorLog { Shell.Log("Failed to fix build automatically.") }
+RunBuild { Shell.Command("npm run build") }
 
 IsSmallError { <error Error> less 500 }
 
@@ -99,12 +93,12 @@ AiFix {
   context = AiContext()
   
   context
-    add(<error>)
-    add_tool("read_file")
-    add_tool("write_file")
-    // Интерполяция строк со слотом <error>
-    add_prompt($"You are an AI expert. Context {<error>}")
-    iterate(limit 100)
+  add(<error>)
+  add_tool("read_file")
+  add_tool("write_file")
+  // Интерполяция строк со слотом <error>
+  add_prompt($"You are an AI expert. Context {<error>}")
+  iterate(limit 100)
 }
 
 // --- 6. Основная точка входа ---
