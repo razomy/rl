@@ -1,7 +1,5 @@
 _ abstracts.meta
 
-Int Number
-
 Cons(T) { Head T, Tail List(T) }
 List(T) None | Cons(T)
 List1(A)       Cons { Head A, Tail None }

@@ -1,61 +1,43 @@
+_ abstracts.chat
 _ abstracts.core
-
-// --- 2. ДОМЕН: СООБЩЕНИЯ И СТРУКТУРЫ ДАННЫХ ---
-
-TextMessage { Text String }
-ToolMessage { Name String }
-Message     TextMessage | ToolMessage
-
-AiContext {
-  SourceDir String
-  Messages  List(Message)
-}
-
-BuildSuccess { Status String }
-BuildError   { Log String, Size Int }
-BuildResult  BuildSuccess | BuildError
-
-SmallError   BuildError & [ _.Size <= 500 ]
-LargeError   BuildError & [ _.Size > 500 ]
-
-// Профиль задачи для исправления: объединяет обработанный лог и бюджет попыток
-TaskPolicy {
-  CleanLog String
-  Retries  Int
-}
-
-// --- 3. МИКРО-СЕРВИСЫ: ТУЛЫ, ПРОМПТЫ И КОНТЕКСТ ---
-
-// Легко добавить новые тулы, не трогая остальной код
-StandardDevTools [
-  List2(
-    ToolMessage { Name "read_file" }
-    ToolMessage { Name "write_file" }
-  )
-]
-
-BuildSystemPrompt(ErrorLog String) [
-  TextMessage {
-    Text "You are an AI expert. Fix this build error: {ErrorLog}"
-  }
-]
-
-// Чистая сборка контекста из лога и набора тулов
-CreateAiContext(ErrorLog String) [
-  AiContext {
-    SourceDir "."
-    Messages  Cons {
-      Head (ErrorLog . BuildSystemPrompt)
-      Tail StandardDevTools
-    }
-  }
-]
+_ ai.assistant.api
 
 
 // --- 4. ДЕЙСТВИЯ (ACTIONS) И ШАГИ ВЕРИФИКАЦИИ ---
 
+Project {
+  Interaction {
+    Schema(T) {
+      Format T
+      Run T
+      Test T
+      Build T
+      Publish T
+    }
+  }
+}
+
+Cli {
+  Schema Project.Interaction.Schema(String)
+}
+
+
+Npm {
+  Cli {
+    Launcher "npm run"
+    BuildCommand(name) ["{Launcher} {name}"]
+  } & Cli.Schema {
+    Format BuildCommand("check")
+    Run BuildCommand("dev")
+    Test BuildCommand("test")
+    Build BuildCommand("build")
+    Publish BuildCommand("publish")
+  }
+}
+
+
 RunBuild [
-  "npm run build"
+  Npm.Cli.Build
   . Shell.Exec
   BuildResult
 ]
@@ -119,6 +101,9 @@ RetryLoop(Policy TaskPolicy) [
   }
 ]
 
+SuccesText(Object, Action, Agectiove) []
+SuccesTextT SuccesText("Сборка", "собрана", "успешно", "с первого раза!")
+LogSuccesTextT SuccesTextT . Shell.Log
 
 // --- 6. ЧИСТЫЙ ОРКЕСТРАТОР (ВЕРХНИЙ УРОВЕНЬ) ---
 
@@ -134,7 +119,7 @@ HandleBuildFailure(Err BuildError) [
 Start [
   RunBuild
   . {
-    BuildSuccess [ "Сборка собрана успешно с первого раза!" . Shell.Log ]
+    BuildSuccess [ LogSuccesTextT ]
     BuildError(Err) [ Err . HandleBuildFailure ]
   }
 ]
