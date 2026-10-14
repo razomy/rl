@@ -1,14 +1,14 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.space
-_ core.energy
-_ core.matter
-_ core.agent
-_ core.information
-_ core.economy
+_ quantity
+_ time
+_ space
+_ energy
+_ matter
+_ agent
+_ information
+_ economy
 
 // =============================================================================
 // Artifacts

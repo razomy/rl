@@ -1,6 +1,6 @@
-_ schema.thing
-_ schema.intangible
-_ schema.place
+_ thing
+_ intangible
+_ place
 
 // =============================================================================
 // CivicStructure and subtypes

@@ -1,9 +1,9 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.organization
-_ schema.person
-_ schema.product
+_ thing
+_ enumerations
+_ intangible
+_ organization
+_ person
+_ product
 
 // =============================================================================
 // MedicalEntity

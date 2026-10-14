@@ -1,10 +1,10 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.space
-_ core.life
+_ quantity
+_ time
+_ space
+_ life
 
 // =============================================================================
 // Agents

@@ -1,12 +1,12 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.space
-_ core.energy
-_ core.matter
-_ core.cosmos
+_ quantity
+_ time
+_ space
+_ energy
+_ matter
+_ cosmos
 
 // =============================================================================
 // Taxonomy

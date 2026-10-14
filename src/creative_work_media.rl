@@ -1,9 +1,9 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.organization
-_ schema.person
-_ schema.creative_work
+_ thing
+_ enumerations
+_ intangible
+_ organization
+_ person
+_ creative_work
 
 // =============================================================================
 // MediaObject

@@ -1,7 +1,7 @@
-_ schema.thing
-_ schema.intangible
-_ schema.place
-_ schema.organization
+_ thing
+_ intangible
+_ place
+_ organization
 
 // =============================================================================
 // LocalBusiness

@@ -1,8 +1,8 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.intangible_commerce
-_ schema.organization
+_ thing
+_ enumerations
+_ intangible
+_ intangible_commerce
+_ organization
 
 // =============================================================================
 // Product

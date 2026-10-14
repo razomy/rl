@@ -1,8 +1,8 @@
-_ schema.thing
-_ schema.intangible
-_ schema.place
-_ schema.creative_work
-_ schema.action
+_ thing
+_ intangible
+_ place
+_ creative_work
+_ action
 
 // =============================================================================
 // Create / Update / Move / Consume / Organize / Play / Search ...

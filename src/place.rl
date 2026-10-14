@@ -1,6 +1,6 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
+_ thing
+_ enumerations
+_ intangible
 
 // =============================================================================
 // Place

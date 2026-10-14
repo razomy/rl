@@ -1,7 +1,7 @@
-_ schema.thing
-_ schema.intangible
-_ schema.intangible_commerce
-_ schema.action
+_ thing
+_ intangible
+_ intangible_commerce
+_ action
 
 // =============================================================================
 // TradeAction and subtypes

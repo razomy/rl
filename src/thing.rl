@@ -1,19 +1,19 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.space
-_ core.energy
-_ core.matter
-_ core.cosmos
-_ core.life
-_ core.agent
-_ core.information
-_ core.society
-_ core.economy
-_ core.artifact
-_ core.event
+_ quantity
+_ time
+_ space
+_ energy
+_ matter
+_ cosmos
+_ life
+_ agent
+_ information
+_ society
+_ economy
+_ artifact
+_ event
 
 // =============================================================================
 // Thing (schema.org root)

@@ -1,11 +1,11 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.intangible_commerce
-_ schema.organization
-_ schema.person
-_ schema.creative_work
-_ schema.creative_work_media
+_ thing
+_ enumerations
+_ intangible
+_ intangible_commerce
+_ organization
+_ person
+_ creative_work
+_ creative_work_media
 
 // =============================================================================
 // Software

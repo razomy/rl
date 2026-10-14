@@ -1,5 +1,5 @@
-_ schema.thing
-_ schema.enumerations
+_ thing
+_ enumerations
 
 // =============================================================================
 // Intangible

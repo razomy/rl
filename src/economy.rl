@@ -1,11 +1,11 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.agent
-_ core.information
-_ core.society
+_ quantity
+_ time
+_ agent
+_ information
+_ society
 
 // =============================================================================
 // Currency and money

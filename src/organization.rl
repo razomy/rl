@@ -1,7 +1,7 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.place
+_ thing
+_ enumerations
+_ intangible
+_ place
 
 // =============================================================================
 // Organization

@@ -1,8 +1,8 @@
-_ schema.thing
-_ schema.enumerations
-_ schema.intangible
-_ schema.place
-_ schema.organization
+_ thing
+_ enumerations
+_ intangible
+_ place
+_ organization
 
 // =============================================================================
 // Person

@@ -1,9 +1,9 @@
-_ schema.thing
-_ schema.intangible
-_ schema.person
-_ schema.organization
-_ schema.creative_work
-_ schema.action
+_ thing
+_ intangible
+_ person
+_ organization
+_ creative_work
+_ action
 
 // =============================================================================
 // InteractAction and subtypes

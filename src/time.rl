@@ -1,7 +1,7 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
+_ quantity
 
 // =============================================================================
 // Points and spans

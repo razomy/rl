@@ -1,9 +1,9 @@
 _ meta
 _ primitives
 _ structures
-_ core.quantity
-_ core.time
-_ core.space
+_ quantity
+_ time
+_ space
 
 // =============================================================================
 // Energy and power
