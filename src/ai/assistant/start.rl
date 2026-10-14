@@ -1,40 +1,11 @@
-_ abstracts.chat
-_ abstracts.core
-_ ai.assistant.api
-
+_ string
+_ grammar
+_ meta
+_ shell
+_ runtimes
+_ ctx
 
 // --- 4. ДЕЙСТВИЯ (ACTIONS) И ШАГИ ВЕРИФИКАЦИИ ---
-
-Project {
-  Interaction {
-    Schema(T) {
-      Format T
-      Run T
-      Test T
-      Build T
-      Publish T
-    }
-  }
-}
-
-Cli {
-  Schema Project.Interaction.Schema(String)
-}
-
-
-Npm {
-  Cli {
-    Launcher "npm run"
-    BuildCommand(name) ["{Launcher} {name}"]
-  } & Cli.Schema {
-    Format BuildCommand("check")
-    Run BuildCommand("dev")
-    Test BuildCommand("test")
-    Build BuildCommand("build")
-    Publish BuildCommand("publish")
-  }
-}
-
 
 RunBuild [
   Npm.Cli.Build
@@ -42,9 +13,6 @@ RunBuild [
   BuildResult
 ]
 
-ChunkLargeLog(Err LargeError) [
-  Log . native_split_double_spaces
-]
 
 // Один изолированный шаг: AI генерирует фикс -> фикс применяется -> билд проверяется
 // На входе: String (лог ошибки). На выходе: BuildResult (BuildSuccess | BuildError)
@@ -61,49 +29,48 @@ AttemptFix(ErrorLog String) [
 
 // Отображение типа ошибки в конкретную политику исправления
 // Хочешь добавить MediumError? Просто добавь одну строчку сюда.
-ResolvePolicy(Err BuildError) [
-  Err . {
+CreateTaskByError(Err BuildError) [
+  Err
+  . {
     SmallError [
-      TaskPolicy { CleanLog Log, Retries 3 }
+      Task { Message Err.Text }
     ]
     LargeError [
-      TaskPolicy { CleanLog (Err . ChunkLargeLog), Retries 5 }
+      Task { Message [Err . ChunkLargeLog] }
     ]
   }
 ]
 
 // Универсальный движок рекурсии, не знающий деталей сборки.
 // Принимает текущую задачу TaskPolicy.
-RetryLoop(Policy TaskPolicy) [
-  Retries . {
-    0 [ "Превышен лимит попыток. Остановка." . Shell.Log ]
 
-    _ [
-      CleanLog
-      . AttemptFix
-      . {
-        BuildSuccess [
-          "Сборка успешно починена!"
-          . Shell.Log
-        ]
+DoTask(Task Task){
+  Task
+  . Message
+  . AttemptFix
+}
 
-        BuildError(NewErr) [
-          "Попытка неудачна. Осталось попыток: {Retries - 1}"
-          . Shell.Log
-          . TaskPolicy {
-            CleanLog NewErr.Log
-            Retries  [ Retries - 1 ]
-          }
-          . RetryLoop
-        ]
-      }
+RetryLoop(Task Task, Retries) [
+  Retries {
+    0 [ "Превышен лимит попыток. Остановка." . Shell.Log . return ]
+    _ [ "Попытка неудачна. Осталось попыток: {Retries - 1}" . Shell.Log ]
+  }
+  Task
+  . DoTask
+  . {
+    BuildSuccess [
+      "Сборка успешно починена!"
+      . Shell.Log
+    ]
+    BuildError(NewErr) [
+      RetryLoop(NewErr, Retries - 1)
     ]
   }
 ]
 
-SuccesText(Object, Action, Agectiove) []
-SuccesTextT SuccesText("Сборка", "собрана", "успешно", "с первого раза!")
-LogSuccesTextT SuccesTextT . Shell.Log
+
+SuccesText ObjectActed("Сборка", "собрана", "успешно", "с первого раза!")
+LogSuccesText SuccesText . Shell.Log
 
 // --- 6. ЧИСТЫЙ ОРКЕСТРАТОР (ВЕРХНИЙ УРОВЕНЬ) ---
 
@@ -112,14 +79,14 @@ HandleBuildFailure(Err BuildError) [
   "Сборка упала (байт лога: {Size}). Запуск пайплайна восстановления..."
   . Shell.Log
   Err
-  . ResolvePolicy
+  . CreateTaskByError
   . RetryLoop
 ]
 
 Start [
   RunBuild
   . {
-    BuildSuccess [ LogSuccesTextT ]
-    BuildError(Err) [ Err . HandleBuildFailure ]
+    BuildSuccess [ LogSuccesText ]
+    BuildError[ _ . HandleBuildFailure ]
   }
 ]

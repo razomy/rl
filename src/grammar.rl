@@ -1,0 +1,1 @@
+ObjectActed(Object, Acted, Details) []

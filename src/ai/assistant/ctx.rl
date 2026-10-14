@@ -1,33 +1,31 @@
-_ abstracts.chat
-_ abstracts.core
+_ message
+_ meta
+_ structures
 
 AiContext {
   SourceDir String
   Messages  List(Message)
 }
 
-BuildSuccess { Status String }
-BuildError   { Log String, Size Int }
+BuildSuccess Any
+BuildError   { Text Text }
 BuildResult  BuildSuccess | BuildError
 
-SmallError   BuildError & [ _.Size <= 500 ]
-LargeError   BuildError & [ _.Size > 500 ]
+SmallError   BuildError & [ _.Text <= 500 ]
+LargeError   BuildError & [ _.Text > 500 ]
 
 // Профиль задачи для исправления: объединяет обработанный лог и бюджет попыток
-TaskPolicy {
-  CleanLog String
-  Retries  Int
+Task {
+  Message String
 }
 
 // --- 3. МИКРО-СЕРВИСЫ: ТУЛЫ, ПРОМПТЫ И КОНТЕКСТ ---
 
 // Легко добавить новые тулы, не трогая остальной код
-StandardDevTools [
-  List2(
+StandardDevTools List(
     ToolMessage { Name "read_file" }
     ToolMessage { Name "write_file" }
-  )
-]
+)
 
 BuildSystemPrompt(ErrorLog String) [
   TextMessage {
@@ -39,10 +37,9 @@ BuildSystemPrompt(ErrorLog String) [
 CreateAiContext(ErrorLog String) [
   AiContext {
     SourceDir "."
-    Messages  Cons {
-      Head (ErrorLog . BuildSystemPrompt)
-      Tail StandardDevTools
-    }
+    Messages List2(
+      ErrorLog
+      BuildSystemPrompt
+    )
   }
 ]
-
