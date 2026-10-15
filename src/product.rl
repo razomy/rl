@@ -1,7 +1,6 @@
 _ thing
 _ enumerations
 _ intangible
-_ intangible_commerce
 _ organization
 
 // =============================================================================
@@ -30,7 +29,7 @@ Product Thing & {
     Height QuantitativeValue
     Depth QuantitativeValue
     Weight QuantitativeValue
-    Offers List(Offer)
+    Offers List(Any)
     AggregateRating
     Review List(Any)
     Audience
@@ -49,7 +48,7 @@ Product Thing & {
     AdditionalProperty List(PropertyValue)
     HasMerchantReturnPolicy MerchantReturnPolicy
     NSN String
-}
+} . DeriveJson
 
 ProductModel      Product & { IsVariantOf ProductModel, PredecessorOf ProductModel, SuccessorOf ProductModel }
 ProductGroup      Product & { HasVariant List(Product), ProductGroupID String, VariesBy List(String) }
@@ -93,6 +92,7 @@ Car               SchemaVehicle & { AcrissCode String, RoofLoad QuantitativeValu
 BusOrCoach        SchemaVehicle & { AcrissCode String, RoofLoad QuantitativeValue }
 Motorcycle        SchemaVehicle
 MotorizedBicycle  SchemaVehicle
+RVParkVehicle     SchemaVehicle
 
 // =============================================================================
 // Transitions

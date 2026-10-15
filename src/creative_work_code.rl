@@ -1,7 +1,7 @@
 _ thing
 _ enumerations
 _ intangible
-_ intangible_commerce
+_ commerce
 _ organization
 _ person
 _ creative_work

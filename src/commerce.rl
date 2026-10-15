@@ -1,302 +1,73 @@
+_ thing
+_ enumerations
+_ intangible
+_ place
+_ organization
+_ product
+
 // =============================================================================
-// Commerce: Products, Vehicles, Services, Offers, Orders & Finance
+// Offers, Pricing, Catalogs & Demand
 // =============================================================================
 
-Product Thing & {
-  AggregateRating     Option(AggregateRating)
-  Audience            Option(Audience)
-  Award               List(Str)
-  Brand               Option(Brand | Organization)
-  Category            Option(Str)
-  Color               Option(Str)
-  CountryOfAssembly   Option(Str)
-  CountryOfLastProcessing Option(Str)
-  CountryOfOrigin     Option(Country)
-  Depth               Option(Distance)
-  Gtin                Option(Str)
-  Gtin12              Option(Str)
-  Gtin13              Option(Str)
-  Gtin14              Option(Str)
-  Gtin8               Option(Str)
-  HasMerchantReturnPolicy Option(MerchantReturnPolicy)
-  Height              Option(Distance)
-  InProductGroupWithID Option(Str)
-  IsAccessoryOrSparePartFor List(Product)
-  IsConsumableFor     List(Product)
-  IsFamilyFriendly    Option(Bool)
-  IsRelatedTo         List(Product | Service)
-  IsSimilarTo         List(Product | Service)
-  ItemCondition       "DamagedCondition" | "NewCondition" | "RefurbishedCondition" | "UsedCondition"
-  Keywords            List(Str)
-  Logo                Option(URL)
-  Manufacturer        Option(Organization)
-  Material            Option(Product | Str)
-  Model               Option(Str)
-  Mpn                 Option(Str)
-  Nsn                 Option(Str)
-  Offers              List(Offer)
-  Pattern             Option(Str)
-  ProductID           Option(Str)
-  ProductionDate      Option(Date)
-  PurchaseDate        Option(Date)
-  ReleaseDate         Option(Date)
-  Review              List(Review)
-  Size                Option(Str)
-  Sku                 Option(Str)
-  Slogan              Option(Str)
-  Weight              Option(Mass)
-  Width               Option(Distance)
-}
-
-IndividualProduct Product & {
-  SerialNumber Str
-}
-ProductGroup Product & {
-  HasVariant      List(Product)
-  ProductGroupID  Str
-  VariesBy        List(Str)
-}
-ProductModel Product & {
-  IsVariantOf Option(ProductGroup | ProductModel)
-  PredecessorOf Option(ProductModel)
-  SuccessorOf Option(ProductModel)
-}
-SomeProducts Product & {
-  InventoryLevel QuantitativeValue
-}
-
-// Vehicles
-Vehicle Product & {
-  AccelerationTime          Option(QuantitativeValue)
-  BodyType                  Option(Str)
-  CargoVolume               Option(QuantitativeValue)
-  DateVehicleFirstRegistered Option(Date)
-  DriveWheelConfiguration   Option(Str)
-  EmissionsCO2              Option(Float)
-  FuelCapacity              Option(QuantitativeValue)
-  FuelConsumption           Option(QuantitativeValue)
-  FuelEfficiency            Option(QuantitativeValue)
-  FuelType                  Option(Str)
-  KnownVehicleDamages       Option(Str)
-  MeetsEmissionStandard     Option(Str)
-  MileageFromOdometer       Option(QuantitativeValue)
-  ModelDate                 Option(Date)
-  NumberOfAirbags           Option(Count)
-  NumberOfAxles             Option(Count)
-  NumberOfDoors             Option(Count)
-  NumberOfForwardGears      Option(Count)
-  NumberOfPreviousOwners    Option(Count)
-  Payload                   Option(Mass)
-  ProductionDate            Option(Date)
-  PurchaseDate              Option(Date)
-  SeatingCapacity           Option(Count)
-  Speed                     Option(QuantitativeValue)
-  SteeringPosition          "LeftHandDriving" | "RightHandDriving"
-  TongueWeight              Option(Mass)
-  TrailerWeight             Option(Mass)
-  VehicleConfiguration      Option(Str)
-  VehicleEngine             Option(EngineSpecification)
-  VehicleIdentificationNumber Option(Str)
-  VehicleInteriorColor      Option(Str)
-  VehicleInteriorType       Option(Str)
-  VehicleModelDate          Option(Date)
-  VehicleSeatingCapacity    Option(Count)
-  VehicleTransmission       Option(Str)
-  WeightTotal               Option(Mass)
-  Wheelbase                 Option(Distance)
-}
-
-EngineSpecification StructuredValue & {
-  EngineDisplacement Option(QuantitativeValue)
-  EnginePower        Option(QuantitativeValue)
-  EngineType         Option(Str)
-  FuelType           Option(Str)
-  Torque             Option(QuantitativeValue)
-}
-
-Car                   Vehicle
-BusOrCoach            Vehicle
-Motorcycle            Vehicle
-MotorizedBicycle      Vehicle
-RVParkVehicle         Vehicle
-
-// Services
-Service Intangible & {
-  AggregateRating    Option(AggregateRating)
-  AreaServed         List(Place)
-  Audience           Option(Audience)
-  AvailableChannel   Option(ServiceChannel)
-  Award              List(Str)
-  Brand              Option(Brand | Organization)
-  Broker             Option(Agent)
-  Category           Option(Str)
-  HasOfferCatalog    Option(OfferCatalog)
-  HoursAvailable     Option(OpeningHoursSpecification)
-  IsRelatedTo        List(Product | Service)
-  IsSimilarTo        List(Product | Service)
-  Logo               Option(URL)
-  Offers             List(Offer)
-  Provider           Option(Agent)
-  ProviderMobility   Option(Str)
-  Review             List(Review)
-  ServiceOutput      Option(Thing)
-  ServiceType        Option(Str)
-  Slogan             Option(Str)
-  TermsOfService     Option(Str | URL)
-}
-
-ServiceChannel Intangible & {
-  AvailableLanguage List(Language)
-  ProcessingTime    Option(Duration)
-  ProvidesService   Option(Service)
-  ServiceLocation   Option(Place)
-  ServicePhone      Option(ContactPoint)
-  ServicePostalAddress Option(PostalAddress)
-  ServiceSmsNumber  Option(ContactPoint)
-  ServiceUrl        Option(URL)
-}
-
-BroadcastService Service & {
-  BroadcastAffiliateOf Option(Organization)
-  BroadcastDisplayName Option(Str)
-  BroadcastFrequency   Option(Str)
-  BroadcastTimezone    Option(Str)
-  Broadcaster          Option(Organization)
-  InLanguage           Option(Language)
-  ParentService        Option(BroadcastService)
-  VideoFormat          Option(Str)
-}
-CableOrSatelliteService Service
-FinancialProduct        Service & {
-  AnnualPercentageRate Option(Float)
-  FeesAndCommissionsSpecification Option(Str)
-  InterestRate         Option(Float)
-}
-BankAccount             FinancialProduct & {
-  AccountMinimumInflow Option(MonetaryAmount)
-  AccountOverdraftLimit Option(MonetaryAmount)
-  BankAccountType      Option(Str)
-}
-CurrencyConversionService FinancialProduct
-InvestmentOrDeposit     FinancialProduct & { Amount MonetaryAmount }
-LoanOrCredit            FinancialProduct & {
-  Amount             MonetaryAmount
-  Currency           Str
-  GracePeriod        Option(Duration)
-  LoanRepaymentForm  Option(Thing)
-  LoanTerm           Option(QuantitativeValue)
-  LoanType           Option(Str)
-  RecourseLoan       Option(Bool)
-  RenegotiableLoan   Option(Bool)
-  RequiredCollateral Option(Thing | Str)
-}
-CreditCard              LoanOrCredit
-MortgageLoan            LoanOrCredit
-PaymentCard             FinancialProduct & {
-  CashBack          Option(Float | Bool)
-  ContactlessPayment Option(Bool)
-  FloorLimit        Option(MonetaryAmount)
-  MonthlyMinimumRepaymentAmount Option(MonetaryAmount)
-}
-PaymentService          FinancialProduct
-FoodService             Service
-GovernmentService       Service & {
-  Jurisdiction       Option(AdministrativeArea)
-  ServiceOperator    Option(Organization)
-}
-TaxiService             Service
-WebAPI                  Service & {
-  Documentation Option(CreativeWork | URL)
-}
-
-// Offers, Pricing & Catalogs
 Offer Intangible & {
-  AcceptedPaymentMethod  List(Str)
-  AddOn                  List(Offer)
+  AcceptedPaymentMethod     List(PaymentMethod)
+  AddOn                     List(Offer)
   AdvanceBookingRequirement Option(QuantitativeValue)
-  AggregateRating        Option(AggregateRating)
-  AreaServed             List(Place)
-  Availability           ItemAvailability
-  AvailabilityEnds       Option(DateTime)
-  AvailabilityStarts     Option(DateTime)
-  AvailableAtOrFrom      Option(Place)
-  AvailableDeliveryMethod List(DeliveryMethod)
-  BusinessFunction       Option(Str)
-  Category               Option(Str)
-  DeliveryLeadTime       Option(QuantitativeValue)
-  EligibleCustomerType   Option(Str)
-  EligibleDuration       Option(QuantitativeValue)
-  EligibleQuantity       Option(QuantitativeValue)
-  EligibleRegion         List(Place)
+  AggregateRating           Option(AggregateRating)
+  AreaServed                List(Place)
+  Availability              ItemAvailability
+  AvailabilityEnds          Option(DateTime)
+  AvailabilityStarts        Option(DateTime)
+  AvailableAtOrFrom         Option(Place)
+  AvailableDeliveryMethod   List(DeliveryMethod)
+  BusinessFunction          Option(BusinessFunction)
+  Category                  Option(Str)
+  DeliveryLeadTime          Option(QuantitativeValue)
+  EligibleCustomerType      Option(Str)
+  EligibleDuration          Option(QuantitativeValue)
+  EligibleQuantity          Option(QuantitativeValue)
+  EligibleRegion            List(Place)
   EligibleTransactionVolume Option(PriceSpecification)
-  Gtin                   Option(Str)
-  HasMerchantReturnPolicy Option(MerchantReturnPolicy)
-  IncludesObject         List(TypeAndQuantityNode)
-  InventoryLevel         Option(QuantitativeValue)
-  ItemCondition          Option(Str)
-  ItemOffered            Product | Service | Event | CreativeWork
-  LeaseLength            Option(QuantitativeValue)
-  Mpn                    Option(Str)
-  OfferedBy              Option(Agent)
-  Price                  Float
-  PriceCurrency          Str
-  PriceSpecification     Option(PriceSpecification)
-  PriceValidUntil        Option(Date)
-  Review                 List(Review)
-  Seller                 Option(Agent)
-  SerialNumber           Option(Str)
-  ShippingDetails        Option(OfferShippingDetails)
-  Sku                    Option(Str)
-  ValidFrom              Option(DateTime)
-  ValidThrough           Option(DateTime)
-  Warranty               Option(WarrantyPromise)
+  Gtin                      Option(Gtin)
+  HasMerchantReturnPolicy   Option(MerchantReturnPolicy)
+  IncludesObject            List(TypeAndQuantityNode)
+  InventoryLevel            Option(QuantitativeValue)
+  ItemCondition             OfferItemCondition
+  ItemOffered               Thing
+  LeaseLength               Option(QuantitativeValue)
+  Mpn                       Option(Str)
+  OfferedBy                 Option(Agent)
+  Price                     Price
+  PriceCurrency             Currency
+  PriceSpecification        Option(PriceSpecification)
+  PriceValidUntil           Option(Date)
+  Review                    List(Any)
+  Seller                    Agent
+  SerialNumber              Option(Str)
+  ShippingDetails           Option(OfferShippingDetails)
+  Sku                       Option(Str)
+  ValidFrom                 Option(DateTime)
+  ValidThrough              Option(DateTime)
+  Warranty                  Option(WarrantyPromise)
 }
 
 AggregateOffer Offer & {
-  HighPrice  Float
-  LowPrice   Float
+  HighPrice  Real
+  LowPrice   Real
   OfferCount Count
   Offers     List(Offer)
 }
 
-OfferCatalog ItemList
+OfferForLease    Offer & { BusinessFunction "LeaseOut" }
+OfferForPurchase Offer & { BusinessFunction "Sell" }
 
-PriceSpecification StructuredValue & {
-  EligibleQuantity          Option(QuantitativeValue)
-  EligibleTransactionVolume Option(PriceSpecification)
-  MaxPrice                  Option(Float)
-  MinPrice                  Option(Float)
-  Price                     Float
-  PriceCurrency             Str
-  ValidFrom                 Option(DateTime)
-  ValidThrough              Option(DateTime)
-  ValueAddedTaxIncluded     Option(Bool)
-}
-UnitPriceSpecification     PriceSpecification & {
-  BillingDuration  Option(QuantitativeValue)
-  BillingIncrement Option(Float)
-  BillingStart     Option(Float)
-  PriceType        Option(Str)
-  ReferenceQuantity Option(QuantitativeValue)
-  UnitCode         Option(Str)
-  UnitText         Option(Str)
-}
-DeliveryChargeSpecification PriceSpecification & {
-  AppliesToDeliveryMethod Option(DeliveryMethod)
-  AreaServed              List(Place)
-}
-PaymentChargeSpecification  PriceSpecification & {
-  AppliesToPaymentMethod Str
-}
-
-MerchantReturnPolicy Intangible & {
-  ApplicableCountry        Option(Country)
-  InStoreReturnsOffered    Option(Bool)
-  MerchantReturnDays       Option(Count)
-  MerchantReturnLink       Option(URL)
-  RefundType               "ExchangeRefund" | "FullRefund" | "StoreCreditRefund"
-  ReturnFees               "FreeReturn" | "OriginalShippingFees" | "RestockingFees" | "ReturnFeesCustomerResponsibility" | "ReturnShippingFees"
-  ReturnMethod             "KeepProduct" | "ReturnAtKiosk" | "ReturnByMail" | "ReturnInStore"
+Demand Intangible & {
+  ItemOffered        Thing
+  Seeks              Thing
+  PriceSpecification Option(PriceSpecification)
+  Availability       ItemAvailability
+  ValidFrom          Option(DateTime)
+  ValidThrough       Option(DateTime)
 }
 
 OfferShippingDetails StructuredValue & {
@@ -306,151 +77,167 @@ OfferShippingDetails StructuredValue & {
   ShippingLabel       Option(Str)
   ShippingRate        Option(MonetaryAmount)
 }
+
 ShippingDeliveryTime StructuredValue & {
   BusinessDays Option(OpeningHoursSpecification)
-  CutoffTime   Option(Time)
+  CutoffTime   Option(TimeOfDay)
   HandlingTime Option(QuantitativeValue)
   TransitTime  Option(QuantitativeValue)
 }
+
 DefinedRegion StructuredValue & {
   AddressCountry Option(Str)
   AddressRegion  Option(Str)
   PostalCode     Option(Str)
 }
 
-WarrantyPromise StructuredValue & {
-  DurationOfWarranty QuantitativeValue
-  WarrantyScope      Str
-}
-TypeAndQuantityNode StructuredValue & {
-  AmountOfThisGood Float
-  BusinessFunction Option(Str)
-  TypeOfGood       Product | Service
-  UnitCode         Option(Str)
-  UnitText         Option(Str)
-}
-
-// Orders, Invoices, Reservations & Receipts
-Order Intangible & {
-  AcceptedOffer            List(Offer)
-  BillingAddress           Option(PostalAddress)
-  Broker                   Option(Agent)
-  ConfirmationNumber       Option(Str)
-  Customer                 Agent
-  Discount                 Option(Float | Str)
-  DiscountCode             Option(Str)
-  DiscountCurrency         Option(Str)
-  IsGift                   Option(Bool)
-  OrderDate                DateTime
-  OrderDelivery            Option(ParcelDelivery)
-  OrderNumber              Str
-  OrderStatus              OrderStatus
-  OrderedItem              List(OrderItem | Product | Service)
-  PartOfInvoice            Option(Invoice)
-  PaymentDueDate           Option(DateTime)
-  PaymentMethod            Option(Str)
-  PaymentMethodId          Option(Str)
-  PaymentUrl               Option(URL)
-  Seller                   Agent
-}
+// =============================================================================
+// Orders, Invoices, Reservations & Tickets
+// =============================================================================
 
 OrderItem Intangible & {
   OrderDelivery   Option(ParcelDelivery)
   OrderItemNumber Str
   OrderItemStatus OrderStatus
   OrderQuantity   Count
-  OrderedItem     Product | Service | OrderItem
+  OrderedItem     Thing
 }
 
-ParcelDelivery Intangible & {
-  DeliveryAddress       PostalAddress
-  DeliveryStatus        Option(DeliveryEvent)
-  ExpectedArrivalFrom   Option(DateTime)
-  ExpectedArrivalUntil  Option(DateTime)
-  HasDeliveryMethod     Option(DeliveryMethod)
-  ItemShipped           List(Product)
-  OriginAddress         Option(PostalAddress)
-  PartOfOrder           Option(Order)
-  Provider              Option(Agent)
-  TrackingNumber        Option(Str)
-  TrackingUrl           Option(URL)
+Order Intangible & {
+  Id                 Str
+  OrderNumber        Str
+  OrderDate          DateTime
+  OrderStatus        OrderStatus
+  Amount             Int
+  Customer           Agent
+  Seller             Agent
+  Broker             Option(Agent)
+  AcceptedOffer      List(Offer)
+  OrderedItem        List(OrderItem)
+  BillingAddress     Option(PostalAddress)
+  ConfirmationNumber Option(Str)
+  Discount           Option(Real)
+  DiscountCode       Option(Str)
+  DiscountCurrency   Option(Str)
+  IsGift             Option(Bool)
+  OrderDelivery      Option(ParcelDelivery)
+  PartOfInvoice      Option(Invoice)
+  PaymentDueDate     Option(DateTime)
+  PaymentMethod      Option(PaymentMethod)
+  PaymentMethodId    Option(Str)
+  PaymentUrl         Option(URL)
 }
 
 Invoice Intangible & {
   AccountId            Option(Str)
-  BillingPeriod        Option(Duration)
+  BillingPeriod        Option(Duration_)
   Broker               Option(Agent)
   Category             Option(Str)
   ConfirmationNumber   Option(Str)
   Customer             Agent
-  MinimumPaymentDue    Option(MonetaryAmount | PriceSpecification)
+  Provider             Agent
   PaymentDueDate       Option(DateTime)
-  PaymentMethod        Option(Str)
+  PaymentMethod        Option(PaymentMethod)
   PaymentMethodId      Option(Str)
   PaymentStatus        PaymentStatusType
-  Provider             Agent
+  TotalPaymentDue      MonetaryAmount
+  MinimumPaymentDue    Option(MonetaryAmount)
   ReferencesOrder      List(Order)
   ScheduledPaymentDate Option(Date)
-  TotalPaymentDue      MonetaryAmount | PriceSpecification
 }
-
-Reservation Intangible & {
-  BookingTime       Option(DateTime)
-  Broker            Option(Agent)
-  ModifiedTime      Option(DateTime)
-  PriceCurrency     Option(Str)
-  ProgramMembershipUsed Option(Thing)
-  Provider          Option(Agent)
-  ReservationFor    Thing
-  ReservationId     Str
-  ReservationStatus "ReservationCancelled" | "ReservationConfirmed" | "ReservationHold" | "ReservationPending"
-  ReservedTicket    Option(Ticket)
-  TotalPrice        Option(Float | MonetaryAmount)
-  UnderName         Option(Agent)
-}
-BusReservation          Reservation
-EventReservation        Reservation
-FlightReservation       Reservation & {
-  BoardingGroup  Option(Str)
-  PassengerPriorityStatus Option(Str)
-  PassengerSequenceNumber Option(Str)
-  SecurityScreening Option(Str)
-}
-FoodEstablishmentReservation Reservation & {
-  EndTime   DateTime
-  PartySize Count
-  StartTime DateTime
-}
-LodgingReservation      Reservation & {
-  CheckinTime  DateTime
-  CheckoutTime DateTime
-  LodgingUnitType Option(Str)
-  NumAdults    Count
-  NumChildren  Count
-}
-RentalCarReservation    Reservation & {
-  DropoffLocation Place
-  DropoffTime     DateTime
-  PickupLocation  Place
-  PickupTime      DateTime
-}
-TaxiReservation         Reservation
-TrainReservation        Reservation
 
 Ticket Intangible & {
-  DateIssued    Option(DateTime)
-  IssuedBy      Option(Organization)
-  PriceCurrency Option(Str)
   TicketNumber  Str
   TicketToken   Option(Str)
   TicketedSeat  Option(Seat)
-  TotalPrice    Option(Float | MonetaryAmount)
+  TotalPrice    Option(PriceSpecification)
+  PriceCurrency Option(Str)
+  IssuedBy      Option(Agent)
   UnderName     Option(Agent)
+  DateIssued    Option(DateTime)
 }
 
-Seat Intangible & {
-  SeatNumber  Str
-  SeatRow     Option(Str)
-  SeatSection Option(Str)
-  SeatingType Option(Str)
+Reservation Intangible & {
+  ReservationId         Str
+  ReservationStatus     ReservationStatusType
+  ReservationFor        Thing
+  UnderName             Option(Agent)
+  Broker                Option(Agent)
+  Provider              Option(Agent)
+  BookingTime           Option(DateTime)
+  ModifiedTime          Option(DateTime)
+  ReservedTicket        Option(Ticket)
+  TotalPrice            Option(PriceSpecification)
+  PriceCurrency         Option(Str)
+  ProgramMembershipUsed Option(ProgramMembership)
 }
+
+BusReservation               Reservation
+EventReservation             Reservation
+FlightReservation            Reservation & { BoardingGroup Option(Str), PassengerPriorityStatus Option(Str), PassengerSequenceNumber Option(Str), SecurityScreening Option(Str) }
+FoodEstablishmentReservation Reservation & { PartySize Count, StartTime DateTime, EndTime DateTime }
+LodgingReservation           Reservation & { CheckinTime DateTime, CheckoutTime DateTime, LodgingUnitType Option(Str), NumAdults Count, NumChildren Count }
+RentalCarReservation         Reservation & { PickupLocation Place, DropoffLocation Place, PickupTime DateTime, DropoffTime DateTime }
+ReservationPackage           Reservation & { SubReservation List(Reservation) }
+TaxiReservation              Reservation & { PartySize Count, PickupLocation Place, PickupTime DateTime }
+TrainReservation             Reservation
+BoatReservation              Reservation
+
+// =============================================================================
+// Ontological Typestate & Railway-Free Fulfillment (README Section 8, 9, 11)
+// =============================================================================
+
+Reserved   { ReservedAt Int }
+Paid       { TransactionId Str }
+OutOfStock { Reason Str }
+NoMoney    { Reason Str }
+
+ReserveStock(O Order) [
+  Amount . {
+    [ _ > 0 ] [ O & Reserved { ReservedAt 1620000000 } ]
+    _         [ OutOfStock { Reason "Warehouse empty" } ]
+  }
+]
+
+ChargePayment(O Order) [
+  Amount . {
+    [ _ < 50000 ] [ O & Paid { TransactionId "tx_001" } ]
+    _             [ NoMoney { Reason "Insufficient funds" } ]
+  }
+]
+
+ExecuteFulfillment(InitialOrder) [
+  InitialOrder
+  . ReserveStock
+  . ChargePayment
+]
+
+ShipToCustomer(Order & Reserved & Paid) [
+  "Shipping order {Id}. Transaction {TransactionId} confirmed." . Shell.Log
+]
+
+// =============================================================================
+// Commerce Transitions
+// =============================================================================
+
+MakeOffer(S Agent, I Thing, P Price) [ Offer { Seller S, ItemOffered I, Price P, Availability "InStock" } ]
+SellOut(O Offer & { Availability "InStock" }) [ O & { Availability "SoldOut" } ]
+Restock(O Offer) [ O & { Availability "InStock" } ]
+PlaceOrder(C Agent, O Offer) [ Order { Customer C, Seller O.Seller, AcceptedOffer List1(O), OrderDate Now, OrderStatus "OrderPaymentDue" } ]
+ProcessOrder(O Order & { OrderStatus "OrderPaymentDue" }) [ O & { OrderStatus "OrderProcessing" } ]
+ShipOrder(O Order & { OrderStatus "OrderProcessing" }, D ParcelDelivery) [ O & { OrderStatus "OrderInTransit", OrderDelivery D } ]
+DeliverOrder(O Order & { OrderStatus "OrderInTransit" }) [ O & { OrderStatus "OrderDelivered" } ]
+ReturnOrder(O Order & { OrderStatus "OrderDelivered" }) [ O & { OrderStatus "OrderReturned" } ]
+CancelOrder(O Order) [
+  OrderStatus . {
+    "OrderDelivered" [ O ]
+    _                [ O & { OrderStatus "OrderCancelled" } ]
+  }
+]
+IssueInvoice(O Order) [ Invoice { Customer O.Customer, Provider O.Seller, ReferencesOrder List1(O), PaymentStatus "PaymentDue" } ]
+SettleInvoice(I Invoice & { PaymentStatus "PaymentDue" }) [ I & { PaymentStatus "PaymentComplete" } ]
+DeclineInvoice(I Invoice) [ I & { PaymentStatus "PaymentDeclined" } ]
+Reserve(A Agent, F Thing) [ Reservation { UnderName A, ReservationFor F, BookingTime Now, ReservationStatus "ReservationPending" } ]
+ConfirmReservation(R Reservation & { ReservationStatus "ReservationPending" }) [ R & { ReservationStatus "ReservationConfirmed" } ]
+CancelReservation(R Reservation) [ R & { ReservationStatus "ReservationCancelled", ModifiedTime Now } ]
+IssueTicket(R Reservation & { ReservationStatus "ReservationConfirmed" }) [ R & { ReservedTicket Ticket { UnderName R.UnderName, DateIssued Now } } ]

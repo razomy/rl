@@ -1,1 +1,0 @@
-ObjectActed(Object, Acted, Details) []

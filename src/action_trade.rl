@@ -1,6 +1,6 @@
 _ thing
 _ intangible
-_ intangible_commerce
+_ commerce
 _ action
 
 // =============================================================================

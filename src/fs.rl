@@ -1,13 +1,81 @@
+_ meta
 _ primitives
+_ structures
+_ string
 
-FileHandle { Fd Int, Path Str }
-IoError    { Msg Str }
+// =============================================================================
+// File System, Paths, Streams & Directory Management
+// =============================================================================
+
+FileOpenMode "read" | "write" | "append" | "read_write" | "create" | "truncate"
+
+FilePermissions {
+  OwnerRead    Bool
+  OwnerWrite   Bool
+  OwnerExec    Bool
+  GroupRead    Bool
+  GroupWrite   Bool
+  GroupExec    Bool
+  OthersRead   Bool
+  OthersWrite  Bool
+  OthersExec   Bool
+  OctalMode    Int
+}
+
+FileStat {
+  Path         Str
+  Size         Int
+  IsFile       Bool
+  IsDirectory  Bool
+  IsSymlink    Bool
+  Permissions  FilePermissions
+  CreatedAt    Int
+  ModifiedAt   Int
+  AccessedAt   Int
+}
+
+FileHandle {
+  Fd   Int
+  Path Str
+  Mode FileOpenMode
+}
+
+IoErrorKind "not_found" | "permission_denied" | "already_exists" | "invalid_data" | "timed_out" | "eof" | "unknown"
+IoError {
+  Kind IoErrorKind
+  Msg  Str
+  Path Option(Str)
+}
+
+Path {
+  Join(Parts List(Str))     [ Parts . native_path_join ]
+  Dirname(P Str)            [ P . native_path_dirname ]
+  Basename(P Str)           [ P . native_path_basename ]
+  Extension(P Str)          [ P . native_path_ext ]
+  Resolve(P Str)            [ P . native_path_resolve ]
+  IsAbsolute(P Str)         [ P . native_path_is_abs ]
+}
 
 Fs {
-  Open(Path Str)            [ Path . native_fs_open ]
-  Read(F FileHandle)        [ Fd . native_fs_read ]
-  Close(F FileHandle)       [ Fd . native_fs_close ]
+  Open(Path Str)                    [ Path . native_fs_open ]
+  OpenWithMode(Path Str, Mode FileOpenMode) [ (Path, Mode) . native_fs_open_mode ]
+  Read(F FileHandle)                [ Fd . native_fs_read ]
+  Write(F FileHandle, Data Str)     [ (Fd, Data) . native_fs_write ]
+  Close(F FileHandle)               [ Fd . native_fs_close ]
+  ReadFile(Path Str)                [ Path . native_fs_read_file ]
+  WriteFile(Path Str, Data Str)     [ (Path, Data) . native_fs_write_file ]
+  AppendFile(Path Str, Data Str)    [ (Path, Data) . native_fs_append_file ]
+  Exists(Path Str)                  [ Path . native_fs_exists ]
+  Stat(Path Str)                    [ Path . native_fs_stat ]
+  Remove(Path Str)                  [ Path . native_fs_remove ]
+  Copy(Src Str, Dst Str)            [ (Src, Dst) . native_fs_copy ]
+  Rename(Src Str, Dst Str)          [ (Src, Dst) . native_fs_rename ]
+  Mkdir(Path Str)                   [ Path . native_fs_mkdir ]
+  MkdirAll(Path Str)                [ Path . native_fs_mkdir_all ]
+  ReadDir(Path Str)                 [ Path . native_fs_read_dir ]
+  Watch(Path Str, OnEvent)          [ (Path, OnEvent) . native_fs_watch ]
 
+  // Bracket pattern: guarantees resource cleanup regardless of outcome
   WithFile(Path Str, Action) [
     Path . Fs.Open . {
       FileHandle(F) [

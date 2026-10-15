@@ -61,6 +61,7 @@ GeoShape      GeoBox | GeoCircle | GeoPolygon | GeoPath
 
 Circle    { Center Point2D, Radius }
 Rectangle { Corner Point2D, Width, Height }
+Rect      Rectangle
 Triangle  { A Point2D, B Point2D, C Point2D }
 Polygon   { Vertices List(Point2D) }
 Ellipse   { Center Point2D, SemiMajor Length, SemiMinor Length }
@@ -75,6 +76,13 @@ Mesh     { Vertices List(Point3D), Faces List(List(Index)) }
 Shape3D  Sphere | Cuboid | Cylinder | Cone | Torus | Mesh
 
 Shape Shape2D | Shape3D
+
+CalculateArea(S Shape2D) [
+  S . {
+    Circle    [ 3.14159 * Radius * Radius ]
+    Rectangle [ Width * Height ]
+  }
+]
 
 // =============================================================================
 // Spatial states

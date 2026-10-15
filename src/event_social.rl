@@ -1,7 +1,7 @@
 _ thing
 _ enumerations
 _ intangible
-_ intangible_commerce
+_ commerce
 _ place
 _ organization
 _ person
@@ -50,50 +50,50 @@ SchemaEvent Thing & Event & {
     WorkPerformed CreativeWork
 }
 
-BusinessEvent      SchemaEvent
-ChildrensEvent     SchemaEvent
-ComedyEvent        SchemaEvent
+BusinessEvent       SchemaEvent
+ChildrensEvent      SchemaEvent
+ComedyEvent         SchemaEvent
 CourseInstanceEvent SchemaEvent
-DanceEvent         SchemaEvent
-DeliveryEvent      SchemaEvent & { AccessCode String, AvailableFrom DateTime, AvailableThrough DateTime, HasDeliveryMethod DeliveryMethod }
-EducationEvent     SchemaEvent & { AssessesE String, EducationalLevel String, Teaches String }
-EventSeries_       SchemaEvent
-ExhibitionEvent    SchemaEvent
-Festival           SchemaEvent
-FoodEvent          SchemaEvent
-Hackathon          SchemaEvent
-LiteraryEvent      SchemaEvent
-MusicEvent         SchemaEvent
-PublicationEvent   SchemaEvent & { PublishedBy Agent, PublishedOn BroadcastService }
-BroadcastEvent     PublicationEvent & { BroadcastOfEvent SchemaEvent, IsLiveBroadcast Bool, VideoFormat String }
-OnDemandEvent      PublicationEvent
-SaleEvent          SchemaEvent
-ScreeningEvent     SchemaEvent & { SubtitleLanguage Language, VideoFormat String, WorkPresented Thing }
-SocialEvent        SchemaEvent
-SportsEvent        SchemaEvent & { AwayTeam Agent, HomeTeam Agent, Competitor List(Agent), Sport String }
-TheaterEvent       SchemaEvent
-UserInteraction    SchemaEvent
-UserBlocks         UserInteraction
-UserCheckins       UserInteraction
-UserComments       UserInteraction
-UserDownloads      UserInteraction
-UserLikes          UserInteraction
-UserPageVisits     UserInteraction
-UserPlays          UserInteraction
-UserPlusOnes       UserInteraction
-UserTweets         UserInteraction
-VisualArtsEvent    SchemaEvent
-Wedding            SocialEvent & { Couple List(Person) }
-Birthday           SocialEvent & { Celebrant Person }
-Funeral            SocialEvent & { Deceased_ Person }
-Conference         BusinessEvent & { Track List(String) }
-Meetup             SocialEvent
-Concert            MusicEvent
-Match              SportsEvent & { Score String }
-Election_          SchemaEvent & { Candidates List(Person) }
-Protest            SchemaEvent & { Cause String }
-War                SchemaEvent & { Belligerents List(Agent) }
-Disaster           SchemaEvent & { NaturalDisaster }
+DanceEvent          SchemaEvent
+DeliveryEvent       SchemaEvent & { AccessCode String, AvailableFrom DateTime, AvailableThrough DateTime, HasDeliveryMethod DeliveryMethod }
+EducationEvent      SchemaEvent & { AssessesE String, EducationalLevel String, Teaches String }
+EventSeries_        SchemaEvent
+ExhibitionEvent     SchemaEvent
+Festival            SchemaEvent
+FoodEvent           SchemaEvent
+Hackathon           SchemaEvent
+LiteraryEvent       SchemaEvent
+MusicEvent          SchemaEvent
+PublicationEvent    SchemaEvent & { PublishedBy Agent, PublishedOn BroadcastService }
+BroadcastEvent      PublicationEvent & { BroadcastOfEvent SchemaEvent, IsLiveBroadcast Bool, VideoFormat String }
+OnDemandEvent       PublicationEvent
+SaleEvent           SchemaEvent
+ScreeningEvent      SchemaEvent & { SubtitleLanguage Language, VideoFormat String, WorkPresented Thing }
+SocialEvent         SchemaEvent
+SportsEvent         SchemaEvent & { AwayTeam Agent, HomeTeam Agent, Competitor List(Agent), Sport String }
+TheaterEvent        SchemaEvent
+UserInteraction     SchemaEvent
+UserBlocks          UserInteraction
+UserCheckins        UserInteraction
+UserComments        UserInteraction
+UserDownloads       UserInteraction
+UserLikes           UserInteraction
+UserPageVisits      UserInteraction
+UserPlays           UserInteraction
+UserPlusOnes        UserInteraction
+UserTweets          UserInteraction
+VisualArtsEvent     SchemaEvent
+Wedding             SocialEvent & { Couple List(Person) }
+Birthday            SocialEvent & { Celebrant Person }
+Funeral             SocialEvent & { Deceased_ Person }
+Conference          BusinessEvent & { Track List(String) }
+Meetup              SocialEvent
+Concert             MusicEvent
+Match               SportsEvent & { Score String }
+Election_           SchemaEvent & { Candidates List(Person) }
+Protest             SchemaEvent & { Cause String }
+War                 SchemaEvent & { Belligerents List(Agent) }
+Disaster            SchemaEvent & { NaturalDisaster }
 
 // =============================================================================
 // Transitions

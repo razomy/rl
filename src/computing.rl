@@ -1,8 +1,101 @@
+_ meta
+_ primitives
+_ structures
+_ quantity
+_ time
+_ space
+_ thing
+_ agent
+_ creative_work
+_ creative_work_media
+_ creative_work_code
+_ commerce
+_ ui
+
 // =============================================================================
-// Computing, UI, Operating System, File System & Network Entities
+// Project CLI, Build Tooling & Runtimes (merged from project.rl & runtimes.rl)
 // =============================================================================
 
+Project {
+  Interaction {
+    Schema(T) {
+      Format  T
+      Lint    T
+      Run     T
+      Test    T
+      Build   T
+      Publish T
+      Clean   T
+    }
+  }
+}
+
+Cli {
+  Schema Project.Interaction.Schema(Str)
+}
+
+LaunchCli {
+  Launcher Str
+  Command  Str
+  BuildCommand(Name Str) [ "{Launcher} {Command} {Name}" ]
+}
+
+LaunchCliAndCliSchema LaunchCli & Cli.Schema
+
+Npm {
+  Cli LaunchCliAndCliSchema {
+    Launcher     "npm run"
+    Command      ""
+    BuildCommand LaunchCli.BuildCommand
+    Format       BuildCommand("check")
+    Lint         BuildCommand("lint")
+    Run          BuildCommand("dev")
+    Test         BuildCommand("test")
+    Build        BuildCommand("build")
+    Publish      BuildCommand("publish")
+    Clean        BuildCommand("clean")
+  }
+}
+
+Cargo {
+  Cli LaunchCliAndCliSchema {
+    Launcher     "cargo"
+    Command      ""
+    BuildCommand LaunchCli.BuildCommand
+    Format       "cargo fmt"
+    Lint         "cargo clippy"
+    Run          "cargo run"
+    Test         "cargo test"
+    Build        "cargo build --release"
+    Publish      "cargo publish"
+    Clean        "cargo clean"
+  }
+}
+
+Docker {
+  ContainerImage {
+    Repository Str
+    Tag        Str
+    Digest     Option(Str)
+  }
+  ContainerState "created" | "running" | "paused" | "restarting" | "removing" | "exited" | "dead"
+  Container {
+    ContainerId Str
+    Image       ContainerImage
+    State       ContainerState
+    Ports       Map(Int, Int)
+    EnvVars     Map(Str, Str)
+    Volumes     List(Str)
+  }
+}
+
+// =============================================================================
 // Level 1: Physical Input & UI Elements
+// =============================================================================
+
+Coordinates Point2D
+BoundingBox Rectangle
+
 CursorState {
   Position  Coordinates
   IsVisible Bool
@@ -42,8 +135,6 @@ UIState {
 StartCoords Coordinates
 EndCoords   Coordinates
 
-Direction "up" | "down" | "left" | "right"
-
 Viewport {
   Width   Float
   Height  Float
@@ -71,12 +162,15 @@ SystemCommand {
   ExitCode  Option(Int)
 }
 
+// =============================================================================
 // Level 2: System & Environment Management
+// =============================================================================
+
 PowerState "on" | "off" | "reboot" | "sleep" | "hibernate"
 
 System Thing & {
   Hostname     Str
-  Architecture "x86_64" | "arm64" | "riscv64"
+  Architecture "x86_64" | "arm64" | "riscv64" | "wasm32"
   CpuCount     Count
   MemoryTotal  Int
 }
@@ -91,7 +185,7 @@ SystemState {
 Credentials {
   Username  Str
   Secret    Str
-  Method    "password" | "pin" | "biometric" | "token" | "oauth" | "passkey"
+  Method    "password" | "pin" | "biometric" | "token" | "oauth" | "passkey" | "ssh-key"
 }
 
 SecuritySystem Thing & {
@@ -119,12 +213,12 @@ Parameter Str
 Value     Primitive
 
 SystemSettings {
-  Volume      Int
-  Brightness  Int
-  WifiEnabled Bool
+  Volume           Int
+  Brightness       Int
+  WifiEnabled      Bool
   BluetoothEnabled Bool
-  Theme       "light" | "dark" | "system"
-  Locale      Str
+  Theme            "light" | "dark" | "system"
+  Locale           Str
 }
 ConfigState SystemSettings
 
@@ -143,7 +237,10 @@ SystemHealth {
   LastCheckedAt    DateTime
 }
 
+// =============================================================================
 // Level 3: File System & Data Operations
+// =============================================================================
+
 ContentStream {
   MimeType MimeType
   Size     Int
@@ -175,14 +272,17 @@ FileSystemState {
 
 Storage Thing & {
   MountPoint Str
-  FileSystem "ext4" | "apfs" | "ntfs" | "fat32" | "zfs" | "btrfs"
+  FileSystem "ext4" | "apfs" | "ntfs" | "fat32" | "zfs" | "btrfs" | "xfs"
   Capacity   Int
 }
 
 Query     Str
 ThingList List(Thing)
 
+// =============================================================================
 // Level 4: Web & Network Operations
+// =============================================================================
+
 Browser WebApplication & {
   CurrentUrl URL
   Tabs       List(WebPage)
@@ -226,7 +326,10 @@ Session {
   CreatedAt DateTime
 }
 
+// =============================================================================
 // Level 5: Digital Communication & Social
+// =============================================================================
+
 Recipient      Agent
 MessageContent {
   Subject     Option(Str)
@@ -257,7 +360,10 @@ CallSession {
 SocialObject    SocialMediaPosting | Comment | MediaObject
 InteractionType "post" | "comment" | "like" | "dislike" | "repost" | "bookmark" | "report"
 
+// =============================================================================
 // Level 6: Applied Tasks
+// =============================================================================
+
 MediaContent MediaObject
 Experience {
   Consumer    Agent
@@ -302,13 +408,6 @@ CartItem {
   Quantity Count
   Price    Float
 }
-Cart {
-  CartId   Str
-  Items    List(CartItem)
-  Amount   Int
-  Currency Str
-}
-PaymentMethod "credit_card" | "debit_card" | "bank_transfer" | "digital_wallet" | "crypto" | "cash_on_delivery"
 OrderReceipt {
   ReceiptId     Str
   Order         Order
