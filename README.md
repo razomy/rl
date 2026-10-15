@@ -6,7 +6,7 @@ This library is a collection of all human entities in Razomy syntax.
 
 ## Syntax
 
-### Types
+### Types & Core Axioms
 
 ```rl
 [UniqName] [VALUE]
@@ -70,55 +70,61 @@ JonnDoyName3.-1 // access by index -1 (D)
 
 
 // =============================================================================
-// МИНИМАЛИСТИЧНЫЙ ЯЗЫК: АКСИМАТИКА ТРЕХ СКОБОК (FULL SPECIFICATION V2.1)
+// MINIMALIST LANGUAGE: AXIOMATICS OF THREE BRACKETS (FULL SPECIFICATION V3.0)
 // =============================================================================
-// {} — Форма  (Структуры данных, Таблицы маршрутизации, Модули)
-// [] — Поток  (Трансформации, Предикаты, Вычислительные блоки)
-// () — Слот   (Захват объекта в переменную, Прием аргументов, Кортежи)
+// {} — Form   (Data structures, Routing tables, Pattern Matching, Modules, Maps)
+// [] — Stream (Transformations, Predicates, Computation blocks, Generators)
+// () — Slot   (Capturing objects into variables, Accepting arguments, Tuples, Isolation)
 //
-// БАЗОВЫЕ ОПЕРАТОРЫ:
-// '.'  — Pipeline        (Передача вычисленных данных слева направо: A . B)
-// '.>' — Tap Pipeline    (Выполнение сайд-эффекта и пропуск левых данных дальше)
-// '.&' — Enrich Pipeline (Вызов функции справа и слияние результата с левым контекстом)
-// '&'  — Merge           (Алгебраическое слияние типов или структур)
-// '|'  — Union           (Алгебраическая сумма типов / исходов)
-// '/'  — Subtract        (Удаление поля из структуры)
-// '_'  — Anon Context    (Обращение к анонимному контексту в предикатах и ветка по умолчанию)
+// CORE OPERATORS:
+// '.'   — Pipeline          (Pass computed data left-to-right: A . B)
+// '.>'  — Tap Pipeline      (Execute side-effect and pass left data further)
+// '.&'  — Enrich Pipeline   (Call right function and merge result with left context)
+// '.|'  — Parallel Pipeline (Fan-out / Concurrent execution of branches in `{}`)
+// '.?'  — Safe/Filter Pipe  (Pass further only if predicate/type matches, else None)
+// '&'   — Merge             (Algebraic intersection/merge of types or structures)
+// '|'   — Union             (Algebraic sum of types / outcomes)
+// '/'   — Subtract          (Remove field from structure or type from union)
+// '_'   — Anon Context      (Reference anonymous context in predicates and default branch)
+// '..'  — Range / Spread    (Generate sequences `1..10` or spread collections)
+// ' . '   — Meta / Decorator  (Attach metadata, macros, or compiler directives to forms)
 //
-// 1. ЖЕЛЕЗНОЕ ПРАВИЛО АВТО-РАСПАКОВКИ (AUTO-UNPACKING):
-// Поля известной формы автоматически проецируются в локальную область видимости `[]`:
-//   а) При совпадении формы в роутере `{}`.
-//   б) При передаче объекта напрямую в блок `[]` через `.` или `.>`.
-//   в) Внутри тела функции, если входящий слот явно типизирован (напр. `Fn(O Order)` или `Fn(Order)`).
-// Символ `_` (анонимный контекст) запрещен для известных форм.
+// 1. IRON RULE OF AUTO-UNPACKING:
+// Fields of a known form are automatically projected into the local scope `[]`:
+//   a) Upon form match inside a router `{}`.
+//   b) When passing an object directly into a block `[]` via `.` or `.>`.
+//   c) Inside a function body if the incoming slot is explicitly typed (`Fn(O Order)` or `Fn(Order)`).
+// The `_` symbol (anonymous context) is strictly forbidden for known forms.
 //
-// 2. ПРАВИЛО ГЕНЕАЛОГИИ ПРИ СЛИЯНИИ (LINEAGE NAMESPACING):
-// При коллизии имен во время слияния `A & B`, уникальные поля доступны плоско,
-// а конфликтующие поля требуют указания предка (например, A.Id, B.Id).
+// 2. LINEAGE NAMESPACING RULE:
+// Upon name collision during merge `A & B`, unique fields are accessed flatly,
+// while conflicting fields require specifying the ancestor (e.g., A.Id, B.Id).
 //
-// 3. ПРАВИЛО БАЙПАСА ИСХОДОВ (SHORT-CIRCUIT / RAILWAY-FREE):
-// Если в пайплайн передается сумма типов `A | B`, а следующая функция ожидает
-// строго форму `A`, то ветка `B` автоматически пролетает функцию насквозь без вызова,
-// накапливаясь в итоговом Union-типе всего потока (авто-проброс ошибок).
+// 3. OUTCOME BYPASS RULE (SHORT-CIRCUIT / RAILWAY-FREE):
+// If a union type `A | B` is passed into a pipeline, and the next function strictly
+// expects form `A`, branch `B` automatically bypasses the function without invocation,
+// accumulating in the final Union type of the entire stream (auto-error propagation).
 // =============================================================================
 
 
 // =============================================================================
-// 1. АЛГЕБРА ДАННЫХ И СТРУКТУРЫ
+// 1. DATA ALGEBRA, PRIMITIVES, AND STRUCTURES
 // =============================================================================
 
-Str ""
-Int 0
+Str   ""
+Int   0
 Float 0.0
-Bool false
+Bool  false
+Byte  0x00
+Any   _
 
-// Кортежи выражаются через пайплайн-слот
+// Tuples are expressed via pipeline-slots
 Point2D (Float, Float)
 Origin  (0.0, 0.0)
 
-// Суммы типов
-Status "draft" | "published" | "archived"
-Primitive Str | Int | Float | Bool
+// Type Unions (Sum Types)
+Status    "draft" | "published" | "archived"
+Primitive Str | Int | Float | Bool | Byte
 
 Identifiable { Id Str }
 Auditable    { CreatedAt Int, UpdatedAt Int }
@@ -131,12 +137,60 @@ User {
   PasswordHash Str
 }
 
+// Type Subtraction ('/') and Intersection ('&')
 PublicUser   User / User.PasswordHash
 DatabaseUser User & Identifiable & Auditable
+GuestUser    PublicUser / PublicUser.Role & { Role "guest" }
 
 
 // =============================================================================
-// 2. МОДУЛИ И ПРАВИЛА ПРИЕМА АРГУМЕНТОВ
+// 2. ALL PRIMITIVE OPERATIONS (ARITHMETIC, LOGIC, BITWISE, STRINGS)
+// =============================================================================
+
+MathOps(A Int, B Int) [
+  {
+    Add (A + B)
+    Sub (A - B)
+    Mul (A * B)
+    Div (A / B)
+    Mod (A % B)
+    Pow (A ** B)
+
+    // Bitwise operations
+    BitAnd (A . bit_and(B))
+    BitOr  (A . bit_or(B))
+    BitXor (A . bit_xor(B))
+    ShiftL (A << 2)
+    ShiftR (A >> 2)
+  }
+]
+
+LogicOps(X Bool, Y Bool, Val Int) [
+  {
+    And (X && Y)
+    Or  (X || Y)
+    Not (!X)
+    Eq  (Val == 42)
+    Neq (Val != 0)
+    Gt  (Val > 10)
+    Gte (Val >= 10)
+    Lt  (Val < 100)
+    Lte (Val <= 100)
+    InRange (Val . (1..100)) // Pattern check against range
+  }
+]
+
+StringOps(First Str, Last Str) [
+  Full "{First} {Last}" // Native interpolation
+  Full
+  . Str.Trim
+  . Str.ToUpper
+  . Str.Split(" ")
+]
+
+
+// =============================================================================
+// 3. MODULES AND ARGUMENT ACCEPTANCE RULES
 // =============================================================================
 
 Shell {
@@ -150,13 +204,13 @@ Cart {
 }
 
 Db {
-  // Слот (Id) захватывает входящую строку целиком
+  // Slot (Id) captures the incoming string in its entirety
   FindUser(Id) [
-    { Id Id, Name "Алиса", Age 25 }
+    { Id Id, Name "Alice", Age 25 }
   ]
 
-  // Слот (Ctx) захватывает объект. Роутер {} проверяет соответствие форме 
-  // Identifiable и автоматически распаковывает поле Id, если совпало.
+  // Slot (Ctx) captures the object. Router {} checks conformance to the
+  // Identifiable form and automatically unpacks the Id field if matched.
   FindCart(Ctx) [
     Ctx . {
       Identifiable [ Cart { CartId "c101", Amount 2500 } ]
@@ -166,7 +220,7 @@ Db {
 
 
 // =============================================================================
-// 3. ВЫЧИСЛЕНИЯ НА ТИПАХ И СТРУКТУРЫ ВЫСШЕГО РОДА (HKT)
+// 4. TYPE-LEVEL COMPUTATIONS AND HIGHER-KINDED TYPES (HKT)
 // =============================================================================
 
 Zero {}
@@ -179,7 +233,7 @@ Three Succ(Two)
 Tuple(T) ()
 
 FixedVector(T, N) {
-  Data Tuple(T)
+  Data   Tuple(T)
   Length N
 }
 
@@ -193,20 +247,26 @@ List(T) None | Cons(T)
 Leaf {}
 Node(T) {
   Value T
-  Left Tree(T)
+  Left  Tree(T)
   Right Tree(T)
 }
 Tree(T) Leaf | Node(T)
 
+// Generic Key-Value Map and Set
+Map(K, V) { (K) V }
+Set(T)    { (T) Bool }
+
 
 // =============================================================================
-// 4. УТОЧНЯЮЩИЕ ТИПЫ (REFINEMENTS) И АВТО-РОУТИНГ
+// 5. REFINEMENT TYPES AND AUTO-ROUTING
 // =============================================================================
 
-// Используем '_', так как конкретная форма на этапе типа еще не распакована
+// Use '_' because the concrete form is not yet unpacked at the type definition stage
 IsAdult   [ _.Age >= 18 ]
 IsMinor   [ _.Age < 18 ]
 IsManager [ _.Role . ("admin" | "manager") ]
+NonEmpty  [ _.Length > 0 ]
+EmailStr  Str & [ _ . Regex.Matches("^[^@]+@[^@]+\.[^@]+$") ]
 
 Adult   User & IsAdult
 Minor   User & IsMinor
@@ -214,12 +274,12 @@ Manager User & IsManager
 
 ClassifyAccount(Account) [
   Account . {
-    // Поле Name доступно автоматически из-за совпадения с типами,
-    // которые наследуют структуру User
-    Manager [ "Панель управления: {Name}" . Shell.Log ]
-    Adult   [ "Взрослый аккаунт: {Name}" . Shell.Log ]
-    Minor   [ "Детский аккаунт: {Name}" . Shell.Log ]
-    _       [ "Неизвестный профиль" . Shell.Log ]
+    // Field 'Name' is available automatically due to matching types
+    // that inherit the User structure
+    Manager [ "Dashboard: {Name}" . Shell.Log ]
+    Adult   [ "Adult account: {Name}" . Shell.Log ]
+    Minor   [ "Child account: {Name}" . Shell.Log ]
+    _       [ "Unknown profile" . Shell.Log ]
   }
 ]
 
@@ -229,7 +289,7 @@ Shape  Circle | Rect
 
 Area(S) [
   S . {
-    // Поля Radius, Width и Height автоматически вливаются в скоуп
+    // Fields Radius, Width, and Height are automatically projected into scope
     Circle [ 3.14159 * Radius * Radius ]
     Rect   [ Width * Height ]
   }
@@ -237,18 +297,18 @@ Area(S) [
 
 
 // =============================================================================
-// 5. ВЫСШИЙ ПОРЯДОК, ФУНКТОРЫ И КАТАМОРФИЗМЫ
+// 6. HIGHER-ORDER FUNCTIONS, FUNCTORS, AND CATAMORPHISMS
 // =============================================================================
 
-Some(T) { Value T }
+Some(T)   { Value T }
 Option(T) Some(T) | None
 
 ListMap(L, Action) [
   L . {
     None [ None ]
     Cons [
-      // Head и Tail доступны автоматически.
-      // Круглые скобки используются исключительно для изоляции вычислений слота.
+      // Head and Tail are available automatically.
+      // Parentheses are used exclusively to isolate slot computations.
       Cons {
         Head (Head . Action)
         Tail (Tail . ListMap(Action))
@@ -260,11 +320,11 @@ ListMap(L, Action) [
 Num(Val)  { Value Val }
 Add(L, R) { Left L, Right R }
 Mul(L, R) { Left L, Right R }
-Expr Num | Add(Expr, Expr) | Mul(Expr, Expr)
+Expr      Num | Add(Expr, Expr) | Mul(Expr, Expr)
 
 Cata(Expression, Algebra) [
   Expression . {
-    // Value, Left и Right распаковываются автоматически
+    // Value, Left, and Right are unpacked automatically
     Num [ Algebra.OnNum(Value) ]
     Add [ Algebra.OnAdd(Left . Cata(Algebra), Right . Cata(Algebra)) ]
     Mul [ Algebra.OnMul(Left . Cata(Algebra), Right . Cata(Algebra)) ]
@@ -279,14 +339,54 @@ Algebra {
 
 
 // =============================================================================
-// 6. ОБОГАЩЕНИЕ КОНТЕКСТА ('.&') И ОПЕРАТОР ТАПИНГА ('.>')
+// 7. COLLECTIONS, STREAMS, GENERATORS, AND PIPELINE ITERATION
+// =============================================================================
+// Replaces traditional for/while loops with declarative stream pipelines.
+
+Item  { Name Str, Price Int, InStock Bool }
+OrderList [
+  Item { Name "Laptop", Price 1200, InStock true }
+  Item { Name "Mouse",  Price 25,   InStock false }
+  Item { Name "Screen", Price 400,  InStock true }
+]
+
+CalculateTotalInStock(Items) [
+  Items
+  . Stream.Filter([ _.InStock == true ])
+  . Stream.Map([ _.Price ])
+  . Stream.Fold(0, (Acc, Price) [ Acc + Price ])
+]
+
+// Range generator andcomprehension
+FizzBuzz(Limit Int) [
+  (1..Limit) . Stream.Map(N [
+    (N % 3, N % 5) . {
+      (0, 0) [ "FizzBuzz" ]
+      (0, _) [ "Fizz" ]
+      (_, 0) [ "Buzz" ]
+      _      [ "{N}" ]
+    }
+  ])
+]
+
+// Dictionary / Map Manipulation
+ConfigMap {
+  "host" "localhost"
+  "port" "8080"
+}
+
+UpdatedConfig ConfigMap & { "port" "9090", "tls" "true" } / "host"
+
+
+// =============================================================================
+// 8. CONTEXT ENRICHMENT ('.&') AND TAPPING OPERATOR ('.>')
 // =============================================================================
 
 FinalizeBill(Ctx User & Cart) [
   Ctx & {
     Discount [
       Amount . {
-        // Анонимный контекст '_' используется только для сырых значений
+        // Anonymous context '_' is used only for raw/primitive values
         [ _ >= 2000 ] [ 300 ]
         [ _ >= 1000 ] [ 100 ]
         _             [ 0 ]
@@ -294,20 +394,320 @@ FinalizeBill(Ctx User & Cart) [
     ]
     FinalPrice [ Amount - Discount ]
   }
-  // Контекст (Ctx & Discount & FinalPrice) доступен целиком
-  .> [ "Чек для {Name}: {FinalPrice} руб (Скидка: {Discount})" . Shell.Log ]
+  // Context (Ctx & Discount & FinalPrice) is available in its entirety
+  .> [ "Receipt for {Name}: {FinalPrice} USD (Discount: {Discount})" . Shell.Log ]
 ]
 
 ProcessOrderPipeline(UserId) [
   UserId
-  . Db.FindUser    // На выходе: { Id, Name, Age }
-  .& Db.FindCart    // Принимает форму, сливает результат: { Id, Name, Age, CartId, Amount }
-  . FinalizeBill   // Обрабатывает итоговый агрегат
+  . Db.FindUser    // Output: { Id, Name, Age }
+  .& Db.FindCart   // Accepts form, merges result: { Id, Name, Age, CartId, Amount }
+  . FinalizeBill   // Processes the final aggregate
 ]
 
 
 // =============================================================================
-// 7. СЛОЖНЫЙ КЕЙС: РЕКУРСИВНЫЙ АВТОНОМНЫЙ AI-АГЕНТ
+// 9. LINEAGE NAMESPACING (COLLISION RESOLUTION UPON MERGE)
+// =============================================================================
+
+Order { Id Str, Amount Int }
+
+// Merging User (see section 1) and Order causes a collision on the `Id` field.
+UserOrder User & Order
+
+ProcessCombined(CombinedContext) [
+  CombinedContext . {
+    UserOrder [
+      // Unique fields are accessed flatly:
+      "Client Name: {Name}, Order Amount: {Amount}" . Shell.Log
+
+      // Colliding fields require specifying the ancestor (Lineage):
+      "User ID: {User.Id}, Order ID: {Order.Id}" . Shell.Log
+    ]
+  }
+]
+
+
+// =============================================================================
+// 10. DECLARATIVE TYPE MIGRATION AND STRUCTURAL PROJECTION
+// =============================================================================
+
+ClientAccount {
+  AccountId Str
+  Name      Str
+  IsAdult   Bool
+}
+
+// Fields with matching names (Name) are mapped automatically.
+// Auto-unpacking: argument is typed (U User), so Id, Name, Age are in scope.
+MigrateUser(U User) [
+  ClientAccount {
+    AccountId Id
+    IsAdult   (Age >= 18)
+  }
+]
+
+
+// =============================================================================
+// 11. ONTOLOGICAL TYPING (TYPESTATE) & OUTCOME COLLECTION (RAILWAY-FREE)
+// =============================================================================
+// Instead of exceptions, the pipeline collects unresolved outcomes into a Union.
+
+Reserved   { ReservedAt Int }
+Paid       { TransactionId Str }
+
+OutOfStock { Reason Str }
+NoMoney    { Reason Str }
+
+// Explicit typing of argument (O Order) triggers Rule 3 (Bypass).
+// Field Amount is flatly accessible thanks to Rule 1 (Auto-unpacking of typed slots).
+ReserveStock(O Order) [
+  Amount . {
+    [ _ > 0 ] [ O & Reserved { ReservedAt 1620000000 } ]
+    _         [ OutOfStock { Reason "Warehouse empty" } ]
+  }
+]
+
+ChargePayment(O Order) [
+  Amount . {
+    [ _ < 50000 ] [ O & Paid { TransactionId "tx_001" } ]
+    _             [ NoMoney { Reason "Insufficient funds" } ]
+  }
+]
+
+// Compiler automatically infers the return type of this function:
+// (Order & Reserved & Paid) | OutOfStock | NoMoney
+// The OutOfStock form bypasses ChargePayment (since it lacks the Order form).
+// We do not need Result<T, E> monads or try/catch!
+ExecuteFulfillment(InitialOrder) [
+  InitialOrder
+  . ReserveStock
+  . ChargePayment
+]
+
+// Function accepts only orders that are simultaneously Reserved and Paid.
+// No collisions exist, so Id and TransactionId are accessed flatly.
+ShipToCustomer(Order & Reserved & Paid) [
+  "Shipping order {Id}. Transaction {TransactionId} confirmed." . Shell.Log
+]
+
+
+// =============================================================================
+// 12. CONCURRENCY, PARALLELISM ('.|'), AND CHANNELS
+// =============================================================================
+
+FetchProfile(Id Str)         [ Http.Get("https://api.ex/users/{Id}") ]
+FetchRecommendations(Id Str) [ Http.Get("https://api.ex/recs/{Id}") ]
+FetchAds()                   [ Http.Get("https://api.ex/ads") ]
+
+// Parallel Fan-Out Operator '.|': executes all branches in '{}' concurrently
+// and merges their results using '&' when all complete.
+LoadDashboardData(UserId Str) [
+  UserId .| {
+    Profile [ _ . FetchProfile ]
+    Recs    [ _ . FetchRecommendations ]
+    Ads     [ FetchAds() ]
+  }
+  // Output type: { Profile ..., Recs ..., Ads ... }
+]
+
+// CSP Channels and Actors for stateful concurrency
+Channel(T) {
+  Send(Val T) [ (Self, Val) . native_chan_send ]
+  Recv()      [ Self . native_chan_recv ]
+}
+
+WorkerLoop(Jobs Channel(Str), Results Channel(Int)) [
+  Jobs.Recv() . {
+    None [ "Channel closed, terminating worker." . Shell.Log ]
+    Some [
+      Value
+      . Str.Length
+      .> (Len [ Results.Send(Len) ])
+      . [ WorkerLoop(Jobs, Results) ] // Tail-recursive actor loop
+    ]
+  }
+]
+
+
+// =============================================================================
+// 13. STATE MANAGEMENT (PURE STATE TRANSITIONS & ATOMS)
+// =============================================================================
+// Razomy avoids mutable variables; state is managed via recursive stream loops
+// or thread-safe transactional Atoms.
+
+CounterState { Count Int }
+Increment    { By Int }
+Decrement    { By Int }
+Reset        {}
+CounterMsg   Increment | Decrement | Reset
+
+// Pure Reducer
+UpdateCounter(State CounterState, Msg CounterMsg) [
+  Msg . {
+    Increment [ CounterState { Count (State.Count + By) } ]
+    Decrement [ CounterState { Count (State.Count - By) } ]
+    Reset     [ CounterState { Count 0 } ]
+  }
+]
+
+// Managed Transactional Reference (Atom)
+Atom(T) {
+  Read()          [ Self . native_atom_read ]
+  Swap(Transition)[ (Self, Transition) . native_atom_swap ]
+}
+
+GlobalCounter Atom(CounterState { Count 0 })
+
+ModifyGlobalCounter() [
+  GlobalCounter.Swap(State [ UpdateCounter(State, Increment { By 5 }) ])
+]
+
+
+// =============================================================================
+// 14. RESOURCE MANAGEMENT, I/O, AND SCOPED LIFETIMES
+// =============================================================================
+
+FileHandle { Fd Int, Path Str }
+IoError    { Msg Str }
+
+Fs {
+  Open(Path Str)            [ Path . native_fs_open ] // Returns FileHandle | IoError
+  Read(F FileHandle)        [ Fd . native_fs_read ]   // Returns Str | IoError
+  Close(F FileHandle)       [ Fd . native_fs_close ]
+
+  // Bracket pattern: guarantees resource cleanup regardless of outcome
+  WithFile(Path Str, Action) [
+    Path . Fs.Open . {
+      FileHandle(F) [
+        F . Action
+        .> [ F . Fs.Close ] // Executed as a tap effect even if Action returns an Error form
+      ]
+      // IoError automatically bypasses via Rule 3
+    }
+  ]
+}
+
+ReadConfig(Path Str) [
+  Fs.WithFile(Path, F [
+    F . Fs.Read . Json.Parse
+  ])
+]
+
+
+// =============================================================================
+// 15. WEB SERVER, ROUTING, AND MIDDLEWARE PIPELINES
+// =============================================================================
+
+HttpRequest {
+  Method  "GET" | "POST" | "PUT" | "DELETE"
+  Path    List(Str)
+  Headers Map(Str, Str)
+  Body    Str
+}
+
+HttpResponse { Status Int, Body Str }
+Unauthorized { Reason Str }
+
+// Middleware enriches the request with an AuthenticatedUser or returns Unauthorized
+AuthMiddleware(Req HttpRequest) [
+  Req.Headers . Map.Get("Authorization") . {
+    Some [ Req & { AuthUser (Value . Db.FindUserByToken) } ]
+    None [ Unauthorized { Reason "Missing Authorization Header" } ]
+  }
+]
+
+// Declarative HTTP Router using Form pattern matching
+ApiRouter(Req HttpRequest) [
+  Req . {
+    // Public route
+    { Method "GET", Path ["health"] } [
+      HttpResponse { Status 200, Body "OK" }
+    ]
+
+    // Protected routes (piped through AuthMiddleware)
+    { Method "GET", Path ["users", Id] } [
+      Req . AuthMiddleware . {
+        Unauthorized [ HttpResponse { Status 401, Body Reason } ]
+        HttpRequest  [
+          Id . Db.FindUser . Json.Encode . (JsonStr [
+            HttpResponse { Status 200, Body JsonStr }
+          ])
+        ]
+      }
+    ]
+
+    _ [ HttpResponse { Status 404, Body "Not Found" } ]
+  }
+]
+
+
+// =============================================================================
+// 16. METAPROGRAMMING, REFLECTION, AND AST MACROS ('.')
+// =============================================================================
+// Since Everything is a Form, Razomy code can inspect and generate Razomy types.
+
+// Macro that automatically generates JSON serialization for any Form
+DeriveJson(TargetForm) [
+  TargetForm & {
+    ToJson() [
+      Self . Meta.FieldsOf . Stream.Map(Field [
+        "\"{Field.Name}\": {Field.Value . Json.FormatValue}"
+      ])
+      . Str.Join(", ")
+      . (Inner [ "\{ {Inner} \}" ])
+    ]
+  }
+]
+
+Product {
+  Id    Int
+  Title Str
+} . DeriveJson
+
+// Reflection: Inspecting fields at runtime/compile-time
+InspectEntity(Entity) [
+  Entity . Meta.TypeOf . {
+    TypeName [ "Inspecting type: {TypeName}" . Shell.Log ]
+  }
+  Entity . Meta.FieldsOf . Stream.ForEach(F [
+    "Field {F.Name} has type {F.Type} and value {F.Value}" . Shell.Log
+  ])
+]
+
+
+// =============================================================================
+// 17. TESTING AND PROPERTY-BASED ASSERTIONS
+// =============================================================================
+
+TestPassed { Name Str }
+TestFailed { Name Str, Expected Any, Actual Any }
+TestResult TestPassed | TestFailed
+
+AssertEq(Name Str, Expected, Actual) [
+  (Expected == Actual) . {
+    true  [ TestPassed { Name Name } ]
+    false [ TestFailed { Name Name, Expected Expected, Actual Actual } ]
+  }
+]
+
+RunTestSuite() [
+  [
+    AssertEq("Math Addition", 4, (2 + 2))
+    AssertEq("Area of Rect", 20.0, (Rect { Width 4.0, Height 5.0 } . Area))
+    AssertEq("User Migration", true, (User { Id "1", Name "Bob", Age 20, Role "user", PasswordHash "x" } . MigrateUser . _.IsAdult))
+  ]
+  . Stream.ForEach(Result [
+    Result . {
+      TestPassed [ "[PASS] {Name}" . Shell.Log ]
+      TestFailed [ "[FAIL] {Name}: Expected {Expected}, got {Actual}" . Shell.Log ]
+    }
+  ])
+]
+
+
+// =============================================================================
+// 18. COMPLEX CASE: RECURSIVE AUTONOMOUS AI AGENT
 // =============================================================================
 
 CompileError { Code Int, Log Str }
@@ -328,29 +728,29 @@ RunBuild [ "cargo build --release" . Shell.Exec ]
 
 AgentLoop(Err, Retries) [
   Retries . {
-    [ _ == 0 ] [ "Лимит попыток исчерпан. Требуется человек." . Shell.Log ]
+    [ _ == 0 ] [ "Retry limit reached. Human intervention required." . Shell.Log ]
 
     _ [
       AiQuery {
-        SystemPrompt "Ты инженер. Исправь ошибку компиляции git diff патчем."
-        // Поле Err.Log берется из явно захваченного слота (Err)
-        UserPrompt   "Лог ошибки: {Err.Log}. Напиши патч."
+        SystemPrompt "You are an engineer. Fix the compilation error with a git diff patch."
+        // Field Err.Log is taken from the explicitly captured slot (Err)
+        UserPrompt   "Error log: {Err.Log}. Write a patch."
       }
       . Ai.Call
-      // Результат Ai.Call (AiResponse) прокидывается сквозь '.>'
-      // Поля Explanation и Diff распаковываются автоматически для интерполяции
-      .> [ "AI предлагает решение: {Explanation}" . Shell.Log ]
+      // Result of Ai.Call (AiResponse) passes through '.>'
+      // Fields Explanation and Diff are unpacked automatically for interpolation
+      .> [ "AI suggests solution: {Explanation}" . Shell.Log ]
       .> [ "git apply {Diff}" . Shell.Exec ]
       . RunBuild
       . {
         BuildSuccess [
-          "Билд успешно собран после патча!" . Shell.Log
+          "Build succeeded after applying patch!" . Shell.Log
         ]
 
-        // Захватываем весь новый объект ошибки в слот (NewErr) для рекурсии
+        // Capture the entire new error object into slot (NewErr) for recursion
         CompileError(NewErr) [
           NewErr
-          .> [ "Патч не помог. Запуск следующей попытки..." . Shell.Log ]
+          .> [ "Patch did not help. Starting next attempt..." . Shell.Log ]
           . AgentLoop(Retries - 1)
         ]
       }
@@ -360,127 +760,44 @@ AgentLoop(Err, Retries) [
 
 
 // =============================================================================
-// 8. РАЗРЕШЕНИЕ КОЛЛИЗИЙ ПРИ СЛИЯНИИ (LINEAGE NAMESPACING)
-// =============================================================================
-
-Order { Id Str, Amount Int }
-
-// При слиянии User (см. раздел 1) и Order возникает коллизия поля `Id`.
-UserOrder User & Order
-
-ProcessCombined(CombinedContext) [
-  CombinedContext . {
-    UserOrder [
-      // Уникальные поля доступны плоско:
-      "Имя клиента: {Name}, Сумма заказа: {Amount}" . Shell.Log
-
-      // Поля с коллизией требуют указания предка (Lineage):
-      "User ID: {User.Id}, Order ID: {Order.Id}" . Shell.Log
-    ]
-  }
-]
-
-
-// =============================================================================
-// 9. ДЕКЛАРАТИВНАЯ МИГРАЦИЯ ТИПОВ
-// =============================================================================
-
-ClientAccount {
-  AccountId Str
-  Name      Str
-  IsAdult   Bool
-}
-
-// Поля с совпадающими именами (Name) мапятся автоматически.
-// Авто-распаковка: аргумент типизирован (U User), поэтому Id, Name, Age доступны в скоупе.
-MigrateUser(U User) [
-  ClientAccount {
-    AccountId Id
-    IsAdult   (Age >= 18)
-  }
-]
-
-
-// =============================================================================
-// 10. ОНТОЛОГИЧЕСКАЯ ТИПИЗАЦИЯ (TYPESTATE) И СБОР ИСХОДОВ (RAILWAY-FREE)
-// =============================================================================
-// Вместо ошибок пайплайн собирает неразрешенные исходы (Outcomes) в Union-тип.
-
-Reserved   { ReservedAt Int }
-Paid       { TransactionId Str }
-
-OutOfStock { Reason Str }
-NoMoney    { Reason Str }
-
-// Явная типизация аргумента (O Order) запускает Правило 3 (Байпас).
-// Поле Amount доступно плоско благодаря Правилу 1 (Авто-распаковка типизированных слотов).
-ReserveStock(O Order) [
-  Amount . {
-    [ _ > 0 ] [ O & Reserved { ReservedAt 1620000000 } ]
-    _         [ OutOfStock { Reason "Пустой склад" } ]
-  }
-]
-
-ChargePayment(O Order) [
-  Amount . {
-    [ _ < 50000 ] [ O & Paid { TransactionId "tx_001" } ]
-    _             [ NoMoney { Reason "Недостаточно средств" } ]
-  }
-]
-
-// Компилятор автоматически выводит тип результата этой функции:
-// (Order & Reserved & Paid) | OutOfStock | NoMoney
-// Форма OutOfStock байпасит функцию ChargePayment (т.к. у нее нет формы Order).
-// Нам не нужны Result<T, E> монады или try/catch!
-ExecuteFulfillment(InitialOrder) [
-  InitialOrder
-  . ReserveStock
-  . ChargePayment
-]
-
-// Функция принимает только те заказы, которые одновременно и Зарезервированы, и Оплачены.
-// Коллизий нет, поэтому поля Id и TransactionId доступны плоско.
-ShipToCustomer(Order & Reserved & Paid) [
-  "Доставка заказа {Id}. Транзакция {TransactionId} подтверждена." . Shell.Log
-]
-
-
-// =============================================================================
-// ТОЧКА ВХОДА (MAIN PIPELINE)
+// 19. ENTRY POINT (MAIN PIPELINE)
 // =============================================================================
 
 Main [
-  "Старт процесса сборки проекта..." . Shell.Log
+  "Starting test suite..." . Shell.Log
+  . RunTestSuite
+  . [ "Starting project build process..." . Shell.Log ]
   . RunBuild
   . {
-    // Требуется полная форма для передачи в агент — используем захват (Err)
+    // Full form is required to pass into the agent — use slot capture (Err)
     FatalError(Err) [
       Err
-      .> [ "Критический сбой компиляции ({Err.Code}). Запуск агента..." . Shell.Log ]
+      .> [ "Critical compilation failure ({Err.Code}). Launching agent..." . Shell.Log ]
       .  AgentLoop(3)
     ]
 
-    // Нужен только лог — используем авто-распаковку поля Log
+    // Only the log is needed — use auto-unpacking of the Log field
     Warning [
-      "Предупреждения компилятора: {Log}" . Shell.Log
+      "Compiler warnings: {Log}" . Shell.Log
       .> [ "cargo fix --allow-no-vcs" . Shell.Exec ]
-      . [ "Автоматический линтинг завершен." . Shell.Log ]
+      .  [ "Automatic linting completed." . Shell.Log ]
     ]
 
     BuildSuccess [
-      "Проект абсолютно чист. Готово к релизу!" . Shell.Log
+      "Project is completely clean. Ready for release!" . Shell.Log
     ]
   }
 ]
 
 
 // =============================================================================
-// ИМПОРТЫ
+// 20. IMPORTS & MODULE SYSTEM
 // =============================================================================
 
-Base root.base     // named import
-{Str} root.base    // element import
-_ root.base        // all import
-_ base             // relative import
-_ ../../../base    // relative import
+Base root.base             // Named import
+{Str, Int} root.base       // Element import
+_ root.base                // Wildcard import (all)
+_ base                     // Relative import
+_ ../../../base            // Deep relative import
+Http std.net.http          // Standard library import
 ```
