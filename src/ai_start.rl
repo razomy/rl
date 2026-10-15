@@ -3,7 +3,7 @@ _ grammar
 _ meta
 _ shell
 _ runtimes
-_ ctx
+_ ai_ctx
 
 // --- 4. ДЕЙСТВИЯ (ACTIONS) И ШАГИ ВЕРИФИКАЦИИ ---
 
@@ -83,10 +83,31 @@ HandleBuildFailure(Err BuildError) [
   . RetryLoop
 ]
 
-Start [
+Start_Fix_Build [
   RunBuild
   . {
     BuildSuccess [ LogSuccesText ]
     BuildError[ _ . HandleBuildFailure ]
   }
+]
+
+IsProjectDevelopmentQuery
+ChoseAgent(I) [
+  I
+  . {
+    IsProjectDevelopmentQuery [
+      I . {
+
+      }
+    ]
+    IsSearchQuery [
+      I . {
+
+      }
+    ]
+  }
+]
+
+Start(UserInputs) [
+  ChoseAgent
 ]

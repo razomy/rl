@@ -5,10 +5,11 @@ Undefined None
 Bool Bool
 SymbolType Any
 Bigint Number
+Byte 0x00
 
 Vector(T) T & {}
 
-// Целые числа
+// Integers
 I8 Number
 I16 Number
 I32 Number
@@ -18,7 +19,7 @@ Int I32
 Long I64
 IntPrimitive I8 | I16 | I32 | I64 | I128 | Int | Long
 
-// Беззнаковые целые числа
+// Unsigned Integers
 U8 Number
 U16 Number
 U32 Number
@@ -26,7 +27,7 @@ U64 Bigint
 U128 Bigint
 UIntPrimitive U8 | U16 | U32 | U64 | U128
 
-// Числа с плавающей точкой
+// Floats
 F32 Number
 F64 Number
 Float F32
@@ -36,7 +37,7 @@ FloatPrimitive F32 | F64 | Float | Double
 Number Number
 NumberPrimitive IntPrimitive | UIntPrimitive | FloatPrimitive | Number
 
-// Строки
+// Strings & Chars
 Char String
 Char64 String
 Char128 String
@@ -51,4 +52,4 @@ StringPrimitive Char | InlineString | MultilineString | FixedString | String
 EnumInt Number
 EnumString String
 
-AllPrimitives StringPrimitive | NumberPrimitive | Bool | Null | Undefined | SymbolType
+AllPrimitives StringPrimitive | NumberPrimitive | Bool | Null | Undefined | SymbolType | Byte

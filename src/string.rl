@@ -1,5 +1,9 @@
+_ primitives
 
-
-ChunkLargeLog(Err LargeError) [
-  Text . native_split_double_spaces
+StringOps(First Str, Last Str) [
+  Full "{First} {Last}"
+  Full
+  . Str.Trim
+  . Str.ToUpper
+  . Str.Split(" ")
 ]

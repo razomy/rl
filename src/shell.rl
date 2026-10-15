@@ -1,6 +1,6 @@
-_ meta
+_ primitives
 
 Shell {
-  Log(Text)  [ Text . native_print ]
+  Log(Msg)  [ Msg . native_print ]
   Exec(Cmd) [ Cmd . native_exec ]
 }

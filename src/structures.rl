@@ -1,7 +1,37 @@
-_ meta
+_ primitives
 
-Cons(T) { Head T, Tail List(T) }
-List None | Cons(Any)
-List1(A)       Cons { Head A, Tail None }
-List2(A, B)    Cons { Head A, Tail List1(B) }
-List3(A, B, C) Cons { Head A, Tail List2(B, C) }
+Identifiable { Id Str }
+Auditable    { CreatedAt Int, UpdatedAt Int }
+
+// Tuples
+Point2D (Float, Float)
+Origin  (0.0, 0.0)
+Tuple(T) ()
+
+// Generic Collections and Data Structures
+None {}
+Cons(T) {
+  Head T
+  Tail List(T)
+}
+List(T) None | Cons(T)
+
+Leaf {}
+Node(T) {
+  Value T
+  Left  Tree(T)
+  Right Tree(T)
+}
+Tree(T) Leaf | Node(T)
+
+Map(K, V) { (K) V }
+Set(T)    { (T) Bool }
+
+Some(T)   { Value T }
+Option(T) Some(T) | None
+
+// Algebraic Expressions
+Num(Val)  { Value Val }
+Add(L, R) { Left L, Right R }
+Mul(L, R) { Left L, Right R }
+Expr      Num | Add(Expr, Expr) | Mul(Expr, Expr)
