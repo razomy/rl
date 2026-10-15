@@ -1,6 +1,6 @@
 _ meta
-_ primitives
-_ structures
+_ primitive
+_ structure
 _ information
 
 // =============================================================================

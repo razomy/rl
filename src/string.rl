@@ -1,6 +1,6 @@
 _ meta
-_ primitives
-_ structures
+_ primitive
+_ structure
 
 // =============================================================================
 // Character Constants & Lexemes (merged from chars.rl)

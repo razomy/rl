@@ -1,9 +1,5 @@
 _ thing
 
-// =============================================================================
-// Enumerations (schema.org)
-// =============================================================================
-
 DayOfWeek "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday" | "PublicHolidays"
 
 ItemAvailability "InStock" | "OutOfStock" | "PreOrder" | "PreSale" | "BackOrder" | "Discontinued"

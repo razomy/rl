@@ -1,17 +1,62 @@
 _ meta
-_ primitives
-_ structures
+_ primitive
+_ structure
 _ string
 _ language
 _ shell
 _ computing
+_ hir
 
 // =============================================================================
-// 1. AI / ML Core Entities, Models & Hyperparameters
+// 1. AI / ML Core Entities, Neural Networks, Optimizers & Hyperparameters
 // =============================================================================
 
-ModelModality "text" | "vision" | "audio" | "video" | "multimodal" | "embedding" | "code" | "reinforcement"
-ModelProvider "openai" | "anthropic" | "google" | "meta" | "mistral" | "deepseek" | "local"
+ModelModality "text" | "vision" | "audio" | "video" | "multimodal" | "embedding" | "code" | "reinforcement" | "tabular" | "graph" | "3d"
+ModelProvider "openai" | "anthropic" | "google" | "meta" | "mistral" | "deepseek" | "cohere" | "xai" | "huggingface" | "local"
+
+ActivationFunction "ReLU" | "LeakyReLU" | "GELU" | "SiLU" | "Swish" | "Sigmoid" | "Tanh" | "Softmax" | "Softplus" | "ELU" | "Mish"
+LossFunction       "CrossEntropy" | "BinaryCrossEntropy" | "MSE" | "MAE" | "Huber" | "KLDivergence" | "Contrastive" | "Triplet" | "CTC" | "Focal"
+OptimizerType      "SGD" | "Adam" | "AdamW" | "RMSprop" | "Adagrad" | "Lion" | "Muon" | "SOAP" | "LBFGS"
+PrecisionFormat    "FP64" | "FP32" | "TF32" | "FP16" | "BF16" | "FP8_E4M3" | "FP8_E5M2" | "INT8" | "INT4" | "NF4"
+
+NeuralLayerType
+  "Linear" | "Conv1D" | "Conv2D" | "Conv3D" | "DepthwiseConv2D" | "TransposeConv2D"
+  | "MaxPool" | "AvgPool" | "AdaptiveAvgPool"
+  | "BatchNorm" | "LayerNorm" | "RMSNorm" | "GroupNorm"
+  | "Dropout" | "Embedding" | "PositionalEncoding" | "RoPE"
+  | "RNN" | "LSTM" | "GRU" | "MambaSSM"
+  | "MultiHeadAttention" | "GroupedQueryAttention" | "FlashAttention" | "CrossAttention"
+  | "MoERouter" | "FeedForwardSwiGLU" | "ResidualConnection"
+
+NeuralLayer {
+  Name        Str
+  LayerType   NeuralLayerType
+  InputShape  List(Int)
+  OutputShape List(Int)
+  Parameters  Count
+  Trainable   Bool
+}
+
+TrainingHyperparameters {
+  LearningRate       Float
+  WeightDecay        Float
+  BatchSize          Int
+  GradientAccumSteps Int
+  MaxEpochs          Int
+  WarmupSteps        Int
+  MaxGradNorm        Float
+  Optimizer          OptimizerType
+  Loss               LossFunction
+  Precision          PrecisionFormat
+  Seed               Int
+}
+
+LoRAConfig {
+  Rank          Int
+  Alpha         Float
+  Dropout       Float
+  TargetModules List(Str)
+}
 
 ModelConfig {
   Provider         ModelProvider
@@ -32,13 +77,64 @@ TokenUsage {
   CompletionTokens Int
   TotalTokens      Int
   CachedTokens     Int
+  ReasoningTokens  Int
 }
 
 // =============================================================================
-// 2. Messages, Prompts, Tools & Context (merged from message.rl & ai_ctx.rl)
+// 2. Reinforcement Learning (MDP, Policies, Value Functions)
 // =============================================================================
 
-MessageRole "system" | "user" | "assistant" | "tool" | "developer"
+RLAlgorithm "DQN" | "PPO" | "SAC" | "TD3" | "DDPG" | "A2C" | "A3C" | "GRPO" | "DPO" | "RLHF" | "AlphaZero" | "MuZero"
+
+ExperienceReplayTransition {
+  State     Any
+  Action    Any
+  Reward    Float
+  NextState Any
+  Done      Bool
+}
+
+MarkovDecisionProcess {
+  DiscountFactorGamma Float
+  Horizon             Int
+  ActionSpace         Str
+  ObservationSpace    Str
+}
+
+// =============================================================================
+// 3. Messages, Prompts, Tools, Interaction Graph & Context
+// =============================================================================
+
+MessageRole      "system" | "user" | "assistant" | "tool" | "developer"
+SenderType       "SYSTEM" | "USER" | "MODEL" | "TOOL"
+MessageTextType  "thinking" | "text" | "example"
+CodeLanguageType "ts" | "py" | "js" | "sh" | "rl" | "cs" | "rust" | "go" | "cpp"
+AgentTaskType    "do" | "goto" | "repeat" | "subtask"
+
+IMessageNode IEntity
+
+TextMn   IMessageNode & { Kind "TextMn", Text Str, TextType MessageTextType, IsDone Bool }
+CodeMn   IMessageNode & { Kind "CodeMn", Text Str, CodeLanguage CodeLanguageType }
+EntityMn IMessageNode & { Kind "EntityMn", Entity IdRef(IEntity) }
+TaskMn   IMessageNode & { Kind "TaskMn", TaskType AgentTaskType, IsDone Bool, SubTasks List(IdRef(TaskMn)) }
+SenderMn IMessageNode & { Kind "SenderMn", SenderType SenderType }
+
+IToolNode IMessageNode & { FunctionSpec FunctionHirn }
+RequestMn IToolNode    & { Kind "RequestMn", Args List(Any) }
+ResultMn  IToolNode    & { Kind "ResultMn", Result Any }
+ToolMn    IToolNode    & { Kind "ToolMn" }
+
+AnyMn TextMn | CodeMn | EntityMn | TaskMn | RequestMn | ResultMn | ToolMn
+
+InteractionTurn IEntity & {
+  Kind     "InteractionTurn"
+  Sender   IdRef(SenderMn)
+  Messages List(IdRef(AnyMn))
+}
+
+InteractionEntity IEntity & {
+  InteractionTurns List(InteractionTurn)
+}
 
 TextMessage {
   Role MessageRole
@@ -87,8 +183,51 @@ AiResponse {
   Usage       Option(TokenUsage)
 }
 
+LlmException            { ActualResult Str, ExpectedResult Str }
+MustUseToolLlmException LlmException
+MaxAttemptLlmException  LlmException
+PanicAnswerLlmException LlmException
+TypedAnswerLlmException LlmException
+ToolExecuteLlmException LlmException
+
 // =============================================================================
-// 3. RAG (Retrieval-Augmented Generation) & Embeddings
+// 4. Multi-Agent Architecture & Autonomous Code Refactoring
+// =============================================================================
+
+DeveloperTask    { FileName Str, Instructions Str }
+ArchitecturePlan { GlobalStrategy Str, Tasks List(DeveloperTask) }
+
+FileOperationAction "CREATE" | "UPDATE" | "DELETE" | "RENAME"
+
+FileOperation {
+  Action  FileOperationAction
+  Path    Str
+  Content Str
+  Reason  Str
+}
+
+BackupPaths {
+  Dir              Str
+  RawLogPath       Str
+  JsonlOpsPath     Str
+  JsonSnapshotPath Str
+}
+
+RefactorConfig {
+  TargetDir            Str
+  SystemPrompt         Str
+  TaskPrompt           Str
+  Model                Str
+  IgnoreList           List(Str)
+  ApplyImmediately     Bool
+  CleanupCacheAfterRun Bool
+  MaxContinuationTurns Int
+  MaxFullFilesInCache  Int
+  BackupDirName        Str
+}
+
+// =============================================================================
+// 5. RAG (Retrieval-Augmented Generation) & Embeddings
 // =============================================================================
 
 DocumentChunk {
@@ -105,7 +244,7 @@ KnowledgeBase {
 }
 
 // =============================================================================
-// 4. Build Verification & Self-Healing Agent (merged from ai.rl & ai_start.rl)
+// 6. Build Verification & Self-Healing Agent
 // =============================================================================
 
 CompileError { Code Int, Log Str }
@@ -113,10 +252,10 @@ BuildSuccess { Status Str, Artifact Str }
 BuildError   { Text Str, Size Int }
 BuildResult  BuildSuccess | CompileError | BuildError
 
-FatalError   CompileError & [ _.Code >= 500 ]
-Warning      CompileError & [ _.Code < 500 ]
-SmallError   BuildError & [ _.Size <= 500 ]
-LargeError   BuildError & [ _.Size > 500 ]
+FatalError CompileError & [ _.Code >= 500 ]
+Warning    CompileError & [ _.Code < 500 ]
+SmallError BuildError & [ _.Size <= 500 ]
+LargeError BuildError & [ _.Size > 500 ]
 
 Task {
   Message Str
@@ -143,8 +282,8 @@ CreateAiContext(ErrorLog Str) [
 ]
 
 Ai {
-  Call(Query)     [ Query . native_ai_llm_request ]
-  Embed(Text Str) [ Text . native_ai_embed ]
+  Call(Query)          [ Query . native_ai_llm_request ]
+  Embed(Text Str)      [ Text . native_ai_embed ]
   Solve(Ctx AiContext) [ Ctx . native_ai_solve ]
 }
 
@@ -155,7 +294,6 @@ RunNpmBuild [
   . Shell.Exec
 ]
 
-// Recursive Autonomous Patch Loop
 AgentLoop(Err, Retries Int) [
   Retries . {
     [ _ == 0 ] [ "Retry limit reached. Human intervention required." . Shell.Log ]
@@ -184,7 +322,6 @@ AgentLoop(Err, Retries Int) [
   }
 ]
 
-// Policy-Driven Task Retry Engine
 AttemptFix(ErrorLog Str) [
   ErrorLog
   . CreateAiContext
@@ -233,14 +370,10 @@ HandleBuildFailure(Err BuildError) [
 
 StartFixBuild [
   RunNpmBuild . {
-    BuildSuccess     [ LogSuccessText ]
-    BuildError(Err)  [ Err . HandleBuildFailure ]
+    BuildSuccess    [ LogSuccessText ]
+    BuildError(Err) [ Err . HandleBuildFailure ]
   }
 ]
-
-// =============================================================================
-// 5. NLP Text Normalization Flow (merged from ai_flows.rl)
-// =============================================================================
 
 NormalizeTextFlow(InputText Str, AgentInstance) [
   InputText . {

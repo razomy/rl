@@ -1,5 +1,5 @@
 _ thing
-_ enumerations
+_ enumeration
 _ intangible
 _ organization
 
