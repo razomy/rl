@@ -1,8 +1,11 @@
-_ meta
-
+_ semantic
+// todo
 // =============================================================================
 // Fundamental Primitives & Refinements
 // =============================================================================
+
+Number Number & Object
+String { Length Number } & Object & String
 
 Null       None
 Undefined  None

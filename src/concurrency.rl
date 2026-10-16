@@ -1,4 +1,4 @@
-_ meta
+_ primitive
 _ primitive
 _ structure
 _ shell
@@ -99,7 +99,7 @@ WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
     None [ "Channel closed, terminating worker." . Shell.Log ]
     Some [
       Value
-      . String.Length
+      . Length
       .> (Len [ Results.Send(Len) ])
       . [ WorkerLoop(Jobs, Results) ]
     ]

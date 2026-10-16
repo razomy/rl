@@ -3,7 +3,7 @@
 // =============================================================================
 
 // 1. Core Language, Runtime & Standard Library
-_ meta
+_ primitive
 _ primitive
 _ structure
 _ math

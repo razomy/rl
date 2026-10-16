@@ -1,4 +1,4 @@
-_ meta
+_ primitive
 _ primitive
 _ structure
 _ string
@@ -68,7 +68,7 @@ FsNode IEntity & HasPrimary(FsNode) & {
 CycleDetectedError { Message String, NodeId String }
 
 ValidateFsNodeCycle(OldNode FsNode, NewNode FsNode) [
-  NewNode.Ancestors . Stream.Filter([ _.Id == OldNode.Id ]) . {
+  NewNode.Ancestors . Filter([ _.Id == OldNode.Id ]) . {
     None [ NewNode ]
     Cons [ CycleDetectedError { Message "FileSystem hierarchy cycle detected", NodeId OldNode.Id } ]
   }

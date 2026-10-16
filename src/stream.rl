@@ -1,4 +1,4 @@
-_ meta
+_ primitive
 _ primitive
 _ structure
 
@@ -31,7 +31,7 @@ Stream {
   All(Pred)                 [ native_stream_all(Pred) ]
   Find(Pred)                [ native_stream_find(Pred) ]
   Count()                   [ native_stream_count ]
-  Sum()                     [ Stream.Fold(0, (Acc, X) [ Acc + X ]) ]
+  Sum()                     [ Fold(0, (Acc, X) [ Acc + X ]) ]
   CollectList()             [ native_stream_collect_list ]
   CollectSet()              [ native_stream_collect_set ]
   CollectMap()              [ native_stream_collect_map ]
@@ -42,7 +42,7 @@ Stream {
 // =============================================================================
 
 FizzBuzz(Limit Int) [
-  (1..Limit) . Stream.Map(N [
+  (1..Limit) . Map(N [
     (N % 3, N % 5) . {
       (0, 0) [ "FizzBuzz" ]
       (0, _) [ "Fizz" ]
@@ -53,5 +53,5 @@ FizzBuzz(Limit Int) [
 ]
 
 RangeSum(Start Int, End Int) [
-  (Start..End) . Stream.Sum
+  (Start..End) . Sum
 ]

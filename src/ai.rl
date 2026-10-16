@@ -1,4 +1,4 @@
-_ meta
+_ primitive
 _ primitive
 _ structure
 _ string
@@ -333,7 +333,7 @@ AttemptFix(ErrorLog String) [
 CreateTaskByError(Err BuildError) [
   Err . {
     SmallError [ Task { Message Err.Text } ]
-    LargeError [ Task { Message (Err.Text . String.Substring(0, 500)) } ]
+    LargeError [ Task { Message (Err.Text . Substring(0, 500)) } ]
   }
 ]
 

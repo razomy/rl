@@ -1,8 +1,8 @@
-# Razomy Language
+# Razomy Language [Under construction]
 
 Razomy language is a metaprogramming language that describes entities and behaviors.
 
-This library is a collection of all human entities in Razomy syntax.
+This library is a collection of all human entities in Razomy Language syntax.
 
 ## Syntax
 
@@ -183,9 +183,17 @@ LogicOps(X Bool, Y Bool, Val Int) [
 StringOps(First String, Last String) [
   Full "{First} {Last}" // Native interpolation
   Full
-  . String.Trim
-  . String.ToUpper
-  . String.Split(" ")
+  . Trim
+  . ToUpper
+  . Split(" ")
+]
+
+StringOpsBi(First String, Last String) [
+  Full "{First} {Last}" // Native interpolation
+  Full
+  & Trim // bi-directinal
+  & ToUpper
+  . Split(" ") // sequencial
 ]
 
 
@@ -195,7 +203,7 @@ StringOps(First String, Last String) [
 
 Shell {
   Log(Msg)  [ Msg . native_print ]
-  Exec(Cmd) [ Cmd . native_exec ]
+  Exec [ _ . native_exec ]
 }
 
 Cart {
@@ -352,14 +360,14 @@ OrderList [
 
 CalculateTotalInStock(Items) [
   Items
-  . Stream.Filter([ _.InStock == true ])
-  . Stream.Map([ _.Price ])
-  . Stream.Fold(0, (Acc, Price) [ Acc + Price ])
+  . Filter([ _.InStock == true ])
+  . Map([ _.Price ])
+  . Fold(0, (Acc, Price) [ Acc + Price ])
 ]
 
 // Range generator andcomprehension
 FizzBuzz(Limit Int) [
-  (1..Limit) . Stream.Map(N [
+  (1..Limit) . Map(N [
     (N % 3, N % 5) . {
       (0, 0) [ "FizzBuzz" ]
       (0, _) [ "Fizz" ]
@@ -522,7 +530,7 @@ WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
     None [ "Channel closed, terminating worker." . Shell.Log ]
     Some [
       Value
-      . String.Length
+      . Length
       .> (Len [ Results.Send(Len) ])
       . [ WorkerLoop(Jobs, Results) ] // Tail-recursive actor loop
     ]
@@ -651,10 +659,10 @@ ApiRouter(Req HttpRequest) [
 DeriveJson(TargetForm) [
   TargetForm & {
     ToJson() [
-      Self . Meta.FieldsOf . Stream.Map(Field [
+      Self . Meta.FieldsOf . Map(Field [
         "\"{Field.Name}\": {Field.Value . Json.FormatValue}"
       ])
-      . String.Join(", ")
+      . Join(", ")
       . (Inner [ "\{ {Inner} \}" ])
     ]
   }
@@ -670,7 +678,7 @@ InspectEntity(Entity) [
   Entity . Meta.TypeOf . {
     TypeName [ "Inspecting type: {TypeName}" . Shell.Log ]
   }
-  Entity . Meta.FieldsOf . Stream.ForEach(F [
+  Entity . Meta.FieldsOf . ForEach(F [
     "Field {F.Name} has type {F.Type} and value {F.Value}" . Shell.Log
   ])
 ]
@@ -697,7 +705,7 @@ RunTestSuite() [
     AssertEq("Area of Rect", 20.0, (Rect { Width 4.0, Height 5.0 } . Area))
     AssertEq("User Migration", true, (User { Id "1", Name "Bob", Age 20, Role "user", PasswordHash "x" } . MigrateUser . _.IsAdult))
   ]
-  . Stream.ForEach(Result [
+  . ForEach(Result [
     Result . {
       TestPassed [ "[PASS] {Name}" . Shell.Log ]
       TestFailed [ "[FAIL] {Name}: Expected {Expected}, got {Actual}" . Shell.Log ]

@@ -1,20 +1,18 @@
-// =============================================================================
-// Core Metaprogramming, Reflection, Type Algebra & Compiler Directives
-// =============================================================================
-
 Any    Any
+Number    Number
+String    String
+RegExp    RegExp
 None   None
 
 Property    Any
 Expression  Any
 
 Tuple(T)    Any
+Array(T)    Tuple
+List(T)    Array
 Object     Tuple(Property)
 Function   Object & Tuple(Expression)
 Type       Tuple(Object | Function)
-
-Number Number & Object
-String { Length Number } & Object & String
 
 // Control flow & Meta primitives
 return Any
@@ -74,10 +72,10 @@ PrimaryKey {}
 DeriveJson(TargetForm) [
   TargetForm & {
     ToJson() [
-      Self . Meta.FieldsOf . Stream.Map(Field [
+      Self . Meta.FieldsOf . Map(Field [
         "\"{Field.Name}\": {Field.Value . Json.FormatValue}"
       ])
-      . String.Join(", ")
+      . Join(", ")
       . (Inner [ "\{ {Inner} \}" ])
     ]
   }
@@ -104,10 +102,10 @@ DeriveHash(TargetForm) [
 DeriveDebug(TargetForm) [
   TargetForm & {
     ToDebugString() [
-      Self . Meta.FieldsOf . Stream.Map(F [
+      Self . Meta.FieldsOf . Map(F [
         "{F.Name}: {F.Value}"
       ])
-      . String.Join(", ")
+      . Join(", ")
       . (FieldsStr [ "{Self . Meta.TypeOf} \{ {FieldsStr} \}" ])
     ]
   }
@@ -117,7 +115,7 @@ InspectEntity(Entity) [
   Entity . Meta.TypeOf . {
     TypeName [ "Inspecting type: {TypeName}" . Shell.Log ]
   }
-  Entity . Meta.FieldsOf . Stream.ForEach(F [
+  Entity . Meta.FieldsOf . ForEach(F [
     "Field {F.Name} has type {F.Type} and value {F.Value}" . Shell.Log
   ])
 ]

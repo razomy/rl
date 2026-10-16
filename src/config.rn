@@ -1,5 +1,8 @@
 order
-meta
+config
+lexeme
+syntax
+semantic
 primitive
 structure
 math

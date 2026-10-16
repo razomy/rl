@@ -1,4 +1,4 @@
-_ meta
+_ primitive
 _ primitive
 _ structure
 
@@ -79,7 +79,7 @@ Regex {
 
 String {
   Length(S String)                 [ S . native_str_len ]
-  IsEmpty(S String)                [ S . String.Length == 0 ]
+  IsEmpty(S String)                [ S . Length == 0 ]
   Trim(S String)                   [ S . native_str_trim ]
   TrimStart(S String)              [ S . native_str_trim_start ]
   TrimEnd(S String)                [ S . native_str_trim_end ]
@@ -92,8 +92,8 @@ String {
   PascalCase(S String)             [ S . native_str_pascal_case ]
   Split(S String, Delim String)       [ (S, Delim) . native_str_split ]
   Join(Items List(String), Sep String)[ (Items, Sep) . native_str_join ]
-  Lines(S String)                  [ S . String.Split("\n") ]
-  Words(S String)                  [ S . String.Trim . String.Split(" ") ]
+  Lines(S String)                  [ S . Split("\n") ]
+  Words(S String)                  [ S . Trim . Split(" ") ]
   StartsWith(S String, Prefix String) [ (S, Prefix) . native_str_starts_with ]
   EndsWith(S String, Suffix String)   [ (S, Suffix) . native_str_ends_with ]
   Contains(S String, Sub String)      [ (S, Sub) . native_str_contains ]
@@ -131,7 +131,7 @@ Csv {
 StringOps(First String, Last String) [
   Full "{First} {Last}"
   Full
-  . String.Trim
-  . String.ToUpper
-  . String.Split(" ")
+  . Trim
+  . ToUpper
+  . Split(" ")
 ]
