@@ -33,7 +33,7 @@ PwmChannel {
 }
 
 Microcontroller {
-  Model           Str
+  Model           String
   Architecture    McuArchitecture
   ClockSpeedMhz   Float
   FlashSizeKb     Int
@@ -54,7 +54,7 @@ SensorKind
   | "GasCO2" | "ParticulateMatter" | "SoilMoisture" | "pH" | "ForceTorque" | "RotaryEncoder"
 
 SensorReading {
-  SensorId    Str
+  SensorId    String
   Kind        SensorKind
   Value       Float
   VectorValue Option(VectorFloat3)
@@ -78,7 +78,7 @@ LidarScanPoint {
 }
 
 LidarPointCloud {
-  FrameId   Str
+  FrameId   String
   Points    List(LidarScanPoint)
   Timestamp Instant
 }
@@ -90,7 +90,7 @@ LidarPointCloud {
 ActuatorKind "StepperMotor" | "BrushlessDC" | "BrushedDC" | "ServoMotor" | "LinearActuator" | "PneumaticValve" | "HydraulicCylinder" | "Solenoid" | "Relay" | "Piezoelectric"
 
 MotorState {
-  ActuatorId       Str
+  ActuatorId       String
   Kind             ActuatorKind
   TargetPositionRad Float
   ActualPositionRad Float
@@ -157,10 +157,10 @@ DenavitHartenbergParam {
 }
 
 RobotJoint {
-  Name          Str
+  Name          String
   JointType     RobotJointType
-  ParentLink    Str
-  ChildLink     Str
+  ParentLink    String
+  ChildLink     String
   Axis          VectorFloat3
   LowerLimitRad Float
   UpperLimitRad Float

@@ -131,11 +131,11 @@ Generator {
   DisposeSystem    DisposeSystem
 }
 
-CoolingZeroLevelException          { Reason Str }
-OverheatException                  { Reason Str }
-OverGatherException                { Reason Str }
-GatheringTakeMoreThenAbleException { Reason Str }
-ProducingTakeMoreThenAbleException { Reason Str }
+CoolingZeroLevelException          { Reason String }
+OverheatException                  { Reason String }
+OverGatherException                { Reason String }
+GatheringTakeMoreThenAbleException { Reason String }
+ProducingTakeMoreThenAbleException { Reason String }
 
 HeatCoolingSystem(Cs CoolingSystem, Amount Float) [
   Cs & { HeatLevel (HeatLevel + Amount) }
@@ -210,8 +210,8 @@ CharacterStats {
 }
 
 StatusEffect {
-  EffectId      Str
-  Name          Str
+  EffectId      String
+  Name          String
   IsBuff        Bool
   DurationSec   Float
   Stacks        Int
@@ -249,7 +249,7 @@ AchievementEntity IEntity & HasPrimary(AchievementEntity) & HasName & HasTitle &
 }
 
 UserAchievementEntity ExtendsEntity(AchievementEntity, UserAchievementEntity) & CardTraits & HasAchieved & HasViewed & HasReceived & HasTouched & {
-  UserId Str
+  UserId String
 }
 
 RankEntity IEntity & HasPrimary(RankEntity) & HasName & HasTitle & {
@@ -259,7 +259,7 @@ RankEntity IEntity & HasPrimary(RankEntity) & HasName & HasTitle & {
 }
 
 UserRankEntity ExtendsEntity(RankEntity, UserRankEntity) & CardTraits & HasAchieved & HasCompleted & HasViewed & HasReceived & HasTouched & {
-  UserId Str
+  UserId String
 }
 
 SkillEdgeModel {
@@ -273,7 +273,7 @@ SkillEntity IEntity & HasPrimary(SkillEntity) & HasName & HasTitle & HasDescript
 }
 
 UserSkillEntity ExtendsEntity(SkillEntity, UserSkillEntity) & HasOpened & HasDirty & HasCompleted & HasViewed & HasReceived & HasTouched & {
-  UserId Str
+  UserId String
 }
 
 TrophyEntity IEntity & HasPrimary(TrophyEntity) & HasTitle & {
@@ -301,7 +301,7 @@ ObjectiveEntity IEntity & HasPrimary(ObjectiveEntity) & HasName & HasTitle & {
 UserLevelStateType "Locked" | "Opened" | "InProgress" | "Completed"
 
 UserNumberBoardObjectiveEntity ExtendsEntity(ObjectiveEntity, UserNumberBoardObjectiveEntity) & CardTraits & HasCompleted & HasTouched & {
-  UserId         Str
+  UserId         String
   Score          Int
   Steps          Int
   State          UserLevelStateType

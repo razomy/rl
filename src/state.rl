@@ -29,10 +29,10 @@ Computed(T) {
 // =============================================================================
 
 ContextEventType "Add" | "Remove" | "Set"
-ContextEvent     { EventType ContextEventType, Key Str, Value Any }
+ContextEvent     { EventType ContextEventType, Key String, Value Any }
 
 IReadOnlyContext IResource & {
-  Store Map(Str, Any)
+  Store Map(String, Any)
 }
 
 IContext IReadOnlyContext & {
@@ -44,7 +44,7 @@ IContext IReadOnlyContext & {
 IContextable { Ctx IContext }
 
 ContextRegistry {
-  Registry Map(Str, IContext)
+  Registry Map(String, IContext)
   Events   Channel(ContextEvent)
 }
 
@@ -61,7 +61,7 @@ ParallelPipe(T) {
 }
 
 ContextPipeline IContextable & IContextPipe & {
-  Pipes Map(Str, IContextPipe)
+  Pipes Map(String, IContextPipe)
 }
 
 // CQRS & Jobs
@@ -82,7 +82,7 @@ AJob IJob & IContextable
 // =============================================================================
 
 IEvent         {}
-ExceptionEvent IEvent & { Error Str, Message Str }
+ExceptionEvent IEvent & { Error String, Message String }
 
 Change(T) { Before T, After T }
 

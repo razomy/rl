@@ -29,7 +29,7 @@ NeuralLayerType
   | "MoERouter" | "FeedForwardSwiGLU" | "ResidualConnection"
 
 NeuralLayer {
-  Name        Str
+  Name        String
   LayerType   NeuralLayerType
   InputShape  List(Int)
   OutputShape List(Int)
@@ -55,12 +55,12 @@ LoRAConfig {
   Rank          Int
   Alpha         Float
   Dropout       Float
-  TargetModules List(Str)
+  TargetModules List(String)
 }
 
 ModelConfig {
   Provider         ModelProvider
-  ModelName        Str
+  ModelName        String
   Modalities       List(ModelModality)
   ContextWindow    Int
   MaxOutputTokens  Int
@@ -69,7 +69,7 @@ ModelConfig {
   TopK             Int
   FrequencyPenalty Float
   PresencePenalty  Float
-  StopSequences    List(Str)
+  StopSequences    List(String)
 }
 
 TokenUsage {
@@ -97,8 +97,8 @@ ExperienceReplayTransition {
 MarkovDecisionProcess {
   DiscountFactorGamma Float
   Horizon             Int
-  ActionSpace         Str
-  ObservationSpace    Str
+  ActionSpace         String
+  ObservationSpace    String
 }
 
 // =============================================================================
@@ -113,8 +113,8 @@ AgentTaskType    "do" | "goto" | "repeat" | "subtask"
 
 IMessageNode IEntity
 
-TextMn   IMessageNode & { Kind "TextMn", Text Str, TextType MessageTextType, IsDone Bool }
-CodeMn   IMessageNode & { Kind "CodeMn", Text Str, CodeLanguage CodeLanguageType }
+TextMn   IMessageNode & { Kind "TextMn", Text String, TextType MessageTextType, IsDone Bool }
+CodeMn   IMessageNode & { Kind "CodeMn", Text String, CodeLanguage CodeLanguageType }
 EntityMn IMessageNode & { Kind "EntityMn", Entity IdRef(IEntity) }
 TaskMn   IMessageNode & { Kind "TaskMn", TaskType AgentTaskType, IsDone Bool, SubTasks List(IdRef(TaskMn)) }
 SenderMn IMessageNode & { Kind "SenderMn", SenderType SenderType }
@@ -138,52 +138,52 @@ InteractionEntity IEntity & {
 
 TextMessage {
   Role MessageRole
-  Text Str
+  Text String
 }
 
 ToolParameter {
-  Name        Str
-  Type        Str
-  Description Str
+  Name        String
+  Type        String
+  Description String
   Required    Bool
 }
 
 ToolDefinition {
-  Name        Str
-  Description Str
+  Name        String
+  Description String
   Parameters  List(ToolParameter)
 }
 
 ToolMessage {
-  Name      Str
-  Arguments Map(Str, Any)
-  Result    Option(Str)
+  Name      String
+  Arguments Map(String, Any)
+  Result    Option(String)
 }
 
 Message TextMessage | ToolMessage
 
 AiContext {
-  SourceDir    Str
+  SourceDir    String
   Model        Option(ModelConfig)
-  SystemPrompt Str
+  SystemPrompt String
   Messages     List(Message)
   Tools        List(ToolDefinition)
 }
 
 AiQuery {
-  SystemPrompt Str
-  UserPrompt   Str
+  SystemPrompt String
+  UserPrompt   String
 }
 
 AiResponse {
-  Content     Str
-  Diff        Str
-  Explanation Str
+  Content     String
+  Diff        String
+  Explanation String
   ToolCalls   List(ToolMessage)
   Usage       Option(TokenUsage)
 }
 
-LlmException            { ActualResult Str, ExpectedResult Str }
+LlmException            { ActualResult String, ExpectedResult String }
 MustUseToolLlmException LlmException
 MaxAttemptLlmException  LlmException
 PanicAnswerLlmException LlmException
@@ -194,36 +194,36 @@ ToolExecuteLlmException LlmException
 // 4. Multi-Agent Architecture & Autonomous Code Refactoring
 // =============================================================================
 
-DeveloperTask    { FileName Str, Instructions Str }
-ArchitecturePlan { GlobalStrategy Str, Tasks List(DeveloperTask) }
+DeveloperTask    { FileName String, Instructions String }
+ArchitecturePlan { GlobalStrategy String, Tasks List(DeveloperTask) }
 
 FileOperationAction "CREATE" | "UPDATE" | "DELETE" | "RENAME"
 
 FileOperation {
   Action  FileOperationAction
-  Path    Str
-  Content Str
-  Reason  Str
+  Path    String
+  Content String
+  Reason  String
 }
 
 BackupPaths {
-  Dir              Str
-  RawLogPath       Str
-  JsonlOpsPath     Str
-  JsonSnapshotPath Str
+  Dir              String
+  RawLogPath       String
+  JsonlOpsPath     String
+  JsonSnapshotPath String
 }
 
 RefactorConfig {
-  TargetDir            Str
-  SystemPrompt         Str
-  TaskPrompt           Str
-  Model                Str
-  IgnoreList           List(Str)
+  TargetDir            String
+  SystemPrompt         String
+  TaskPrompt           String
+  Model                String
+  IgnoreList           List(String)
   ApplyImmediately     Bool
   CleanupCacheAfterRun Bool
   MaxContinuationTurns Int
   MaxFullFilesInCache  Int
-  BackupDirName        Str
+  BackupDirName        String
 }
 
 // =============================================================================
@@ -231,15 +231,15 @@ RefactorConfig {
 // =============================================================================
 
 DocumentChunk {
-  ChunkId   Str
-  SourceUri Str
-  Content   Str
+  ChunkId   String
+  SourceUri String
+  Content   String
   Embedding List(Float)
   Score     Float
 }
 
 KnowledgeBase {
-  Name   Str
+  Name   String
   Chunks List(DocumentChunk)
 }
 
@@ -247,9 +247,9 @@ KnowledgeBase {
 // 6. Build Verification & Self-Healing Agent
 // =============================================================================
 
-CompileError { Code Int, Log Str }
-BuildSuccess { Status Str, Artifact Str }
-BuildError   { Text Str, Size Int }
+CompileError { Code Int, Log String }
+BuildSuccess { Status String, Artifact String }
+BuildError   { Text String, Size Int }
 BuildResult  BuildSuccess | CompileError | BuildError
 
 FatalError CompileError & [ _.Code >= 500 ]
@@ -258,7 +258,7 @@ SmallError BuildError & [ _.Size <= 500 ]
 LargeError BuildError & [ _.Size > 500 ]
 
 Task {
-  Message Str
+  Message String
 }
 
 StandardDevTools List2(
@@ -266,14 +266,14 @@ StandardDevTools List2(
   ToolMessage { Name "write_file" }
 )
 
-BuildSystemPrompt(ErrorLog Str) [
+BuildSystemPrompt(ErrorLog String) [
   TextMessage {
     Role "system"
     Text "You are an AI expert. Fix this build error: {ErrorLog}"
   }
 ]
 
-CreateAiContext(ErrorLog Str) [
+CreateAiContext(ErrorLog String) [
   AiContext {
     SourceDir    "."
     SystemPrompt "You are an autonomous software engineer."
@@ -283,7 +283,7 @@ CreateAiContext(ErrorLog Str) [
 
 Ai {
   Call(Query)          [ Query . native_ai_llm_request ]
-  Embed(Text Str)      [ Text . native_ai_embed ]
+  Embed(Text String)      [ Text . native_ai_embed ]
   Solve(Ctx AiContext) [ Ctx . native_ai_solve ]
 }
 
@@ -322,7 +322,7 @@ AgentLoop(Err, Retries Int) [
   }
 ]
 
-AttemptFix(ErrorLog Str) [
+AttemptFix(ErrorLog String) [
   ErrorLog
   . CreateAiContext
   . Ai.Solve
@@ -333,7 +333,7 @@ AttemptFix(ErrorLog Str) [
 CreateTaskByError(Err BuildError) [
   Err . {
     SmallError [ Task { Message Err.Text } ]
-    LargeError [ Task { Message (Err.Text . Str.Substring(0, 500)) } ]
+    LargeError [ Task { Message (Err.Text . String.Substring(0, 500)) } ]
   }
 ]
 
@@ -375,7 +375,7 @@ StartFixBuild [
   }
 ]
 
-NormalizeTextFlow(InputText Str, AgentInstance) [
+NormalizeTextFlow(InputText String, AgentInstance) [
   InputText . {
     "1. Has typos or unknown words? (pymorphy3)"       [ AgentInstance . NormalizeTextFlow ]
     "2. Missing clear Subject+Verb structure? (SpaCy)" [ AgentInstance . NormalizeTextFlow ]

@@ -2,8 +2,6 @@
 // 1. БАЗОВЫЕ ПРИМИТИВЫ И МОДИФИКАТОРЫ СХЕМЫ
 // =============================================================================
 
-Str ""
-
 // Модификаторы узлов (вместо методов .mult().opt().skip())
 Mult   Any
 Opt    Any
@@ -11,8 +9,8 @@ Skip   Any
 
 // Примитивы ФС и суффиксы
 File  Any
-FileUrl Str
-CommandStr Str
+FileUrl String
+CommandStr String
 Folder Any
 Chunk  ".chunk"
 drawio  ".drawio"
@@ -37,7 +35,7 @@ RunCmd          "run" & CommandStr & MultOpt
 // Общее правило для scopes и orders в configSchema
 ScopeRule {
   ScopeName {
-    FileRegex Str & Mult
+    FileRegex String & Mult
   } & Mult
 }
 
@@ -71,7 +69,7 @@ ConfigSchema {
   environment "environment" & { source_dir "source_dir" & {  } } & Opt
   templates   "templates" & {
     TemplateName {
-      Action Str & Skip & Mult
+      Action String & Skip & Mult
     } & Mult
   } & Opt
 }
@@ -89,10 +87,10 @@ Start  "start" & StartSchema & File
 // Рекурсивная форма: Task и SubTask имели 100% одинаковые поля в JS.
 // Вынесено в единую структуру TaskItem!
 TaskItem {
-  cron     "cron" & { Time Str } & Opt
-  priority "priority" & { Priority Str } & Opt
-  duration "duration" & { Priority Str } & Opt
-  examples "examples" & { Example Str & Mult } & Opt
+  cron     "cron" & { Time String } & Opt
+  priority "priority" & { Priority String } & Opt
+  duration "duration" & { Priority String } & Opt
+  examples "examples" & { Example String & Mult } & Opt
   SubTask  TaskItem & MultOpt // Рекурсия вместо дублирования кода!
 }
 
@@ -105,9 +103,9 @@ PlanSchema {
   DoCmd
   Goal {
     Objective {
-      responsible "responsible" & { Unit Str & Mult } & Opt
-      deps        "deps" & { Unit Str & Mult } & Opt
-      Description Str & MultOpt
+      responsible "responsible" & { Unit String & Mult } & Opt
+      deps        "deps" & { Unit String & Mult } & Opt
+      Description String & MultOpt
     } & MultOpt
   } & Mult
 }
@@ -115,13 +113,13 @@ PlanSchema {
 CompetitorsSchema Folder & {
   Name {
     "on Google Play" & Opt
-    Url Str & Opt
+    Url String & Opt
   } & Mult
 }
 
 AudienceSchema Folder & {
   Key {
-    Value Str & MultOpt
+    Value String & MultOpt
   } & Mult
 }
 
@@ -141,20 +139,20 @@ WebSchema Folder & {
 
 DescriptionSchema Folder & {
   Statement {
-    SubStatement Str & MultOpt
+    SubStatement String & MultOpt
   } & Mult
 }
 
 // Переиспользуемый блок данных для OperationSchema
-SkippedData { Data Str & SkipMultOpt }
+SkippedData { Data String & SkipMultOpt }
 
 OperationSchema Folder & {
   admin "admin" & {
     env "env" & {
       dev "dev" & SkipMultOpt
       prod "prod" & SkipMultOpt
-      Env Str & SkipMultOpt
-      Key Str & SkipMultOpt
+      Env String & SkipMultOpt
+      Key String & SkipMultOpt
     } & MultOpt
     SkippedData
   } & MultOpt
@@ -171,7 +169,7 @@ OperationSchema Folder & {
 
 ArchiveSchema {
   ArchiveChunk Chunk & Skip & Mult    // @deprecated (<ArchiveName>.chunk)
-  ArchiveName  Str & SkipMultOpt    // @deprecated (<ArchiveName>)
+  ArchiveName  String & SkipMultOpt    // @deprecated (<ArchiveName>)
 }
 
 CompanySchema Folder & {

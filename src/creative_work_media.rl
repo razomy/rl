@@ -100,10 +100,10 @@ ImBuf {
   ColorMode       ImColorMode
   ByteData        Option(List(Byte))
   FloatData       Option(List(Float))
-  ByteColorspace  Str
-  FloatColorspace Str
+  ByteColorspace  String
+  FloatColorspace String
   Ppm             (Float, Float)
-  Filepath        Str
+  Filepath        String
   Flags           Int
 }
 
@@ -111,7 +111,7 @@ ImageMetadata {
   Width    Int
   Height   Int
   Bands    Int
-  Space    Str
+  Space    String
   HasAlpha Bool
 }
 
@@ -127,7 +127,7 @@ ITextureFilter         { Apply Any }
 BlurTextureFilter      ITextureFilter & { BlurRadius Float }
 BrightenTextureFilter  ITextureFilter & { Brightness Float }
 ContrastTextureFilter  ITextureFilter & { Contrast Float }
-EmbossTextureFilter    ITextureFilter & { Strength Float, WhiteLevel Float, Direction Str, Blend Bool }
+EmbossTextureFilter    ITextureFilter & { Strength Float, WhiteLevel Float, Direction String, Blend Bool }
 EnhanceTextureFilter   ITextureFilter & { Enhance Float }
 GrayscaleTextureFilter ITextureFilter
 InvertTextureFilter    ITextureFilter
@@ -172,7 +172,7 @@ SeqRetimingKey {
 }
 
 Strip {
-  Name         Str
+  Name         String
   Type         StripType
   Channel      Int
   StartFrame   Float

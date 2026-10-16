@@ -27,7 +27,7 @@ EncryptedPayload {
   Ciphertext     Base64Str
   NonceIv        HexStr
   AuthTag        HexStr
-  KeyId          Str
+  KeyId          String
 }
 
 DigitalSignature {
@@ -43,9 +43,9 @@ DigitalSignature {
 
 X509Certificate {
   SerialNumber       HexStr
-  SubjectCommonName  Str
-  SubjectAltNames    List(Str)
-  IssuerCommonName   Str
+  SubjectCommonName  String
+  SubjectAltNames    List(String)
+  IssuerCommonName   String
   ValidFrom          DateTime
   ValidUntil         DateTime
   PublicKeyAlgorithm AsymmetricAlgorithm
@@ -63,8 +63,8 @@ CertificateChain {
 }
 
 HardwareSecurityModule {
-  ModuleId        Str
-  Vendor          Str
+  ModuleId        String
+  Vendor          String
   FipsLevel       "FIPS-140-2-L2" | "FIPS-140-2-L3" | "FIPS-140-3-L3" | "FIPS-140-3-L4"
   SlotsAvailable  Count
   TamperProtected Bool
@@ -78,19 +78,19 @@ ZkProofSystem "Groth16" | "PLONK" | "Halo2" | "STARK" | "Bulletproofs" | "Nova" 
 EllipticCurve "BN254" | "BLS12-381" | "BLS12-377" | "Pasta-Pallas" | "Pasta-Vesta" | "Secp256k1" | "Ed25519"
 
 ZkCircuit {
-  CircuitId        Str
+  CircuitId        String
   ProofSystem      ZkProofSystem
   Curve            EllipticCurve
   ConstraintsCount Int
-  PublicInputs     List(Str)
-  PrivateWitnesses List(Str)
+  PublicInputs     List(String)
+  PrivateWitnesses List(String)
 }
 
 ZkProof {
-  CircuitId    Str
+  CircuitId    String
   ProofSystem  ZkProofSystem
   ProofBytes   Base64Str
-  PublicInputs List(Str)
+  PublicInputs List(String)
   Verified     Bool
 }
 
@@ -113,18 +113,18 @@ CvssScore {
   Version          "3.1" | "4.0"
   BaseScore        Range(0.0, 10.0) & Float
   Severity         CvssSeverity
-  VectorString     Str
+  VectorString     String
   AttackVector     AttackVector
   AttackComplexity AttackComplexity
 }
 
 CveVulnerability {
-  CveId            Str
-  CweId            Str
-  Summary          Str
+  CveId            String
+  CweId            String
+  Summary          String
   Cvss             CvssScore
-  AffectedProducts List(Str)
-  PatchedVersions  List(Str)
+  AffectedProducts List(String)
+  PatchedVersions  List(String)
   ExploitAvailable Bool
   PublishedAt      Date
 }
@@ -136,20 +136,20 @@ MitreTactic
   | "Exfiltration" | "Impact"
 
 MitreTechnique {
-  TechniqueId Str
-  Name        Str
+  TechniqueId String
+  Name        String
   Tactic      MitreTactic
-  Platforms   List(Str)
-  Detections  List(Str)
+  Platforms   List(String)
+  Detections  List(String)
 }
 
 MalwareCategory "Ransomware" | "Trojan" | "Worm" | "Spyware" | "Rootkit" | "Botnet" | "Keylogger" | "Cryptojacker" | "Fileless" | "APT"
 
 IndicatorOfCompromise {
   IocType     "IPv4" | "IPv6" | "Domain" | "URL" | "FileHashSHA256" | "FileHashMD5" | "Email" | "RegistryKey" | "YaraRule"
-  Value       Str
+  Value       String
   Confidence  Fraction
-  ThreatActor Option(Str)
+  ThreatActor Option(String)
   FirstSeen   Instant
   LastSeen    Instant
 }
@@ -162,12 +162,12 @@ FirewallAction "ALLOW" | "DENY" | "DROP" | "REJECT" | "LOG" | "RATE_LIMIT"
 NetworkDirection "INBOUND" | "OUTBOUND" | "BIDIRECTIONAL"
 
 FirewallRule {
-  RuleId          Str
+  RuleId          String
   Priority        Int
   Direction       NetworkDirection
   Protocol        "TCP" | "UDP" | "ICMP" | "ANY"
-  SourceCidr      Str
-  DestinationCidr Str
+  SourceCidr      String
+  DestinationCidr String
   PortRange       (Int, Int)
   Action          FirewallAction
   Enabled         Bool
@@ -176,25 +176,25 @@ FirewallRule {
 WafThreatType "SQLInjection" | "XSS" | "CSRF" | "SSRF" | "PathTraversal" | "RemoteCodeExecution" | "XXE" | "BotAbuse" | "DDoS"
 
 SiemAlert {
-  AlertId       Str
+  AlertId       String
   Severity      CvssSeverity
-  RuleName      Str
-  SourceIp      Option(Str)
-  DestinationIp Option(Str)
+  RuleName      String
+  SourceIp      Option(String)
+  DestinationIp Option(String)
   Technique     Option(MitreTechnique)
-  RawLog        Str
+  RawLog        String
   TriggeredAt   Instant
 }
 
 IncidentStatus "Detected" | "Triaged" | "Contained" | "Eradicated" | "Recovered" | "PostMortemClosed"
 
 SecurityIncident {
-  IncidentId   Str
-  Title        Str
+  IncidentId   String
+  Title        String
   Severity     CvssSeverity
   Status       IncidentStatus
   Alerts       List(SiemAlert)
-  AssignedTeam Str
+  AssignedTeam String
   CreatedAt    Instant
   ResolvedAt   Option(Instant)
 }

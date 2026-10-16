@@ -1,4 +1,4 @@
 NetworkNode {
-  Host       Str
+  Host       String
   Port       Int
 }

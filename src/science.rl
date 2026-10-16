@@ -31,7 +31,7 @@ QuantumGateOp {
 }
 
 QuantumCircuit {
-  Name          Str
+  Name          String
   NumQubits     Int
   NumClassicalBits Int
   Operations    List(QuantumGateOp)
@@ -41,7 +41,7 @@ QuantumCircuit {
 QuantumHardwareBackend "SuperconductingTransmon" | "TrappedIon" | "NeutralAtom" | "Photonic" | "TopologicalMajorana" | "SpinSilicon" | "StatevectorSimulator"
 
 QuantumProcessor {
-  Name            Str
+  Name            String
   Backend         QuantumHardwareBackend
   QubitCount      Int
   T1CoherenceUs   Float
@@ -59,15 +59,15 @@ BrainWaveBand "Delta" | "Theta" | "Alpha" | "Beta" | "Gamma"
 CorticalLobe "Frontal" | "Parietal" | "Temporal" | "Occipital" | "Insular" | "Limbic" | "Cerebellum" | "Brainstem"
 
 Synapse {
-  PreSynapticNeuronId  Str
-  PostSynapticNeuronId Str
+  PreSynapticNeuronId  String
+  PostSynapticNeuronId String
   Transmitter          Neurotransmitter
   SynapticWeight       Float
   IsExcitatory         Bool
 }
 
 SpikingNeuron {
-  NeuronId             Str
+  NeuronId             String
   MembranePotentialMv  Float
   RestingPotentialMv   Float
   ThresholdPotentialMv Float
@@ -93,7 +93,7 @@ RockCategory "IgneousIntrusive" | "IgneousExtrusive" | "SedimentaryClastic" | "S
 CrystalSystem "Cubic" | "Tetragonal" | "Orthorhombic" | "Hexagonal" | "Trigonal" | "Monoclinic" | "Triclinic" | "Amorphous"
 
 Mineral {
-  Name            Str
+  Name            String
   ChemicalFormula Formula
   CrystalSystem   CrystalSystem
   MohsHardness    Range(1.0, 10.0) & Float
@@ -104,7 +104,7 @@ Mineral {
 PlateBoundaryType "Divergent" | "ConvergentSubduction" | "ConvergentCollision" | "TransformFault"
 
 SeismicEvent {
-  EventId          Str
+  EventId          String
   Epicenter        GeoCoordinate
   FocalDepthKm     Float
   MomentMagnitude  Range(0.0, 10.0) & Float
@@ -133,7 +133,7 @@ SoilProfile {
 CropCycleStage "Fallow" | "SeedbedPrepared" | "Sown" | "Germinating" | "VegetativeGrowth" | "Flowering" | "Ripening" | "Harvested"
 
 AgriculturalField {
-  FieldId          Str
+  FieldId          String
   Boundary         GeoPolygon
   AreaHectares     Float
   Soil             SoilProfile

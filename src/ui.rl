@@ -25,7 +25,7 @@ FontStyle  "normal" | "italic" | "oblique" | "bold" | "underline" | "strikethrou
 TextAlign  "left" | "center" | "right" | "justify"
 
 TypographyToken {
-  FontFamily    Str
+  FontFamily    String
   FontSizePx    Float
   LineHeight    Float
   FontWeight    FontWeight
@@ -92,7 +92,7 @@ PaddingAttribute IAttribute & { XStart Float, XFinish Float, YStart Float, YFini
 SpacingAttribute IAttribute & { Spacing Float }
 
 GridTrackSize {
-  Kind  Str
+  Kind  String
   Min   MetricUnit
   Max   MetricUnit
   Limit MetricUnit
@@ -105,14 +105,14 @@ GridContainerLayout {
   Rows           List(GridTrackSize)
   AutoColumns    List(GridTrackSize)
   AutoRows       List(GridTrackSize)
-  AutoFlow       Str
-  TemplateAreas  List(Str)
+  AutoFlow       String
+  TemplateAreas  List(String)
   ColumnGap      MetricUnit
   RowGap         MetricUnit
-  JustifyContent Str
-  AlignContent   Str
-  JustifyItems   Str
-  AlignItems     Str
+  JustifyContent String
+  AlignContent   String
+  JustifyItems   String
+  AlignItems     String
 }
 
 GridItemPlacement {
@@ -120,18 +120,18 @@ GridItemPlacement {
   ColumnEnd   Int
   RowStart    Int
   RowEnd      Int
-  Area        Str
-  JustifySelf Str
-  AlignSelf   Str
+  Area        String
+  JustifySelf String
+  AlignSelf   String
 }
 
 FlexLayout {
   Kind           "Flex"
-  Direction      Str
-  Wrap           Str
-  JustifyContent Str
-  AlignItems     Str
-  AlignContent   Str
+  Direction      String
+  Wrap           String
+  JustifyContent String
+  AlignItems     String
+  AlignContent   String
   Gap            MetricUnit
 }
 
@@ -140,17 +140,17 @@ FlexItemPlacement {
   Shrink    Float
   Basis     MetricUnit
   Order     Int
-  AlignSelf Str
+  AlignSelf String
 }
 
 FlowLayout {
   Kind        "Flow"
-  Display     Str
-  FloatMode   Str
-  ClearMode   Str
-  BreakBefore Str
-  BreakAfter  Str
-  BreakInside Str
+  Display     String
+  FloatMode   String
+  ClearMode   String
+  BreakBefore String
+  BreakAfter  String
+  BreakInside String
 }
 
 AnchoredLayout {
@@ -180,23 +180,23 @@ UISizing {
   MinHeight   MetricUnit
   MaxHeight   MetricUnit
   AspectRatio Float
-  BoxSizing   Str
+  BoxSizing   String
 }
 
-UIPositioning { Mode Str, Insets PaddingAttribute, ZIndex Int }
-UIOverflow    { X Str, Y Str }
+UIPositioning { Mode String, Insets PaddingAttribute, ZIndex Int }
+UIOverflow    { X String, Y String }
 
 SolidPaint    { Kind "Solid", Color ColorRGBA, Opacity Float }
 GradientStop  { Offset Float, Color ColorRGBA }
 GradientPaint { Kind "Gradient", Angle Float, Stops List(GradientStop) }
-ImagePaint    { Kind "Image", Uri Str, Fit Str, Position Vector2Metric, Repeat Str }
+ImagePaint    { Kind "Image", Uri String, Fit String, Position Vector2Metric, Repeat String }
 UIPaint       SolidPaint | GradientPaint | ImagePaint
 
-BorderSide { Width MetricUnit, Style Str, Color ColorRGBA }
+BorderSide { Width MetricUnit, Style String, Color ColorRGBA }
 UIBorders  { Top BorderSide, Right BorderSide, Bottom BorderSide, Left BorderSide, Radii List(MetricUnit) }
 
 UIShadow {
-  Kind         Str
+  Kind         String
   Offset       Vector2Metric
   BlurRadius   MetricUnit
   SpreadRadius MetricUnit
@@ -211,7 +211,7 @@ UIFilters {
   Contrast     Float
   Brightness   Float
   Saturate     Float
-  BlendMode    Str
+  BlendMode    String
 }
 
 UITransforms {
@@ -224,30 +224,30 @@ UITransforms {
 }
 
 Typography {
-  FontFamily     List(Str)
+  FontFamily     List(String)
   FontSize       MetricUnit
   FontWeight     Int
-  FontStyle      Str
+  FontStyle      String
   LineHeight     MetricUnit
   LetterSpacing  MetricUnit
   WordSpacing    MetricUnit
-  TextAlign      Str
-  VerticalAlign  Str
-  TextTransform  Str
-  TextDecoration Str
-  WhiteSpace     Str
-  WordBreak      Str
-  TextOverflow   Str
+  TextAlign      String
+  VerticalAlign  String
+  TextTransform  String
+  TextDecoration String
+  WhiteSpace     String
+  WordBreak      String
+  TextOverflow   String
   MaxLines       Int
   TextShadow     List(UIShadow)
   Color          UIPaint
 }
 
 UITransition {
-  Property       Str
+  Property       String
   DurationMs     Int
   DelayMs        Int
-  TimingFunction Str
+  TimingFunction String
 }
 
 UIStyleBag {
@@ -262,17 +262,17 @@ UIStyleBag {
   Filters     UIFilters
   Transforms  UITransforms
   Transitions List(UITransition)
-  Cursor      Str
+  Cursor      String
   Opacity     Float
   Visible     Bool
 }
 
-UIEventBinding    { Event Str, ActionId Str, Payload Any }
+UIEventBinding    { Event String, ActionId String, Payload Any }
 UIInteractionSpec { Focusable Bool, TabIndex Int, Events List(UIEventBinding) }
 
 IUIBaseUin {
-  Id              Str
-  Name            Option(Str)
+  Id              String
+  Name            Option(String)
   Parent          Option(IdRef(UIUin))
   Children        List(IdRef(UIUin))
   ContainerLayout Option(UILayoutEngine)
@@ -284,23 +284,23 @@ IUIBaseUin {
 
 SurfaceUin        IUIBaseUin & { Kind "SurfaceUin", Width MetricUnit, Height MetricUnit, Dpi Int }
 ContainerUin      IUIBaseUin & { Kind "ContainerUin" }
-TextLeafUin       IUIBaseUin & { Kind "TextLeafUin", Content Str, Typo Typography }
-VectorShapeUin    IUIBaseUin & { Kind "VectorShapeUin", PathCommands Str, FillPaint Option(UIPaint), StrokePaint Option(UIPaint), StrokeWidth Option(MetricUnit) }
-MediaAssetUin     IUIBaseUin & { Kind "MediaAssetUin", SourceUri Str, ImageFit "cover" | "contain" | "fill" | "none" }
+TextLeafUin       IUIBaseUin & { Kind "TextLeafUin", Content String, Typo Typography }
+VectorShapeUin    IUIBaseUin & { Kind "VectorShapeUin", PathCommands String, FillPaint Option(UIPaint), StrokePaint Option(UIPaint), StrokeWidth Option(MetricUnit) }
+MediaAssetUin     IUIBaseUin & { Kind "MediaAssetUin", SourceUri String, ImageFit "cover" | "contain" | "fill" | "none" }
 TableContainerUin IUIBaseUin & { Kind "TableContainerUin", ColumnWidths List(MetricUnit) }
 TableRowUin       IUIBaseUin & { Kind "TableRowUin", IsHeader Bool }
 TableCellUin      IUIBaseUin & { Kind "TableCellUin", ColSpan Int, RowSpan Int }
 UIControlType     "button" | "text-input" | "checkbox" | "radio" | "select" | "slider"
-ControlUin        IUIBaseUin & { Kind "ControlUin", ControlType UIControlType, Value Any, Placeholder Option(Str), Disabled Bool, ReadOnly Bool }
-ProjectionUin     IUIBaseUin & { Kind "ProjectionUin", SlotName Option(Str), ComponentDefinitionId Option(Str) }
+ControlUin        IUIBaseUin & { Kind "ControlUin", ControlType UIControlType, Value Any, Placeholder Option(String), Disabled Bool, ReadOnly Bool }
+ProjectionUin     IUIBaseUin & { Kind "ProjectionUin", SlotName Option(String), ComponentDefinitionId Option(String) }
 
 UIUin SurfaceUin | ContainerUin | TextLeafUin | VectorShapeUin | MediaAssetUin | TableContainerUin | TableRowUin | TableCellUin | ControlUin | ProjectionUin
 
 UIDocumentUin {
-  Id     Str
-  Title  Str
-  RootId Str
-  Nodes  Map(Str, UIUin)
+  Id     String
+  Title  String
+  RootId String
+  Nodes  Map(String, UIUin)
 }
 
 // =============================================================================
@@ -337,61 +337,61 @@ Spacer     Layout & { Size Float }
 // Form & Input Components
 ButtonVariant "solid" | "outline" | "ghost" | "link" | "danger"
 
-Button        Forms & { Label Str, Variant ButtonVariant, Disabled Bool, Loading Bool }
-IconButton    Button & { IconName Str }
-Input         Forms & { Value Str, Placeholder Str, Disabled Bool, ReadOnly Bool }
+Button        Forms & { Label String, Variant ButtonVariant, Disabled Bool, Loading Bool }
+IconButton    Button & { IconName String }
+Input         Forms & { Value String, Placeholder String, Disabled Bool, ReadOnly Bool }
 PasswordInput Input & { ShowToggle Bool }
 NumberInput   Forms & { Value Float, Min Float, Max Float, Step Float }
-Textarea      Forms & { Value Str, Rows Int, MaxLength Int }
-Select        Forms & { Options List(Str), Value Option(Str), Multiple Bool }
-Combobox      Select & { SearchQuery Str }
-Checkbox      Forms & { Checked Bool, Indeterminate Bool, Label Str }
-Radio         Forms & { Checked Bool, GroupName Str, Value Str }
-Switch        Forms & { Checked Bool, Label Str }
+Textarea      Forms & { Value String, Rows Int, MaxLength Int }
+Select        Forms & { Options List(String), Value Option(String), Multiple Bool }
+Combobox      Select & { SearchQuery String }
+Checkbox      Forms & { Checked Bool, Indeterminate Bool, Label String }
+Radio         Forms & { Checked Bool, GroupName String, Value String }
+Switch        Forms & { Checked Bool, Label String }
 Slider        Forms & { Value Float, Min Float, Max Float, Step Float }
-DatePicker    Forms & { SelectedDate Option(Str), MinDate Option(Str), MaxDate Option(Str) }
+DatePicker    Forms & { SelectedDate Option(String), MinDate Option(String), MaxDate Option(String) }
 ColorPicker   Forms & { SelectedColor Color }
-FileUpload    Forms & { Accept List(Str), MaxSizeBytes Int, Multiple Bool }
+FileUpload    Forms & { Accept List(String), MaxSizeBytes Int, Multiple Bool }
 Form          Forms & { Fields List(Any), IsValid Bool, IsSubmitting Bool }
 
 // Data Display & Visualization Components
-Table      Display & { Columns List(Str), Rows List(Any), SortColumn Option(Str) }
+Table      Display & { Columns List(String), Rows List(Any), SortColumn Option(String) }
 DataGrid   Table & { PageSize Int, CurrentPage Int, Virtualized Bool }
-Card       Display & { Title Option(Str), Subtitle Option(Str), Elevated Bool }
-Avatar     Display & { Src Option(Str), Initials Str, Size Float, Status Option(Str) }
-Badge      Display & { Text Str, Variant "neutral" | "success" | "warning" | "error" | "info" }
-TagChip    Display & { Label Str, Closable Bool }
-TreeView   Display & { Nodes List(Any), ExpandedIds List(Str) }
+Card       Display & { Title Option(String), Subtitle Option(String), Elevated Bool }
+Avatar     Display & { Src Option(String), Initials String, Size Float, Status Option(String) }
+Badge      Display & { Text String, Variant "neutral" | "success" | "warning" | "error" | "info" }
+TagChip    Display & { Label String, Closable Bool }
+TreeView   Display & { Nodes List(Any), ExpandedIds List(String) }
 TimelineUi Display & { Items List(Any) }
-CodeBlock  Display & { Code Str, Language Str, ShowLineNumbers Bool }
-StatMetric Display & { Label Str, Value Str, Delta Option(Float) }
+CodeBlock  Display & { Code String, Language String, ShowLineNumbers Bool }
+StatMetric Display & { Label String, Value String, Delta Option(Float) }
 
 ChartType "line" | "bar" | "pie" | "doughnut" | "scatter" | "area" | "radar" | "heatmap" | "candlestick" | "sankey" | "treemap" | "funnel" | "gauge"
-Chart     DataViz & { Type ChartType, Series List(Any), Labels List(Str) }
+Chart     DataViz & { Type ChartType, Series List(Any), Labels List(String) }
 
 // Feedback, Status & Overlay Components
-Alert     Feedback & Status & { Severity "info" | "success" | "warning" | "error", Title Str, Message Str }
-Dialog    Overlay & Feedback & Status & { Open Bool, Title Str, Closable Bool }
+Alert     Feedback & Status & { Severity "info" | "success" | "warning" | "error", Title String, Message String }
+Dialog    Overlay & Feedback & Status & { Open Bool, Title String, Closable Bool }
 Modal     Dialog & { BackdropBlur Bool }
 Drawer    Overlay & { Open Bool, Placement "left" | "right" | "top" | "bottom" }
 Progress  Feedback & Status & { Value Float, Max Float, Indeterminate Bool }
 Spinner   Feedback & Status & { Size Float }
 Skeleton  Feedback & { Width Float, Height Float, Animated Bool }
-Toast     Feedback & Status & { Message Str, DurationMs Int, Position Str }
+Toast     Feedback & Status & { Message String, DurationMs Int, Position String }
 Popover   Overlay & Disclosure & { Open Bool, Trigger Any }
-Tooltip   Overlay & Disclosure & { Content Str, DelayMs Int }
+Tooltip   Overlay & Disclosure & { Content String, DelayMs Int }
 Accordion Overlay & Disclosure & { Sections List(Any), AllowMultiple Bool }
 
 // Navigation & Menu Components
-Tabs           Navigation & { ActiveTabId Str, Items List(Any) }
-Breadcrumbs    Navigation & { Items List(Str), Separator Str }
-Navbar         Navigation & { Sticky Bool, BrandTitle Str, Links List(Str) }
+Tabs           Navigation & { ActiveTabId String, Items List(Any) }
+Breadcrumbs    Navigation & { Items List(String), Separator String }
+Navbar         Navigation & { Sticky Bool, BrandTitle String, Links List(String) }
 Sidebar        Navigation & { Collapsed Bool, Width Float, Items List(Any) }
 Pagination     Navigation & { CurrentPage Int, TotalPages Int, PageSize Int }
-Stepper        Navigation & { ActiveStep Int, Steps List(Str) }
+Stepper        Navigation & { ActiveStep Int, Steps List(String) }
 Dropdown       Menu & Navigation & { Open Bool, Items List(Any) }
 ContextMenu    Menu & Overlay & { Position Point2D, Items List(Any) }
-CommandPalette Overlay & Navigation & { Open Bool, Query Str, Commands List(Any) }
+CommandPalette Overlay & Navigation & { Open Bool, Query String, Commands List(Any) }
 
 // =============================================================================
 // UI Animations, Timelines, Routing & Popups
@@ -432,7 +432,7 @@ UpdateTimeline(Tl AnimationTimeLine, Delta Float) [
 ]
 
 // Routing
-RouteValue { Slug Str, Payload Any }
+RouteValue { Slug String, Payload Any }
 RoutePath(T) { Segments List(T) }
 RouteChange  Change(RoutePath(RouteValue))
 RouteHistory { ActiveHistory List(RoutePath(RouteValue)), Count Int }

@@ -21,9 +21,9 @@ Offer Intangible & {
   AvailableAtOrFrom         Option(Place)
   AvailableDeliveryMethod   List(DeliveryMethod)
   BusinessFunction          Option(BusinessFunction)
-  Category                  Option(Str)
+  Category                  Option(String)
   DeliveryLeadTime          Option(QuantitativeValue)
-  EligibleCustomerType      Option(Str)
+  EligibleCustomerType      Option(String)
   EligibleDuration          Option(QuantitativeValue)
   EligibleQuantity          Option(QuantitativeValue)
   EligibleRegion            List(Place)
@@ -35,7 +35,7 @@ Offer Intangible & {
   ItemCondition             OfferItemCondition
   ItemOffered               Thing
   LeaseLength               Option(QuantitativeValue)
-  Mpn                       Option(Str)
+  Mpn                       Option(String)
   OfferedBy                 Option(Agent)
   Price                     Price
   PriceCurrency             Currency
@@ -43,9 +43,9 @@ Offer Intangible & {
   PriceValidUntil           Option(Date)
   Review                    List(Any)
   Seller                    Agent
-  SerialNumber              Option(Str)
+  SerialNumber              Option(String)
   ShippingDetails           Option(OfferShippingDetails)
-  Sku                       Option(Str)
+  Sku                       Option(String)
   ValidFrom                 Option(DateTime)
   ValidThrough              Option(DateTime)
   Warranty                  Option(WarrantyPromise)
@@ -74,7 +74,7 @@ OfferShippingDetails StructuredValue & {
   DeliveryTime        Option(ShippingDeliveryTime)
   DoesNotShip         Option(Bool)
   ShippingDestination Option(DefinedRegion)
-  ShippingLabel       Option(Str)
+  ShippingLabel       Option(String)
   ShippingRate        Option(MonetaryAmount)
 }
 
@@ -86,9 +86,9 @@ ShippingDeliveryTime StructuredValue & {
 }
 
 DefinedRegion StructuredValue & {
-  AddressCountry Option(Str)
-  AddressRegion  Option(Str)
-  PostalCode     Option(Str)
+  AddressCountry Option(String)
+  AddressRegion  Option(String)
+  PostalCode     Option(String)
 }
 
 // =============================================================================
@@ -97,15 +97,15 @@ DefinedRegion StructuredValue & {
 
 OrderItem Intangible & {
   OrderDelivery   Option(ParcelDelivery)
-  OrderItemNumber Str
+  OrderItemNumber String
   OrderItemStatus OrderStatus
   OrderQuantity   Count
   OrderedItem     Thing
 }
 
 Order Intangible & {
-  Id                 Str
-  OrderNumber        Str
+  Id                 String
+  OrderNumber        String
   OrderDate          DateTime
   OrderStatus        OrderStatus
   Amount             Int
@@ -115,30 +115,30 @@ Order Intangible & {
   AcceptedOffer      List(Offer)
   OrderedItem        List(OrderItem)
   BillingAddress     Option(PostalAddress)
-  ConfirmationNumber Option(Str)
+  ConfirmationNumber Option(String)
   Discount           Option(Real)
-  DiscountCode       Option(Str)
-  DiscountCurrency   Option(Str)
+  DiscountCode       Option(String)
+  DiscountCurrency   Option(String)
   IsGift             Option(Bool)
   OrderDelivery      Option(ParcelDelivery)
   PartOfInvoice      Option(Invoice)
   PaymentDueDate     Option(DateTime)
   PaymentMethod      Option(PaymentMethod)
-  PaymentMethodId    Option(Str)
+  PaymentMethodId    Option(String)
   PaymentUrl         Option(URL)
 }
 
 Invoice Intangible & {
-  AccountId            Option(Str)
+  AccountId            Option(String)
   BillingPeriod        Option(Duration_)
   Broker               Option(Agent)
-  Category             Option(Str)
-  ConfirmationNumber   Option(Str)
+  Category             Option(String)
+  ConfirmationNumber   Option(String)
   Customer             Agent
   Provider             Agent
   PaymentDueDate       Option(DateTime)
   PaymentMethod        Option(PaymentMethod)
-  PaymentMethodId      Option(Str)
+  PaymentMethodId      Option(String)
   PaymentStatus        PaymentStatusType
   TotalPaymentDue      MonetaryAmount
   MinimumPaymentDue    Option(MonetaryAmount)
@@ -147,18 +147,18 @@ Invoice Intangible & {
 }
 
 Ticket Intangible & {
-  TicketNumber  Str
-  TicketToken   Option(Str)
+  TicketNumber  String
+  TicketToken   Option(String)
   TicketedSeat  Option(Seat)
   TotalPrice    Option(PriceSpecification)
-  PriceCurrency Option(Str)
+  PriceCurrency Option(String)
   IssuedBy      Option(Agent)
   UnderName     Option(Agent)
   DateIssued    Option(DateTime)
 }
 
 Reservation Intangible & {
-  ReservationId         Str
+  ReservationId         String
   ReservationStatus     ReservationStatusType
   ReservationFor        Thing
   UnderName             Option(Agent)
@@ -168,15 +168,15 @@ Reservation Intangible & {
   ModifiedTime          Option(DateTime)
   ReservedTicket        Option(Ticket)
   TotalPrice            Option(PriceSpecification)
-  PriceCurrency         Option(Str)
+  PriceCurrency         Option(String)
   ProgramMembershipUsed Option(ProgramMembership)
 }
 
 BusReservation               Reservation
 EventReservation             Reservation
-FlightReservation            Reservation & { BoardingGroup Option(Str), PassengerPriorityStatus Option(Str), PassengerSequenceNumber Option(Str), SecurityScreening Option(Str) }
+FlightReservation            Reservation & { BoardingGroup Option(String), PassengerPriorityStatus Option(String), PassengerSequenceNumber Option(String), SecurityScreening Option(String) }
 FoodEstablishmentReservation Reservation & { PartySize Count, StartTime DateTime, EndTime DateTime }
-LodgingReservation           Reservation & { CheckinTime DateTime, CheckoutTime DateTime, LodgingUnitType Option(Str), NumAdults Count, NumChildren Count }
+LodgingReservation           Reservation & { CheckinTime DateTime, CheckoutTime DateTime, LodgingUnitType Option(String), NumAdults Count, NumChildren Count }
 RentalCarReservation         Reservation & { PickupLocation Place, DropoffLocation Place, PickupTime DateTime, DropoffTime DateTime }
 ReservationPackage           Reservation & { SubReservation List(Reservation) }
 TaxiReservation              Reservation & { PartySize Count, PickupLocation Place, PickupTime DateTime }
@@ -188,9 +188,9 @@ BoatReservation              Reservation
 // =============================================================================
 
 Reserved   { ReservedAt Int }
-Paid       { TransactionId Str }
-OutOfStock { Reason Str }
-NoMoney    { Reason Str }
+Paid       { TransactionId String }
+OutOfStock { Reason String }
+NoMoney    { Reason String }
 
 ReserveStock(O Order) [
   Amount . {

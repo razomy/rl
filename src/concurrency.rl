@@ -76,7 +76,7 @@ Async {
 // =============================================================================
 
 ActorRef(Msg) {
-  Address       Str
+  Address       String
   Tell(M Msg)   [ (Self, M) . native_actor_tell ]
   Ask(M Msg)    [ (Self, M) . native_actor_ask ]
   Stop()        [ Self . native_actor_stop ]
@@ -94,23 +94,23 @@ SupervisorSpec {
 // Worker Loops & Parallel Fan-Out ('.|')
 // =============================================================================
 
-WorkerLoop(Jobs Channel(Str), Results Channel(Int)) [
+WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
   Jobs.Recv() . {
     None [ "Channel closed, terminating worker." . Shell.Log ]
     Some [
       Value
-      . Str.Length
+      . String.Length
       .> (Len [ Results.Send(Len) ])
       . [ WorkerLoop(Jobs, Results) ]
     ]
   }
 ]
 
-FetchProfile(Id Str)         [ Http.Get("https://api.ex/users/{Id}") ]
-FetchRecommendations(Id Str) [ Http.Get("https://api.ex/recs/{Id}") ]
+FetchProfile(Id String)         [ Http.Get("https://api.ex/users/{Id}") ]
+FetchRecommendations(Id String) [ Http.Get("https://api.ex/recs/{Id}") ]
 FetchAds()                   [ Http.Get("https://api.ex/ads") ]
 
-LoadDashboardData(UserId Str) [
+LoadDashboardData(UserId String) [
   UserId .| {
     Profile [ _ . FetchProfile ]
     Recs    [ _ . FetchRecommendations ]

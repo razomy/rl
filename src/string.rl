@@ -55,57 +55,57 @@ DOLLAR       '$'
 // =============================================================================
 
 RegexPattern {
-  Pattern Str
-  Flags   Str
+  Pattern String
+  Flags   String
 }
 
 RegexMatch {
-  FullMatch Str
-  Groups    List(Str)
+  FullMatch String
+  Groups    List(String)
   Index     Int
 }
 
 Regex {
-  Compile(Pat Str)              [ RegexPattern { Pattern Pat, Flags "" } ]
-  Matches(Input Str, Pat Str)   [ (Input, Pat) . native_regex_matches ]
-  Find(Input Str, Pat Str)      [ (Input, Pat) . native_regex_find ]
-  FindAll(Input Str, Pat Str)   [ (Input, Pat) . native_regex_find_all ]
-  Replace(Input Str, Pat Str, Repl Str) [ (Input, Pat, Repl) . native_regex_replace ]
+  Compile(Pat String)              [ RegexPattern { Pattern Pat, Flags "" } ]
+  Matches(Input String, Pat String)   [ (Input, Pat) . native_regex_matches ]
+  Find(Input String, Pat String)      [ (Input, Pat) . native_regex_find ]
+  FindAll(Input String, Pat String)   [ (Input, Pat) . native_regex_find_all ]
+  Replace(Input String, Pat String, Repl String) [ (Input, Pat, Repl) . native_regex_replace ]
 }
 
 // =============================================================================
 // String Operations Module
 // =============================================================================
 
-Str {
-  Length(S Str)                 [ S . native_str_len ]
-  IsEmpty(S Str)                [ S . Str.Length == 0 ]
-  Trim(S Str)                   [ S . native_str_trim ]
-  TrimStart(S Str)              [ S . native_str_trim_start ]
-  TrimEnd(S Str)                [ S . native_str_trim_end ]
-  ToUpper(S Str)                [ S . native_str_to_upper ]
-  ToLower(S Str)                [ S . native_str_to_lower ]
-  Capitalize(S Str)             [ S . native_str_capitalize ]
-  CamelCase(S Str)              [ S . native_str_camel_case ]
-  SnakeCase(S Str)              [ S . native_str_snake_case ]
-  KebabCase(S Str)              [ S . native_str_kebab_case ]
-  PascalCase(S Str)             [ S . native_str_pascal_case ]
-  Split(S Str, Delim Str)       [ (S, Delim) . native_str_split ]
-  Join(Items List(Str), Sep Str)[ (Items, Sep) . native_str_join ]
-  Lines(S Str)                  [ S . Str.Split("\n") ]
-  Words(S Str)                  [ S . Str.Trim . Str.Split(" ") ]
-  StartsWith(S Str, Prefix Str) [ (S, Prefix) . native_str_starts_with ]
-  EndsWith(S Str, Suffix Str)   [ (S, Suffix) . native_str_ends_with ]
-  Contains(S Str, Sub Str)      [ (S, Sub) . native_str_contains ]
-  IndexOf(S Str, Sub Str)       [ (S, Sub) . native_str_index_of ]
-  Substring(S Str, Start Int, End Int) [ (S, Start, End) . native_str_substring ]
-  Replace(S Str, From Str, To Str)     [ (S, From, To) . native_str_replace ]
-  Repeat(S Str, Count Int)      [ (S, Count) . native_str_repeat ]
-  PadStart(S Str, Len Int, Pad Str)    [ (S, Len, Pad) . native_str_pad_start ]
-  PadEnd(S Str, Len Int, Pad Str)      [ (S, Len, Pad) . native_str_pad_end ]
-  Reverse(S Str)                [ S . native_str_reverse ]
-  ToInt(S Str)                  [ S . native_str_to_int ]
-  ToFloat(S Str)                [ S . native_str_to_float ]
+String {
+  Length(S String)                 [ S . native_str_len ]
+  IsEmpty(S String)                [ S . String.Length == 0 ]
+  Trim(S String)                   [ S . native_str_trim ]
+  TrimStart(S String)              [ S . native_str_trim_start ]
+  TrimEnd(S String)                [ S . native_str_trim_end ]
+  ToUpper(S String)                [ S . native_str_to_upper ]
+  ToLower(S String)                [ S . native_str_to_lower ]
+  Capitalize(S String)             [ S . native_str_capitalize ]
+  CamelCase(S String)              [ S . native_str_camel_case ]
+  SnakeCase(S String)              [ S . native_str_snake_case ]
+  KebabCase(S String)              [ S . native_str_kebab_case ]
+  PascalCase(S String)             [ S . native_str_pascal_case ]
+  Split(S String, Delim String)       [ (S, Delim) . native_str_split ]
+  Join(Items List(String), Sep String)[ (Items, Sep) . native_str_join ]
+  Lines(S String)                  [ S . String.Split("\n") ]
+  Words(S String)                  [ S . String.Trim . String.Split(" ") ]
+  StartsWith(S String, Prefix String) [ (S, Prefix) . native_str_starts_with ]
+  EndsWith(S String, Suffix String)   [ (S, Suffix) . native_str_ends_with ]
+  Contains(S String, Sub String)      [ (S, Sub) . native_str_contains ]
+  IndexOf(S String, Sub String)       [ (S, Sub) . native_str_index_of ]
+  Substring(S String, Start Int, End Int) [ (S, Start, End) . native_str_substring ]
+  Replace(S String, From String, To String)     [ (S, From, To) . native_str_replace ]
+  Repeat(S String, Count Int)      [ (S, Count) . native_str_repeat ]
+  PadStart(S String, Len Int, Pad String)    [ (S, Len, Pad) . native_str_pad_start ]
+  PadEnd(S String, Len Int, Pad String)      [ (S, Len, Pad) . native_str_pad_end ]
+  Reverse(S String)                [ S . native_str_reverse ]
+  ToInt(S String)                  [ S . native_str_to_int ]
+  ToFloat(S String)                [ S . native_str_to_float ]
 }
 
 // =============================================================================
@@ -113,25 +113,25 @@ Str {
 // =============================================================================
 
 Json {
-  Parse(Raw Str)        [ Raw . native_json_parse ]
+  Parse(Raw String)        [ Raw . native_json_parse ]
   Encode(Entity Any)    [ Entity . native_json_encode ]
   FormatValue(Val Any)  [ Val . native_json_format_value ]
 }
 
 Yaml {
-  Parse(Raw Str)        [ Raw . native_yaml_parse ]
+  Parse(Raw String)        [ Raw . native_yaml_parse ]
   Encode(Entity Any)    [ Entity . native_yaml_encode ]
 }
 
 Csv {
-  Parse(Raw Str)        [ Raw . native_csv_parse ]
+  Parse(Raw String)        [ Raw . native_csv_parse ]
   Encode(Rows List(Any))[ Rows . native_csv_encode ]
 }
 
-StringOps(First Str, Last Str) [
+StringOps(First String, Last String) [
   Full "{First} {Last}"
   Full
-  . Str.Trim
-  . Str.ToUpper
-  . Str.Split(" ")
+  . String.Trim
+  . String.ToUpper
+  . String.Split(" ")
 ]

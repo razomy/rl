@@ -122,7 +122,7 @@ GeoPolygon    { Vertices List(GeoCoordinate) }
 GeoShape      GeoBox | GeoCircle | GeoPolygon | GeoPath
 
 UtmCoordinate { ZoneNumber Int, ZoneLetter Char, Easting Float, Northing Float }
-GeoHash       Str
+GeoHash       String
 
 // =============================================================================
 // Shapes (2D & 3D)

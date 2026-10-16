@@ -26,9 +26,9 @@ IDType
 IDPropertyType "STRING" | "INT" | "FLOAT" | "ARRAY" | "GROUP" | "ID" | "DOUBLE" | "IDPARRAY" | "BOOLEAN" | "ENUM"
 
 IDProperty {
-  Name    Str
+  Name    String
   Type    IDPropertyType
-  Subtype Str
+  Subtype String
   Flag    Int
   Value   Any
   UiData  Option(Any)
@@ -37,14 +37,14 @@ IDProperty {
 IDOverrideLibraryPropertyOperation {
   Operation      Int
   Flag           Int
-  SubitemRefName Option(Str)
-  SubitemLocName Option(Str)
+  SubitemRefName Option(String)
+  SubitemLocName Option(String)
   SubitemRefIdx  Int
   SubitemLocIdx  Int
 }
 
 IDOverrideLibraryProperty {
-  RnaPath    Str
+  RnaPath    String
   Operations List(IDOverrideLibraryPropertyOperation)
   Tag        Int
 }
@@ -72,23 +72,23 @@ PreviewImage {
   Flag      Int
 }
 
-AssetTag { Name Str }
+AssetTag { Name String }
 
 AssetMetaData {
   Properties        Option(IDProperty)
-  CatalogId         Str
-  CatalogSimpleName Str
-  Author            Str
-  Description       Str
-  Copyright         Str
-  License           Str
+  CatalogId         String
+  CatalogSimpleName String
+  Author            String
+  Description       String
+  Copyright         String
+  License           String
   Tags              List(AssetTag)
   ActiveTag         Int
 }
 
 Library ID & {
-  Filepath          Str
-  FilepathAbs       Str
+  Filepath          String
+  FilepathAbs       String
   Parent            Option(Library)
   PackedFile        Option(PackedFile)
   VersionFile       Int
@@ -97,14 +97,14 @@ Library ID & {
 }
 
 ID Identifiable & {
-  Name             Str
+  Name             String
   Type             IDType
   Flag             Int
   Tag              Int
   Users            Int
   SessionUid       SessionUID
   Library          Option(Library)
-  LibraryWeakRef   Option(Str)
+  LibraryWeakRef   Option(String)
   OverrideLibrary  Option(IDOverrideLibrary)
   Properties       Option(IDProperty)
   SystemProperties Option(IDProperty)
@@ -122,12 +122,12 @@ PointerRNA {
 }
 
 PropertyRNA {
-  Identifier         Str
-  Name               Str
-  Description        Str
-  TranslationContext Str
+  Identifier         String
+  Name               String
+  Description        String
+  TranslationContext String
   Type               "Boolean" | "Int" | "Float" | "String" | "Enum" | "Pointer" | "Collection"
-  Subtype            Str
+  Subtype            String
   Flag               Int
   OverrideFlag       Int
   ArrayDimension     Int
@@ -136,18 +136,18 @@ PropertyRNA {
 }
 
 FunctionRNA {
-  Identifier  Str
-  Description Str
+  Identifier  String
+  Description String
   Flag        Int
   Parameters  List(PropertyRNA)
   ReturnProp  Option(PropertyRNA)
 }
 
 StructRNA {
-  Identifier         Str
-  Name               Str
-  Description        Str
-  TranslationContext Str
+  Identifier         String
+  Name               String
+  Description        String
+  TranslationContext String
   Icon               Int
   Base               Option(StructRNA)
   NameProperty       Option(PropertyRNA)
@@ -157,7 +157,7 @@ StructRNA {
 }
 
 Main {
-  Filepath          Str
+  Filepath          String
   VersionFile       Int
   SubversionFile    Int
   MinVersionFile    Int
@@ -185,13 +185,13 @@ Main {
 }
 
 UndoType {
-  Identifier Str
+  Identifier String
   Flags      Int
   StepSize   Int
 }
 
 UndoStep {
-  Name            Str
+  Name            String
   Type            UndoType
   DataSize        Int
   Skip            Bool
@@ -217,7 +217,7 @@ AttrType        "Bool" | "Int8" | "Int16_2D" | "Int32" | "Int32_2D" | "Float" | 
 AttrDomain      "Point" | "Edge" | "Face" | "Corner" | "Curve" | "Instance" | "Layer"
 
 Attribute {
-  Name        Str
+  Name        String
   Domain      AttrDomain
   DataType    AttrType
   StorageType AttrStorageType
@@ -231,14 +231,14 @@ AttributeStorage {
 // Multi-Function & Lazy-Function Graphs
 MFDataType  { Category "Single" | "Vector", BaseType AttrType }
 MFParamType { Category "SingleInput" | "VectorInput" | "SingleOutput" | "VectorOutput" | "SingleMutable" | "VectorMutable", DataType MFDataType }
-MFParamInfo { Name Str, Type MFParamType, Flag "None" | "SupportsUnusedOutput" }
-MFSignature { FunctionName Str, Params List(MFParamInfo) }
+MFParamInfo { Name String, Type MFParamType, Flag "None" | "SupportsUnusedOutput" }
+MFSignature { FunctionName String, Params List(MFParamInfo) }
 MultiFunction { Signature MFSignature }
 
 LFValueUsage "Used" | "Maybe" | "Unused"
-LFInput      { DebugName Str, Type AttrType, Usage LFValueUsage }
-LFOutput     { DebugName Str, Type AttrType }
-LazyFunction { DebugName Str, Inputs List(LFInput), Outputs List(LFOutput), AllowMissingRequestedInputs Bool }
+LFInput      { DebugName String, Type AttrType, Usage LFValueUsage }
+LFOutput     { DebugName String, Type AttrType }
+LazyFunction { DebugName String, Inputs List(LFInput), Outputs List(LFOutput), AllowMissingRequestedInputs Bool }
 
 GeometryOwnershipType "Owned" | "Editable" | "ReadOnly"
 GeometryComponentType "Mesh" | "PointCloud" | "Curve" | "Instance" | "Volume" | "Edit" | "GreasePencil"
@@ -274,7 +274,7 @@ Instances {
 }
 
 GeometrySet {
-  Name       Str
+  Name       String
   Components Map(GeometryComponentType, GeometryComponent)
   Bundle     Option(Any)
 }
@@ -285,10 +285,10 @@ GeometrySet {
 
 bDeformWeight { DefNr Int, Weight Float }
 MDeformVert   { Dw List(bDeformWeight), Flag Int }
-bDeformGroup  { Name Str, Flag Int }
+bDeformGroup  { Name String, Flag Int }
 
 KeyBlock {
-  Name      Str
+  Name      String
   Curval    Float
   Type      Int
   Relative  Int
@@ -296,7 +296,7 @@ KeyBlock {
   TotElem   Int
   Uid       Int
   Data      List(Float3)
-  Vgroup    Str
+  Vgroup    String
   Slidermin Float
   Slidermax Float
 }
@@ -400,7 +400,7 @@ Curves ID & {
   Geometry        CurvesGeometry
   Materials       List(Material3D)
   Surface         Option(Object3D)
-  SurfaceUvMap    Str
+  SurfaceUvMap    String
   Symmetry        Int
   SelectionDomain AttrDomain
   Flag            Int
@@ -417,7 +417,7 @@ PointCloud ID & {
 VolumeGridType "Unknown" | "Boolean" | "Float" | "Double" | "Int" | "Int64" | "Vec3f" | "Vec3d" | "Vec3i" | "Mask" | "Points"
 
 VolumeGridData {
-  Name             Str
+  Name             String
   GridType         VolumeGridType
   IsLoaded         Bool
   ActiveVoxels     Int
@@ -426,12 +426,12 @@ VolumeGridData {
   SizeInBytes      Int
   ActiveBounds     Bounds(Int3)
   Transform        Float4x4
-  ErrorMessage     Str
+  ErrorMessage     String
 }
 
 Volume3D ID & {
   Type          "VO"
-  Filepath      Str
+  Filepath      String
   PackedFile    Option(PackedFile)
   IsSequence    Bool
   SequenceMode  Int
@@ -442,7 +442,7 @@ Volume3D ID & {
   ActiveGrid    Int
   Materials     List(Material3D)
   Grids         List(VolumeGridData)
-  VelocityGrid  Str
+  VelocityGrid  String
   VelocityUnit  Int
   VelocityScale Float
 }
@@ -461,12 +461,12 @@ GreasePencilFrame {
 }
 
 GreasePencilLayerMask {
-  LayerName Str
+  LayerName String
   Flag      Int
 }
 
 GreasePencilTreeNode {
-  Name   Str
+  Name   String
   Flag   Int
   Color  Float3
   Parent Option(GreasePencilLayerGroup)
@@ -477,12 +477,12 @@ GreasePencilLayer GreasePencilTreeNode & {
   BlendMode     Int
   Opacity       Float
   ParentObject  Option(Object3D)
-  Parsubstr     Str
+  Parsubstr     String
   ParentInverse Float4x4
   Translation   Float3
   Rotation      Float3
   Scale         Float3
-  ViewLayerName Str
+  ViewLayerName String
   Masks         List(GreasePencilLayerMask)
 }
 
@@ -532,7 +532,7 @@ BezTriple {
 FModifierType "Null" | "Generator" | "FnGenerator" | "Envelope" | "Cycles" | "Noise" | "Limits" | "Step"
 
 FModifier {
-  Name      Str
+  Name      String
   Type      FModifierType
   Flag      Int
   Influence Float
@@ -548,22 +548,22 @@ DriverType    "Average" | "Sum" | "Scripted" | "Min" | "Max"
 DriverTarget {
   Id            Option(ID)
   IdType        IDType
-  RnaPath       Str
-  PchanName     Str
+  RnaPath       String
+  PchanName     String
   TransChan     Int
   RotationMode  Int
   FallbackValue Float
 }
 
 DriverVar {
-  Name    Str
+  Name    String
   Type    DriverVarType
   Targets List(DriverTarget)
 }
 
 ChannelDriver {
   Variables  List(DriverVar)
-  Expression Str
+  Expression String
   Type       DriverType
   Influence  Float
   Curval     Float
@@ -579,7 +579,7 @@ BoneColor {
 }
 
 bActionGroup {
-  Name      Str
+  Name      String
   Channels  List(FCurve)
   Color     BoneColor
   Flag      Int
@@ -587,7 +587,7 @@ bActionGroup {
 }
 
 FCurve {
-  RnaPath       Str
+  RnaPath       String
   ArrayIndex    Int
   Flag          Int
   Extend        Int
@@ -604,7 +604,7 @@ FCurve {
 ActionSlot {
   Handle     SlotHandle
   IdType     IDType
-  Identifier Str
+  Identifier String
   Flags      Int
 }
 
@@ -627,7 +627,7 @@ ActionStrip {
 }
 
 ActionLayer {
-  Name    Str
+  Name    String
   Flags   Int
   MixMode ActionLayerMix
   Strips  List(ActionStrip)
@@ -646,7 +646,7 @@ NlaBlendMode   "Replace" | "Combine" | "Add" | "Subtract" | "Multiply"
 NlaExtrapolate "Hold" | "HoldForward" | "Nothing"
 
 NlaStrip {
-  Name             Str
+  Name             String
   Type             NlaStripType
   BlendMode        NlaBlendMode
   Extrapolation    NlaExtrapolate
@@ -663,14 +663,14 @@ NlaStrip {
   StripTime        Float
   Action           Option(Action3D)
   ActionSlotHandle SlotHandle
-  ActionSlotIdent  Str
+  ActionSlotIdent  String
   Fcurves          List(FCurve)
   Modifiers        List(FModifier)
   Strips           List(NlaStrip)
 }
 
 NlaTrack {
-  Name   Str
+  Name   String
   Index  Int
   Flag   Int
   Strips List(NlaStrip)
@@ -679,10 +679,10 @@ NlaTrack {
 AnimData {
   Action             Option(Action3D)
   SlotHandle         SlotHandle
-  LastSlotIdentifier Str
+  LastSlotIdentifier String
   TmpAction          Option(Action3D)
   TmpSlotHandle      SlotHandle
-  TmpLastSlotIdent   Str
+  TmpLastSlotIdent   String
   Drivers            List(FCurve)
   NlaTracks          List(NlaTrack)
   ActTrack           Option(NlaTrack)
@@ -694,7 +694,7 @@ AnimData {
 }
 
 Bone {
-  Name         Str
+  Name         String
   Parent       Option(Bone)
   Children     List(Bone)
   Roll         Float
@@ -715,7 +715,7 @@ Bone {
 }
 
 BoneCollection {
-  Name       Str
+  Name       String
   Bones      List(Bone)
   Flags      Int
   ChildIndex Int
@@ -742,7 +742,7 @@ ConstraintType
   | "FollowTrack" | "CameraSolver" | "ObjectSolver" | "TransformCache" | "Armature" | "GeometryAttribute"
 
 bConstraint {
-  Name     Str
+  Name     String
   Type     ConstraintType
   Flag     Int
   OwnSpace Int
@@ -755,7 +755,7 @@ bConstraint {
 }
 
 bPoseChannel {
-  Name        Str
+  Name        String
   Bone        Option(Bone)
   Parent      Option(bPoseChannel)
   Child       Option(bPoseChannel)
@@ -779,7 +779,7 @@ bPoseChannel {
 
 bPose {
   Channels     List(bPoseChannel)
-  ChanHash     Map(Str, bPoseChannel)
+  ChanHash     Map(String, bPoseChannel)
   ActionGroups List(bActionGroup)
   ActiveGroup  Int
   Flag         Int
@@ -813,21 +813,21 @@ ModifierType
   | "WeightedNormal" | "Weld" | "Nodes" | "MeshToVolume" | "VolumeDisplace" | "VolumeToMesh"
 
 ModifierData {
-  Name          Str
+  Name          String
   Type          ModifierType
   Mode          Int
   Flag          Int
   PersistentUid Int
   SessionUid    SessionUID
   ExecutionTime Float
-  Error         Option(Str)
+  Error         Option(String)
 }
 
 NodesModifierData ModifierData & {
   Type          "Nodes"
   NodeGroup     Option(bNodeTree)
   Settings      Option(IDProperty)
-  BakeDirectory Str
+  BakeDirectory String
   BakeTarget    Int
   Flag          Int
 }
@@ -1023,7 +1023,7 @@ Collection3D ID & {
 }
 
 ViewLayer {
-  Name             Str
+  Name             String
   Flag             Int
   PassFlag         Int
   Samples          Int
@@ -1070,11 +1070,11 @@ NodeSocketDatatype
 NodeSocketInOut "Input" | "Output"
 
 bNodeSocket {
-  Identifier   Str
-  Name         Str
-  Label        Str
-  Description  Str
-  Idname       Str
+  Identifier   String
+  Name         String
+  Label        String
+  Description  String
+  Idname       String
   Type         NodeSocketDatatype
   InOut        NodeSocketInOut
   Flag         Int
@@ -1092,9 +1092,9 @@ bNodeLink {
 }
 
 bNode {
-  Name       Str
-  Label      Str
-  Idname     Str
+  Name       String
+  Label      String
+  Idname     String
   Identifier Int
   Flag       Int
   Color      Float3
@@ -1109,7 +1109,7 @@ bNode {
 
 bNodeTree ID & {
   Type              "NT"
-  Idname            Str
+  Idname            String
   TreeType          Int
   Flag              Int
   Nodes             List(bNode)
@@ -1117,7 +1117,7 @@ bNodeTree ID & {
   ViewCenter        Float2
   ActiveOutputIndex Int
   ColorTag          Int
-  Description       Str
+  Description       String
 }
 
 // Sculpt & PBVH
@@ -1160,16 +1160,16 @@ RegionTypeID "Window" | "Header" | "Channels" | "Temporary" | "UI" | "Tools" | "
 wmOperatorStatus "RunningModal" | "Cancelled" | "Finished" | "PassThrough" | "Interface"
 
 wmOperatorType {
-  Name        Str
-  Idname      Str
-  Description Str
-  UndoGroup   Str
+  Name        String
+  Idname      String
+  Description String
+  UndoGroup   String
   Srna        Option(StructRNA)
   Flag        Int
 }
 
 wmOperator {
-  Idname     Str
+  Idname     String
   Properties Option(IDProperty)
   Type       Option(wmOperatorType)
   Customdata Any
@@ -1180,7 +1180,7 @@ wmOperator {
 wmWindow {
   Winid         Int
   Scene         Option(Scene3D)
-  ViewLayerName Str
+  ViewLayerName String
   Posx          Int, Posy Int
   Sizex         Int, Sizey Int
   Windowstate   Int
@@ -1205,34 +1205,34 @@ PrimvarInterpolation "constant" | "uniform" | "vertex" | "faceVarying" | "varyin
 UsdSpecifier         "def" | "over" | "class"
 UsdModelKind         "group" | "assembly" | "component" | "subcomponent"
 
-TimeSamplesIn  { Kind "TimeSamples", Samples Map(Float, Any), Interpolation Str }
-AttributeIn    { Kind "Attribute", Name Str, ShapeName Str, Value Any, TimeSamples Option(IdRef(TimeSamplesIn)) }
-PrimvarIn      { Kind "Primvar", Name Str, ShapeName Str, Interpolation PrimvarInterpolation, ElementSize Int, Indices List(Int), Value Any }
-RelationshipIn { Kind "Relationship", Name Str, Targets List(Str) }
+TimeSamplesIn  { Kind "TimeSamples", Samples Map(Float, Any), Interpolation String }
+AttributeIn    { Kind "Attribute", Name String, ShapeName String, Value Any, TimeSamples Option(IdRef(TimeSamplesIn)) }
+PrimvarIn      { Kind "Primvar", Name String, ShapeName String, Interpolation PrimvarInterpolation, ElementSize Int, Indices List(Int), Value Any }
+RelationshipIn { Kind "Relationship", Name String, Targets List(String) }
 PropertyIn     AttributeIn | PrimvarIn | RelationshipIn
 
 SublayerArcIn    { Kind "SublayerArc", LayerRef IdRef(LayerIn), LayerPosition Int }
-InheritArcIn     { Kind "InheritArc", TargetPath Str }
-VariantSetIn     { Kind "VariantSet", Name Str, SelectedVariant Str, Variants Map(Str, IdRef(PrimIn)) }
-ReferenceArcIn   { Kind "ReferenceArc", AssetPath Str, TargetPrim Str, LayerOffsetTime Float, LayerScaleTime Float }
-PayloadArcIn     { Kind "PayloadArc", AssetPath Str, TargetPrim Str, IsLoaded Bool }
-SpecializeArcIn  { Kind "SpecializeArc", TargetPath Str }
+InheritArcIn     { Kind "InheritArc", TargetPath String }
+VariantSetIn     { Kind "VariantSet", Name String, SelectedVariant String, Variants Map(String, IdRef(PrimIn)) }
+ReferenceArcIn   { Kind "ReferenceArc", AssetPath String, TargetPrim String, LayerOffsetTime Float, LayerScaleTime Float }
+PayloadArcIn     { Kind "PayloadArc", AssetPath String, TargetPrim String, IsLoaded Bool }
+SpecializeArcIn  { Kind "SpecializeArc", TargetPath String }
 CompositionArcIn SublayerArcIn | InheritArcIn | VariantSetIn | ReferenceArcIn | PayloadArcIn | SpecializeArcIn
 
 PrimIn {
   Kind            "Prim"
-  Name            Str
+  Name            String
   Specifier       UsdSpecifier
-  ShapeName       Str
+  ShapeName       String
   ModelKind       UsdModelKind
   Active          Bool
-  Visibility      Str
+  Visibility      String
   Children        List(IdRef(PrimIn))
   Properties      List(IdRef(PropertyIn))
   CompositionArcs List(IdRef(CompositionArcIn))
 }
 
-InstanceablePrimIn PrimIn & { IsInstance Bool, MasterPrimPath Str }
+InstanceablePrimIn PrimIn & { IsInstance Bool, MasterPrimPath String }
 
 PointInstancerIn PrimIn & {
   Prototypes   List(IdRef(PrimIn))
@@ -1244,9 +1244,9 @@ PointInstancerIn PrimIn & {
 
 LayerIn {
   Kind        "Layer"
-  Identifier  Str
+  Identifier  String
   SubLayers   List(IdRef(LayerIn))
-  DefaultPrim Str
+  DefaultPrim String
   IsAnonymous Bool
 }
 
@@ -1265,17 +1265,17 @@ PcgDataType         "Point" | "Surface" | "Spline" | "Volume" | "Mesh" | "Attrib
 SpatialSetOperation "Union" | "Intersection" | "Difference"
 
 PcgPin {
-  PinName           Str
+  PinName           String
   Direction         PcgPinDirection
   AllowedTypes      List(PcgDataType)
   IsMultiConnection Bool
 }
 
 PcgEdge {
-  FromNodeId  Str
-  FromPinName Str
-  ToNodeId    Str
-  ToPinName   Str
+  FromNodeId  String
+  FromPinName String
+  ToNodeId    String
+  ToPinName   String
 }
 
 PcgPoint {
@@ -1286,11 +1286,11 @@ PcgPoint {
   BoundsMax  VectorFloat3
   Seed       Int
   Color      RgbaColorFloat
-  Attributes Map(Str, Any)
+  Attributes Map(String, Any)
 }
 
 IPcgNode {
-  Name               Str
+  Name               String
   Inputs             List(PcgPin)
   Outputs            List(PcgPin)
   Enabled            Bool
@@ -1299,7 +1299,7 @@ IPcgNode {
 
 SurfaceSamplerNode IPcgNode & {
   Kind                  "SurfaceSampler"
-  SamplingMethod        Str
+  SamplingMethod        String
   PointsPerSquaredMeter Float
   PointExtents          VectorFloat3
   Looseness             Float
@@ -1308,17 +1308,17 @@ SurfaceSamplerNode IPcgNode & {
 SplineSamplerNode IPcgNode & {
   Kind              "SplineSampler"
   SampleDistance    Float
-  SubdivisionMethod Str
+  SubdivisionMethod String
   FillInteriorSpace Bool
 }
 
 NoiseFieldNode IPcgNode & {
   Kind                "NoiseField"
-  NoiseType           Str
+  NoiseType           String
   Frequency           Float
   Octaves             Int
   Lacunarity          Float
-  TargetAttributeName Str
+  TargetAttributeName String
 }
 
 TransformPointsNode IPcgNode & {
@@ -1336,30 +1336,30 @@ WaveFunctionCollapseNode IPcgNode & {
   Kind                  "WaveFunctionCollapse"
   GridSize              VectorInt3
   TileSize              VectorFloat3
-  AdjacencyRuleSetAsset Str
+  AdjacencyRuleSetAsset String
   PeriodicWrap          Bool
 }
 
 LSystemGrammarNode IPcgNode & {
   Kind       "LSystemGrammar"
-  Axiom      Str
-  Rules      Map(Str, Str)
+  Axiom      String
+  Rules      Map(String, String)
   Iterations Int
   AngleStep  Float
   StepLength Float
 }
 
 MeshSpawnEntry {
-  MeshAssetPath   Str
+  MeshAssetPath   String
   Weight          Float
   ScaleAdjustment VectorFloat3
-  CollisionPreset Str
+  CollisionPreset String
 }
 
 StaticMeshSpawnerNode IPcgNode & {
   Kind                 "StaticMeshSpawner"
   MeshEntries          List(MeshSpawnEntry)
-  InstancingStrategy   Str
+  InstancingStrategy   String
   ApplyColorToMaterial Bool
   CastShadows          Bool
 }
@@ -1367,7 +1367,7 @@ StaticMeshSpawnerNode IPcgNode & {
 PcgGraph {
   Nodes             List(IdRef(IPcgNode))
   Edges             List(PcgEdge)
-  ExposedParameters Map(Str, Any)
+  ExposedParameters Map(String, Any)
 }
 
 // =============================================================================
@@ -1377,7 +1377,7 @@ PcgGraph {
 PathReferenceMode "Auto" | "Absolute" | "Relative" | "Match" | "Strip" | "Copy"
 
 IOBaseParams {
-  Filepath    Str
+  Filepath    String
   ForwardAxis AxisSigned
   UpAxis      AxisSigned
   GlobalScale Float
@@ -1441,12 +1441,12 @@ GLTFExportParams IOBaseParams & {
 
 Evaluated       { EvalTimestamp Float }
 DepsgraphSynced { SyncCount Int }
-Baked           { BakeDir Str, BakedFrameRange Int2 }
+Baked           { BakeDir String, BakedFrameRange Int2 }
 LibOverridden   { ReferenceUid SessionUID }
-InEditMode      { ActiveTool Str }
+InEditMode      { ActiveTool String }
 
-InvalidTopology   { Reason Str }
-MissingDependency { MissingIdName Str }
+InvalidTopology   { Reason String }
+MissingDependency { MissingIdName String }
 
 ValidateMeshTopology(M Mesh3D) [
   VertsNum . {
@@ -1455,7 +1455,7 @@ ValidateMeshTopology(M Mesh3D) [
   }
 ]
 
-CreateMain(Path Str) [
+CreateMain(Path String) [
   Main {
     Filepath          Path
     VersionFile       400
@@ -1466,7 +1466,7 @@ CreateMain(Path Str) [
   }
 ]
 
-CreateObject3D(NameStr Str, Kind ObjectType, DataBlock Option(ID)) [
+CreateObject3D(NameStr String, Kind ObjectType, DataBlock Option(ID)) [
   Object3D {
     Id     NameStr
     Name   NameStr

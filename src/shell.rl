@@ -10,22 +10,22 @@ ProcessSignal "SIGINT" | "SIGTERM" | "SIGKILL" | "SIGHUP" | "SIGQUIT" | "SIGUSR1
 
 ProcessOutput {
   ExitCode Int
-  Stdout   Str
-  Stderr   Str
+  Stdout   String
+  Stderr   String
 }
 
 ProcessInfo {
   Pid      Int
   Ppid     Int
-  Command  Str
+  Command  String
   CpuUsage Float
   MemBytes Int
 }
 
 Env {
-  Get(Key Str)              [ Key . native_env_get ]
-  Set(Key Str, Val Str)     [ (Key, Val) . native_env_set ]
-  Remove(Key Str)           [ Key . native_env_remove ]
+  Get(Key String)              [ Key . native_env_get ]
+  Set(Key String, Val String)     [ (Key, Val) . native_env_set ]
+  Remove(Key String)           [ Key . native_env_remove ]
   All()                     [ native_env_all ]
   CurrentDir()              [ native_env_cwd ]
   HomeDir()                 [ native_env_home ]
@@ -38,8 +38,8 @@ Shell {
   Warn(Msg)                 [ "[WARN] {Msg}" . native_print_err ]
   Error(Msg)                [ "[ERROR] {Msg}" . native_print_err ]
   ReadLine()                [ native_stdin_read_line ]
-  Exec(Cmd Str)             [ Cmd . native_exec ]
-  Spawn(Cmd Str, Args List(Str)) [ (Cmd, Args) . native_process_spawn ]
+  Exec(Cmd String)             [ Cmd . native_exec ]
+  Spawn(Cmd String, Args List(String)) [ (Cmd, Args) . native_process_spawn ]
   Kill(Pid Int, Sig ProcessSignal) [ (Pid, Sig) . native_process_kill ]
   Exit(Code Int)            [ Code . native_process_exit ]
 }

@@ -10,18 +10,18 @@ _ auth
 // Unit Testing, Property-Based Testing, Mocking & Benchmarking
 // =============================================================================
 
-TestPassed  { Name Str, DurationMs Float }
-TestFailed  { Name Str, Expected Any, Actual Any }
-TestSkipped { Name Str, Reason Str }
+TestPassed  { Name String, DurationMs Float }
+TestFailed  { Name String, Expected Any, Actual Any }
+TestSkipped { Name String, Reason String }
 TestResult  TestPassed | TestFailed | TestSkipped
 
 TestSuite {
-  SuiteName Str
+  SuiteName String
   Tests     List(TestResult)
 }
 
 BenchmarkResult {
-  Name         Str
+  Name         String
   Iterations   Int
   MeanTimeNs   Float
   MedianTimeNs Float
@@ -44,25 +44,25 @@ MockFn(ReturnType) {
 // Assertions
 // =============================================================================
 
-AssertEq(Name Str, Expected, Actual) [
+AssertEq(Name String, Expected, Actual) [
   (Expected == Actual) . {
     true  [ TestPassed { Name Name, DurationMs 0.0 } ]
     false [ TestFailed { Name Name, Expected Expected, Actual Actual } ]
   }
 ]
 
-AssertNeq(Name Str, Unexpected, Actual) [
+AssertNeq(Name String, Unexpected, Actual) [
   (Unexpected != Actual) . {
     true  [ TestPassed { Name Name, DurationMs 0.0 } ]
     false [ TestFailed { Name Name, Expected "!= {Unexpected}", Actual Actual } ]
   }
 ]
 
-AssertTrue(Name Str, Cond Bool) [
+AssertTrue(Name String, Cond Bool) [
   AssertEq(Name, true, Cond)
 ]
 
-AssertFalse(Name Str, Cond Bool) [
+AssertFalse(Name String, Cond Bool) [
   AssertEq(Name, false, Cond)
 ]
 

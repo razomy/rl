@@ -41,7 +41,7 @@ BeamSupportType "Cantilever" | "SimplySupported" | "FixedBothEnds" | "Overhangin
 CrossSectionShape "IBeam" | "HBeam" | "ChannelC" | "AngleL" | "HollowRectangular" | "HollowCircular" | "SolidCircular" | "SolidRectangular" | "TBeam"
 
 StructuralBeam {
-  BeamId            Str
+  BeamId            String
   Support           BeamSupportType
   SectionShape      CrossSectionShape
   LengthMeters      Float
@@ -113,7 +113,7 @@ PcbLayerType "TopSignal" | "BottomSignal" | "InnerSignal" | "PowerPlane" | "Grou
 SurfaceMountPackage "0201" | "0402" | "0603" | "0805" | "1206" | "SOT-23" | "SOIC-8" | "QFP" | "QFN" | "BGA" | "LGA" | "DIP"
 
 PcbBoardSpec {
-  DesignName        Str
+  DesignName        String
   LayerCount        Count
   WidthMm           Float
   HeightMm          Float
@@ -129,19 +129,19 @@ PcbBoardSpec {
 SemiconductorNodeProcess "180nm" | "65nm" | "28nm" | "14nm-FinFET" | "7nm-EUV" | "5nm-EUV" | "3nm-GAA" | "2nm-RibbonFET" | "14A"
 
 IntegratedCircuitChip {
-  ModelName         Str
+  ModelName         String
   ProcessNode       SemiconductorNodeProcess
   TransistorCount   Bigint
   DieAreaMm2        Float
   ClockBaseGhz      Float
   ClockBoostGhz     Float
   TdpWatts          Float
-  PackageSocket     Str
+  PackageSocket     String
   SupplyVoltageV    Float
 }
 
 PowerGridSubstation {
-  SubstationId      Str
+  SubstationId      String
   InputVoltageKv    Float
   OutputVoltageKv   Float
   FrequencyHz       "50Hz" | "60Hz"
@@ -162,10 +162,10 @@ PropulsionSystemKind
   | "HallEffectIonThruster" | "NuclearThermalRocket" | "SolarSail"
 
 RocketEngineSpec {
-  EngineName          Str
+  EngineName          String
   PropulsionKind      PropulsionSystemKind
-  Fuel                Str
-  Oxidizer            Str
+  Fuel                String
+  Oxidizer            String
   ThrustSeaLevelKn    Float
   ThrustVacuumKn      Float
   SpecificImpulseIspS Float
@@ -188,7 +188,7 @@ KeplerianOrbitalElements {
 }
 
 SpacecraftTelemetry {
-  Callsign          Str
+  Callsign          String
   Regime            OrbitalRegime
   Elements          KeplerianOrbitalElements
   DryMassKg         Float

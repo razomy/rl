@@ -19,18 +19,18 @@ DegreeOfComparison "positive" | "comparative" | "superlative"
 
 MorphemeKind "root" | "prefix" | "suffix" | "infix" | "ending" | "clitic"
 Morpheme {
-  Text Str
+  Text String
   Kind MorphemeKind
 }
 
 Lexeme {
-  Lemma        Str
+  Lemma        String
   PartOfSpeech PartOfSpeech
   Language     Language
 }
 
 InflectedWord {
-  SurfaceForm  Str
+  SurfaceForm  String
   Lexeme       Lexeme
   Case         Option(GrammaticalCase)
   Number       Option(GrammaticalNumber)
@@ -55,13 +55,13 @@ DependencyArc {
 }
 
 SyntaxPhrase {
-  Subject   Str
-  Verb      Str
-  Object    Option(Str)
-  Modifiers List(Str)
+  Subject   String
+  Verb      String
+  Object    Option(String)
+  Modifiers List(String)
 }
 
 // Semantic Frame (Subject - Action - Object - Details)
-ObjectActed(Object Str, Acted Str, Status Str, Details Str) [
+ObjectActed(Object String, Acted String, Status String, Details String) [
   "{Object} {Acted} {Status} {Details}"
 ]

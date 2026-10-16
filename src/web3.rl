@@ -14,7 +14,7 @@ ConsensusMechanism "ProofOfWork" | "ProofOfStake" | "DelegatedProofOfStake" | "P
 VmEnvironment "EVM" | "SVM-Solana" | "MoveVM" | "CosmWasm" | "CairoVM" | "FuelVM" | "BitcoinScript"
 
 BlockchainNetwork {
-  Name            Str
+  Name            String
   ChainId         Int
   NativeCurrency  CurrencyCode
   Consensus       ConsensusMechanism
@@ -77,13 +77,13 @@ Block {
 // =============================================================================
 
 AbiParameter {
-  Name         Str
-  SolidityType Str
+  Name         String
+  SolidityType String
   Indexed      Bool
 }
 
 AbiFunction {
-  Name            Str
+  Name            String
   StateMutability "pure" | "view" | "nonpayable" | "payable"
   Inputs          List(AbiParameter)
   Outputs         List(AbiParameter)
@@ -105,15 +105,15 @@ TokenStandard "ERC-20" | "ERC-721" | "ERC-1155" | "ERC-4626" | "SPL-Token" | "BR
 FungibleToken {
   ContractAddress WalletAddress
   Standard        TokenStandard
-  Name            Str
-  Symbol          Str
+  Name            String
+  Symbol          String
   Decimals        Range(0, 18) & Int
   TotalSupply     Bigint
 }
 
 NftAttribute {
-  TraitType Str
-  Value     Str | Float
+  TraitType String
+  Value     String | Float
 }
 
 NonFungibleToken {
@@ -122,8 +122,8 @@ NonFungibleToken {
   TokenId         Bigint
   Owner           WalletAddress
   Creator         WalletAddress
-  MetadataUri     Str
-  ImageUri        Str
+  MetadataUri     String
+  ImageUri        String
   Attributes      List(NftAttribute)
   RoyaltyBps      Range(0, 10000) & Int
 }
@@ -156,7 +156,7 @@ LendingPosition {
 }
 
 PriceOracleFeed {
-  PairSymbol    Str
+  PairSymbol    String
   OracleAddress WalletAddress
   Price         Float
   Decimals      Int
@@ -175,8 +175,8 @@ DaoProposalState "Pending" | "Active" | "Canceled" | "Defeated" | "Succeeded" | 
 DaoProposal {
   ProposalId    Int
   Proposer      WalletAddress
-  Title         Str
-  Description   Str
+  Title         String
+  Description   String
   TargetCalldata List(HexStr)
   ForVotes      Float
   AgainstVotes  Float

@@ -5,30 +5,30 @@ _ primitive
 // Core Traits & Structural Mixins
 // =============================================================================
 
-PrimaryId(T) { Id Str }
-ForeignId(T) { Id Str }
-IdRef(T)     { Id Str }
+PrimaryId(T) { Id String }
+ForeignId(T) { Id String }
+IdRef(T)     { Id String }
 
 IResource        {}
 IAttribute       {}
-IEntity          { Id Str }
-Identifiable     { Id Str }
+IEntity          { Id String }
+Identifiable     { Id String }
 Auditable        { CreatedAt Int, UpdatedAt Int }
 Versioned        { Version Int }
 SoftDeletable    { DeletedAt Option(Int), IsDeleted Bool }
 Timestamped      Auditable & SoftDeletable
-Named            { Name Str }
-Tagged           { Tags List(Str) }
-Metadata         { MetaMap Map(Str, Any) }
+Named            { Name String }
+Tagged           { Tags List(String) }
+Metadata         { MetaMap Map(String, Any) }
 
 HasId(T)         { Id T }
 HasPrimary(T)    { PrimaryId PrimaryId(T) }
 HasForeign(T)    { EntityId ForeignId(T) }
-HasName          { Name Str }
-HasFullName      { FullName Str }
-HasTitle         { Title Str }
-HasDescription   { Description Str }
-HasSlug          { Slug Str }
+HasName          { Name String }
+HasFullName      { FullName String }
+HasTitle         { Title String }
+HasDescription   { Description String }
+HasSlug          { Slug String }
 HasValue(T)      { Value T }
 HasCount         { Count Int }
 HasRange         { From Int, To Int }
@@ -112,11 +112,11 @@ ImplicitSharingInfoAndData {
   Data        Any
 }
 
-GPointer { Type Str, Data Any }
-GSpan    { Type Str, Data Any, Size Int }
+GPointer { Type String, Data Any }
+GSpan    { Type String, Data Any, Size Int }
 GArray   GSpan & { Capacity Int }
 GVArray  GSpan & { IsSingle Bool }
-GList    { CppType Str, Data Any, Size Int }
+GList    { CppType String, Data Any, Size Int }
 
 // =============================================================================
 // Option, Result & Either (Algebraic Sum Types)
@@ -232,10 +232,10 @@ KeyValue(K, V)      { Key K, Value V }
 KeyValueArray(K, V) { Key K, Values List(KvaOrValue(K, V)) }
 KvaOrValue(K, V)    KeyValue(K, V) | KeyValueArray(K, V) | V
 
-Dict(T)          Map(Str, T)
-RecursiveDict(T) Map(Str, T | RecursiveDict(T))
+Dict(T)          Map(String, T)
+RecursiveDict(T) Map(String, T | RecursiveDict(T))
 
-Vrd(T)        Map(Str, VrdOrValue(T))
+Vrd(T)        Map(String, VrdOrValue(T))
 VrdOrValue(T) T | Vrd(T)
 
 HashTable(K, V) {
@@ -336,14 +336,14 @@ TrieNode(V) {
 }
 Trie(V)     TrieNode(V)
 RadixTree(V) Trie(V)
-SuffixTree  { Text Str, Root TrieNode(Int) }
+SuffixTree  { Text String, Root TrieNode(Int) }
 
 HeapType       "MinHeap" | "MaxHeap" | "FibonacciHeap" | "PairingHeap" | "BinomialHeap"
 Heap(T)        { HeapType HeapType, Array List(T) }
 SegmentTree(T) { Array List(T), Size Int }
 FenwickTree(T) { Tree List(T), Size Int }
-MerkleNode     { Hash Str, Left Option(MerkleNode), Right Option(MerkleNode) }
-MerkleTree     { Root Option(MerkleNode), Leaves List(Str) }
+MerkleNode     { Hash String, Left Option(MerkleNode), Right Option(MerkleNode) }
+MerkleTree     { Root Option(MerkleNode), Leaves List(String) }
 
 KDTreeNode(T) {
   Left  Int
@@ -384,13 +384,13 @@ OrderedEdge {
 KeyEdge(TFrom, TTo) { From TFrom, To TTo }
 
 Vertex(T) {
-  Id    Str
+  Id    String
   Value T
 }
 
 Edge(W) {
-  From       Str
-  To         Str
+  From       String
+  To         String
   Weight     W
   IsDirected Bool
 }
@@ -404,7 +404,7 @@ Graph(T, W) {
 
 DAG(T, W)                  Graph(T, W) & { IsAcyclic True }
 BipartiteGraph(U, V, W)    { LeftSet List(Vertex(U)), RightSet List(Vertex(V)), Edges List(Edge(W)) }
-Hyperedge(T)               { Id Str, Nodes List(Vertex(T)), Weight Float }
+Hyperedge(T)               { Id String, Nodes List(Vertex(T)), Weight Float }
 Hypergraph(T)              { Vertices List(Vertex(T)), Hyperedges List(Hyperedge(T)) }
 EdgeListGraph(N, E)        { Nodes List(N), Edges List((E, E)) }
 GraphAdjacencyMatrix(T)    { Vertices List(T), Matrix List(List(Float)) }
@@ -438,11 +438,11 @@ SparseMatrixCSR(T) {
 }
 
 RemoveDeltaString { Offset Int, RemoveLength Int }
-AddDeltaString    { Offset Int, AddValue Str }
+AddDeltaString    { Offset Int, AddValue String }
 DeltaString       RemoveDeltaString | AddDeltaString
 
-RemoveDeltaVrd { Path List(Str), AfterPath List(Str), Remove Bool }
-AddDeltaVrd    { Path List(Str), AfterPath List(Str), Add VrdOrValue(Str) }
+RemoveDeltaVrd { Path List(String), AfterPath List(String), Remove Bool }
+AddDeltaVrd    { Path List(String), AfterPath List(String), Add VrdOrValue(String) }
 DeltaVrd       RemoveDeltaVrd | AddDeltaVrd
 
 // =============================================================================

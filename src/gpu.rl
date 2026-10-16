@@ -36,8 +36,8 @@ GPUWriteMask "None" | "Red" | "Green" | "Blue" | "Alpha" | "Depth" | "Stencil" |
 GPUFaceCullTest "None" | "Front" | "Back"
 
 GPUVertAttr {
-  Name   Str
-  Type   Str
+  Name   String
+  Type   String
   Offset Int
 }
 
@@ -75,14 +75,14 @@ GPUBatch {
 }
 
 GPUUniformBuf {
-  Name        Str
+  Name        String
   SizeInBytes Int
   Slot        Int
   Data        List(Byte)
 }
 
 GPUStorageBuf {
-  Name        Str
+  Name        String
   SizeInBytes Int
   Usage       GPUUsageType
   Slot        Int
@@ -98,7 +98,7 @@ GPUSamplerState {
 }
 
 GPUTexture {
-  Name         Str
+  Name         String
   Type         "1D" | "1DArray" | "2D" | "2DArray" | "3D" | "Cube" | "CubeArray" | "Buffer"
   Format       GPUTextureFormat
   Usage        Int
@@ -116,7 +116,7 @@ GPUAttachment {
 }
 
 GPUFrameBuffer {
-  Name              Str
+  Name              String
   Width             Int
   Height            Int
   DepthAttachment   GPUAttachment
@@ -153,57 +153,57 @@ GPUViewport {
 // =============================================================================
 
 GPUSpecializationConstant {
-  Name  Str
+  Name  String
   Type  "Int" | "UInt" | "Float" | "Bool"
   Value Int | Float | Bool
 }
 
 GPUStageInterfaceInfo {
-  Name         Str
-  InstanceName Str
-  Attributes   List((Str, Str, "Smooth" | "Flat" | "NoPerspective"))
+  Name         String
+  InstanceName String
+  Attributes   List((String, String, "Smooth" | "Flat" | "NoPerspective"))
 }
 
 GPUResourceBinding {
   BindType  "UniformBuf" | "StorageBuf" | "Sampler" | "Image" | "AccelerationStructure" | "InputAttachment"
   Slot      Int
-  Name      Str
-  TypeName  Str
+  Name      String
+  TypeName  String
   Frequency "Pass" | "Batch" | "Geometry"
 }
 
 GPUShaderCreateInfo {
-  Name                    Str
-  VertexInputs            List((Int, Str, Str))
+  Name                    String
+  VertexInputs            List((Int, String, String))
   VertexOutInterfaces     List(GPUStageInterfaceInfo)
-  FragmentOutputs         List((Int, Str, Str))
-  PushConstants           List((Str, Str, Int))
+  FragmentOutputs         List((Int, String, String))
+  PushConstants           List((String, String, Int))
   SpecializationConstants List(GPUSpecializationConstant)
   Resources               List(GPUResourceBinding)
-  VertexSource            Option(Str)
-  GeometrySource          Option(Str)
-  FragmentSource          Option(Str)
-  ComputeSource           Option(Str)
-  TypedefSources          List(Str)
-  Defines                 List((Str, Str))
+  VertexSource            Option(String)
+  GeometrySource          Option(String)
+  FragmentSource          Option(String)
+  ComputeSource           Option(String)
+  TypedefSources          List(String)
+  Defines                 List((String, String))
   LocalGroupSize          Vec3i
   DepthWrite              "Any" | "Unchanged" | "Greater" | "Less"
 }
 
 GPUShader {
-  Name      Str
+  Name      String
   IsValid   Bool
   IsCompute Bool
   Info      Option(GPUShaderCreateInfo)
 }
 
 GPUBottomLevelAS {
-  Name       Str
+  Name       String
   Geometries List((GPUIndexBuf, GPUVertBuf))
 }
 
 GPUTopLevelAS {
-  Name      Str
+  Name      String
   Instances List((GPUBottomLevelAS, Mat4x4, Byte))
   IsDirty   Bool
 }
@@ -217,11 +217,11 @@ GPUMaterialStatus "Failed" | "Queued" | "Success"
 
 GPUNodeLink {
   LinkType "Constant" | "Uniform" | "Attribute" | "UniformAttr" | "LayerAttr" | "Texture" | "Output"
-  Name     Str
+  Name     String
 }
 
 GPUNodeStack {
-  Type       Str
+  Type       String
   Value      Any
   Link       Option(GPUNodeLink)
   HasInput   Bool
@@ -235,7 +235,7 @@ GPUPass {
 }
 
 GPUMaterial {
-  Name                  Str
+  Name                  String
   Engine                GPUMaterialEngine
   Material              Any
   Status                GPUMaterialStatus
@@ -311,7 +311,7 @@ BSLToken {
   Type   BSLTokenType
   Offset Int
   Length Int
-  Text   Str
+  Text   String
 }
 
 BSLScope {
@@ -322,8 +322,8 @@ BSLScope {
 }
 
 BSLSymbolVariable {
-  Name            Str
-  TypeName        Str
+  Name            String
+  TypeName        String
   ArrayDimensions Int
   Offset          Int
   IsConst         Bool
@@ -331,7 +331,7 @@ BSLSymbolVariable {
 }
 
 BSLSymbolClass {
-  Name    Str
+  Name    String
   Size    Int
   Align   Int
   IsUnion Bool
@@ -340,15 +340,15 @@ BSLSymbolClass {
 }
 
 BSLSymbolFunction {
-  Name         Str
-  ReturnType   Str
-  ArgTypes     List(Str)
+  Name         String
+  ReturnType   String
+  ArgTypes     List(String)
   IsEntryPoint Bool
   IsConstexpr  Bool
 }
 
 BSLSymbolTable {
-  Classes   Map(Str, BSLSymbolClass)
-  Functions Map(Str, List(BSLSymbolFunction))
-  Variables Map(Str, BSLSymbolVariable)
+  Classes   Map(String, BSLSymbolClass)
+  Functions Map(String, List(BSLSymbolFunction))
+  Variables Map(String, BSLSymbolVariable)
 }

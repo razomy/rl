@@ -31,13 +31,13 @@ Project {
 }
 
 Cli {
-  Schema Project.Interaction.Schema(Str)
+  Schema Project.Interaction.Schema(String)
 }
 
 LaunchCli {
-  Launcher Str
-  Command  Str
-  BuildCommand(Name Str) [ "{Launcher} {Command} {Name}" ]
+  Launcher String
+  Command  String
+  BuildCommand(Name String) [ "{Launcher} {Command} {Name}" ]
 }
 
 LaunchCliAndCliSchema LaunchCli & Cli.Schema
@@ -74,18 +74,18 @@ Cargo {
 
 Docker {
   ContainerImage {
-    Repository Str
-    Tag        Str
-    Digest     Option(Str)
+    Repository String
+    Tag        String
+    Digest     Option(String)
   }
   ContainerState "created" | "running" | "paused" | "restarting" | "removing" | "exited" | "dead"
   Container {
-    ContainerId Str
+    ContainerId String
     Image       ContainerImage
     State       ContainerState
     Ports       Map(Int, Int)
-    EnvVars     Map(Str, Str)
-    Volumes     List(Str)
+    EnvVars     Map(String, String)
+    Volumes     List(String)
   }
 }
 
@@ -105,24 +105,24 @@ CursorState {
 ClickType "single" | "double" | "right" | "middle" | "long-press"
 
 UIElement Thing & {
-  ElementId  Str
-  TagName    Str
+  ElementId  String
+  TagName    String
   Bounds     BoundingBox
   IsEnabled  Bool
   IsVisible  Bool
   IsFocused  Bool
-  TextValue  Option(Str)
-  AriaRole   Option(Str)
+  TextValue  Option(String)
+  AriaRole   Option(String)
 }
 ButtonElement   UIElement
-InputField      UIElement & { Placeholder Option(Str), Value Str, InputType "text" | "password" | "email" | "number" | "search" }
+InputField      UIElement & { Placeholder Option(String), Value String, InputType "text" | "password" | "email" | "number" | "search" }
 CheckboxElement UIElement & { IsChecked Bool }
-SelectElement   UIElement & { Options List(Str), SelectedOption Option(Str) }
+SelectElement   UIElement & { Options List(String), SelectedOption Option(String) }
 CanvasElement   UIElement
 
 UIEvent {
   Source    UIElement
-  EventType Str
+  EventType String
   Timestamp DateTime
 }
 
@@ -145,20 +145,20 @@ Viewport {
 ViewportState Viewport
 
 TextData {
-  Content  Str
-  Encoding Str
+  Content  String
+  Encoding String
   Length   Count
 }
 
 KeyModifier "Ctrl" | "Alt" | "Shift" | "Meta"
 KeyCombination {
   Modifiers List(KeyModifier)
-  Key       Str
+  Key       String
 }
 
 SystemCommand {
-  Command   Str
-  Arguments List(Str)
+  Command   String
+  Arguments List(String)
   ExitCode  Option(Int)
 }
 
@@ -169,7 +169,7 @@ SystemCommand {
 PowerState "on" | "off" | "reboot" | "sleep" | "hibernate"
 
 System Thing & {
-  Hostname     Str
+  Hostname     String
   Architecture "x86_64" | "arm64" | "riscv64" | "wasm32"
   CpuCount     Count
   MemoryTotal  Int
@@ -183,33 +183,33 @@ SystemState {
 }
 
 Credentials {
-  Username  Str
-  Secret    Str
+  Username  String
+  Secret    String
   Method    "password" | "pin" | "biometric" | "token" | "oauth" | "passkey" | "ssh-key"
 }
 
 SecuritySystem Thing & {
-  Provider     Str
-  AuthMethods  List(Str)
+  Provider     String
+  AuthMethods  List(String)
   MfaRequired  Bool
 }
 
 AuthToken {
-  Token     Str
+  Token     String
   ExpiresAt DateTime
-  Scopes    List(Str)
+  Scopes    List(String)
 }
 
 WindowAction "open" | "close" | "minimize" | "maximize" | "restore" | "resize" | "move" | "focus"
 
 Window UIElement & {
-  Title        Str
+  Title        String
   ProcessId    Int
   State        "normal" | "minimized" | "maximized" | "fullscreen"
   ZIndex       Int
 }
 
-Parameter Str
+Parameter String
 Value     Primitive
 
 SystemSettings {
@@ -218,15 +218,15 @@ SystemSettings {
   WifiEnabled      Bool
   BluetoothEnabled Bool
   Theme            "light" | "dark" | "system"
-  Locale           Str
+  Locale           String
 }
 ConfigState SystemSettings
 
 MaintenanceTask "install_package" | "remove_package" | "update_os" | "clear_cache" | "empty_trash" | "security_scan" | "disk_cleanup"
 
 OperatingSystem SoftwareApplication & {
-  KernelVersion Str
-  Distribution  Str
+  KernelVersion String
+  Distribution  String
 }
 
 SystemHealth {
@@ -244,39 +244,39 @@ SystemHealth {
 ContentStream {
   MimeType MimeType
   Size     Int
-  Data     Str
+  Data     String
 }
 
 NewData {
-  Payload   Str
+  Payload   String
   Overwrite Bool
 }
 
-SourceLocation Str
-TargetLocation Str
+SourceLocation String
+TargetLocation String
 OperationType  "copy" | "cut" | "paste" | "rename" | "archive" | "extract" | "move" | "symlink"
 
 FileEntry Thing & {
-  Path        Str
+  Path        String
   Size        Int
   IsDirectory Bool
-  Permissions Str
+  Permissions String
   ModifiedAt  DateTime
 }
 
 FileSystemState {
-  RootPath  Str
+  RootPath  String
   Entries   List(FileEntry)
   FreeSpace Int
 }
 
 Storage Thing & {
-  MountPoint Str
+  MountPoint String
   FileSystem "ext4" | "apfs" | "ntfs" | "fat32" | "zfs" | "btrfs" | "xfs"
   Capacity   Int
 }
 
-Query     Str
+Query     String
 ThingList List(Thing)
 
 // =============================================================================
@@ -291,11 +291,11 @@ Browser WebApplication & {
 
 SearchEngine WebApplication & {
   Endpoint URL
-  Provider Str
+  Provider String
 }
 SearchQuery {
-  Text    Str
-  Filters Map(Str, Str)
+  Text    String
+  Filters Map(String, String)
   Limit   Count
 }
 SearchResults {
@@ -305,10 +305,10 @@ SearchResults {
 }
 
 DataObject MediaObject & {
-  Checksum Str
+  Checksum String
 }
-SourceNode      URL | Str
-DestinationNode URL | Str
+SourceNode      URL | String
+DestinationNode URL | String
 TransferStatus {
   BytesTransferred Int
   TotalBytes       Int
@@ -320,7 +320,7 @@ WebService Service & {
   BaseUrl URL
 }
 Session {
-  SessionId Str
+  SessionId String
   User      Agent
   AuthToken AuthToken
   CreatedAt DateTime
@@ -332,12 +332,12 @@ Session {
 
 Recipient      Agent
 MessageContent {
-  Subject     Option(Str)
-  Body        Str
+  Subject     Option(String)
+  Body        String
   Attachments List(MediaObject)
 }
 MessageStatus {
-  MessageId   Str
+  MessageId   String
   State       "queued" | "sent" | "delivered" | "read" | "failed"
   Timestamp   DateTime
 }
@@ -350,7 +350,7 @@ MediaStream {
   BitrateKbps Int
 }
 CallSession {
-  SessionId    Str
+  SessionId    String
   Participants ParticipantList
   Stream       MediaStream
   StartedAt    DateTime
@@ -375,25 +375,25 @@ Experience {
 Document       DigitalDocument
 TextOperations List("insert" | "delete" | "replace" | "format_bold" | "format_italic" | "align" | "paginate")
 
-Formulas List(Str)
+Formulas List(String)
 AnalyticsResult {
-  Summary Map(Str, Float)
+  Summary Map(String, Float)
   Charts  List(ImageObject)
 }
 
 RawMedia      MediaObject
-EditingTools  List(Str)
+EditingTools  List(String)
 MediaArtifact MediaObject
 
 SourceCode SoftwareSourceCode
 Compiler   SoftwareApplication
 Executable SoftwareApplication & {
-  BinaryPath Str
-  TargetArch Str
+  BinaryPath String
+  TargetArch String
 }
 
 GameEnvironment VideoGame
-GameActions     List(Str)
+GameActions     List(String)
 GameState {
   Score     Int
   Level     Int
@@ -409,7 +409,7 @@ CartItem {
   Price    Float
 }
 OrderReceipt {
-  ReceiptId     Str
+  ReceiptId     String
   Order         Order
   PaidAmount    MonetaryAmount
   PaymentMethod PaymentMethod

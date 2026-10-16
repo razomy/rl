@@ -13,23 +13,23 @@ IpVersion "IPv4" | "IPv6"
 SocketProtocol "TCP" | "UDP" | "QUIC" | "SCTP" | "Unix"
 
 SocketAddr {
-  Host      Str
+  Host      String
   Port      U16
   IpVersion IpVersion
 }
 
 DnsRecordType "A" | "AAAA" | "CNAME" | "MX" | "TXT" | "NS" | "SRV" | "CAA"
 DnsRecord {
-  Name  Str
+  Name  String
   Type  DnsRecordType
-  Value Str
+  Value String
   Ttl   Int
 }
 
 TlsConfig {
-  CertPath   Str
-  KeyPath    Str
-  CaPath     Option(Str)
+  CertPath   String
+  KeyPath    String
+  CaPath     Option(String)
   MinVersion "TLS1.2" | "TLS1.3"
 }
 
@@ -41,7 +41,7 @@ HttpMethod "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS" | "C
 
 HttpStatus {
   Code   Int
-  Reason Str
+  Reason String
 }
 
 HttpOk                  HttpStatus & { Code 200, Reason "OK" }
@@ -58,10 +58,10 @@ HttpInternalServerError HttpStatus & { Code 500, Reason "Internal Server Error" 
 HttpServiceUnavailable  HttpStatus & { Code 503, Reason "Service Unavailable" }
 
 Cookie {
-  Name     Str
-  Value    Str
-  Domain   Option(Str)
-  Path     Str
+  Name     String
+  Value    String
+  Domain   Option(String)
+  Path     String
   MaxAge   Option(Int)
   Secure   Bool
   HttpOnly Bool
@@ -70,19 +70,19 @@ Cookie {
 
 HttpRequest {
   Method      HttpMethod
-  Path        List(Str)
-  QueryParams Map(Str, Str)
-  Headers     Map(Str, Str)
-  Cookies     Map(Str, Cookie)
-  Body        Str
+  Path        List(String)
+  QueryParams Map(String, String)
+  Headers     Map(String, String)
+  Cookies     Map(String, Cookie)
+  Body        String
   RemoteAddr  Option(SocketAddr)
 }
 
 HttpResponse {
   Status  Int
-  Headers Map(Str, Str)
+  Headers Map(String, String)
   Cookies List(Cookie)
-  Body    Str
+  Body    String
 }
 
 // =============================================================================
@@ -92,25 +92,25 @@ HttpResponse {
 WsFrameType "text" | "binary" | "ping" | "pong" | "close"
 WsMessage {
   FrameType WsFrameType
-  Payload   Str
+  Payload   String
 }
 
 SseEvent {
-  Id    Option(Str)
-  Event Option(Str)
-  Data  Str
+  Id    Option(String)
+  Event Option(String)
+  Data  String
   Retry Option(Int)
 }
 
 GraphQlRequest {
-  Query         Str
-  OperationName Option(Str)
-  Variables     Map(Str, Any)
+  Query         String
+  OperationName Option(String)
+  Variables     Map(String, Any)
 }
 
 GraphQlResponse {
   Data   Option(Any)
-  Errors List(Str)
+  Errors List(String)
 }
 
 // =============================================================================
@@ -118,10 +118,10 @@ GraphQlResponse {
 // =============================================================================
 
 Http {
-  Get(Url Str)                     [ native_http_get(Url) ]
-  Post(Url Str, Body Str)          [ native_http_post(Url, Body) ]
-  Put(Url Str, Body Str)           [ native_http_put(Url, Body) ]
-  Delete(Url Str)                  [ native_http_delete(Url) ]
+  Get(Url String)                     [ native_http_get(Url) ]
+  Post(Url String, Body String)          [ native_http_post(Url, Body) ]
+  Put(Url String, Body String)           [ native_http_put(Url, Body) ]
+  Delete(Url String)                  [ native_http_delete(Url) ]
   Send(Req HttpRequest)            [ Req . native_http_send ]
   Listen(Port Int, Handler)        [ (Port, Handler) . native_http_listen ]
 }

@@ -85,10 +85,10 @@ CurveProfile {
 
 OCIOColorSpace {
   Index             Int
-  Name              Str
-  Description       Str
-  Family            Str
-  InteropId         Str
+  Name              String
+  Description       String
+  Family            String
+  InteropId         String
   IsSceneLinear     Bool
   IsSrgb            Bool
   IsData            Bool
@@ -97,8 +97,8 @@ OCIOColorSpace {
 
 OCIOView {
   Index            Int
-  Name             Str
-  Description      Str
+  Name             String
+  Description      String
   IsHdr            Bool
   Gamut            "Unknown" | "Rec709" | "P3D65" | "Rec2020" | "ACES_AP0" | "ACES_AP1"
   TransferFunction "Unknown" | "sRGB" | "ExtendedsRGB" | "Gamma22" | "Gamma24" | "PQ" | "HLG" | "AgX" | "Filmic"
@@ -107,17 +107,17 @@ OCIOView {
 
 OCIODisplay {
   Index       Int
-  Name        Str
-  UiName      Str
-  Description Str
+  Name        String
+  UiName      String
+  Description String
   Views       List(OCIOView)
 }
 
 OCIOLook {
   Index        Int
-  Name         Str
-  UiName       Str
-  ProcessSpace Str
+  Name         String
+  UiName       String
+  ProcessSpace String
   IsNoop       Bool
 }
 
@@ -131,8 +131,8 @@ OCIOConfig {
 
 ColorManagedViewSettings {
   Flag                    Int
-  Look                    Str
-  ViewTransform           Str
+  Look                    String
+  ViewTransform           String
   Exposure                Float
   Gamma                   Float
   CurveMapping            Option(CurveMapping)
@@ -141,12 +141,12 @@ ColorManagedViewSettings {
 }
 
 ColorManagedDisplaySettings {
-  DisplayDevice Str
+  DisplayDevice String
   Emulation     Int
 }
 
 ColorManagedColorspaceSettings {
-  Name Str
+  Name String
 }
 
 Histogram {
@@ -187,10 +187,10 @@ Scopes {
 EvaluationMode "Viewport" | "Render"
 
 RenderPass {
-  Name     Str
-  FullName Str
-  ChanId   Str
-  View     Str
+  Name     String
+  FullName String
+  ChanId   String
+  View     String
   ViewId   Int
   Channels Int
   RectX    Int
@@ -198,7 +198,7 @@ RenderPass {
 }
 
 RenderLayer {
-  Name     Str
+  Name     String
   RectX    Int
   RectY    Int
   LayFlag  Int
@@ -214,8 +214,8 @@ RenderResult {
   Ppm          (Float, Float)
   HaveCombined Bool
   Layers       List(RenderLayer)
-  Text         Option(Str)
-  Error        Option(Str)
+  Text         Option(String)
+  Error        Option(String)
 }
 
 RenderStats {
@@ -223,18 +223,18 @@ RenderStats {
   LocalView     Bool
   StartTime     Float
   LastFrameTime Float
-  SceneName     Str
-  InfoStr       Str
-  StatStr       Str
+  SceneName     String
+  InfoStr       String
+  StatStr       String
   MemUsed       Int
   MemPeak       Int
 }
 
 SceneRenderView {
-  Name         Str
-  Suffix       Str
+  Name         String
+  Suffix       String
   Viewflag     Int
-  CameraSuffix Str
+  CameraSuffix String
 }
 
 ImageFormatData {
@@ -268,7 +268,7 @@ RenderData {
   BakeMode         Int
   BakeFilter       Int
   BakeSamples      Int
-  Engine           Str
+  Engine           String
   Views            List(SceneRenderView)
 }
 
@@ -289,15 +289,15 @@ CompositorDomain {
 }
 
 CryptomatteMetaData {
-  Hash       Str
-  Conversion Str
-  Manifest   Str
+  Hash       String
+  Conversion String
+  Manifest   String
 }
 
 CompositorMetaData {
   IsNonColorData Bool
   Cryptomatte    CryptomatteMetaData
-  Fields         Map(Str, Str)
+  Fields         Map(String, String)
 }
 
 CompositorResult {
@@ -324,9 +324,9 @@ InputDescriptor {
 }
 
 CompositorOperation {
-  Results               Map(Str, CompositorResult)
-  InputDescriptors      Map(Str, InputDescriptor)
-  ResultsMappedToInputs Map(Str, CompositorResult)
+  Results               Map(String, CompositorResult)
+  InputDescriptors      Map(String, InputDescriptor)
+  ResultsMappedToInputs Map(String, CompositorResult)
 }
 
 // =============================================================================
@@ -349,12 +349,12 @@ DRWView {
 }
 
 DRWPass {
-  Name  Str
+  Name  String
   State DRWState
 }
 
 DrawEngine {
-  Name Str
+  Name String
   Used Bool
 }
 
@@ -472,8 +472,8 @@ OverlayInstance DrawEngine & {
 GpuReady            { VramAllocatedBytes Int }
 GpuCompiled         { ShaderHandle GPUShader, CompiledAt Int }
 RenderAllocated     { OffScreen GPUOffScreen, Viewport GPUViewport }
-ShaderCompileError  { ShaderName Str, ErrorLog Str }
-ShaderCompileFailed { Log Str, Stage Str }
+ShaderCompileError  { ShaderName String, ErrorLog String }
+ShaderCompileFailed { Log String, Stage String }
 OutOfVram           { RequestedBytes Int, AvailableBytes Int }
 
 CompileEEVEEShaders(E EEVEEInstance) [

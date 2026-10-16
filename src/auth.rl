@@ -11,24 +11,24 @@ _ db
 RoleType "guest" | "user" | "moderator" | "manager" | "admin" | "superadmin" | "service"
 
 PermissionScope {
-  Resource Str
+  Resource String
   Actions  List("create" | "read" | "update" | "delete" | "execute" | "manage")
 }
 
 AccessLevel "DENIED" | "VIEWER" | "COMMENTER" | "EDITOR" | "ADMIN" | "OWNER"
 
 AccessPolicy {
-  SubjectId   Str
-  ResourceId  Str
+  SubjectId   String
+  ResourceId  String
   AccessLevel AccessLevel
 }
 
 User {
-  Id           Str
-  Name         Str
+  Id           String
+  Name         String
   Age          Int
-  Role         Str
-  PasswordHash Str
+  Role         String
+  PasswordHash String
 }
 
 // Type Subtraction ('/') and Intersection ('&')
@@ -41,7 +41,7 @@ IsAdult   [ _.Age >= 18 ]
 IsMinor   [ _.Age < 18 ]
 IsManager [ _.Role . ("admin" | "manager") ]
 NonEmpty  [ _.Length > 0 ]
-EmailStr  Str & [ _ . Regex.Matches("^[^@]+@[^@]+\\.[^@]+$") ]
+EmailStr  String & [ _ . Regex.Matches("^[^@]+@[^@]+\\.[^@]+$") ]
 
 Adult   User & IsAdult
 Minor   User & IsMinor
@@ -58,40 +58,40 @@ AuthAction       "LOGIN" | "LOGOUT" | "REGISTER" | "PASSWORD_RESET" | "MFA_CHALL
 
 SecurityProfile {
   IsBanned            Bool
-  BanReason           Option(Str)
+  BanReason           Option(String)
   FailedLoginAttempts Int
   LockedUntil         Option(Int)
   TwoFactorEnabled    Bool
-  TwoFactorSecret     Option(Str)
+  TwoFactorSecret     Option(String)
   PasswordChangedAt   Option(Int)
 }
 
 AuthProvider {
   Provider          AuthProviderType
-  ProviderAccountId Str
-  Email             Option(Str)
-  AccessToken       Option(Str)
-  RefreshToken      Option(Str)
+  ProviderAccountId String
+  Email             Option(String)
+  AccessToken       Option(String)
+  RefreshToken      Option(String)
 }
 
 AuthSession {
-  SessionToken Str
-  UserAgent    Option(Str)
-  IpAddress    Option(Str)
+  SessionToken String
+  UserAgent    Option(String)
+  IpAddress    Option(String)
   DeviceType   Option(DeviceType)
-  Location     Option(Str)
+  Location     Option(String)
   ExpiresAt    Int
 }
 
 RecoveryCode {
-  CodeHash Str
+  CodeHash String
   IsUsed   Bool
   UsedAt   Option(Int)
 }
 
 VerificationToken {
-  Identifier Str
-  Token      Str
+  Identifier String
+  Token      String
   Type       TokenTypeAuth
   Payload    Option(Any)
   ExpiresAt  Int
@@ -99,8 +99,8 @@ VerificationToken {
 
 AuthEvent {
   Action    AuthAction
-  IpAddress Option(Str)
-  UserAgent Option(Str)
+  IpAddress Option(String)
+  UserAgent Option(String)
   CreatedAt Int
 }
 
@@ -123,39 +123,39 @@ JwtHeader {
 }
 
 JwtClaims {
-  Sub   Str
-  Iss   Str
-  Aud   Str
+  Sub   String
+  Iss   String
+  Aud   String
   Exp   Int
   Iat   Int
-  Roles List(Str)
+  Roles List(String)
 }
 
 JwtToken {
   Header    JwtHeader
   Claims    JwtClaims
-  Signature Str
+  Signature String
 }
 
 OAuthToken {
-  AccessToken  Str
-  RefreshToken Option(Str)
+  AccessToken  String
+  RefreshToken Option(String)
   TokenType    "Bearer"
   ExpiresIn    Int
-  Scope        Str
+  Scope        String
 }
 
 ApiKey {
-  KeyId      Str
-  Prefix     Str
-  SecretHash Str
-  OwnerId    Str
-  Scopes     List(Str)
+  KeyId      String
+  Prefix     String
+  SecretHash String
+  OwnerId    String
+  Scopes     List(String)
   ExpiresAt  Option(Int)
 }
 
-Unauthorized { Reason Str }
-Forbidden    { Reason Str, RequiredPermission Str }
+Unauthorized { Reason String }
+Forbidden    { Reason String, RequiredPermission String }
 
 // =============================================================================
 // Cryptography & Hashing
@@ -166,11 +166,11 @@ CipherAlgorithm "aes-256-gcm" | "aes-128-gcm" | "chacha20-poly1305" | "xchacha20
 SignatureScheme "ed25519" | "ecdsa-secp256k1" | "ecdsa-p256" | "rsa-pss" | "bls12-381" | "ml-dsa-dilithium"
 
 Crypto {
-  Hash(Data Str, Alg HashAlgorithm)                 [ (Data, Alg) . native_crypto_hash ]
-  VerifyHash(Data Str, Hash Str)                    [ (Data, Hash) . native_crypto_verify ]
-  Hmac(Key Str, Data Str)                           [ (Key, Data) . native_crypto_hmac ]
-  Encrypt(Key Str, Plain Str, Alg CipherAlgorithm)  [ (Key, Plain, Alg) . native_crypto_encrypt ]
-  Decrypt(Key Str, Cipher Str, Alg CipherAlgorithm) [ (Key, Cipher, Alg) . native_crypto_decrypt ]
+  Hash(Data String, Alg HashAlgorithm)                 [ (Data, Alg) . native_crypto_hash ]
+  VerifyHash(Data String, Hash String)                    [ (Data, Hash) . native_crypto_verify ]
+  Hmac(Key String, Data String)                           [ (Key, Data) . native_crypto_hmac ]
+  Encrypt(Key String, Plain String, Alg CipherAlgorithm)  [ (Key, Plain, Alg) . native_crypto_encrypt ]
+  Decrypt(Key String, Cipher String, Alg CipherAlgorithm) [ (Key, Cipher, Alg) . native_crypto_decrypt ]
   RandomBytes(Count Int)                            [ Count . native_crypto_random_bytes ]
   RandomUuid()                                      [ native_crypto_uuid ]
 }
@@ -196,8 +196,8 @@ ClassifyAccount(Account) [
 ]
 
 ClientAccount {
-  AccountId Str
-  Name      Str
+  AccountId String
+  Name      String
   IsAdult   Bool
 }
 

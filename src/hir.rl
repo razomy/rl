@@ -10,7 +10,7 @@ TokenType "VALUE" | "WHITESPACES" | "ASSIGN" | "SEPERATE" | "INDENT" | "DEDENT" 
 
 Token {
   Type  TokenType
-  Value Str
+  Value String
 }
 
 Span {
@@ -37,7 +37,7 @@ CsNode   TokenCsn | GroupCsn
 // 9. Layer:        Meta, Docs, Annotations
 
 ISyntax       {}
-HasFnHashId   { FnHashId Str }
+HasFnHashId   { FnHashId String }
 SyntaxRole    "Declaration" | "Expression" | "Statement" | "Shape" | "Binding" | "Operator"
 SemanticLayer "Utils" | "System" | "Application" | "Domain"
 
@@ -55,7 +55,7 @@ LiteralHirn IHirNode & {
 
 OperatorHirn IHirNode & {
   Kind     "Operator"
-  Operator Str
+  Operator String
   Operands List(IdRef(HirType))
 }
 
@@ -93,23 +93,23 @@ BlockHirn IHirNode & {
 // --- Declarations, Bindings, Functions, Structs & References ---
 
 IIdentityHirn IHirNode & {
-  Name      Option(Str)
+  Name      Option(String)
   Modifiers List(IdRef(HirType))
 }
 
 DocCommentHirn {
-  Description Str
+  Description String
 }
 
 FunctionDocExampleHirn {
-  Code     Str
-  Expected Str
+  Code     String
+  Expected String
 }
 
 FunctionDocHirn {
-  Title             Option(Str)
-  Description       Option(Str)
-  ReturnDescription Option(Str)
+  Title             Option(String)
+  Description       Option(String)
+  ReturnDescription Option(String)
   Examples          List(FunctionDocExampleHirn)
 }
 
@@ -165,7 +165,7 @@ SemanticNode(T) {
 }
 
 SemanticContext {
-  NodeMap     Map(Str, HirNode)
+  NodeMap     Map(String, HirNode)
   Root        HirNode
-  SemanticMap Map(Str, SemanticNode(HirNode))
+  SemanticMap Map(String, SemanticNode(HirNode))
 }

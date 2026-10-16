@@ -14,22 +14,22 @@ CloudProvider "aws" | "gcp" | "azure" | "cloudflare" | "digitalocean" | "hetzner
 
 AvailabilityZone {
   Provider CloudProvider
-  Region   Str
-  ZoneId   Str
+  Region   String
+  ZoneId   String
 }
 
 VpcSubnet {
-  SubnetId         Str
-  CidrBlock        Str
+  SubnetId         String
+  CidrBlock        String
   Zone             AvailabilityZone
   IsPublic         Bool
-  RouteTableId     Str
+  RouteTableId     String
 }
 
 VirtualPrivateCloud {
-  VpcId            Str
-  Name             Str
-  CidrBlock        Str
+  VpcId            String
+  Name             String
+  CidrBlock        String
   Subnets          List(VpcSubnet)
   EnableDnsHostnames Bool
 }
@@ -37,14 +37,14 @@ VirtualPrivateCloud {
 InstanceState "pending" | "running" | "stopping" | "stopped" | "shutting-down" | "terminated"
 
 ComputeInstance {
-  InstanceId       Str
-  InstanceType     Str
+  InstanceId       String
+  InstanceType     String
   Vcpus            Count
   MemoryGb         Float
   GpuCount         Count
-  GpuModel         Option(Str)
-  PublicIp         Option(Str)
-  PrivateIp        Str
+  GpuModel         Option(String)
+  PublicIp         Option(String)
+  PrivateIp        String
   State            InstanceState
   Zone             AvailabilityZone
   SpotInstance     Bool
@@ -59,11 +59,11 @@ K8sPodPhase "Pending" | "Running" | "Succeeded" | "Failed" | "Unknown"
 K8sServiceType "ClusterIP" | "NodePort" | "LoadBalancer" | "ExternalName"
 
 K8sObjectMeta {
-  Name        Str
-  Namespace   Str
-  Uid         Str
-  Labels      Map(Str, Str)
-  Annotations Map(Str, Str)
+  Name        String
+  Namespace   String
+  Uid         String
+  Labels      Map(String, String)
+  Annotations Map(String, String)
   Generation  Int
 }
 
@@ -74,7 +74,7 @@ ResourceQuotaSpec {
 }
 
 K8sProbe {
-  Path                Str
+  Path                String
   Port                Int
   InitialDelaySeconds Int
   PeriodSeconds       Int
@@ -83,10 +83,10 @@ K8sProbe {
 }
 
 K8sContainerSpec {
-  Name           Str
-  Image          Str
-  Command        List(Str)
-  Args           List(Str)
+  Name           String
+  Image          String
+  Command        List(String)
+  Args           List(String)
   Ports          List(Int)
   Requests       ResourceQuotaSpec
   Limits         ResourceQuotaSpec
@@ -97,9 +97,9 @@ K8sContainerSpec {
 K8sPod {
   Metadata      K8sObjectMeta
   Containers    List(K8sContainerSpec)
-  NodeName      Option(Str)
+  NodeName      Option(String)
   Phase         K8sPodPhase
-  PodIp         Option(Str)
+  PodIp         Option(String)
   RestartPolicy "Always" | "OnFailure" | "Never"
 }
 
@@ -114,8 +114,8 @@ K8sDeployment {
 K8sService {
   Metadata   K8sObjectMeta
   Type       K8sServiceType
-  Selector   Map(Str, Str)
-  ClusterIp  Str
+  Selector   Map(String, String)
+  ClusterIp  String
   Ports      List((Int, Int))
 }
 
@@ -126,23 +126,23 @@ K8sService {
 ServerlessRuntime "nodejs20" | "python312" | "rust-provided" | "go1.x" | "java21" | "dotnet8" | "wasm-edge"
 
 ServerlessFunction {
-  FunctionName Str
+  FunctionName String
   Runtime      ServerlessRuntime
-  Handler      Str
+  Handler      String
   MemoryMb     Int
   TimeoutSec   Int
-  Environment  Map(Str, Str)
+  Environment  Map(String, String)
   Trigger      "http" | "queue" | "cron" | "storage-event" | "stream"
 }
 
 StorageClass "STANDARD" | "INFREQUENT_ACCESS" | "GLACIER_INSTANT" | "GLACIER_DEEP_ARCHIVE" | "MULTI_REGIONAL"
 
 ObjectStorageBucket {
-  BucketName        Str
-  Region            Str
+  BucketName        String
+  Region            String
   StorageClass      StorageClass
   VersioningEnabled Bool
-  EncryptionKeyId   Option(Str)
+  EncryptionKeyId   Option(String)
   PublicAccessBlock Bool
 }
 
@@ -150,7 +150,7 @@ MessageQueueBroker "Kafka" | "RabbitMQ" | "NATS" | "Pulsar" | "SQS" | "RedisStre
 DeliveryGuarantee  "AtMostOnce" | "AtLeastOnce" | "ExactlyOnce"
 
 EventTopic {
-  TopicName         Str
+  TopicName         String
   Broker            MessageQueueBroker
   Partitions        Int
   ReplicationFactor Int
@@ -165,19 +165,19 @@ EventTopic {
 CiStepStatus "queued" | "in_progress" | "succeeded" | "failed" | "skipped" | "cancelled"
 
 CiPipelineStep {
-  Name       Str
-  Command    Str
-  DockerImage Option(Str)
+  Name       String
+  Command    String
+  DockerImage Option(String)
   TimeoutMin Int
   Status     CiStepStatus
 }
 
 CiPipeline {
-  PipelineId  Str
-  RepoUrl     Str
-  Branch      Str
-  CommitSha   Str
-  TriggeredBy Str
+  PipelineId  String
+  RepoUrl     String
+  Branch      String
+  CommitSha   String
+  TriggeredBy String
   Steps       List(CiPipelineStep)
   Status      CiStepStatus
 }
@@ -185,10 +185,10 @@ CiPipeline {
 IacResourceAction "no-op" | "create" | "read" | "update" | "replace" | "delete"
 
 IacStateResource {
-  Address      Str
-  Provider     Str
-  ResourceType Str
-  Attributes   Map(Str, Any)
+  Address      String
+  Provider     String
+  ResourceType String
+  Attributes   Map(String, Any)
 }
 
 // =============================================================================
@@ -198,11 +198,11 @@ IacStateResource {
 MetricKind "Counter" | "Gauge" | "Histogram" | "Summary" | "UpDownCounter"
 
 TelemetryMetric {
-  Name        Str
-  Description Str
-  Unit        Str
+  Name        String
+  Description String
+  Unit        String
   Kind        MetricKind
-  Labels      Map(Str, Str)
+  Labels      Map(String, String)
   Value       Float
   Timestamp   Instant
 }
@@ -214,18 +214,18 @@ TraceSpan {
   TraceId      HexStr
   SpanId       HexStr
   ParentSpanId Option(HexStr)
-  Operation    Str
-  ServiceName  Str
+  Operation    String
+  ServiceName  String
   Kind         SpanKind
   Status       SpanStatus
   StartTimeNs  Int
   EndTimeNs    Int
-  Attributes   Map(Str, Any)
+  Attributes   Map(String, Any)
 }
 
 SloTarget {
-  ServiceName         Str
-  IndicatorMetric     Str
+  ServiceName         String
+  IndicatorMetric     String
   TargetPercentage    Range(0.0, 100.0) & Float
   EvaluationWindowDays Int
   ErrorBudgetRemaining Fraction

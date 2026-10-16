@@ -111,7 +111,7 @@ JonnDoyName3.-1 // access by index -1 (D)
 // 1. DATA ALGEBRA, PRIMITIVES, AND STRUCTURES
 // =============================================================================
 
-Str   ""
+String   ""
 Int   0
 Float 0.0
 Bool  false
@@ -124,17 +124,17 @@ Origin  (0.0, 0.0)
 
 // Type Unions (Sum Types)
 Status    "draft" | "published" | "archived"
-Primitive Str | Int | Float | Bool | Byte
+Primitive String | Int | Float | Bool | Byte
 
-Identifiable { Id Str }
+Identifiable { Id String }
 Auditable    { CreatedAt Int, UpdatedAt Int }
 
 User {
-  Id           Str
-  Name         Str
+  Id           String
+  Name         String
   Age          Int
-  Role         Str
-  PasswordHash Str
+  Role         String
+  PasswordHash String
 }
 
 // Type Subtraction ('/') and Intersection ('&')
@@ -180,12 +180,12 @@ LogicOps(X Bool, Y Bool, Val Int) [
   }
 ]
 
-StringOps(First Str, Last Str) [
+StringOps(First String, Last String) [
   Full "{First} {Last}" // Native interpolation
   Full
-  . Str.Trim
-  . Str.ToUpper
-  . Str.Split(" ")
+  . String.Trim
+  . String.ToUpper
+  . String.Split(" ")
 ]
 
 
@@ -199,7 +199,7 @@ Shell {
 }
 
 Cart {
-  CartId Str
+  CartId String
   Amount Int
 }
 
@@ -266,7 +266,7 @@ IsAdult   [ _.Age >= 18 ]
 IsMinor   [ _.Age < 18 ]
 IsManager [ _.Role . ("admin" | "manager") ]
 NonEmpty  [ _.Length > 0 ]
-EmailStr  Str & [ _ . Regex.Matches("^[^@]+@[^@]+\.[^@]+$") ]
+EmailStr  String & [ _ . Regex.Matches("^[^@]+@[^@]+\.[^@]+$") ]
 
 Adult   User & IsAdult
 Minor   User & IsMinor
@@ -343,7 +343,7 @@ Algebra {
 // =============================================================================
 // Replaces traditional for/while loops with declarative stream pipelines.
 
-Item  { Name Str, Price Int, InStock Bool }
+Item  { Name String, Price Int, InStock Bool }
 OrderList [
   Item { Name "Laptop", Price 1200, InStock true }
   Item { Name "Mouse",  Price 25,   InStock false }
@@ -410,7 +410,7 @@ ProcessOrderPipeline(UserId) [
 // 9. LINEAGE NAMESPACING (COLLISION RESOLUTION UPON MERGE)
 // =============================================================================
 
-Order { Id Str, Amount Int }
+Order { Id String, Amount Int }
 
 // Merging User (see section 1) and Order causes a collision on the `Id` field.
 UserOrder User & Order
@@ -433,8 +433,8 @@ ProcessCombined(CombinedContext) [
 // =============================================================================
 
 ClientAccount {
-  AccountId Str
-  Name      Str
+  AccountId String
+  Name      String
   IsAdult   Bool
 }
 
@@ -454,10 +454,10 @@ MigrateUser(U User) [
 // Instead of exceptions, the pipeline collects unresolved outcomes into a Union.
 
 Reserved   { ReservedAt Int }
-Paid       { TransactionId Str }
+Paid       { TransactionId String }
 
-OutOfStock { Reason Str }
-NoMoney    { Reason Str }
+OutOfStock { Reason String }
+NoMoney    { Reason String }
 
 // Explicit typing of argument (O Order) triggers Rule 3 (Bypass).
 // Field Amount is flatly accessible thanks to Rule 1 (Auto-unpacking of typed slots).
@@ -496,13 +496,13 @@ ShipToCustomer(Order & Reserved & Paid) [
 // 12. CONCURRENCY, PARALLELISM ('.|'), AND CHANNELS
 // =============================================================================
 
-FetchProfile(Id Str)         [ Http.Get("https://api.ex/users/{Id}") ]
-FetchRecommendations(Id Str) [ Http.Get("https://api.ex/recs/{Id}") ]
+FetchProfile(Id String)         [ Http.Get("https://api.ex/users/{Id}") ]
+FetchRecommendations(Id String) [ Http.Get("https://api.ex/recs/{Id}") ]
 FetchAds()                   [ Http.Get("https://api.ex/ads") ]
 
 // Parallel Fan-Out Operator '.|': executes all branches in '{}' concurrently
 // and merges their results using '&' when all complete.
-LoadDashboardData(UserId Str) [
+LoadDashboardData(UserId String) [
   UserId .| {
     Profile [ _ . FetchProfile ]
     Recs    [ _ . FetchRecommendations ]
@@ -517,12 +517,12 @@ Channel(T) {
   Recv()      [ Self . native_chan_recv ]
 }
 
-WorkerLoop(Jobs Channel(Str), Results Channel(Int)) [
+WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
   Jobs.Recv() . {
     None [ "Channel closed, terminating worker." . Shell.Log ]
     Some [
       Value
-      . Str.Length
+      . String.Length
       .> (Len [ Results.Send(Len) ])
       . [ WorkerLoop(Jobs, Results) ] // Tail-recursive actor loop
     ]
@@ -568,16 +568,16 @@ ModifyGlobalCounter() [
 // 14. RESOURCE MANAGEMENT, I/O, AND SCOPED LIFETIMES
 // =============================================================================
 
-FileHandle { Fd Int, Path Str }
-IoError    { Msg Str }
+FileHandle { Fd Int, Path String }
+IoError    { Msg String }
 
 Fs {
-  Open(Path Str)            [ Path . native_fs_open ] // Returns FileHandle | IoError
-  Read(F FileHandle)        [ Fd . native_fs_read ]   // Returns Str | IoError
+  Open(Path String)            [ Path . native_fs_open ] // Returns FileHandle | IoError
+  Read(F FileHandle)        [ Fd . native_fs_read ]   // Returns String | IoError
   Close(F FileHandle)       [ Fd . native_fs_close ]
 
   // Bracket pattern: guarantees resource cleanup regardless of outcome
-  WithFile(Path Str, Action) [
+  WithFile(Path String, Action) [
     Path . Fs.Open . {
       FileHandle(F) [
         F . Action
@@ -588,7 +588,7 @@ Fs {
   ]
 }
 
-ReadConfig(Path Str) [
+ReadConfig(Path String) [
   Fs.WithFile(Path, F [
     F . Fs.Read . Json.Parse
   ])
@@ -601,13 +601,13 @@ ReadConfig(Path Str) [
 
 HttpRequest {
   Method  "GET" | "POST" | "PUT" | "DELETE"
-  Path    List(Str)
-  Headers Map(Str, Str)
-  Body    Str
+  Path    List(String)
+  Headers Map(String, String)
+  Body    String
 }
 
-HttpResponse { Status Int, Body Str }
-Unauthorized { Reason Str }
+HttpResponse { Status Int, Body String }
+Unauthorized { Reason String }
 
 // Middleware enriches the request with an AuthenticatedUser or returns Unauthorized
 AuthMiddleware(Req HttpRequest) [
@@ -654,7 +654,7 @@ DeriveJson(TargetForm) [
       Self . Meta.FieldsOf . Stream.Map(Field [
         "\"{Field.Name}\": {Field.Value . Json.FormatValue}"
       ])
-      . Str.Join(", ")
+      . String.Join(", ")
       . (Inner [ "\{ {Inner} \}" ])
     ]
   }
@@ -662,7 +662,7 @@ DeriveJson(TargetForm) [
 
 Product {
   Id    Int
-  Title Str
+  Title String
 } . DeriveJson
 
 // Reflection: Inspecting fields at runtime/compile-time
@@ -680,11 +680,11 @@ InspectEntity(Entity) [
 // 17. TESTING AND PROPERTY-BASED ASSERTIONS
 // =============================================================================
 
-TestPassed { Name Str }
-TestFailed { Name Str, Expected Any, Actual Any }
+TestPassed { Name String }
+TestFailed { Name String, Expected Any, Actual Any }
 TestResult TestPassed | TestFailed
 
-AssertEq(Name Str, Expected, Actual) [
+AssertEq(Name String, Expected, Actual) [
   (Expected == Actual) . {
     true  [ TestPassed { Name Name } ]
     false [ TestFailed { Name Name, Expected Expected, Actual Actual } ]
@@ -710,15 +710,15 @@ RunTestSuite() [
 // 18. COMPLEX CASE: RECURSIVE AUTONOMOUS AI AGENT
 // =============================================================================
 
-CompileError { Code Int, Log Str }
-BuildSuccess { Status Str, Artifact Str }
+CompileError { Code Int, Log String }
+BuildSuccess { Status String, Artifact String }
 BuildResult  BuildSuccess | CompileError
 
 FatalError CompileError & [ _.Code >= 500 ]
 Warning    CompileError & [ _.Code < 500 ]
 
-AiQuery    { SystemPrompt Str, UserPrompt Str }
-AiResponse { Diff Str, Explanation Str }
+AiQuery    { SystemPrompt String, UserPrompt String }
+AiResponse { Diff String, Explanation String }
 
 Ai {
   Call(Query) [ Query . native_ai_llm_request ]
@@ -795,7 +795,7 @@ Main [
 // =============================================================================
 
 Base root.base             // Named import
-{Str, Int} root.base       // Element import
+{String, Int} root.base       // Element import
 _ root.base                // Wildcard import (all)
 _ base                     // Relative import
 _ ../../../base            // Deep relative import

@@ -72,16 +72,14 @@ Char256         String & [ _.Length <= 256 ]
 InlineString    String
 FixedString     String
 MultilineString String
-Str             ""
-String          Str
-NonEmptyStr     Str & [ _.Length > 0 ]
-AsciiStr        Str
-Utf8Str         Str
-HexStr          Str & [ _ . Regex.Matches("^[0-9a-fA-F]+$") ]
-Base64Str       Str & [ _ . Regex.Matches("^[A-Za-z0-9+/=]+$") ]
-SlugStr         Str & [ _ . Regex.Matches("^[a-z0-9]+(-[a-z0-9]+)*$") ]
+NonEmptyStr     String & [ _.Length > 0 ]
+AsciiStr        String
+Utf8Str         String
+HexStr          String & [ _ . Regex.Matches("^[0-9a-fA-F]+$") ]
+Base64Str       String & [ _ . Regex.Matches("^[A-Za-z0-9+/=]+$") ]
+SlugStr         String & [ _ . Regex.Matches("^[a-z0-9]+(-[a-z0-9]+)*$") ]
 
-StringPrimitive Char | Char64 | Char128 | Char256 | InlineString | MultilineString | FixedString | Str | String
+StringPrimitive Char | Char64 | Char128 | Char256 | InlineString | MultilineString | FixedString | String | String
 
 // SIMD & Binary Buffers
 Vector64   Vector(Number)
@@ -93,7 +91,7 @@ BitField   U64
 
 // Enums
 EnumInt    Int
-EnumString Str
+EnumString String
 
-Primitive     Str | Int | Float | Bool | Byte
+Primitive     String | Int | Float | Bool | Byte
 AllPrimitives StringPrimitive | NumberPrimitive | Bool | Null | Undefined | SymbolType | Byte

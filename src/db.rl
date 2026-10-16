@@ -12,9 +12,9 @@ DbEngine "postgres" | "mysql" | "sqlite" | "mongodb" | "redis" | "clickhouse" | 
 DbConfig {
   Engine     DbEngine
 
-  Database   Str
-  Username   Str
-  Password   Str
+  Database   String
+  Username   String
+  Password   String
   PoolSize   Int
   SslEnabled Bool
 } & NetworkNode
@@ -22,7 +22,7 @@ DbConfig {
 IsolationLevel "read_uncommitted" | "read_committed" | "repeatable_read" | "serializable" | "snapshot"
 
 DbTransaction {
-  TxId         Str
+  TxId         String
   Isolation    IsolationLevel
   StartedAt    Int
   IsCommitted  Bool
@@ -30,16 +30,16 @@ DbTransaction {
 }
 
 DbError {
-  Code    Str
-  Message Str
-  Query   Option(Str)
+  Code    String
+  Message String
+  Query   Option(String)
 }
 
 SortOrder "ASC" | "DESC"
 FilterOp  "=" | "!=" | ">" | ">=" | "<" | "<=" | "IN" | "NOT_IN" | "LIKE" | "ILIKE" | "IS_NULL" | "IS_NOT_NULL" | "BETWEEN" | "CONTAINS"
 
 QueryFilter {
-  Field    Str
+  Field    String
   Operator FilterOp
   Value    Any
 }
@@ -47,27 +47,27 @@ QueryFilter {
 JoinType "INNER" | "LEFT" | "RIGHT" | "FULL" | "CROSS"
 QueryJoin {
   JoinType     JoinType
-  TargetTable  Str
-  OnLeftField  Str
-  OnRightField Str
+  TargetTable  String
+  OnLeftField  String
+  OnRightField String
 }
 
 QuerySpec {
-  Table   Str
-  Select  List(Str)
+  Table   String
+  Select  List(String)
   Joins   List(QueryJoin)
   Where   List(QueryFilter)
-  GroupBy List(Str)
-  OrderBy Map(Str, SortOrder)
+  GroupBy List(String)
+  OrderBy Map(String, SortOrder)
   Limit   Option(Int)
   Offset  Option(Int)
 }
 
 Migration {
   Version   Int
-  Name      Str
-  UpSql     Str
-  DownSql   Str
+  Name      String
+  UpSql     String
+  DownSql   String
   AppliedAt Option(Int)
 }
 
@@ -76,7 +76,7 @@ Migration {
 // =============================================================================
 
 NodeId  Int
-EdgeId  Str
+EdgeId  String
 FieldId Int
 OpCode  "SET_FIELD" | "ADD_NODE" | "CONNECT_EDGE" | "CLEAR_ELEMENT"
 DbLayer "SYNTAX" | "SEMANTIC" | "TOPOLOGY" | "EXECUTION"
@@ -170,33 +170,33 @@ GraphTopology {
 // =============================================================================
 
 EventActionType "Create" | "Read" | "Update" | "Delete"
-ConfigEvent     { Type EventActionType, Path List(Str), Value Any }
+ConfigEvent     { Type EventActionType, Path List(String), Value Any }
 EventSourcing   { Events List(ConfigEvent) }
 
 DistanceMetric "Cosine" | "Euclidean" | "DotProduct" | "Manhattan" | "Hamming"
 
 VectorRecord {
-  Id        Str
+  Id        String
   Embedding List(Float)
-  Metadata  Map(Str, Any)
+  Metadata  Map(String, Any)
 }
 
 VectorIndexConfig {
-  CollectionName Str
+  CollectionName String
   Dimensions     Int
   Metric         DistanceMetric
   HnswM          Int
   HnswEfConstruct Int
 }
 
-ChunkSection { Id Str, Text Str }
-ChunkFile    { FilePath Str, Content Str, CommitId Str, Chunks List(ChunkSection) }
+ChunkSection { Id String, Text String }
+ChunkFile    { FilePath String, Content String, CommitId String, Chunks List(ChunkSection) }
 
 RagDbConfig {
-  Neo4jUri       Str
-  Neo4jUser      Str
-  Neo4jPassword  Str
-  EmbeddingModel Str
+  Neo4jUri       String
+  Neo4jUser      String
+  Neo4jPassword  String
+  EmbeddingModel String
   VectorDim      Int
 }
 
@@ -205,13 +205,13 @@ RagDbConfig {
 // =============================================================================
 
 Cart {
-  CartId Str
+  CartId String
   Amount Int
 }
 
 Db {
   Connect(Cfg DbConfig)              [ Cfg . native_db_connect ]
-  Execute(Sql Str, Params List(Any)) [ (Sql, Params) . native_db_execute ]
+  Execute(Sql String, Params List(Any)) [ (Sql, Params) . native_db_execute ]
   Query(Spec QuerySpec)              [ Spec . native_db_query ]
 
   BeginTx(Isolation IsolationLevel)  [ Isolation . native_db_begin_tx ]

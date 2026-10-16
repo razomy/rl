@@ -2,11 +2,19 @@
 // Core Metaprogramming, Reflection, Type Algebra & Compiler Directives
 // =============================================================================
 
-Number Number
-String { Length Number } & String
-Char   Char
+Any    Any
 None   None
-Any    _
+
+Property    Any
+Expression  Any
+
+Tuple(T)    Any
+Object     Tuple(Property)
+Function   Object & Tuple(Expression)
+Type       Tuple(Object | Function)
+
+Number Number & Object
+String { Length Number } & Object & String
 
 // Control flow & Meta primitives
 return Any
@@ -69,7 +77,7 @@ DeriveJson(TargetForm) [
       Self . Meta.FieldsOf . Stream.Map(Field [
         "\"{Field.Name}\": {Field.Value . Json.FormatValue}"
       ])
-      . Str.Join(", ")
+      . String.Join(", ")
       . (Inner [ "\{ {Inner} \}" ])
     ]
   }
@@ -99,7 +107,7 @@ DeriveDebug(TargetForm) [
       Self . Meta.FieldsOf . Stream.Map(F [
         "{F.Name}: {F.Value}"
       ])
-      . Str.Join(", ")
+      . String.Join(", ")
       . (FieldsStr [ "{Self . Meta.TypeOf} \{ {FieldsStr} \}" ])
     ]
   }

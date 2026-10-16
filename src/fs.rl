@@ -8,8 +8,8 @@ _ stream
 // File System, Paths, Streams, FsNode Hierarchy & Git Version Control
 // =============================================================================
 
-AbsolutePathString Str
-RelativePathString Str
+AbsolutePathString String
+RelativePathString String
 PathString         AbsolutePathString | RelativePathString
 FilePathString     PathString
 DirPathString      PathString
@@ -17,7 +17,7 @@ SourcePathString   DirPathString
 
 HasPath       { Path PathString }
 HasDirPath    { DirPath DirPathString }
-HasFileName   { FileName Str }
+HasFileName   { FileName String }
 HasFilePath   { FilePath FilePathString }
 HasSourcePath { SourcePath SourcePathString }
 
@@ -37,7 +37,7 @@ FilePermissions {
 }
 
 FileStat {
-  Path        Str
+  Path        String
   Size        Int
   IsFile      Bool
   IsDirectory Bool
@@ -50,7 +50,7 @@ FileStat {
 
 FileHandle {
   Fd   Int
-  Path Str
+  Path String
   Mode FileOpenMode
 }
 
@@ -65,7 +65,7 @@ FsNode IEntity & HasPrimary(FsNode) & {
   Ancestors     List(IdRef(FsNode))
 }
 
-CycleDetectedError { Message Str, NodeId Str }
+CycleDetectedError { Message String, NodeId String }
 
 ValidateFsNodeCycle(OldNode FsNode, NewNode FsNode) [
   NewNode.Ancestors . Stream.Filter([ _.Id == OldNode.Id ]) . {
@@ -79,25 +79,25 @@ ValidateFsNodeCycle(OldNode FsNode, NewNode FsNode) [
 // =============================================================================
 
 GitFileChanges {
-  Created  List(Str)
-  Modified List(Str)
-  Deleted  List(Str)
-  Renamed  List((Str, Str))
+  Created  List(String)
+  Modified List(String)
+  Deleted  List(String)
+  Renamed  List((String, String))
 }
 
 GitCommitInfo {
-  Hash        Str
-  AuthorName  Str
-  AuthorEmail Str
-  Date        Str
-  Message     Str
-  ParentHashes List(Str)
+  Hash        String
+  AuthorName  String
+  AuthorEmail String
+  Date        String
+  Message     String
+  ParentHashes List(String)
 }
 
 GitStatus {
-  LocalBranch  Str
-  RemoteBranch Str
-  RemoteDiff   Str
+  LocalBranch  String
+  RemoteBranch String
+  RemoteDiff   String
   Clean        Bool
   Changes      GitFileChanges
 }
@@ -109,40 +109,40 @@ GitStatus {
 IoErrorKind "not_found" | "permission_denied" | "already_exists" | "invalid_data" | "timed_out" | "eof" | "unknown"
 IoError {
   Kind IoErrorKind
-  Msg  Str
-  Path Option(Str)
+  Msg  String
+  Path Option(String)
 }
 
 Path {
-  Join(Parts List(Str)) [ Parts . native_path_join ]
-  Dirname(P Str)        [ P . native_path_dirname ]
-  Basename(P Str)       [ P . native_path_basename ]
-  Extension(P Str)      [ P . native_path_ext ]
-  Resolve(P Str)        [ P . native_path_resolve ]
-  IsAbsolute(P Str)     [ P . native_path_is_abs ]
+  Join(Parts List(String)) [ Parts . native_path_join ]
+  Dirname(P String)        [ P . native_path_dirname ]
+  Basename(P String)       [ P . native_path_basename ]
+  Extension(P String)      [ P . native_path_ext ]
+  Resolve(P String)        [ P . native_path_resolve ]
+  IsAbsolute(P String)     [ P . native_path_is_abs ]
 }
 
 Fs {
-  Open(Path Str)                            [ Path . native_fs_open ]
-  OpenWithMode(Path Str, Mode FileOpenMode) [ (Path, Mode) . native_fs_open_mode ]
+  Open(Path String)                            [ Path . native_fs_open ]
+  OpenWithMode(Path String, Mode FileOpenMode) [ (Path, Mode) . native_fs_open_mode ]
   Read(F FileHandle)                        [ Fd . native_fs_read ]
-  Write(F FileHandle, Data Str)             [ (Fd, Data) . native_fs_write ]
+  Write(F FileHandle, Data String)             [ (Fd, Data) . native_fs_write ]
   Close(F FileHandle)                       [ Fd . native_fs_close ]
-  ReadFile(Path Str)                        [ Path . native_fs_read_file ]
-  WriteFile(Path Str, Data Str)             [ (Path, Data) . native_fs_write_file ]
-  AppendFile(Path Str, Data Str)            [ (Path, Data) . native_fs_append_file ]
-  Exists(Path Str)                          [ Path . native_fs_exists ]
-  Stat(Path Str)                            [ Path . native_fs_stat ]
-  Remove(Path Str)                          [ Path . native_fs_remove ]
-  Copy(Src Str, Dst Str)                    [ (Src, Dst) . native_fs_copy ]
-  Rename(Src Str, Dst Str)                  [ (Src, Dst) . native_fs_rename ]
-  Mkdir(Path Str)                           [ Path . native_fs_mkdir ]
-  MkdirAll(Path Str)                        [ Path . native_fs_mkdir_all ]
-  ReadDir(Path Str)                         [ Path . native_fs_read_dir ]
-  Watch(Path Str, OnEvent)                  [ (Path, OnEvent) . native_fs_watch ]
+  ReadFile(Path String)                        [ Path . native_fs_read_file ]
+  WriteFile(Path String, Data String)             [ (Path, Data) . native_fs_write_file ]
+  AppendFile(Path String, Data String)            [ (Path, Data) . native_fs_append_file ]
+  Exists(Path String)                          [ Path . native_fs_exists ]
+  Stat(Path String)                            [ Path . native_fs_stat ]
+  Remove(Path String)                          [ Path . native_fs_remove ]
+  Copy(Src String, Dst String)                    [ (Src, Dst) . native_fs_copy ]
+  Rename(Src String, Dst String)                  [ (Src, Dst) . native_fs_rename ]
+  Mkdir(Path String)                           [ Path . native_fs_mkdir ]
+  MkdirAll(Path String)                        [ Path . native_fs_mkdir_all ]
+  ReadDir(Path String)                         [ Path . native_fs_read_dir ]
+  Watch(Path String, OnEvent)                  [ (Path, OnEvent) . native_fs_watch ]
 
   // Bracket pattern: guarantees resource cleanup regardless of outcome
-  WithFile(Path Str, Action) [
+  WithFile(Path String, Action) [
     Path . Fs.Open . {
       FileHandle(F) [
         F . Action
@@ -152,7 +152,7 @@ Fs {
   ]
 }
 
-ReadConfig(Path Str) [
+ReadConfig(Path String) [
   Fs.WithFile(Path, F [
     F . Fs.Read . Json.Parse
   ])
