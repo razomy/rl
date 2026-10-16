@@ -5,9 +5,9 @@ _ quantity
 _ time
 _ agent
 
-// =============================================================================
-// Languages and writing
-// =============================================================================
+#
+Languages and writing
+#
 
 LanguageCode String
 Script "latin" | "cyrillic" | "greek" | "arabic" | "hebrew" | "devanagari" | "han" | "hiragana"
@@ -61,9 +61,9 @@ Keyword   String
 PartOfSpeech "noun" | "verb" | "adjective" | "adverb" | "pronoun" | "preposition" | "conjunction"
     | "interjection" | "article" | "numeral"
 
-// =============================================================================
-// Identity and addressing
-// =============================================================================
+#
+Identity and addressing
+#
 
 Identifier { Scheme String, Value String }
 Uuid   Identifier & { Scheme "uuid" }
@@ -92,9 +92,9 @@ Address {
 
 ContactPoint { Email, Phone, Url, Address }
 
-// =============================================================================
-// Data and media
-// =============================================================================
+#
+Data and media
+#
 
 MimeType String
 Encoding "utf-8" | "utf-16" | "ascii" | "base64" | "binary"
@@ -147,9 +147,9 @@ Record      { Identifier, Fields Any, Created Instant }
 Catalog     { Records List(Record) }
 Archive     Catalog
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Write(A Agent, Content String, L Language) [ Text { Content, Language L } & Draft {} ]
 Publish(D Draft, U Url) [ D / Draft & Published { PublishedAt Now, Url U } ]

@@ -9,9 +9,9 @@ _ energy
 _ matter
 _ artifact
 
-// =============================================================================
-// 1. Mechanical & Structural Engineering (Statics, Dynamics, FEM, CAD/CAM)
-// =============================================================================
+#
+1. Mechanical & Structural Engineering (Statics, Dynamics, FEM, CAD/CAM)
+#
 
 StressTensor3D {
   SigmaXX Float, SigmaYY Float, SigmaZZ Float
@@ -66,9 +66,9 @@ FemMeshAnalysis {
   Converged         Bool
 }
 
-// =============================================================================
-// 2. Thermodynamics, Fluid Mechanics & HVACCycles
-// =============================================================================
+#
+2. Thermodynamics, Fluid Mechanics & HVACCycles
+#
 
 ThermodynamicProcess "Isothermal" | "Adiabatic" | "Isobaric" | "Isochoric" | "Isentropic" | "Polytropic" | "Throttling"
 ThermodynamicCycle   "Carnot" | "Rankine" | "Otto" | "Diesel" | "Brayton" | "Stirling" | "Ericsson" | "VaporCompressionRefrigeration"
@@ -100,9 +100,9 @@ HeatExchanger {
   FoulingFactor          Float
 }
 
-// =============================================================================
-// 3. Electrical Engineering, Power Grids & PCB / Semiconductor VLSI Design
-// =============================================================================
+#
+3. Electrical Engineering, Power Grids & PCB / Semiconductor VLSI Design
+#
 
 CurrentType "DC" | "AC-SinglePhase" | "AC-ThreePhase" | "PulsedDC" | "RF-HighFrequency"
 
@@ -152,9 +152,9 @@ PowerGridSubstation {
   BreakerClosed     Bool
 }
 
-// =============================================================================
-// 4. Aerospace, Avionics, Orbital Mechanics & Propulsion
-// =============================================================================
+#
+4. Aerospace, Avionics, Orbital Mechanics & Propulsion
+#
 
 PropulsionSystemKind
   "Turbofan" | "Turbojet" | "Turboprop" | "Ramjet" | "Scramjet"
@@ -198,9 +198,9 @@ SpacecraftTelemetry {
   AttitudeQuat      Quaternion
 }
 
-// =============================================================================
-// 5. Industrial Manufacturing, CNC, Additive 3D Printing & Supply Chain QC
-// =============================================================================
+#
+5. Industrial Manufacturing, CNC, Additive 3D Printing & Supply Chain QC
+#
 
 ManufacturingProcess
   "CNC-Milling-3Axis" | "CNC-Milling-5Axis" | "CNC-Turning-Lathe" | "EDM-Wire"
@@ -219,9 +219,9 @@ GdtCallout {
   MaterialCondition "MMC" | "LMC" | "RFS"
 }
 
-// =============================================================================
-// 6. Engineering Calculations & Transitions
-// =============================================================================
+#
+6. Engineering Calculations & Transitions
+#
 
 ComputeReynoldsNumber(Density Float, Velocity Float, CharacteristicLength Float, DynamicViscosity Float) [
   (Density * Velocity * CharacteristicLength) / DynamicViscosity

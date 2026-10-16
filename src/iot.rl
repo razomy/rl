@@ -8,9 +8,9 @@ _ space
 _ energy
 _ artifact
 
-// =============================================================================
-// 1. Embedded Microcontrollers, Buses & Wireless Protocols
-// =============================================================================
+#
+1. Embedded Microcontrollers, Buses & Wireless Protocols
+#
 
 McuArchitecture "AVR" | "ARM-Cortex-M0" | "ARM-Cortex-M4" | "ARM-Cortex-M7" | "RISC-V-RV32I" | "Xtensa-ESP32" | "MSP430"
 HardwareBus "I2C" | "SPI" | "UART" | "CAN-Bus" | "CAN-FD" | "Modbus-RTU" | "RS-485" | "1-Wire" | "PCIe" | "USB"
@@ -43,9 +43,9 @@ Microcontroller {
   SleepPowerMw    Float
 }
 
-// =============================================================================
-// 2. Sensors & Telemetry Readings
-// =============================================================================
+#
+2. Sensors & Telemetry Readings
+#
 
 SensorKind
   "Temperature" | "Humidity" | "BarometricPressure" | "Accelerometer" | "Gyroscope"
@@ -83,9 +83,9 @@ LidarPointCloud {
   Timestamp Instant
 }
 
-// =============================================================================
-// 3. Actuators, Motors & End-Effectors
-// =============================================================================
+#
+3. Actuators, Motors & End-Effectors
+#
 
 ActuatorKind "StepperMotor" | "BrushlessDC" | "BrushedDC" | "ServoMotor" | "LinearActuator" | "PneumaticValve" | "HydraulicCylinder" | "Solenoid" | "Relay" | "Piezoelectric"
 
@@ -102,9 +102,9 @@ MotorState {
   FaultCode        Int
 }
 
-// =============================================================================
-// 4. Control Theory: PID Controller & Kalman Filter
-// =============================================================================
+#
+4. Control Theory: PID Controller & Kalman Filter
+#
 
 PidController {
   Kp           Float
@@ -143,9 +143,9 @@ UpdateKalman1D(Kf KalmanFilter1D, Measurement Float) [
   Kf & { EstimateX NextX, ErrorCovarianceP NextP }
 ]
 
-// =============================================================================
-// 5. Robotics, Kinematics (DH / URDF), SLAM & Autonomous Navigation
-// =============================================================================
+#
+5. Robotics, Kinematics (DH / URDF), SLAM & Autonomous Navigation
+#
 
 RobotJointType "Revolute" | "Continuous" | "Prismatic" | "Fixed" | "Floating" | "Planar"
 
@@ -193,9 +193,9 @@ AutonomousRobot Robot & {
   NavigationMode   "Manual" | "Teleoperated" | "AutonomousSLAM" | "WaypointFollowing" | "EmergencyStop"
 }
 
-// =============================================================================
-// 6. IoT & Robotics Transitions
-// =============================================================================
+#
+6. IoT & Robotics Transitions
+#
 
 TriggerEmergencyStop(Bot AutonomousRobot) [
   Bot & { NavigationMode "EmergencyStop" }

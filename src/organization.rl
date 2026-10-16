@@ -3,9 +3,9 @@ _ enumeration
 _ intangible
 _ place
 
-// =============================================================================
-// 1. Organization (schema.org)
-// =============================================================================
+#
+1. Organization (schema.org)
+#
 
 LegalName String
 TaxID     String
@@ -58,9 +58,9 @@ Organization Thing & Agent & {
   EthicsPolicy         Url
 }
 
-// =============================================================================
-// 2. Organization Subtypes
-// =============================================================================
+#
+2. Organization Subtypes
+#
 
 Airline                  Organization & { IataCode String, BoardingPolicy BoardingPolicyType }
 Consortium               Organization
@@ -97,9 +97,9 @@ SportsOrganization       Organization & { Sport String }
 SportsTeam               SportsOrganization & { Athlete List(Agent), Coach List(Agent) }
 WorkersUnion             Organization
 
-// =============================================================================
-// 3. LocalBusiness & Commercial Establishments
-// =============================================================================
+#
+3. LocalBusiness & Commercial Establishments
+#
 
 PriceRange String
 
@@ -279,9 +279,9 @@ TireShop             Store
 ToyStore             Store
 WholesaleStore       Store
 
-// =============================================================================
-// 4. Organization & Business Transitions
-// =============================================================================
+#
+4. Organization & Business Transitions
+#
 
 Found(F Agent, N Name) [ Organization { Name N, Founder List1(F), FoundingDate Today } ]
 Dissolve_(O Organization) [ O & { DissolutionDate Today } ]

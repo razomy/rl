@@ -69,9 +69,9 @@ JonnDoyName3.0  // access by index 0 (ParentName)
 JonnDoyName3.-1 // access by index -1 (D)
 
 
-// =============================================================================
-// MINIMALIST LANGUAGE: AXIOMATICS OF THREE BRACKETS (FULL SPECIFICATION V3.0)
-// =============================================================================
+#
+MINIMALIST LANGUAGE: AXIOMATICS OF THREE BRACKETS (FULL SPECIFICATION V3.0)
+#
 // {} — Form   (Data structures, Routing tables, Pattern Matching, Modules, Maps)
 // [] — Stream (Transformations, Predicates, Computation blocks, Generators)
 // () — Slot   (Capturing objects into variables, Accepting arguments, Tuples, Isolation)
@@ -107,9 +107,9 @@ JonnDoyName3.-1 // access by index -1 (D)
 // =============================================================================
 
 
-// =============================================================================
-// 1. DATA ALGEBRA, PRIMITIVES, AND STRUCTURES
-// =============================================================================
+#
+1. DATA ALGEBRA, PRIMITIVES, AND STRUCTURES
+#
 
 String   ""
 Int   0
@@ -143,9 +143,9 @@ DatabaseUser User & Identifiable & Auditable
 GuestUser    PublicUser / PublicUser.Role & { Role "guest" }
 
 
-// =============================================================================
-// 2. ALL PRIMITIVE OPERATIONS (ARITHMETIC, LOGIC, BITWISE, STRINGS)
-// =============================================================================
+#
+2. ALL PRIMITIVE OPERATIONS (ARITHMETIC, LOGIC, BITWISE, STRINGS)
+#
 
 MathOps(A Int, B Int) [
   {
@@ -197,9 +197,9 @@ StringOpsBi(First String, Last String) [
 ]
 
 
-// =============================================================================
-// 3. MODULES AND ARGUMENT ACCEPTANCE RULES
-// =============================================================================
+#
+3. MODULES AND ARGUMENT ACCEPTANCE RULES
+#
 
 Shell {
   Log(Msg)  [ Msg . native_print ]
@@ -227,9 +227,9 @@ Db {
 }
 
 
-// =============================================================================
-// 4. TYPE-LEVEL COMPUTATIONS AND HIGHER-KINDED TYPES (HKT)
-// =============================================================================
+#
+4. TYPE-LEVEL COMPUTATIONS AND HIGHER-KINDED TYPES (HKT)
+#
 
 Zero {}
 Succ(N) { Prev N }
@@ -265,9 +265,9 @@ Map(K, V) { (K) V }
 Set(T)    { (T) Bool }
 
 
-// =============================================================================
-// 5. REFINEMENT TYPES AND AUTO-ROUTING
-// =============================================================================
+#
+5. REFINEMENT TYPES AND AUTO-ROUTING
+#
 
 // Use '_' because the concrete form is not yet unpacked at the type definition stage
 IsAdult   [ _.Age >= 18 ]
@@ -304,9 +304,9 @@ Area(S) [
 ]
 
 
-// =============================================================================
-// 6. HIGHER-ORDER FUNCTIONS, FUNCTORS, AND CATAMORPHISMS
-// =============================================================================
+#
+6. HIGHER-ORDER FUNCTIONS, FUNCTORS, AND CATAMORPHISMS
+#
 
 Some(T)   { Value T }
 Option(T) Some(T) | None
@@ -346,9 +346,9 @@ Algebra {
 }
 
 
-// =============================================================================
-// 7. COLLECTIONS, STREAMS, GENERATORS, AND PIPELINE ITERATION
-// =============================================================================
+#
+7. COLLECTIONS, STREAMS, GENERATORS, AND PIPELINE ITERATION
+#
 // Replaces traditional for/while loops with declarative stream pipelines.
 
 Item  { Name String, Price Int, InStock Bool }
@@ -386,9 +386,9 @@ ConfigMap {
 UpdatedConfig ConfigMap & { "port" "9090", "tls" "true" } / "host"
 
 
-// =============================================================================
-// 8. CONTEXT ENRICHMENT ('.&') AND TAPPING OPERATOR ('.>')
-// =============================================================================
+#
+8. CONTEXT ENRICHMENT ('.&') AND TAPPING OPERATOR ('.>')
+#
 
 FinalizeBill(Ctx User & Cart) [
   Ctx & {
@@ -414,9 +414,9 @@ ProcessOrderPipeline(UserId) [
 ]
 
 
-// =============================================================================
-// 9. LINEAGE NAMESPACING (COLLISION RESOLUTION UPON MERGE)
-// =============================================================================
+#
+9. LINEAGE NAMESPACING (COLLISION RESOLUTION UPON MERGE)
+#
 
 Order { Id String, Amount Int }
 
@@ -436,9 +436,9 @@ ProcessCombined(CombinedContext) [
 ]
 
 
-// =============================================================================
-// 10. DECLARATIVE TYPE MIGRATION AND STRUCTURAL PROJECTION
-// =============================================================================
+#
+10. DECLARATIVE TYPE MIGRATION AND STRUCTURAL PROJECTION
+#
 
 ClientAccount {
   AccountId String
@@ -456,9 +456,9 @@ MigrateUser(U User) [
 ]
 
 
-// =============================================================================
-// 11. ONTOLOGICAL TYPING (TYPESTATE) & OUTCOME COLLECTION (RAILWAY-FREE)
-// =============================================================================
+#
+11. ONTOLOGICAL TYPING (TYPESTATE) & OUTCOME COLLECTION (RAILWAY-FREE)
+#
 // Instead of exceptions, the pipeline collects unresolved outcomes into a Union.
 
 Reserved   { ReservedAt Int }
@@ -500,9 +500,9 @@ ShipToCustomer(Order & Reserved & Paid) [
 ]
 
 
-// =============================================================================
-// 12. CONCURRENCY, PARALLELISM ('.|'), AND CHANNELS
-// =============================================================================
+#
+12. CONCURRENCY, PARALLELISM ('.|'), AND CHANNELS
+#
 
 FetchProfile(Id String)         [ Http.Get("https://api.ex/users/{Id}") ]
 FetchRecommendations(Id String) [ Http.Get("https://api.ex/recs/{Id}") ]
@@ -538,9 +538,9 @@ WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
 ]
 
 
-// =============================================================================
-// 13. STATE MANAGEMENT (PURE STATE TRANSITIONS & ATOMS)
-// =============================================================================
+#
+13. STATE MANAGEMENT (PURE STATE TRANSITIONS & ATOMS)
+#
 // Razomy avoids mutable variables; state is managed via recursive stream loops
 // or thread-safe transactional Atoms.
 
@@ -572,9 +572,9 @@ ModifyGlobalCounter() [
 ]
 
 
-// =============================================================================
-// 14. RESOURCE MANAGEMENT, I/O, AND SCOPED LIFETIMES
-// =============================================================================
+#
+14. RESOURCE MANAGEMENT, I/O, AND SCOPED LIFETIMES
+#
 
 FileHandle { Fd Int, Path String }
 IoError    { Msg String }
@@ -603,9 +603,9 @@ ReadConfig(Path String) [
 ]
 
 
-// =============================================================================
-// 15. WEB SERVER, ROUTING, AND MIDDLEWARE PIPELINES
-// =============================================================================
+#
+15. WEB SERVER, ROUTING, AND MIDDLEWARE PIPELINES
+#
 
 HttpRequest {
   Method  "GET" | "POST" | "PUT" | "DELETE"
@@ -650,9 +650,9 @@ ApiRouter(Req HttpRequest) [
 ]
 
 
-// =============================================================================
-// 16. METAPROGRAMMING, REFLECTION, AND AST MACROS ('.')
-// =============================================================================
+#
+16. METAPROGRAMMING, REFLECTION, AND AST MACROS ('.')
+#
 // Since Everything is a Form, Razomy code can inspect and generate Razomy types.
 
 // Macro that automatically generates JSON serialization for any Form
@@ -684,9 +684,9 @@ InspectEntity(Entity) [
 ]
 
 
-// =============================================================================
-// 17. TESTING AND PROPERTY-BASED ASSERTIONS
-// =============================================================================
+#
+17. TESTING AND PROPERTY-BASED ASSERTIONS
+#
 
 TestPassed { Name String }
 TestFailed { Name String, Expected Any, Actual Any }
@@ -714,9 +714,9 @@ RunTestSuite() [
 ]
 
 
-// =============================================================================
-// 18. COMPLEX CASE: RECURSIVE AUTONOMOUS AI AGENT
-// =============================================================================
+#
+18. COMPLEX CASE: RECURSIVE AUTONOMOUS AI AGENT
+#
 
 CompileError { Code Int, Log String }
 BuildSuccess { Status String, Artifact String }
@@ -767,9 +767,9 @@ AgentLoop(Err, Retries) [
 ]
 
 
-// =============================================================================
-// 19. ENTRY POINT (MAIN PIPELINE)
-// =============================================================================
+#
+19. ENTRY POINT (MAIN PIPELINE)
+#
 
 Main [
   "Starting test suite..." . Shell.Log
@@ -798,9 +798,9 @@ Main [
 ]
 
 
-// =============================================================================
-// 20. IMPORTS & MODULE SYSTEM
-// =============================================================================
+#
+20. IMPORTS & MODULE SYSTEM
+#
 
 Base root.base             // Named import
 {String, Int} root.base       // Element import

@@ -3,9 +3,9 @@ _ primitive
 _ structure
 _ shell
 
-// =============================================================================
-// CSP Channels & Synchronization Primitives
-// =============================================================================
+#
+CSP Channels & Synchronization Primitives
+#
 
 ChannelClosed {}
 
@@ -46,9 +46,9 @@ WaitGroup {
   Wait()     [ Self . native_wg_wait ]
 }
 
-// =============================================================================
-// Futures, Promises & Tasks
-// =============================================================================
+#
+Futures, Promises & Tasks
+#
 
 TaskPending   {}
 TaskRunning   {}
@@ -71,9 +71,9 @@ Async {
   Race(Futures List(Any))[ Futures . native_async_race ]
 }
 
-// =============================================================================
-// Actor Model & Supervision Trees
-// =============================================================================
+#
+Actor Model & Supervision Trees
+#
 
 ActorRef(Msg) {
   Address       String
@@ -90,9 +90,9 @@ SupervisorSpec {
   Policy        RestartPolicy
 }
 
-// =============================================================================
-// Worker Loops & Parallel Fan-Out ('.|')
-// =============================================================================
+#
+Worker Loops & Parallel Fan-Out ('.|')
+#
 
 WorkerLoop(Jobs Channel(String), Results Channel(Int)) [
   Jobs.Recv() . {

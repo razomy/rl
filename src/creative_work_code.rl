@@ -7,9 +7,9 @@ _ person
 _ creative_work
 _ creative_work_media
 
-// =============================================================================
-// Software
-// =============================================================================
+#
+Software
+#
 
 SoftwareApplication CreativeWork & {
     ApplicationCategory String
@@ -47,9 +47,9 @@ SoftwareSourceCode CreativeWork & {
     TargetProduct SoftwareApplication
 }
 
-// =============================================================================
-// Data
-// =============================================================================
+#
+Data
+#
 
 Dataset CreativeWork & {
     Distribution List(DataDownload)
@@ -64,9 +64,9 @@ DataFeed    Dataset & { DataFeedElement List(DataFeedItem) }
 CompleteDataFeed DataFeed
 DataCatalog CreativeWork & { Dataset List(Dataset), MeasurementTechnique String }
 
-// =============================================================================
-// Learning
-// =============================================================================
+#
+Learning
+#
 
 Course CreativeWork & {
     CourseCode String
@@ -83,9 +83,9 @@ LearningResource CreativeWork & { AssessesSkill List(String), CompetencyRequired
 Quiz LearningResource
 SyllabusDoc LearningResource
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Develop(T Agent, Name_ Name, L ProgrammingLanguage) [ SoftwareSourceCode { Name Name_, Author List1(T), ProgrammingLanguage L, DateCreated Now } ]
 Commit(S SoftwareSourceCode, T Text) [ S & { Text T, DateModified Now } ]

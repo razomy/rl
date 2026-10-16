@@ -2,9 +2,9 @@
 Razomy Language Lexer Specification (V4.0)
 #
 
-// =============================================================================
-// 1. BRACKETS & DELIMITERS
-// =============================================================================
+#
+1. BRACKETS & DELIMITERS
+#
 
 LBrace      "{"
 RBrace      "}"
@@ -23,9 +23,9 @@ Underscore  "_"
 Delimiters  Comma | Semicolon | Colon | Underscore
 
 
-// =============================================================================
-// 2. PIPELINE & COMPOSITE OPERATORS (Matched first by longest match)
-// =============================================================================
+#
+2. PIPELINE & COMPOSITE OPERATORS (Matched first by longest match)
+#
 
 // Pipeline family
 DotGt       ".>"                  // Tap pipeline (side-effect)
@@ -56,9 +56,9 @@ ShiftR      ">>"
 CompositeOp EqEq | NotEq | Lte | Gte | AndAnd | OrOr | Pow | ShiftL | ShiftR
 
 
-// =============================================================================
-// 3. ATOMIC OPERATORS (Math & Set/Type Algebra)
-// =============================================================================
+#
+3. ATOMIC OPERATORS (Math & Set/Type Algebra)
+#
 
 Plus        "+"
 Minus       "-"
@@ -78,9 +78,9 @@ AtomicOp    Plus | Minus | Mul | Slash | Mod | Pipe | Amp | Qm | Bang | Eq | LAn
 Operator    Pipelines | CompositeOp | AtomicOp
 
 
-// =============================================================================
-// 4. WHITESPACE & COMMENTS
-// =============================================================================
+#
+4. WHITESPACE & COMMENTS
+#
 
 WhiteSpace   "[ \\t\\f]+"
 Crlf         "\\r?\\n"
@@ -90,9 +90,9 @@ DocComment   "#[\\r\\n][^#]*#"
 BlockComment "#[^#]*#"
 
 
-// =============================================================================
-// 5. LITERALS & IDENTIFIERS
-// =============================================================================
+#
+5. LITERALS & IDENTIFIERS
+#
 
 True          "true"
 False         "false"
@@ -109,9 +109,9 @@ StringLiteral "\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'"
 BadCharacter  "[^]"
 
 
-// =============================================================================
-// 6. LEXER PIPELINE SCOPE
-// =============================================================================
+#
+6. LEXER PIPELINE SCOPE
+#
 
 Lexeme DocComment
  | BlockComment

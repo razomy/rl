@@ -4,9 +4,9 @@ _ structure
 _ string
 _ stream
 
-// =============================================================================
-// File System, Paths, Streams, FsNode Hierarchy & Git Version Control
-// =============================================================================
+#
+File System, Paths, Streams, FsNode Hierarchy & Git Version Control
+#
 
 AbsolutePathString String
 RelativePathString String
@@ -74,9 +74,9 @@ ValidateFsNodeCycle(OldNode FsNode, NewNode FsNode) [
   }
 ]
 
-// =============================================================================
-// Git Version Control
-// =============================================================================
+#
+Git Version Control
+#
 
 GitFileChanges {
   Created  List(String)
@@ -102,9 +102,9 @@ GitStatus {
   Changes      GitFileChanges
 }
 
-// =============================================================================
-// I/O Errors, Path & Fs Operations
-// =============================================================================
+#
+I/O Errors, Path & Fs Operations
+#
 
 IoErrorKind "not_found" | "permission_denied" | "already_exists" | "invalid_data" | "timed_out" | "eof" | "unknown"
 IoError {

@@ -14,9 +14,9 @@ _ organization
 _ person
 _ creative_work
 
-// =============================================================================
-// 1. Occurrences & Lifecycle Typestates
-// =============================================================================
+#
+1. Occurrences & Lifecycle Typestates
+#
 
 EventKind "natural" | "social" | "biological" | "physical" | "economic" | "political"
     | "cultural" | "sport" | "personal" | "technical" | "historical"
@@ -40,9 +40,9 @@ Postponed { NewTime Interval }
 Failed    { FailedAt Instant, Reason String }
 Lifecycle Planned | Active | Paused | Done | Cancelled | Postponed | Failed
 
-// =============================================================================
-// 2. Causality, Triggers & Historical Processes
-// =============================================================================
+#
+2. Causality, Triggers & Historical Processes
+#
 
 Probability Fraction
 Certainty "impossible" | "unlikely" | "possible" | "likely" | "certain"
@@ -64,9 +64,9 @@ Era_      { Name Name, Interval Interval }
 Epoch     Era_
 Milestone Event & { Significance String }
 
-// =============================================================================
-// 3. SchemaEvent & Social / Cultural / Business Events (schema.org)
-// =============================================================================
+#
+3. SchemaEvent & Social / Cultural / Business Events (schema.org)
+#
 
 SchemaEvent Thing & Event & {
   About                           Thing
@@ -152,9 +152,9 @@ Protest             SchemaEvent & { Cause String }
 War                 SchemaEvent & { Belligerents List(Agent) }
 Disaster            SchemaEvent & { NaturalDisaster NaturalDisaster }
 
-// =============================================================================
-// 4. Event Transitions
-// =============================================================================
+#
+4. Event Transitions
+#
 
 PlanEvent(E Event, I Interval) [ E & Planned { PlannedFor I } ]
 Start(E Event & Planned) [ E / Planned & Active { StartedAt Now } ]

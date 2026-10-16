@@ -3,9 +3,9 @@ _ primitive
 _ structure
 _ concurrency
 
-// =============================================================================
-// Transactional Memory & Reactive Primitives
-// =============================================================================
+#
+Transactional Memory & Reactive Primitives
+#
 
 Atom(T) {
   Read()                            [ Self . native_atom_read ]
@@ -24,9 +24,9 @@ Computed(T) {
   Evaluate() [ Self . native_computed_eval ]
 }
 
-// =============================================================================
-// Contexts, Pipes, CQRS Commands & Queries
-// =============================================================================
+#
+Contexts, Pipes, CQRS Commands & Queries
+#
 
 ContextEventType "Add" | "Remove" | "Set"
 ContextEvent     { EventType ContextEventType, Key String, Value Any }
@@ -77,9 +77,9 @@ IQuery(TRes)            IAQuery   & { Execute Any }
 IJob IResource & { Execute Any, Dispose Any }
 AJob IJob & IContextable
 
-// =============================================================================
-// Events, Change Tracking & Reactive Collections
-// =============================================================================
+#
+Events, Change Tracking & Reactive Collections
+#
 
 IEvent         {}
 ExceptionEvent IEvent & { Error String, Message String }
@@ -119,9 +119,9 @@ MemoryStore(T) IStore(T) & {
 CollectionStore(T)      IReset & { Store List(T) }
 IdCollectionStore(K, V) IReset & { Store Map(K, V) }
 
-// =============================================================================
-// Undo / Redo Time-Travel History State
-// =============================================================================
+#
+Undo / Redo Time-Travel History State
+#
 
 HistoryState(T) {
   Past    List(T)
@@ -163,9 +163,9 @@ RedoHistory(H HistoryState) [
   }
 ]
 
-// =============================================================================
-// Finite State Machine (FSM) & Store Pattern
-// =============================================================================
+#
+Finite State Machine (FSM) & Store Pattern
+#
 
 TransitionRule(S, E) {
   FromState S
@@ -197,9 +197,9 @@ Store(StateType, ActionType) {
   ]
 }
 
-// =============================================================================
-// Counter Reducer Example
-// =============================================================================
+#
+Counter Reducer Example
+#
 
 CounterState { Count Int }
 Increment    { By Int }

@@ -7,9 +7,9 @@ _ space
 _ agent
 _ information
 
-// =============================================================================
-// Groups
-// =============================================================================
+#
+Groups
+#
 
 GroupKind "family" | "household" | "tribe" | "clan" | "community" | "team" | "club" | "party"
     | "nation" | "ethnicity" | "religion" | "class" | "guild" | "union" | "movement" | "audience"
@@ -29,9 +29,9 @@ Nation    Group & { GroupKind "nation", Language }
 Ethnicity Group & { GroupKind "ethnicity" }
 Religion  Group & { GroupKind "religion", Beliefs List(Belief) }
 
-// =============================================================================
-// Roles and relationships
-// =============================================================================
+#
+Roles and relationships
+#
 
 RoleKind "leader" | "member" | "founder" | "parent" | "child" | "sibling" | "spouse" | "partner"
     | "friend" | "neighbor" | "employer" | "employee" | "teacher" | "student" | "citizen"
@@ -73,9 +73,9 @@ Membership {
 Member    { Membership }
 NonMember {}
 
-// =============================================================================
-// Norms, law and rights
-// =============================================================================
+#
+Norms, law and rights
+#
 
 Jurisdiction { Name, Area GeoShape }
 LegalSystem "civil" | "common" | "religious" | "customary" | "mixed"
@@ -112,9 +112,9 @@ Crime   { Law, Offender Agent, At Instant }
 Verdict "guilty" | "not-guilty" | "dismissed"
 Sentence_ { Verdict, Penalty String, Duration }
 
-// =============================================================================
-// Governance
-// =============================================================================
+#
+Governance
+#
 
 GovernmentForm "democracy" | "republic" | "monarchy" | "constitutional-monarchy" | "theocracy"
     | "dictatorship" | "oligarchy" | "federation" | "confederation" | "anarchy"
@@ -137,9 +137,9 @@ Stateless {}
 Free      {}
 Imprisoned { Since Instant, Until Instant }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Join(A Agent & NonMember, G Group, R Role) [ A / NonMember & Member { Membership { Member A, Group G, Role R, Since Now } } ]
 Leave(A Agent & Member) [ A / Member & NonMember {} ]

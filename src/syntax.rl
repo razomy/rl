@@ -4,9 +4,9 @@ Razomy Language Grammar Specification (V4.0)
 
 _ lexeme
 
-// =============================================================================
-// 0. GRAMMAR COMBINATORS
-// =============================================================================
+#
+0. GRAMMAR COMBINATORS
+#
 
 Kleene(T) Any   // 0 or more repetitions (T*)
 Many(T)   T & Kleene(T) // 1 or more repetitions (T+)
@@ -14,9 +14,9 @@ Opt(T)    T | None      // Optional (T?)
 Nl        Kleene(Crlf)  // Optional newlines for multiline expressions
 
 
-// =============================================================================
-// 1. ATOMIC LITERALS & PATHS (User.Id, _.Age, -1)
-// =============================================================================
+#
+1. ATOMIC LITERALS & PATHS (User.Id, _.Age, -1)
+#
 
 Literal FloatLiteral
 | NumberLiteral
@@ -33,9 +33,9 @@ PathNode Identifier | NumberLiteral | (Minus & NumberLiteral)
 Path PathRoot & Kleene(Dot & PathNode)
 
 
-// =============================================================================
-// 2. THREE BRACKETS: SLOT (), FORM {}, FLOW []
-// =============================================================================
+#
+2. THREE BRACKETS: SLOT (), FORM {}, FLOW []
+#
 
 Separator Crlf | Semicolon | Comma
 
@@ -53,9 +53,9 @@ FlowItem      Declaration
 FlowBlock     LBracket & Kleene(FlowSeparator | FlowItem) & RBracket
 
 
-// =============================================================================
-// 3. PRIMARY & POSTFIX EXPRESSIONS
-// =============================================================================
+#
+3. PRIMARY & POSTFIX EXPRESSIONS
+#
 
 AtomExpr Literal
 | Path
@@ -75,9 +75,9 @@ UnaryOp   Bang | Minus
 UnaryExpr (Kleene(UnaryOp) & PrimaryExpr)
 
 
-// =============================================================================
-// 4. VALUE & ARITHMETIC HIERARCHY
-// =============================================================================
+#
+4. VALUE & ARITHMETIC HIERARCHY
+#
 
 // Power (**)
 PowExpr UnaryExpr & Kleene(Nl & Pow & Nl & UnaryExpr)
@@ -103,9 +103,9 @@ LogicOp   AndAnd | OrOr
 LogicExpr CompareExpr & Kleene(Nl & LogicOp & Nl & CompareExpr)
 
 
-// =============================================================================
-// 5. ALGEBRA OF TYPES & MORPHISMS (/, &, |)
-// =============================================================================
+#
+5. ALGEBRA OF TYPES & MORPHISMS (/, &, |)
+#
 // Applies equally to Forms (Data) and Flows (Processes)!
 
 // 1. Subtraction / Division (A / B) — Highest algebraic precedence
@@ -118,9 +118,9 @@ MergeExpr SubtractExpr & Kleene(Nl & Amp & Nl & SubtractExpr)
 UnionExpr MergeExpr & Kleene(Nl & Pipe & Nl & MergeExpr)
 
 
-// =============================================================================
-// 6. PIPELINE MORPHISM CHAIN (., .., .?, .&, .>, .|)
-// =============================================================================
+#
+6. PIPELINE MORPHISM CHAIN (., .., .?, .&, .>, .|)
+#
 // Lowest precedence: binds algebraic types and flows into execution chains.
 
 PipelineOp | PipeDot     // Sequential composition (A . B)
@@ -133,9 +133,9 @@ PipelineOp | PipeDot     // Sequential composition (A . B)
 PipelineExpr UnionExpr & Kleene(Nl & PipelineOp & Nl & UnionExpr)
 
 
-// =============================================================================
-// 7. DECLARATIONS & FILE ROOT
-// =============================================================================
+#
+7. DECLARATIONS & FILE ROOT
+#
 
 // A Declaration is either:
 // 1. A standalone PipelineExpression (e.g., inside a Flow: `A . B . C`)

@@ -6,9 +6,9 @@ _ space
 _ state
 _ ui
 
-// =============================================================================
-// 1. Elemental Affinities, Grid Boards & Puzzle Mechanics
-// =============================================================================
+#
+1. Elemental Affinities, Grid Boards & Puzzle Mechanics
+#
 
 EmpedoclesElements "None" | "Water" | "Earth" | "Fire" | "Air" | "Aether" | "Light" | "Dark" | "Lightning" | "Ice"
 GridLayoutType     "Rectangle" | "Hexagon" | "Isometric" | "Octagonal"
@@ -70,9 +70,9 @@ IsNeighborCell(Target VectorInt3, Neighbor VectorInt3) [
   ((Target.Z - Neighbor.Z) . Math.Abs <= 1)
 ]
 
-// =============================================================================
-// 2. Resource Generators, Clicker & Idle Systems
-// =============================================================================
+#
+2. Resource Generators, Clicker & Idle Systems
+#
 
 UserGeneratorInteractionType "HoldUpProduce" | "HoldProduce" | "ClickProduce" | "AutoClickGenerator"
 AutoClickGeneratorState      "Gathering" | "ProduceIncrements" | "ProduceDecrements" | "StoreIncrements" | "StoreDecrements" | "Dispose" | "DisposeIncrements" | "DisposeDecrement"
@@ -178,9 +178,9 @@ ProduceResources(Ps ProducingSystem) [
   }
 ]
 
-// =============================================================================
-// 3. RPG Stats, Inventory, Crafting, Achievements, Ranks, Skills & Trophies
-// =============================================================================
+#
+3. RPG Stats, Inventory, Crafting, Achievements, Ranks, Skills & Trophies
+#
 
 ItemRarity "Common" | "Uncommon" | "Rare" | "Epic" | "Legendary" | "Mythic" | "Artifact"
 EquipmentSlot "Head" | "Chest" | "Legs" | "Feet" | "Hands" | "MainHand" | "OffHand" | "Ring" | "Amulet" | "Cloak" | "Belt"
@@ -280,9 +280,9 @@ TrophyEntity IEntity & HasPrimary(TrophyEntity) & HasTitle & {
   Image ImageModel
 }
 
-// =============================================================================
-// 4. Locations, Chapters, Objectives, Quests & Progression Transitions
-// =============================================================================
+#
+4. Locations, Chapters, Objectives, Quests & Progression Transitions
+#
 
 GridStepsTaskEntity     { Steps Int }
 RequiredSkillTaskEntity { RequiredSkill ForeignId(SkillEntity) }

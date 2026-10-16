@@ -1,6 +1,6 @@
-// =============================================================================
-// Razomy Standard Ontology & Entity Library — Root Module
-// =============================================================================
+#
+Razomy Standard Ontology & Entity Library — Root Module
+#
 
 // 1. Core Language, Runtime & Standard Library
 _ primitive

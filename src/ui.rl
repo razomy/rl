@@ -6,9 +6,9 @@ _ space
 _ energy
 _ state
 
-// =============================================================================
-// Units, Colors, Paint & Design Tokens
-// =============================================================================
+#
+Units, Colors, Paint & Design Tokens
+#
 
 MetricType "px" | "rem" | "em" | "vh" | "vw" | "percent" | "m" | "cm" | "mm" | "pt" | "dp"
 MetricUnit { Value Float, Type MetricType }
@@ -81,9 +81,9 @@ ThemeColorPalette {
   OnColor           RgbaColorFloat
 }
 
-// =============================================================================
-// Universal UI Node (UIN) & Layout Engines (Grid, Flex, Flow, Anchored, Fixed)
-// =============================================================================
+#
+Universal UI Node (UIN) & Layout Engines (Grid, Flex, Flow, Anchored, Fixed)
+#
 
 LayoutAlign "Start" | "Center" | "End" | "Stretch" | "SpaceBetween" | "SpaceAround" | "SpaceEvenly"
 RectGravity "Center" | "Bottom" | "Right" | "Top" | "Left"
@@ -303,9 +303,9 @@ UIDocumentUin {
   Nodes  Map(String, UIUin)
 }
 
-// =============================================================================
-// UI Component Taxonomy
-// =============================================================================
+#
+UI Component Taxonomy
+#
 
 Category   Any
 Layout     Category
@@ -393,9 +393,9 @@ Dropdown       Menu & Navigation & { Open Bool, Items List(Any) }
 ContextMenu    Menu & Overlay & { Position Point2D, Items List(Any) }
 CommandPalette Overlay & Navigation & { Open Bool, Query String, Commands List(Any) }
 
-// =============================================================================
-// UI Animations, Timelines, Routing & Popups
-// =============================================================================
+#
+UI Animations, Timelines, Routing & Popups
+#
 
 IAnimationHandler      { Handle Any }
 CurvedAnimationHandler { Handler IAnimationHandler, Curve ICurve }

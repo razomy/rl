@@ -7,9 +7,9 @@ _ shell
 _ computing
 _ hir
 
-// =============================================================================
-// 1. AI / ML Core Entities, Neural Networks, Optimizers & Hyperparameters
-// =============================================================================
+#
+1. AI / ML Core Entities, Neural Networks, Optimizers & Hyperparameters
+#
 
 ModelModality "text" | "vision" | "audio" | "video" | "multimodal" | "embedding" | "code" | "reinforcement" | "tabular" | "graph" | "3d"
 ModelProvider "openai" | "anthropic" | "google" | "meta" | "mistral" | "deepseek" | "cohere" | "xai" | "huggingface" | "local"
@@ -80,9 +80,9 @@ TokenUsage {
   ReasoningTokens  Int
 }
 
-// =============================================================================
-// 2. Reinforcement Learning (MDP, Policies, Value Functions)
-// =============================================================================
+#
+2. Reinforcement Learning (MDP, Policies, Value Functions)
+#
 
 RLAlgorithm "DQN" | "PPO" | "SAC" | "TD3" | "DDPG" | "A2C" | "A3C" | "GRPO" | "DPO" | "RLHF" | "AlphaZero" | "MuZero"
 
@@ -101,9 +101,9 @@ MarkovDecisionProcess {
   ObservationSpace    String
 }
 
-// =============================================================================
-// 3. Messages, Prompts, Tools, Interaction Graph & Context
-// =============================================================================
+#
+3. Messages, Prompts, Tools, Interaction Graph & Context
+#
 
 MessageRole      "system" | "user" | "assistant" | "tool" | "developer"
 SenderType       "SYSTEM" | "USER" | "MODEL" | "TOOL"
@@ -190,9 +190,9 @@ PanicAnswerLlmException LlmException
 TypedAnswerLlmException LlmException
 ToolExecuteLlmException LlmException
 
-// =============================================================================
-// 4. Multi-Agent Architecture & Autonomous Code Refactoring
-// =============================================================================
+#
+4. Multi-Agent Architecture & Autonomous Code Refactoring
+#
 
 DeveloperTask    { FileName String, Instructions String }
 ArchitecturePlan { GlobalStrategy String, Tasks List(DeveloperTask) }
@@ -226,9 +226,9 @@ RefactorConfig {
   BackupDirName        String
 }
 
-// =============================================================================
-// 5. RAG (Retrieval-Augmented Generation) & Embeddings
-// =============================================================================
+#
+5. RAG (Retrieval-Augmented Generation) & Embeddings
+#
 
 DocumentChunk {
   ChunkId   String
@@ -243,9 +243,9 @@ KnowledgeBase {
   Chunks List(DocumentChunk)
 }
 
-// =============================================================================
-// 6. Build Verification & Self-Healing Agent
-// =============================================================================
+#
+6. Build Verification & Self-Healing Agent
+#
 
 CompileError { Code Int, Log String }
 BuildSuccess { Status String, Artifact String }

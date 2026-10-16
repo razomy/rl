@@ -3,9 +3,9 @@ _ primitive
 _ structure
 _ quantity
 
-// =============================================================================
-// Points and spans
-// =============================================================================
+#
+Points and spans
+#
 
 // Seconds since the Unix epoch
 Timestamp Long
@@ -24,9 +24,9 @@ End   Instant
 Interval { Start, End } & [ _.End.Timestamp >= _.Start.Timestamp ]
 OpenInterval { Start }
 
-// =============================================================================
-// Calendar
-// =============================================================================
+#
+Calendar
+#
 
 Year           Int
 MonthIndex     Range(1, 12) & Int
@@ -74,9 +74,9 @@ Holiday {
     Date
 }
 
-// =============================================================================
-// Recurrence and schedules
-// =============================================================================
+#
+Recurrence and schedules
+#
 
 RecurrenceFrequency "once" | "secondly" | "minutely" | "hourly" | "daily" | "weekly" | "monthly" | "yearly"
 RepeatCount Count
@@ -106,9 +106,9 @@ Unscheduled {}
 Overdue     { Deadline }
 Expired     { At Instant }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Elapse(I Instant, D Duration) [
     Instant { Timestamp (Timestamp + D.Value) }

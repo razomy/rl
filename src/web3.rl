@@ -6,9 +6,9 @@ _ time
 _ economy
 _ security
 
-// =============================================================================
-// 1. Blockchain Networks, Consensus & Cryptography
-// =============================================================================
+#
+1. Blockchain Networks, Consensus & Cryptography
+#
 
 ConsensusMechanism "ProofOfWork" | "ProofOfStake" | "DelegatedProofOfStake" | "ProofOfAuthority" | "ProofOfHistory" | "PBFT" | "Tendermint" | "DAG-Avalanche"
 VmEnvironment "EVM" | "SVM-Solana" | "MoveVM" | "CosmWasm" | "CairoVM" | "FuelVM" | "BitcoinScript"
@@ -31,9 +31,9 @@ BlockHash     HexStr
 Wei           Bigint
 Gwei          Bigint
 
-// =============================================================================
-// 2. Blocks, Transactions, Gas & Mempool
-// =============================================================================
+#
+2. Blocks, Transactions, Gas & Mempool
+#
 
 BlockHeader {
   BlockNumber      Int
@@ -72,9 +72,9 @@ Block {
   Transactions List(OnChainTransaction)
 }
 
-// =============================================================================
-// 3. Smart Contracts & Token Standards (ERC-20, ERC-721, ERC-1155)
-// =============================================================================
+#
+3. Smart Contracts & Token Standards (ERC-20, ERC-721, ERC-1155)
+#
 
 AbiParameter {
   Name         String
@@ -128,9 +128,9 @@ NonFungibleToken {
   RoyaltyBps      Range(0, 10000) & Int
 }
 
-// =============================================================================
-// 4. Decentralized Finance (DeFi): AMM Pools, Lending, Oracles & Bridges
-// =============================================================================
+#
+4. Decentralized Finance (DeFi): AMM Pools, Lending, Oracles & Bridges
+#
 
 AmmCurveType "ConstantProductXYK" | "StableSwapCurve" | "ConcentratedLiquidityV3" | "WeightedBalancer"
 
@@ -164,9 +164,9 @@ PriceOracleFeed {
   UpdatedAt     Instant
 }
 
-// =============================================================================
-// 5. Decentralized Autonomous Organizations (DAO) & Layer-2 Rollups
-// =============================================================================
+#
+5. Decentralized Autonomous Organizations (DAO) & Layer-2 Rollups
+#
 
 RollupKind "OptimisticRollup" | "ZkRollup" | "Validium" | "Volition" | "Sidechain"
 
@@ -186,9 +186,9 @@ DaoProposal {
   EndBlock      Int
 }
 
-// =============================================================================
-// 6. Web3 Transitions
-// =============================================================================
+#
+6. Web3 Transitions
+#
 
 SwapConstantProduct(Pool LiquidityPool, AmountInA Float) [
   AmountOutB ((Pool.ReserveB * AmountInA) / (Pool.ReserveA + AmountInA))

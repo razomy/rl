@@ -6,9 +6,9 @@ _ time
 _ http
 _ computing
 
-// =============================================================================
-// 1. Cloud Providers, Regions, VPC & Compute Instances
-// =============================================================================
+#
+1. Cloud Providers, Regions, VPC & Compute Instances
+#
 
 CloudProvider "aws" | "gcp" | "azure" | "cloudflare" | "digitalocean" | "hetzner" | "linode" | "oracle" | "alibaba" | "bare-metal"
 
@@ -50,9 +50,9 @@ ComputeInstance {
   SpotInstance     Bool
 }
 
-// =============================================================================
-// 2. Kubernetes (K8s) Orchestration & Service Mesh
-// =============================================================================
+#
+2. Kubernetes (K8s) Orchestration & Service Mesh
+#
 
 K8sResourceKind "Pod" | "Deployment" | "StatefulSet" | "DaemonSet" | "Job" | "CronJob" | "Service" | "Ingress" | "ConfigMap" | "Secret" | "PersistentVolumeClaim" | "HorizontalPodAutoscaler"
 K8sPodPhase "Pending" | "Running" | "Succeeded" | "Failed" | "Unknown"
@@ -119,9 +119,9 @@ K8sService {
   Ports      List((Int, Int))
 }
 
-// =============================================================================
-// 3. Serverless, Object Storage, CDN & Message Brokers
-// =============================================================================
+#
+3. Serverless, Object Storage, CDN & Message Brokers
+#
 
 ServerlessRuntime "nodejs20" | "python312" | "rust-provided" | "go1.x" | "java21" | "dotnet8" | "wasm-edge"
 
@@ -158,9 +158,9 @@ EventTopic {
   Guarantee         DeliveryGuarantee
 }
 
-// =============================================================================
-// 4. CI/CD Pipelines & Infrastructure as Code (Terraform / Pulumi)
-// =============================================================================
+#
+4. CI/CD Pipelines & Infrastructure as Code (Terraform / Pulumi)
+#
 
 CiStepStatus "queued" | "in_progress" | "succeeded" | "failed" | "skipped" | "cancelled"
 
@@ -191,9 +191,9 @@ IacStateResource {
   Attributes   Map(String, Any)
 }
 
-// =============================================================================
-// 5. Observability: OpenTelemetry Traces, Prometheus Metrics & Logs
-// =============================================================================
+#
+5. Observability: OpenTelemetry Traces, Prometheus Metrics & Logs
+#
 
 MetricKind "Counter" | "Gauge" | "Histogram" | "Summary" | "UpDownCounter"
 
@@ -231,9 +231,9 @@ SloTarget {
   ErrorBudgetRemaining Fraction
 }
 
-// =============================================================================
-// 6. Cloud & DevOps Transitions
-// =============================================================================
+#
+6. Cloud & DevOps Transitions
+#
 
 ScaleDeployment(D K8sDeployment, TargetReplicas Int) [
   D & { Replicas TargetReplicas }

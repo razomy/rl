@@ -3,9 +3,9 @@ _ enumeration
 _ intangible
 _ organization
 
-// =============================================================================
-// Product
-// =============================================================================
+#
+Product
+#
 
 Sku       String
 Mpn       String
@@ -58,9 +58,9 @@ ProductCollection Product & { IncludesObject List(TypeAndQuantityNode) }
 DietarySupplement Product & { ActiveIngredient String, SafetyConsideration String }
 Drug_             Product
 
-// =============================================================================
-// Vehicles
-// =============================================================================
+#
+Vehicles
+#
 
 SchemaVehicle Product & {
     VehicleIdentificationNumber String
@@ -94,9 +94,9 @@ Motorcycle        SchemaVehicle
 MotorizedBicycle  SchemaVehicle
 RVParkVehicle     SchemaVehicle
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Manufacture(M Organization, Model ProductModel) [ IndividualProduct & Model & { Manufacturer M, ProductionDate Today, ItemCondition "NewCondition" } ]
 ReleaseProduct(P Product) [ P & { ReleaseDate Today } ]

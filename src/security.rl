@@ -5,9 +5,9 @@ _ string
 _ time
 _ auth
 
-// =============================================================================
-// 1. Symmetric, Asymmetric & Post-Quantum Cryptography
-// =============================================================================
+#
+1. Symmetric, Asymmetric & Post-Quantum Cryptography
+#
 
 SymmetricCipher "AES-128-GCM" | "AES-256-GCM" | "AES-256-CBC" | "ChaCha20-Poly1305" | "XChaCha20-Poly1305" | "Twofish" | "Camellia" | "Serpent"
 AsymmetricAlgorithm "RSA-2048" | "RSA-4096" | "ECDSA-P256" | "ECDSA-P384" | "ECDSA-secp256k1" | "Ed25519" | "Ed448" | "X25519" | "X448" | "BLS12-381"
@@ -37,9 +37,9 @@ DigitalSignature {
   SignedAt   Instant
 }
 
-// =============================================================================
-// 2. X.509 Certificates, PKI & Hardware Security Modules (HSM / TPM)
-// =============================================================================
+#
+2. X.509 Certificates, PKI & Hardware Security Modules (HSM / TPM)
+#
 
 X509Certificate {
   SerialNumber       HexStr
@@ -70,9 +70,9 @@ HardwareSecurityModule {
   TamperProtected Bool
 }
 
-// =============================================================================
-// 3. Zero-Knowledge Proofs (ZKP) & Multi-Party Computation (MPC)
-// =============================================================================
+#
+3. Zero-Knowledge Proofs (ZKP) & Multi-Party Computation (MPC)
+#
 
 ZkProofSystem "Groth16" | "PLONK" | "Halo2" | "STARK" | "Bulletproofs" | "Nova" | "SuperNova" | "Marlin"
 EllipticCurve "BN254" | "BLS12-381" | "BLS12-377" | "Pasta-Pallas" | "Pasta-Vesta" | "Secp256k1" | "Ed25519"
@@ -101,9 +101,9 @@ ShamirSecretShare {
   ShareValue   HexStr
 }
 
-// =============================================================================
-// 4. Threat Intelligence, Vulnerabilities (CVE / CVSS) & MITRE ATT&CK
-// =============================================================================
+#
+4. Threat Intelligence, Vulnerabilities (CVE / CVSS) & MITRE ATT&CK
+#
 
 CvssSeverity "NONE" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL"
 AttackVector "NETWORK" | "ADJACENT_NETWORK" | "LOCAL" | "PHYSICAL"
@@ -154,9 +154,9 @@ IndicatorOfCompromise {
   LastSeen    Instant
 }
 
-// =============================================================================
-// 5. Network Security, Firewalls, WAF, SIEM & Incident Response
-// =============================================================================
+#
+5. Network Security, Firewalls, WAF, SIEM & Incident Response
+#
 
 FirewallAction "ALLOW" | "DENY" | "DROP" | "REJECT" | "LOG" | "RATE_LIMIT"
 NetworkDirection "INBOUND" | "OUTBOUND" | "BIDIRECTIONAL"
@@ -199,9 +199,9 @@ SecurityIncident {
   ResolvedAt   Option(Instant)
 }
 
-// =============================================================================
-// 6. Security Transitions
-// =============================================================================
+#
+6. Security Transitions
+#
 
 VerifyZkProof(P ZkProof) [
   P & { Verified true }

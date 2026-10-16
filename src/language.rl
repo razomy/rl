@@ -3,9 +3,9 @@ _ primitive
 _ structure
 _ information
 
-// =============================================================================
-// Natural Language Grammar, Morphology, Syntax & Semantics
-// =============================================================================
+#
+Natural Language Grammar, Morphology, Syntax & Semantics
+#
 
 GrammaticalCase "nominative" | "genitive" | "dative" | "accusative" | "instrumental" | "prepositional" | "vocative" | "ablative"
 GrammaticalNumber "singular" | "dual" | "plural"
@@ -42,9 +42,9 @@ InflectedWord {
   Voice        Option(VerbVoice)
 }
 
-// =============================================================================
-// Syntactic Roles & Phrase Structure
-// =============================================================================
+#
+Syntactic Roles & Phrase Structure
+#
 
 SyntacticRole "subject" | "predicate" | "direct-object" | "indirect-object" | "adverbial" | "attribute" | "complement" | "determiner"
 

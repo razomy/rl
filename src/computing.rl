@@ -12,9 +12,9 @@ _ creative_work_code
 _ commerce
 _ ui
 
-// =============================================================================
-// Project CLI, Build Tooling & Runtimes (merged from project.rl & runtimes.rl)
-// =============================================================================
+#
+Project CLI, Build Tooling & Runtimes (merged from project.rl & runtimes.rl)
+#
 
 Project {
   Interaction {
@@ -89,9 +89,9 @@ Docker {
   }
 }
 
-// =============================================================================
-// Level 1: Physical Input & UI Elements
-// =============================================================================
+#
+Level 1: Physical Input & UI Elements
+#
 
 Coordinates Point2D
 BoundingBox Rectangle
@@ -162,9 +162,9 @@ SystemCommand {
   ExitCode  Option(Int)
 }
 
-// =============================================================================
-// Level 2: System & Environment Management
-// =============================================================================
+#
+Level 2: System & Environment Management
+#
 
 PowerState "on" | "off" | "reboot" | "sleep" | "hibernate"
 
@@ -237,9 +237,9 @@ SystemHealth {
   LastCheckedAt    DateTime
 }
 
-// =============================================================================
-// Level 3: File System & Data Operations
-// =============================================================================
+#
+Level 3: File System & Data Operations
+#
 
 ContentStream {
   MimeType MimeType
@@ -279,9 +279,9 @@ Storage Thing & {
 Query     String
 ThingList List(Thing)
 
-// =============================================================================
-// Level 4: Web & Network Operations
-// =============================================================================
+#
+Level 4: Web & Network Operations
+#
 
 Browser WebApplication & {
   CurrentUrl URL
@@ -326,9 +326,9 @@ Session {
   CreatedAt DateTime
 }
 
-// =============================================================================
-// Level 5: Digital Communication & Social
-// =============================================================================
+#
+Level 5: Digital Communication & Social
+#
 
 Recipient      Agent
 MessageContent {
@@ -360,9 +360,9 @@ CallSession {
 SocialObject    SocialMediaPosting | Comment | MediaObject
 InteractionType "post" | "comment" | "like" | "dislike" | "repost" | "bookmark" | "report"
 
-// =============================================================================
-// Level 6: Applied Tasks
-// =============================================================================
+#
+Level 6: Applied Tasks
+#
 
 MediaContent MediaObject
 Experience {

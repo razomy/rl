@@ -4,9 +4,9 @@ _ intangible
 _ place
 _ organization
 
-// =============================================================================
-// Person
-// =============================================================================
+#
+Person
+#
 
 GivenName      Name
 FamilyName     Name
@@ -76,9 +76,9 @@ Athlete   Person
 Musician  Person
 Actor_    Person
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 BirthOf(P Person, Where Place) [ P & Alive { Since Now } & { BirthDate Today, BirthPlace Where } ]
 DeathOf(P Person & Alive, Where Place) [ P / Alive & { DeathDate Today, DeathPlace Where } ]

@@ -2,9 +2,9 @@ _ thing
 _ enumeration
 _ intangible
 
-// =============================================================================
-// 1. Place (schema.org)
-// =============================================================================
+#
+1. Place (schema.org)
+#
 
 Place Thing & {
   Address                    PostalAddress
@@ -30,9 +30,9 @@ Place Thing & {
   BranchCode                 String
 }
 
-// =============================================================================
-// 2. Administrative Areas, Countries & World Cities
-// =============================================================================
+#
+2. Administrative Areas, Countries & World Cities
+#
 
 AdministrativeArea Place
 Country            AdministrativeArea & { CountryCode String, Currency Currency, OfficialLanguage Language }
@@ -86,9 +86,9 @@ Beijing       City & { Name "Beijing",       ContainedInPlace China }
 Sydney        City & { Name "Sydney",        ContainedInPlace Australia }
 Zurich        City & { Name "Zurich",        ContainedInPlace Switzerland }
 
-// =============================================================================
-// 3. Natural Places, Landforms & Accommodations
-// =============================================================================
+#
+3. Natural Places, Landforms & Accommodations
+#
 
 Landform_        Place & { Landform Landform }
 BodyOfWater      Landform_
@@ -128,9 +128,9 @@ ApartmentComplex        Residence & { NumberOfAccommodationUnits Count, PetsAllo
 GatedResidenceCommunity Residence
 Store_                  Place
 
-// =============================================================================
-// 4. Civic Structures & Public Infrastructure
-// =============================================================================
+#
+4. Civic Structures & Public Infrastructure
+#
 
 CivicStructure Place & { OpeningHours String }
 
@@ -181,9 +181,9 @@ Zoo                             CivicStructure
 School_                         CivicStructure
 Library_                        CivicStructure
 
-// =============================================================================
-// 5. Place & Civic Structure Transitions
-// =============================================================================
+#
+5. Place & Civic Structure Transitions
+#
 
 Contain(Outer Place, Inner Place) [ Inner & { ContainedInPlace Outer } ]
 Relocate(P Place, G GeoCoordinates) [ P & { Geo G } ]

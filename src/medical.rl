@@ -7,9 +7,9 @@ _ person
 _ product
 _ creative_work
 
-// =============================================================================
-// MedicalEntity & Coding Systems
-// =============================================================================
+#
+MedicalEntity & Coding Systems
+#
 
 MedicalCode Intangible & {
   CodeValue    String
@@ -26,9 +26,9 @@ MedicalEntity Thing & {
   Study                List(MedicalStudy)
 }
 
-// =============================================================================
-// Anatomy
-// =============================================================================
+#
+Anatomy
+#
 
 AnatomicalStructure MedicalEntity & {
   AssociatedPathophysiology Text
@@ -55,9 +55,9 @@ Vein                Vessel & { DrainsTo Vessel, Tributary AnatomicalStructure }
 AnatomicalSystem    MedicalEntity & { ComprisedOf List(AnatomicalStructure), RelatedCondition List(MedicalCondition), RelatedStructure List(AnatomicalStructure), RelatedTherapy List(MedicalTherapy) }
 SuperficialAnatomy  MedicalEntity
 
-// =============================================================================
-// Conditions, Symptoms, Stages & Diagnostics
-// =============================================================================
+#
+Conditions, Symptoms, Stages & Diagnostics
+#
 
 MedicalConditionStage MedicalEntity & {
   StageAsNumber  Real
@@ -108,9 +108,9 @@ Fever        MedicalSymptom & { Name "fever" }
 Cough        MedicalSymptom & { Name "cough" }
 Pain         MedicalSymptom & { Name "pain" }
 
-// =============================================================================
-// Pharmacology, Drugs & Supplements
-// =============================================================================
+#
+Pharmacology, Drugs & Supplements
+#
 
 DrugStrength MedicalEntity & {
   ActiveIngredient String
@@ -177,9 +177,9 @@ Ibuprofen   Drug & { NonProprietaryName "ibuprofen",   PrescriptionStatus "OTC" 
 Amoxicillin Drug & { NonProprietaryName "amoxicillin", PrescriptionStatus "PrescriptionOnly" }
 Insulin     Drug & { NonProprietaryName "insulin",     PrescriptionStatus "PrescriptionOnly" }
 
-// =============================================================================
-// Procedures, Tests, Therapies, Lifestyle & Studies
-// =============================================================================
+#
+Procedures, Tests, Therapies, Lifestyle & Studies
+#
 
 MedicalProcedure MedicalEntity & {
   BodyLocation  String
@@ -239,9 +239,9 @@ Diet_                          CreativeWork & MedicalEntity & LifestyleModificat
 PhysicalActivity               LifestyleModification & { AssociatedAnatomy Option(AnatomicalStructure), Category_ PhysicalActivityCategory, Epidemiology Text }
 ExercisePlan_                  CreativeWork & PhysicalActivity & { ActivityDuration Duration_, ActivityFrequency String, ExerciseType String, Intensity_ String, Repetitions Count, RestPeriods String, Workload Energy_ }
 
-// =============================================================================
-// Biochemistry & Molecular Biology
-// =============================================================================
+#
+Biochemistry & Molecular Biology
+#
 
 BioChemEntity Thing & {
   AssociatedDisease              List(MedicalCondition)
@@ -268,9 +268,9 @@ ChemicalSubstance BioChemEntity & {
   ChemicalRole        Option(String)
 }
 
-// =============================================================================
-// Medical Transitions
-// =============================================================================
+#
+Medical Transitions
+#
 
 Diagnose(P Patient, C MedicalCondition) [ P & { Diagnosis (Cons { Head C & { Status_ "Active" }, Tail Diagnosis }) } ]
 Prescribe(P Patient, D Drug) [ P & { Drug (Cons { Head D, Tail Drug }) } ]

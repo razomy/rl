@@ -2,9 +2,9 @@ _ primitive
 _ primitive
 _ structure
 
-// =============================================================================
-// Mathematical Constants
-// =============================================================================
+#
+Mathematical Constants
+#
 
 PI           3.141592653589793
 TAU          6.283185307179586
@@ -19,9 +19,9 @@ EPSILON      1e-7
 INFINITY     1e308
 NEG_INFINITY -1e308
 
-// =============================================================================
-// Fixed-Dimension Tuples, Vectors & Matrices
-// =============================================================================
+#
+Fixed-Dimension Tuples, Vectors & Matrices
+#
 
 Int2   (Int, Int)
 Int3   (Int, Int, Int)
@@ -59,9 +59,9 @@ Mat2x2 Float2x2
 Mat3x3 Float3x3
 Mat4x4 Float4x4
 
-// =============================================================================
-// Rotations, Quaternions, Dual Quaternions & Spatial Algebra
-// =============================================================================
+#
+Rotations, Quaternions, Dual Quaternions & Spatial Algebra
+#
 
 AngleRadian    { Radian Float }
 AngleDegree    { Degree Float }
@@ -119,9 +119,9 @@ SphericalHarmonicsL2 {
   L2  List(Float3)
 }
 
-// =============================================================================
-// Advanced Number Types & Curves
-// =============================================================================
+#
+Advanced Number Types & Curves
+#
 
 Complex {
   Real      Float
@@ -161,9 +161,9 @@ CubicCurve ICurve & {
   ErrorBound Float
 }
 
-// =============================================================================
-// Procedural Noise & Voronoi Math
-// =============================================================================
+#
+Procedural Noise & Voronoi Math
+#
 
 NoiseType "Perlin" | "Simplex" | "Worley" | "Voronoi" | "Value" | "Gabor" | "Wavelet" | "White"
 FractalType "None" | "FBM" | "Multifractal" | "HybridMultifractal" | "HeteroTerrain" | "RidgedMultifractal"
@@ -188,9 +188,9 @@ VoronoiOutput {
   Position Float4
 }
 
-// =============================================================================
-// Arithmetic, Bitwise & Logic Operations
-// =============================================================================
+#
+Arithmetic, Bitwise & Logic Operations
+#
 
 MathOps(A Int, B Int) [
   {
@@ -227,9 +227,9 @@ LogicOps(X Bool, Y Bool, Val Int) [
   }
 ]
 
-// =============================================================================
-// Elementary, Vector & Transcendental Functions
-// =============================================================================
+#
+Elementary, Vector & Transcendental Functions
+#
 
 Math {
   Abs(X Float) [
@@ -336,9 +336,9 @@ Math {
   ]
 }
 
-// =============================================================================
-// Vector & Complex Algebra Operations
-// =============================================================================
+#
+Vector & Complex Algebra Operations
+#
 
 AddVec3(A VectorFloat3, B VectorFloat3) [
   VectorFloat3 { X (A.X + B.X), Y (A.Y + B.Y), Z (A.Z + B.Z) }
@@ -379,9 +379,9 @@ ComplexConjugate(C Complex) [
   Complex { Real C.Real, Imaginary (0.0 - C.Imaginary) }
 ]
 
-// =============================================================================
-// Statistics & Probability Distributions
-// =============================================================================
+#
+Statistics & Probability Distributions
+#
 
 DescriptiveStats {
   Count    Int

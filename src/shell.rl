@@ -2,9 +2,9 @@ _ primitive
 _ primitive
 _ structure
 
-// =============================================================================
-// Shell, Process & OS Environment
-// =============================================================================
+#
+Shell, Process & OS Environment
+#
 
 ProcessSignal "SIGINT" | "SIGTERM" | "SIGKILL" | "SIGHUP" | "SIGQUIT" | "SIGUSR1" | "SIGUSR2"
 

@@ -3,9 +3,9 @@ _ primitive
 _ structure
 _ network
 
-// =============================================================================
-// Database, Storage Engines, Queries & Transactions
-// =============================================================================
+#
+Database, Storage Engines, Queries & Transactions
+#
 
 DbEngine "postgres" | "mysql" | "sqlite" | "mongodb" | "redis" | "clickhouse" | "dynamodb" | "qdrant" | "neo4j" | "cassandra" | "cockroachdb" | "duckdb" | "rocksdb"
 
@@ -71,9 +71,9 @@ Migration {
   AppliedAt Option(Int)
 }
 
-// =============================================================================
-// High-Performance Columnar, Chunked & Graph Topology Storage
-// =============================================================================
+#
+High-Performance Columnar, Chunked & Graph Topology Storage
+#
 
 NodeId  Int
 EdgeId  String
@@ -165,9 +165,9 @@ GraphTopology {
   EdgeNextIn   Column
 }
 
-// =============================================================================
-// Event Sourcing, Vector Search & RAG Database
-// =============================================================================
+#
+Event Sourcing, Vector Search & RAG Database
+#
 
 EventActionType "Create" | "Read" | "Update" | "Delete"
 ConfigEvent     { Type EventActionType, Path List(String), Value Any }
@@ -200,9 +200,9 @@ RagDbConfig {
   VectorDim      Int
 }
 
-// =============================================================================
-// Domain Models & DB Operations
-// =============================================================================
+#
+Domain Models & DB Operations
+#
 
 Cart {
   CartId String

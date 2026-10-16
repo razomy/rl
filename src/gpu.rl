@@ -5,9 +5,9 @@ _ math
 _ space
 _ ui
 
-// =============================================================================
-// 1. GPU Backend, Buffers, Batches, Textures & Framebuffers
-// =============================================================================
+#
+1. GPU Backend, Buffers, Batches, Textures & Framebuffers
+#
 
 GPUBackendType "None" | "OpenGL" | "Metal" | "Vulkan" | "DirectX12" | "WebGPU" | "Dummy"
 
@@ -148,9 +148,9 @@ GPUViewport {
   FramebufferOverlay GPUFrameBuffer
 }
 
-// =============================================================================
-// 2. Shader Creation, Specialization & Ray Tracing Acceleration Structures
-// =============================================================================
+#
+2. Shader Creation, Specialization & Ray Tracing Acceleration Structures
+#
 
 GPUSpecializationConstant {
   Name  String
@@ -208,9 +208,9 @@ GPUTopLevelAS {
   IsDirty   Bool
 }
 
-// =============================================================================
-// 3. GPUMaterial & Shader Closures (BSDF / EDF / VDF)
-// =============================================================================
+#
+3. GPUMaterial & Shader Closures (BSDF / EDF / VDF)
+#
 
 GPUMaterialEngine "EEVEE" | "Compositor" | "Cycles"
 GPUMaterialStatus "Failed" | "Queued" | "Success"
@@ -265,9 +265,9 @@ ShaderClosure
   | ClosureRefraction | ClosureSheen | ClosureHair | ClosureVolumeScatter
   | ClosureVolumeAbsorption | ClosureEmission | ClosureTransparency
 
-// =============================================================================
-// 4. Vulkan Render Graph & BSL Shader Compiler Tool
-// =============================================================================
+#
+4. Vulkan Render Graph & BSL Shader Compiler Tool
+#
 
 VKNodeType
   "BeginRendering" | "EndRendering" | "ClearAttachments" | "ClearColorImage"

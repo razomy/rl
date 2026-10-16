@@ -6,9 +6,9 @@ _ place
 _ organization
 _ person
 
-// =============================================================================
-// CreativeWork
-// =============================================================================
+#
+CreativeWork
+#
 
 Headline String
 Genre    String
@@ -78,9 +78,9 @@ CreativeWork Thing & {
     WordCount Count
 }
 
-// =============================================================================
-// Text works
-// =============================================================================
+#
+Text works
+#
 
 Article CreativeWork & { ArticleBody Text, ArticleSection String, PageStart Count, PageEnd Count, Pagination String, Speakable SpeakableSpecification }
 NewsArticle     Article & { Dateline String, PrintColumn String, PrintEdition String, PrintPage String, PrintSection String }
@@ -124,9 +124,9 @@ BookSeries CreativeWorkSeries
 PublicationIssue CreativeWork & { IssueNumber String, PageStart Count, PageEnd Count }
 PublicationVolume CreativeWork & { VolumeNumber String }
 
-// =============================================================================
-// Reviews, comments, messages
-// =============================================================================
+#
+Reviews, comments, messages
+#
 
 Review CreativeWork & { ItemReviewed Thing, ReviewBody Text, ReviewRating Rating, ReviewAspect String, PositiveNotes ItemList, NegativeNotes ItemList }
 ClaimReview    Review & { ClaimReviewed String }
@@ -176,9 +176,9 @@ Thesis_      Thesis
 WebContent   CreativeWork
 HealthTopicContent WebContent
 
-// =============================================================================
-// Web
-// =============================================================================
+#
+Web
+#
 
 WebSite  CreativeWork & { Issn }
 WebPage  CreativeWork & { Breadcrumb BreadcrumbList, LastReviewed Date, MainContentOfPage WebPageElement, PrimaryImageOfPage Image, RelatedLink List(Url), Reviewer Agent, SignificantLink List(Url), Speakable SpeakableSpecification }
@@ -204,9 +204,9 @@ WPFooter         WebPageElement
 WPHeader         WebPageElement
 WPSideBar        WebPageElement
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Author(A Agent, T Text) [ CreativeWork { Author List1(A), Text T, DateCreated Now, CreativeWorkStatus "Draft" } ]
 Edit(W CreativeWork, T Text) [ W & { Text T, DateModified Now } ]

@@ -1,8 +1,8 @@
 _ semantic
 // todo
-// =============================================================================
-// Fundamental Primitives & Refinements
-// =============================================================================
+#
+Fundamental Primitives & Refinements
+#
 
 Number Number & Object
 String { Length Number } & Object & String

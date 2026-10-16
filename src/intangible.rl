@@ -1,9 +1,9 @@
 _ thing
 _ enumeration
 
-// =============================================================================
-// Intangible
-// =============================================================================
+#
+Intangible
+#
 
 Intangible Thing
 
@@ -136,9 +136,9 @@ Taxi TaxiService
 TaxiService Service
 WebAPI Service & { Documentation Url }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Rate(T Thing, V Real, A Agent) [ Rating { RatingValue V, Author A, BestRating 5, WorstRating 1 } ]
 Aggregate(R AggregateRating, N Rating) [

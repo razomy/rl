@@ -6,9 +6,9 @@ _ time
 _ space
 _ energy
 
-// =============================================================================
-// Particles
-// =============================================================================
+#
+Particles
+#
 
 Spin Real
 
@@ -32,9 +32,9 @@ Neutron  Particle & { ParticleKind "neutron",  ParticleFamily "hadron" }
 Photon   Particle & { ParticleKind "photon",   ParticleFamily "gauge-boson" }
 AntiParticle(P Particle) Particle & { ParticleKind P.ParticleKind, Charge (0 - P.Charge.Value) }
 
-// =============================================================================
-// Elements
-// =============================================================================
+#
+Elements
+#
 
 ElementSymbol String
 AtomicNumber  Range(1, 118) & Int
@@ -169,9 +169,9 @@ Livermorium   Element & { Name "livermorium",   ElementSymbol "Lv", AtomicNumber
 Tennessine    Element & { Name "tennessine",    ElementSymbol "Ts", AtomicNumber 117, ElementCategory "unknown" }
 Oganesson     Element & { Name "oganesson",     ElementSymbol "Og", AtomicNumber 118, ElementCategory "unknown" }
 
-// =============================================================================
-// Atoms and molecules
-// =============================================================================
+#
+Atoms and molecules
+#
 
 ProtonCount   Count
 NeutronCount  Count
@@ -205,9 +205,9 @@ Molecule {
     Bonds List(Bond)
 }
 
-// =============================================================================
-// Substances and phases
-// =============================================================================
+#
+Substances and phases
+#
 
 MeltingPoint Temperature
 BoilingPoint Temperature
@@ -247,9 +247,9 @@ Alloy    Mixture & { Phase "solid" }
 Suspension Mixture
 Emulsion   Mixture
 
-// =============================================================================
-// Materials and bodies
-// =============================================================================
+#
+Materials and bodies
+#
 
 MaterialKind "metal" | "wood" | "stone" | "glass" | "plastic" | "ceramic" | "fabric" | "paper"
     | "rubber" | "composite" | "concrete" | "leather" | "bone" | "clay" | "sand" | "soil"
@@ -296,9 +296,9 @@ Exothermic Reaction & [ _.Released.Value > 0 ]
 Endothermic Reaction & [ _.Released.Value < 0 ]
 NoReaction {}
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Melt(S Solid) [
     Temperature.Value . {

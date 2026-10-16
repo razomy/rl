@@ -2,9 +2,9 @@ _ primitive
 _ primitive
 _ structure
 
-// =============================================================================
-// Declarative Stream & Pipeline Combinators
-// =============================================================================
+#
+Declarative Stream & Pipeline Combinators
+#
 
 Stream {
   Filter(Pred)              [ native_stream_filter(Pred) ]
@@ -37,9 +37,9 @@ Stream {
   CollectMap()              [ native_stream_collect_map ]
 }
 
-// =============================================================================
-// Stream Examples & Generators
-// =============================================================================
+#
+Stream Examples & Generators
+#
 
 FizzBuzz(Limit Int) [
   (1..Limit) . Map(N [

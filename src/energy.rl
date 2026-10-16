@@ -5,9 +5,9 @@ _ quantity
 _ time
 _ space
 
-// =============================================================================
-// Energy and power
-// =============================================================================
+#
+Energy and power
+#
 
 Energy     Measure(Real, Joule)
 Power      Measure(Real, Watt)
@@ -28,9 +28,9 @@ EnergyStore {
     Capacity Energy
 }
 
-// =============================================================================
-// Forces
-// =============================================================================
+#
+Forces
+#
 
 FundamentalForce "gravity" | "electromagnetism" | "strong-nuclear" | "weak-nuclear"
 ForceMagnitude Measure(Real, Newton)
@@ -45,9 +45,9 @@ Momentum { Mass, Velocity }
 Gravity  Force & { FundamentalForce "gravity" }
 Friction Force & { FundamentalForce "electromagnetism" }
 
-// =============================================================================
-// Temperature
-// =============================================================================
+#
+Temperature
+#
 
 Celsius    Unit & { UnitSymbol "C", Dimension "temperature", Factor 1 }
 Fahrenheit Unit & { UnitSymbol "F", Dimension "temperature", Factor 0.5556 }
@@ -63,9 +63,9 @@ Warm    Thermal & [ _.Temperature.Value >= 273 ] & [ _.Temperature.Value <= 323 
 
 HeatTransfer "conduction" | "convection" | "radiation"
 
-// =============================================================================
-// Waves, light and sound
-// =============================================================================
+#
+Waves, light and sound
+#
 
 Wavelength Length
 Amplitude  Real
@@ -107,9 +107,9 @@ Sound Wave & {
 Silence Sound & { Loudness { Value 0, Unit Decibel } }
 Audible Sound & [ _.Pitch.Value >= 20 ] & [ _.Pitch.Value <= 20000 ]
 
-// =============================================================================
-// Fields and electricity
-// =============================================================================
+#
+Fields and electricity
+#
 
 FieldKind "gravitational" | "electric" | "magnetic" | "electromagnetic" | "higgs"
 Strength  Real
@@ -133,9 +133,9 @@ Unpowered {}
 Radiating { Emission Light }
 Sounding  { Emission Sound }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Heat(B Thermal, E Energy) [
     B & Thermal { Temperature { Value (Temperature.Value + E.Value / HeatCapacity), Unit Kelvin } }

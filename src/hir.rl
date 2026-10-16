@@ -2,9 +2,9 @@ _ primitive
 _ primitive
 _ structure
 
-// =============================================================================
-// 1. Lexer Tokens, Spans & Concrete Syntax Tree (CST)
-// =============================================================================
+#
+1. Lexer Tokens, Spans & Concrete Syntax Tree (CST)
+#
 
 TokenType "VALUE" | "WHITESPACES" | "ASSIGN" | "SEPERATE" | "INDENT" | "DEDENT" | "NEWLINE" | "SEMICOLON" | "EOF"
 
@@ -22,9 +22,9 @@ TokenCsn { Kind "TokenCsn", Token Token, Span Span }
 GroupCsn { Kind "GroupCsn", Children List(CsNode) }
 CsNode   TokenCsn | GroupCsn
 
-// =============================================================================
-// 2. High-Level Intermediate Representation (HIR) Ontology
-// =============================================================================
+#
+2. High-Level Intermediate Representation (HIR) Ontology
+#
 // 0. Panic:        Try / Throw
 // 1. State:        Literal, Sequence, Record, Template
 // 2. Operation:    Unary, Binary, Cast
@@ -156,9 +156,9 @@ HirType
 
 HirNode HirType
 
-// =============================================================================
-// 3. Semantic Graph & Compiler Context
-// =============================================================================
+#
+3. Semantic Graph & Compiler Context
+#
 
 SemanticNode(T) {
   Hir T

@@ -10,9 +10,9 @@ _ agent
 _ information
 _ economy
 
-// =============================================================================
-// Artifacts
-// =============================================================================
+#
+Artifacts
+#
 
 Condition "new" | "like-new" | "good" | "worn" | "damaged" | "broken" | "destroyed"
 Manufacturer Agent
@@ -33,9 +33,9 @@ InUse    { User Agent }
 Stored   { Location Position }
 Discarded { At Instant }
 
-// =============================================================================
-// Tools and devices
-// =============================================================================
+#
+Tools and devices
+#
 
 ToolKind "hammer" | "screwdriver" | "wrench" | "saw" | "drill" | "knife" | "axe" | "shovel"
     | "needle" | "brush" | "pen" | "pencil" | "ruler" | "scissors" | "pliers" | "spoon" | "pot"
@@ -62,9 +62,9 @@ Processor Component & { Cores Count, ClockSpeed Frequency }
 Display   Component & { Resolution, Diagonal Length }
 Memory_   Component & { Capacity DataSize }
 
-// =============================================================================
-// Vehicles
-// =============================================================================
+#
+Vehicles
+#
 
 VehicleKind "car" | "truck" | "bus" | "motorcycle" | "bicycle" | "scooter" | "train" | "tram"
     | "subway" | "ship" | "boat" | "submarine" | "airplane" | "helicopter" | "drone" | "rocket"
@@ -83,9 +83,9 @@ Vehicle Artifact & Moving & {
 Parked  {}
 Driving { Driver Agent, Destination GeoCoordinate }
 
-// =============================================================================
-// Buildings and infrastructure
-// =============================================================================
+#
+Buildings and infrastructure
+#
 
 BuildingKind "house" | "apartment" | "office" | "factory" | "warehouse" | "shop" | "school"
     | "hospital" | "church" | "mosque" | "temple" | "synagogue" | "stadium" | "theater"
@@ -112,9 +112,9 @@ UnderConstruction { Progress Fraction }
 Completed_ { CompletedAt Instant }
 Demolished { At Instant }
 
-// =============================================================================
-// Software
-// =============================================================================
+#
+Software
+#
 
 Version String
 License "mit" | "apache-2.0" | "gpl-3.0" | "bsd-3" | "mpl-2.0" | "proprietary" | "public-domain"
@@ -135,9 +135,9 @@ Uninstalled {}
 Running     { Since Instant }
 Stopped     {}
 
-// =============================================================================
-// Clothing and food
-// =============================================================================
+#
+Clothing and food
+#
 
 GarmentKind "shirt" | "trousers" | "dress" | "skirt" | "coat" | "jacket" | "hat" | "shoes"
     | "socks" | "gloves" | "scarf" | "underwear" | "uniform"
@@ -152,9 +152,9 @@ Raw    {}
 Cooked { Method "boiled" | "fried" | "baked" | "grilled" | "steamed" | "roasted" }
 Spoiled {}
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Make(A Agent, M Material, Purpose String) [ Artifact { Material M, Maker A, MadeAt Now, Condition "new", Purpose } & Working {} ]
 Assemble(Parts List(Component), A Agent) [ Artifact { Maker A, MadeAt Now, Condition "new" } & Working {} ]

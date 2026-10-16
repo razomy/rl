@@ -6,9 +6,9 @@ _ space
 _ ui
 _ gpu
 
-// =============================================================================
-// 1. Color Management (OpenColorIO), Curves, Histograms & Scopes
-// =============================================================================
+#
+1. Color Management (OpenColorIO), Curves, Histograms & Scopes
+#
 
 CBData {
   R   Float, G Float, B Float, A Float
@@ -180,9 +180,9 @@ Scopes {
   Hist           Histogram
 }
 
-// =============================================================================
-// 2. Render Engine, Passes, Layers, Results & Bake
-// =============================================================================
+#
+2. Render Engine, Passes, Layers, Results & Bake
+#
 
 EvaluationMode "Viewport" | "Render"
 
@@ -272,9 +272,9 @@ RenderData {
   Views            List(SceneRenderView)
 }
 
-// =============================================================================
-// 3. Realtime Compositor System (COM)
-// =============================================================================
+#
+3. Realtime Compositor System (COM)
+#
 
 CompositorExecutionMode "Render" | "Preview"
 CompositorResultType    "Float" | "Float2" | "Float3" | "Float4" | "Color" | "Int" | "Int2" | "Int3" | "Bool" | "Float4x4" | "Menu" | "String"
@@ -329,9 +329,9 @@ CompositorOperation {
   ResultsMappedToInputs Map(String, CompositorResult)
 }
 
-// =============================================================================
-// 4. Viewport Draw Manager, EEVEE, Workbench & Overlay Engines
-// =============================================================================
+#
+4. Viewport Draw Manager, EEVEE, Workbench & Overlay Engines
+#
 
 DRWSelectStage "PassPre" | "PassPost"
 DRWState       Int
@@ -465,9 +465,9 @@ OverlayInstance DrawEngine & {
   ClippingEnabled Bool
 }
 
-// =============================================================================
-// 5. Ontological Typestates for Shader Compilation & Rendering
-// =============================================================================
+#
+5. Ontological Typestates for Shader Compilation & Rendering
+#
 
 GpuReady            { VramAllocatedBytes Int }
 GpuCompiled         { ShaderHandle GPUShader, CompiledAt Int }

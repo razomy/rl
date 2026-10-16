@@ -7,9 +7,9 @@ _ agent
 _ information
 _ society
 
-// =============================================================================
-// Currency and money
-// =============================================================================
+#
+Currency and money
+#
 
 CurrencyCode "USD" | "EUR" | "GBP" | "JPY" | "CNY" | "CHF" | "CAD" | "AUD" | "NZD" | "SEK"
     | "NOK" | "DKK" | "PLN" | "CZK" | "HUF" | "UAH" | "RUB" | "TRY" | "INR" | "KRW" | "SGD"
@@ -37,9 +37,9 @@ TaxRate Percent
 Tax { Name, TaxRate, Jurisdiction }
 InterestRate Percent
 
-// =============================================================================
-// Assets and accounts
-// =============================================================================
+#
+Assets and accounts
+#
 
 AssetKind "cash" | "deposit" | "stock" | "bond" | "real-estate" | "commodity" | "vehicle"
     | "equipment" | "intellectual-property" | "crypto" | "receivable" | "inventory"
@@ -71,9 +71,9 @@ Closed  { ClosedAt Instant }
 
 Loan { Principal Money, InterestRate, Term Duration, Borrower Agent, Lender Agent }
 
-// =============================================================================
-// Exchange
-// =============================================================================
+#
+Exchange
+#
 
 TransactionKind "payment" | "transfer" | "deposit" | "withdrawal" | "refund" | "fee" | "salary"
     | "purchase" | "sale" | "loan" | "repayment" | "donation" | "tax"
@@ -127,9 +127,9 @@ Retired    { Since Instant }
 Insufficient { Needed Money, Available Balance }
 Rejected     { Reason String }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Pay(From Account, To Account, M Money) [
     From.Balance.Amount . {

@@ -1,9 +1,9 @@
 _ primitive
 _ primitive
 
-// =============================================================================
-// Core Traits & Structural Mixins
-// =============================================================================
+#
+Core Traits & Structural Mixins
+#
 
 PrimaryId(T) { Id String }
 ForeignId(T) { Id String }
@@ -55,9 +55,9 @@ ExtendsEntity(TBase, TSelf)      IEntity & HasPrimary(TSelf) & HasForeign(TBase)
 ExtendsCountEntity(TBase, TSelf) ExtendsEntity(TBase, TSelf) & HasCount
 ExtendsRangeEntity(TBase, TSelf) ExtendsEntity(TBase, TSelf) & HasRange
 
-// =============================================================================
-// Tuples, Indexing, Spans & Memory Sharing
-// =============================================================================
+#
+Tuples, Indexing, Spans & Memory Sharing
+#
 
 Tuple(T)        ()
 Pair(A, B)      { First A, Second B }
@@ -118,9 +118,9 @@ GArray   GSpan & { Capacity Int }
 GVArray  GSpan & { IsSingle Bool }
 GList    { CppType String, Data Any, Size Int }
 
-// =============================================================================
-// Option, Result & Either (Algebraic Sum Types)
-// =============================================================================
+#
+Option, Result & Either (Algebraic Sum Types)
+#
 
 Some(T)   { Value T }
 Option(T) Some(T) | None
@@ -133,9 +133,9 @@ Left(L)      { Value L }
 Right(R)     { Value R }
 Either(L, R) Left(L) | Right(R)
 
-// =============================================================================
-// Lists, Linked Lists, Queues, Deques & Buffers
-// =============================================================================
+#
+Lists, Linked Lists, Queues, Deques & Buffers
+#
 
 Nil  None
 Cons(T) {
@@ -218,9 +218,9 @@ SkipList(T) {
   MaxLevel Int
 }
 
-// =============================================================================
-// Maps, Sets, Bags, Caches & Virtual Recursive Dictionaries (VRD)
-// =============================================================================
+#
+Maps, Sets, Bags, Caches & Virtual Recursive Dictionaries (VRD)
+#
 
 Map(K, V)      { (K) V }
 Set(T)         { (T) Bool }
@@ -259,9 +259,9 @@ LFUCache(K, V) {
   Frequencies Map(K, Int)
 }
 
-// =============================================================================
-// Probabilistic Data Structures
-// =============================================================================
+#
+Probabilistic Data Structures
+#
 
 ProbabilisticDataStructure { Accuracy Float }
 
@@ -286,9 +286,9 @@ CountMinSketch(T) ProbabilisticDataStructure & {
   Table List(List(Int))
 }
 
-// =============================================================================
-// Trees, Tries, Heaps & Spatial Trees (BVH, KDTree, QuadTree, Octree)
-// =============================================================================
+#
+Trees, Tries, Heaps & Spatial Trees (BVH, KDTree, QuadTree, Octree)
+#
 
 HasOrder(T)        { Prev Option(T), Next Option(T) }
 HasParent(T)       { Parent Option(T) }
@@ -372,9 +372,9 @@ BVHTree {
   Len      Int
 }
 
-// =============================================================================
-// Graphs & Networks
-// =============================================================================
+#
+Graphs & Networks
+#
 
 OrderedEdge {
   VLow  Int
@@ -410,9 +410,9 @@ EdgeListGraph(N, E)        { Nodes List(N), Edges List((E, E)) }
 GraphAdjacencyMatrix(T)    { Vertices List(T), Matrix List(List(Float)) }
 GraphAdjacencyList(T)      { AdjacencyMap Map(T, List(T)) }
 
-// =============================================================================
-// Matrices, Tensors & Diffs
-// =============================================================================
+#
+Matrices, Tensors & Diffs
+#
 
 MatrixRow(T)   { Row List(T) }
 MatrixModel(T) { Rows List(MatrixRow(T)) }
@@ -445,9 +445,9 @@ RemoveDeltaVrd { Path List(String), AfterPath List(String), Remove Bool }
 AddDeltaVrd    { Path List(String), AfterPath List(String), Add VrdOrValue(String) }
 DeltaVrd       RemoveDeltaVrd | AddDeltaVrd
 
-// =============================================================================
-// Algebraic Expressions & Catamorphisms
-// =============================================================================
+#
+Algebraic Expressions & Catamorphisms
+#
 
 Num(Val)  { Value Val }
 Add(L, R) { Left L, Right R }
@@ -474,9 +474,9 @@ Cata(Expression, Alg) [
   }
 ]
 
-// =============================================================================
-// Collection Operations & Transitions
-// =============================================================================
+#
+Collection Operations & Transitions
+#
 
 OptionMap(Opt, Fn) [
   Opt . {

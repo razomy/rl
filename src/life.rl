@@ -8,9 +8,9 @@ _ energy
 _ matter
 _ cosmos
 
-// =============================================================================
-// Taxonomy
-// =============================================================================
+#
+Taxonomy
+#
 
 TaxonRank "domain" | "kingdom" | "phylum" | "class" | "order" | "family" | "genus" | "species" | "subspecies"
 ScientificName String
@@ -155,9 +155,9 @@ QuercusRobur  Species & { ScientificName "Quercus robur",      CommonName "oak",
 ConservationStatus "least-concern" | "near-threatened" | "vulnerable" | "endangered"
     | "critically-endangered" | "extinct-in-the-wild" | "extinct"
 
-// =============================================================================
-// Biology building blocks
-// =============================================================================
+#
+Biology building blocks
+#
 
 Nucleotide "A" | "C" | "G" | "T" | "U"
 AminoAcid "Ala" | "Arg" | "Asn" | "Asp" | "Cys" | "Gln" | "Glu" | "Gly" | "His" | "Ile"
@@ -200,9 +200,9 @@ Body {
     Height
 }
 
-// =============================================================================
-// Organisms
-// =============================================================================
+#
+Organisms
+#
 
 Sex "female" | "male" | "hermaphrodite" | "none"
 Diet "herbivore" | "carnivore" | "omnivore" | "detritivore" | "autotroph" | "parasite"
@@ -251,9 +251,9 @@ Population { Species, Size Count, Habitat }
 Ecosystem  { Biome, Populations List(Population), Climate }
 FoodChain  List(Species)
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Born(O Organism) [ O & Alive { Since Now } & { LifeStage "infant", BirthDate Today } ]
 Germinate(S Plant & { LifeStage "seed" }) [ S & Alive { Since Now } & { LifeStage "juvenile" } ]

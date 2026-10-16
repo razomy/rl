@@ -7,9 +7,9 @@ _ space
 _ energy
 _ matter
 
-// =============================================================================
-// Astronomical units
-// =============================================================================
+#
+Astronomical units
+#
 
 AstronomicalUnit Unit & { UnitSymbol "au", Dimension "length", Factor 149597870700 }
 LightYear        Unit & { UnitSymbol "ly", Dimension "length", Factor 9460730472580800 }
@@ -18,9 +18,9 @@ Parsec           Unit & { UnitSymbol "pc", Dimension "length", Factor 3085677581
 Redshift  Real
 Magnitude Real
 
-// =============================================================================
-// Celestial bodies
-// =============================================================================
+#
+Celestial bodies
+#
 
 CelestialBody {
     Name
@@ -111,9 +111,9 @@ MoonPhase "new" | "waxing-crescent" | "first-quarter" | "waxing-gibbous"
     | "full" | "waning-gibbous" | "last-quarter" | "waning-crescent"
 Eclipse { EclipseKind "solar" | "lunar", At Instant, Totality Fraction }
 
-// =============================================================================
-// Earth systems
-// =============================================================================
+#
+Earth systems
+#
 
 Hemisphere "northern" | "southern" | "eastern" | "western"
 Season "spring" | "summer" | "autumn" | "winter" | "wet" | "dry"
@@ -160,9 +160,9 @@ WaterBody "ocean" | "sea" | "lake" | "river" | "stream" | "pond" | "bay" | "gulf
 Continent "africa" | "antarctica" | "asia" | "australia" | "europe" | "north-america" | "south-america"
 Ocean "pacific" | "atlantic" | "indian" | "southern" | "arctic"
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Revolve(B Orbiting, D Duration) [ B & { Position (Position . Translate(Velocity)) } ]
 Ignite(C CelestialBody) [ Star & C & { StarStage "main-sequence" } ]

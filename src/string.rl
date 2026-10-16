@@ -2,9 +2,9 @@ _ primitive
 _ primitive
 _ structure
 
-// =============================================================================
-// Character Constants & Lexemes (merged from chars.rl)
-// =============================================================================
+#
+Character Constants & Lexemes (merged from chars.rl)
+#
 
 // Split & Delimiters
 SPACE        ' '
@@ -50,9 +50,9 @@ QUESTION     '?'
 HASH         '#'
 DOLLAR       '$'
 
-// =============================================================================
-// Regular Expressions & Pattern Matching
-// =============================================================================
+#
+Regular Expressions & Pattern Matching
+#
 
 RegexPattern {
   Pattern String
@@ -73,9 +73,9 @@ Regex {
   Replace(Input String, Pat String, Repl String) [ (Input, Pat, Repl) . native_regex_replace ]
 }
 
-// =============================================================================
-// String Operations Module
-// =============================================================================
+#
+String Operations Module
+#
 
 String {
   Length(S String)                 [ S . native_str_len ]
@@ -108,9 +108,9 @@ String {
   ToFloat(S String)                [ S . native_str_to_float ]
 }
 
-// =============================================================================
-// Serialization Formats (JSON, YAML, TOML, CSV, XML)
-// =============================================================================
+#
+Serialization Formats (JSON, YAML, TOML, CSV, XML)
+#
 
 Json {
   Parse(Raw String)        [ Raw . native_json_parse ]

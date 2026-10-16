@@ -10,9 +10,9 @@ _ creative_work_media
 _ creative_work_code
 _ computing
 
-// =============================================================================
-// 1. Base Action & Status Typestates (schema.org)
-// =============================================================================
+#
+1. Base Action & Status Typestates (schema.org)
+#
 
 Action Thing & {
   ActionStatus  ActionStatusType
@@ -35,9 +35,9 @@ Running_  { ActionStatus "ActiveActionStatus" }
 Completed { ActionStatus "CompletedActionStatus" }
 Errored   { ActionStatus "FailedActionStatus" }
 
-// =============================================================================
-// 2. InteractAction, CommunicateAction & AssessAction Subtypes
-// =============================================================================
+#
+2. InteractAction, CommunicateAction & AssessAction Subtypes
+#
 
 InteractAction    Action
 BefriendAction    InteractAction
@@ -73,9 +73,9 @@ LikeAction     ReactAction
 WantAction     ReactAction
 ReviewAction   AssessAction & { ResultReview Review }
 
-// =============================================================================
-// 3. Create, Update, Move, Consume, Organize, Play, Search & Control Actions
-// =============================================================================
+#
+3. Create, Update, Move, Consume, Organize, Play, Search & Control Actions
+#
 
 CreateAction     Action
 CookAction       CreateAction & { FoodEstablishment_ Thing, Recipe Recipe }
@@ -147,9 +147,9 @@ SuspendAction    ControlAction
 SolveMathAction Action & { EduQuestionType String }
 SeekToAction    Action & { StartOffset Real }
 
-// =============================================================================
-// 4. TradeAction & TransferAction Subtypes
-// =============================================================================
+#
+4. TradeAction & TransferAction Subtypes
+#
 
 TradeAction    Action & { Price Price, PriceCurrency Currency, PriceSpecification PriceSpecification }
 BuyAction      TradeAction & { Seller Agent }
@@ -172,9 +172,9 @@ SendAction     TransferAction & { DeliveryMethod DeliveryMethod, Recipient Agent
 TakeAction     TransferAction
 DownloadAction TransferAction
 
-// =============================================================================
-// 5. Base, Social, Lifecycle & Trade Transitions
-// =============================================================================
+#
+5. Base, Social, Lifecycle & Trade Transitions
+#
 
 Propose(A Agent, O Thing) [ Action { Agent A, Object O, ActionStatus "PotentialActionStatus" } ]
 Begin(X Action & Potential) [ X & { ActionStatus "ActiveActionStatus", StartTime Now } ]
@@ -235,9 +235,9 @@ Lend(A Agent, I Thing, B Agent) [ LendAction { Agent A, Object I, Borrower B } ]
 ReturnItem(A Agent, I Thing, R Agent) [ ReturnAction { Agent A, Object I, Recipient R } ]
 Ship_(A Agent, I Thing, R Agent, M DeliveryMethod) [ SendAction { Agent A, Object I, Recipient R, DeliveryMethod M } ]
 
-// =============================================================================
-// 6. Digital & Computing Actions (6-Level Hierarchy)
-// =============================================================================
+#
+6. Digital & Computing Actions (6-Level Hierarchy)
+#
 
 // Level 1: Physical Input
 Point(A Agent, T Coordinates) [ CursorState ]

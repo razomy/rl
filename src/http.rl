@@ -5,9 +5,9 @@ _ string
 _ db
 _ auth
 
-// =============================================================================
-// Network Layer (IP, TCP, UDP, DNS, TLS)
-// =============================================================================
+#
+Network Layer (IP, TCP, UDP, DNS, TLS)
+#
 
 IpVersion "IPv4" | "IPv6"
 SocketProtocol "TCP" | "UDP" | "QUIC" | "SCTP" | "Unix"
@@ -33,9 +33,9 @@ TlsConfig {
   MinVersion "TLS1.2" | "TLS1.3"
 }
 
-// =============================================================================
-// HTTP Protocol, Headers, Cookies & Status Codes
-// =============================================================================
+#
+HTTP Protocol, Headers, Cookies & Status Codes
+#
 
 HttpMethod "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS" | "CONNECT" | "TRACE"
 
@@ -85,9 +85,9 @@ HttpResponse {
   Body    String
 }
 
-// =============================================================================
-// WebSockets, SSE, GraphQL & gRPC
-// =============================================================================
+#
+WebSockets, SSE, GraphQL & gRPC
+#
 
 WsFrameType "text" | "binary" | "ping" | "pong" | "close"
 WsMessage {
@@ -113,9 +113,9 @@ GraphQlResponse {
   Errors List(String)
 }
 
-// =============================================================================
-// HTTP Client & Declarative API Router
-// =============================================================================
+#
+HTTP Client & Declarative API Router
+#
 
 Http {
   Get(Url String)                     [ native_http_get(Url) ]

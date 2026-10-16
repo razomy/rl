@@ -10,9 +10,9 @@ _ thing
 _ enumeration
 _ intangible
 
-// =============================================================================
-// 1. Core Data-Blocks (ID), Main Database, Undo & RNA Reflection
-// =============================================================================
+#
+1. Core Data-Blocks (ID), Main Database, Undo & RNA Reflection
+#
 
 SessionUID { Value Int }
 SubFrame   { Frame Int, Subframe Float }
@@ -208,9 +208,9 @@ UndoStack {
   GroupLevel        Int
 }
 
-// =============================================================================
-// 2. Attributes, Fields, MultiFunctions, LazyFunctions & Geometry Set
-// =============================================================================
+#
+2. Attributes, Fields, MultiFunctions, LazyFunctions & Geometry Set
+#
 
 AttrStorageType "Array" | "Single"
 AttrType        "Bool" | "Int8" | "Int16_2D" | "Int32" | "Int32_2D" | "Float" | "Float2" | "Float3" | "Float4" | "Float4x4" | "ColorByte" | "ColorFloat" | "Quaternion" | "String"
@@ -279,9 +279,9 @@ GeometrySet {
   Bundle     Option(Any)
 }
 
-// =============================================================================
-// 3. Geometry Entities: Mesh, BMesh, Subdiv, Curves, PointCloud, Volume, GPencil
-// =============================================================================
+#
+3. Geometry Entities: Mesh, BMesh, Subdiv, Curves, PointCloud, Volume, GPencil
+#
 
 bDeformWeight { DefNr Int, Weight Float }
 MDeformVert   { Dw List(bDeformWeight), Flag Int }
@@ -503,9 +503,9 @@ GreasePencil ID & {
   Flag                 Int
 }
 
-// =============================================================================
-// 4. Animation, Rigging, Armature, Pose, F-Curves, Drivers & NLA
-// =============================================================================
+#
+4. Animation, Rigging, Armature, Pose, F-Curves, Drivers & NLA
+#
 
 SlotHandle     { Value Int }
 ActionLayerMix "Replace" | "Add" | "Subtract" | "Multiply"
@@ -786,9 +786,9 @@ bPose {
   Ctime        Float
 }
 
-// =============================================================================
-// 5. Objects, Modifiers, Physics (Cloth, Fluid, RigidBody, XPBD) & Scenes
-// =============================================================================
+#
+5. Objects, Modifiers, Physics (Cloth, Fluid, RigidBody, XPBD) & Scenes
+#
 
 ObjectType
   "Empty" | "Mesh" | "CurveLegacy" | "Surf" | "Font" | "MBall" | "Lamp"
@@ -1058,9 +1058,9 @@ Depsgraph {
   IsFullyEvaluated   Bool
 }
 
-// =============================================================================
-// 6. Node System, Sculpt PBVH & Window Manager (WM / Screen / Editors)
-// =============================================================================
+#
+6. Node System, Sculpt PBVH & Window Manager (WM / Screen / Editors)
+#
 
 NodeSocketDatatype
   "Custom" | "Value" | "Int" | "Boolean" | "Vector" | "RGBA" | "Shader"
@@ -1197,9 +1197,9 @@ wmWindowManager ID & {
   IsInterfaceLocked Bool
 }
 
-// =============================================================================
-// 7. Universal Scene Description (USD) & Procedural Content Generation (PCG)
-// =============================================================================
+#
+7. Universal Scene Description (USD) & Procedural Content Generation (PCG)
+#
 
 PrimvarInterpolation "constant" | "uniform" | "vertex" | "faceVarying" | "varying"
 UsdSpecifier         "def" | "over" | "class"
@@ -1370,9 +1370,9 @@ PcgGraph {
   ExposedParameters Map(String, Any)
 }
 
-// =============================================================================
-// 8. 3D I/O Export & Import Formats (Alembic, FBX, OBJ, PLY, STL, glTF, USD)
-// =============================================================================
+#
+8. 3D I/O Export & Import Formats (Alembic, FBX, OBJ, PLY, STL, glTF, USD)
+#
 
 PathReferenceMode "Auto" | "Absolute" | "Relative" | "Match" | "Strip" | "Copy"
 
@@ -1435,9 +1435,9 @@ GLTFExportParams IOBaseParams & {
   ExportCameras      Bool
 }
 
-// =============================================================================
-// 9. Ontological Typestates & 3D Domain Transitions
-// =============================================================================
+#
+9. Ontological Typestates & 3D Domain Transitions
+#
 
 Evaluated       { EvalTimestamp Float }
 DepsgraphSynced { SyncCount Int }

@@ -4,9 +4,9 @@ _ structure
 _ math
 _ quantity
 
-// =============================================================================
-// Coordinates, Vectors & Bounds
-// =============================================================================
+#
+Coordinates, Vectors & Bounds
+#
 
 X Real
 Y Real
@@ -80,9 +80,9 @@ FlexibleTransform Transform3d & {
   Pivot   PivotAttribute
 }
 
-// =============================================================================
-// Rays, Planes, Frustums & Coordinate Systems
-// =============================================================================
+#
+Rays, Planes, Frustums & Coordinate Systems
+#
 
 Ray2D   { Origin Point2D, Direction Vector2D }
 Ray3D   { Origin Point3D, Direction Vector3D, MaxDistance Float }
@@ -95,9 +95,9 @@ CylindricalCoord    { Radial Float, Azimuth Float, Z Float }
 BarycentricCoord    { U Float, V Float, W Float }
 UvCoord             { U Float, V Float }
 
-// =============================================================================
-// Directions
-// =============================================================================
+#
+Directions
+#
 
 CardinalDirection "north" | "east" | "south" | "west"
 CompassDirection  CardinalDirection | "northeast" | "southeast" | "southwest" | "northwest"
@@ -106,9 +106,9 @@ AxisSigned        "PosX" | "PosY" | "PosZ" | "NegX" | "NegY" | "NegZ"
 Direction         CompassDirection | RelativeDirection | Vector3D
 Bearing           Range(0, 360) & Real
 
-// =============================================================================
-// Geography & Geodesy
-// =============================================================================
+#
+Geography & Geodesy
+#
 
 Latitude  Range(-90, 90) & Real
 Longitude Range(-180, 180) & Real
@@ -124,9 +124,9 @@ GeoShape      GeoBox | GeoCircle | GeoPolygon | GeoPath
 UtmCoordinate { ZoneNumber Int, ZoneLetter Char, Easting Float, Northing Float }
 GeoHash       String
 
-// =============================================================================
-// Shapes (2D & 3D)
-// =============================================================================
+#
+Shapes (2D & 3D)
+#
 
 Circle         { Center Point2D, Radius }
 Rectangle      { Corner Point2D, Width, Height }
@@ -164,9 +164,9 @@ CalculateArea(S Shape2D) [
   }
 ]
 
-// =============================================================================
-// Spatial Partitioning (QuadTree & Octree)
-// =============================================================================
+#
+Spatial Partitioning (QuadTree & Octree)
+#
 
 QuadTreeNode(T) {
   Bounds   RectF
@@ -192,9 +192,9 @@ Octree(T) {
   Capacity Int
 }
 
-// =============================================================================
-// Spatial States & Transitions
-// =============================================================================
+#
+Spatial States & Transitions
+#
 
 Located    { Position }
 Bounded    { Shape }

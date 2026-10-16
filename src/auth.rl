@@ -4,9 +4,9 @@ _ structure
 _ string
 _ db
 
-// =============================================================================
-// Users, Roles, Permissions (RBAC / ABAC / ACL) & Cryptography
-// =============================================================================
+#
+Users, Roles, Permissions (RBAC / ABAC / ACL) & Cryptography
+#
 
 RoleType "guest" | "user" | "moderator" | "manager" | "admin" | "superadmin" | "service"
 
@@ -47,9 +47,9 @@ Adult   User & IsAdult
 Minor   User & IsMinor
 Manager User & IsManager
 
-// =============================================================================
-// Sessions, MFA, Recovery Codes & Security Profiles
-// =============================================================================
+#
+Sessions, MFA, Recovery Codes & Security Profiles
+#
 
 AuthProviderType "google" | "apple" | "credentials" | "github" | "microsoft" | "discord" | "gitlab" | "saml" | "oidc" | "webauthn"
 DeviceType       "mobile" | "desktop" | "tablet" | "tv" | "watch" | "vr" | "bot"
@@ -113,9 +113,9 @@ UserAuth IEntity & {
   AuthEvents    List(IdRef(AuthEvent))
 }
 
-// =============================================================================
-// Tokens, JWT, OAuth2 & Security Errors
-// =============================================================================
+#
+Tokens, JWT, OAuth2 & Security Errors
+#
 
 JwtHeader {
   Alg "HS256" | "HS512" | "RS256" | "ES256" | "EdDSA"
@@ -157,9 +157,9 @@ ApiKey {
 Unauthorized { Reason String }
 Forbidden    { Reason String, RequiredPermission String }
 
-// =============================================================================
-// Cryptography & Hashing
-// =============================================================================
+#
+Cryptography & Hashing
+#
 
 HashAlgorithm   "sha256" | "sha512" | "sha3-256" | "blake3" | "argon2id" | "bcrypt" | "scrypt" | "pbkdf2"
 CipherAlgorithm "aes-256-gcm" | "aes-128-gcm" | "chacha20-poly1305" | "xchacha20-poly1305" | "rsa-oaep"
@@ -175,9 +175,9 @@ Crypto {
   RandomUuid()                                      [ native_crypto_uuid ]
 }
 
-// =============================================================================
-// Auth Middleware & Account Classification
-// =============================================================================
+#
+Auth Middleware & Account Classification
+#
 
 AuthMiddleware(Req) [
   Req.Headers . Map.Get("Authorization") . {

@@ -15,9 +15,9 @@ _ economy
 _ artifact
 _ event
 
-// =============================================================================
-// Thing (schema.org root)
-// =============================================================================
+#
+Thing (schema.org root)
+#
 
 Description           Text
 DisambiguatingDescription Text
@@ -43,9 +43,9 @@ Thing {
     SubjectOf
 }
 
-// =============================================================================
-// DataTypes
-// =============================================================================
+#
+DataTypes
+#
 
 Boolean_  Bool
 Text_     String
@@ -60,9 +60,9 @@ Time_     TimeOfDay
 PronounceableText String
 DataType Boolean_ | Text_ | Number_ | Integer | URL | DateTime_ | Date_ | Time_
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Describe(T Thing, D Text) [ T & { Description D } ]
 Rename(T Thing, N Name) [ T & { AlternateName Name, Name N } ]

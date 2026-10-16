@@ -6,9 +6,9 @@ _ time
 _ space
 _ life
 
-// =============================================================================
-// Agents
-// =============================================================================
+#
+Agents
+#
 
 AgentKind "human" | "animal" | "organization" | "software" | "robot" | "collective"
 Autonomy  Fraction
@@ -25,9 +25,9 @@ AnimalAgent   Agent & Animal & { AgentKind "animal" }
 SoftwareAgent Agent & { AgentKind "software", Model String }
 Robot         Agent & { AgentKind "robot" }
 
-// =============================================================================
-// Needs (Maslow) and motivation
-// =============================================================================
+#
+Needs (Maslow) and motivation
+#
 
 NeedLevel "physiological" | "safety" | "belonging" | "esteem" | "self-actualization"
 NeedKind "food" | "water" | "sleep" | "air" | "warmth" | "shelter" | "health" | "security"
@@ -57,9 +57,9 @@ Goal {
 Plan_ { Goal, Steps List(String) }
 Intention { Goal, Committed Bool }
 
-// =============================================================================
-// Mind
-// =============================================================================
+#
+Mind
+#
 
 Proficiency "novice" | "beginner" | "intermediate" | "advanced" | "expert" | "master"
 SkillDomain "physical" | "cognitive" | "social" | "technical" | "artistic" | "linguistic" | "craft"
@@ -128,9 +128,9 @@ Busy     { Activity String }
 Tired    { Fatigue Fraction }
 Rested   {}
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Perceive(A Agent & Mind, P Perception) [ A & { Memories (Cons { Head Memory { Content P, Recorded Now }, Tail Memories }) } ]
 Learn(A Agent & Mind, S Skill) [ A & { Skills (Cons { Head S, Tail Skills }) } ]

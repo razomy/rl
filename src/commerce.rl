@@ -5,9 +5,9 @@ _ place
 _ organization
 _ product
 
-// =============================================================================
-// Offers, Pricing, Catalogs & Demand
-// =============================================================================
+#
+Offers, Pricing, Catalogs & Demand
+#
 
 Offer Intangible & {
   AcceptedPaymentMethod     List(PaymentMethod)
@@ -91,9 +91,9 @@ DefinedRegion StructuredValue & {
   PostalCode     Option(String)
 }
 
-// =============================================================================
-// Orders, Invoices, Reservations & Tickets
-// =============================================================================
+#
+Orders, Invoices, Reservations & Tickets
+#
 
 OrderItem Intangible & {
   OrderDelivery   Option(ParcelDelivery)
@@ -183,9 +183,9 @@ TaxiReservation              Reservation & { PartySize Count, PickupLocation Pla
 TrainReservation             Reservation
 BoatReservation              Reservation
 
-// =============================================================================
-// Ontological Typestate & Railway-Free Fulfillment (README Section 8, 9, 11)
-// =============================================================================
+#
+Ontological Typestate & Railway-Free Fulfillment (README Section 8, 9, 11)
+#
 
 Reserved   { ReservedAt Int }
 Paid       { TransactionId String }
@@ -216,9 +216,9 @@ ShipToCustomer(Order & Reserved & Paid) [
   "Shipping order {Id}. Transaction {TransactionId} confirmed." . Shell.Log
 ]
 
-// =============================================================================
-// Commerce Transitions
-// =============================================================================
+#
+Commerce Transitions
+#
 
 MakeOffer(S Agent, I Thing, P Price) [ Offer { Seller S, ItemOffered I, Price P, Availability "InStock" } ]
 SellOut(O Offer & { Availability "InStock" }) [ O & { Availability "SoldOut" } ]

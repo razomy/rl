@@ -6,9 +6,9 @@ _ stream
 _ space
 _ auth
 
-// =============================================================================
-// Unit Testing, Property-Based Testing, Mocking & Benchmarking
-// =============================================================================
+#
+Unit Testing, Property-Based Testing, Mocking & Benchmarking
+#
 
 TestPassed  { Name String, DurationMs Float }
 TestFailed  { Name String, Expected Any, Actual Any }
@@ -40,9 +40,9 @@ MockFn(ReturnType) {
   ReturnValue ReturnType
 }
 
-// =============================================================================
-// Assertions
-// =============================================================================
+#
+Assertions
+#
 
 AssertEq(Name String, Expected, Actual) [
   (Expected == Actual) . {
@@ -66,9 +66,9 @@ AssertFalse(Name String, Cond Bool) [
   AssertEq(Name, false, Cond)
 ]
 
-// =============================================================================
-// Test Suite Runner
-// =============================================================================
+#
+Test Suite Runner
+#
 
 RunTestSuite() [
   [

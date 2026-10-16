@@ -1,18 +1,18 @@
 _ primitive
 _ primitive
 
-// =============================================================================
-// Refinements
-// =============================================================================
+#
+Refinements
+#
 
 Positive    [ _ > 0 ]
 NonNegative [ _ >= 0 ]
 Negative    [ _ < 0 ]
 Range(Min, Max) [ _ >= Min ] & [ _ <= Max ]
 
-// =============================================================================
-// Scalars
-// =============================================================================
+#
+Scalars
+#
 
 Real     Double
 Natural  Int & NonNegative
@@ -23,17 +23,17 @@ Fraction Range(0, 1) & Double
 Ratio    { Numerator Real, Denominator Real & Positive }
 Sign     "negative" | "zero" | "positive"
 
-// =============================================================================
-// Labels
-// =============================================================================
+#
+Labels
+#
 
 Name  String
 Code  String
 Label String
 
-// =============================================================================
-// Units
-// =============================================================================
+#
+Units
+#
 
 Dimension "length" | "mass" | "time" | "current" | "temperature" | "amount" | "luminosity"
     | "area" | "volume" | "velocity" | "acceleration" | "force" | "energy" | "power"
@@ -83,9 +83,9 @@ One             Unit & { UnitSymbol "1",     Dimension "dimensionless", Factor 1
 SiDerivedUnit SquareMetre | CubicMetre | Litre | MetrePerSecond | MetrePerSecond2 | Newton | Joule
     | Watt | Pascal | Hertz | Coulomb | Volt | Ohm | Radian | Degree | KilogramPerM3 | Bit | Byte | One
 
-// =============================================================================
-// Measures
-// =============================================================================
+#
+Measures
+#
 
 Measure(T, U) {
     Value T
@@ -108,9 +108,9 @@ AmountOfSubstance Measure(Real & NonNegative, Mole)
 
 Tolerance { Lower Real, Upper Real }
 
-// =============================================================================
-// Transitions
-// =============================================================================
+#
+Transitions
+#
 
 Convert(M Measure(Real, Unit), Target Unit) [
     Measure(Real, Unit) {

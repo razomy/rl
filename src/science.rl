@@ -10,9 +10,9 @@ _ matter
 _ cosmos
 _ life
 
-// =============================================================================
-// 1. Quantum Mechanics & Quantum Computing
-// =============================================================================
+#
+1. Quantum Mechanics & Quantum Computing
+#
 
 QubitStateVector {
   Alpha Complex
@@ -50,9 +50,9 @@ QuantumProcessor {
   QuantumVolume   Int
 }
 
-// =============================================================================
-// 2. Neuroscience & Cognitive Architecture
-// =============================================================================
+#
+2. Neuroscience & Cognitive Architecture
+#
 
 Neurotransmitter "Dopamine" | "Serotonin" | "Norepinephrine" | "Acetylcholine" | "Glutamate" | "GABA" | "Endorphin" | "Oxytocin"
 BrainWaveBand "Delta" | "Theta" | "Alpha" | "Beta" | "Gamma"
@@ -81,9 +81,9 @@ FireActionPotential(N SpikingNeuron) [
   }
 ]
 
-// =============================================================================
-// 3. Geology, Mineralogy, Seismology & Plate Tectonics
-// =============================================================================
+#
+3. Geology, Mineralogy, Seismology & Plate Tectonics
+#
 
 GeologicalEon "Hadean" | "Archean" | "Proterozoic" | "Phanerozoic"
 GeologicalEra "Paleozoic" | "Mesozoic" | "Cenozoic"
@@ -112,9 +112,9 @@ SeismicEvent {
   Timestamp        Instant
 }
 
-// =============================================================================
-// 4. Ecology, Climate Carbon Cycles & Agriculture (Agronomy)
-// =============================================================================
+#
+4. Ecology, Climate Carbon Cycles & Agriculture (Agronomy)
+#
 
 TrophicLevel "PrimaryProducer" | "PrimaryConsumerHerbivore" | "SecondaryConsumerCarnivore" | "TertiaryApexPredator" | "DecomposerDetritivore"
 

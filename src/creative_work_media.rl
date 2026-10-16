@@ -8,9 +8,9 @@ _ math
 _ space
 _ ui
 
-// =============================================================================
-// MediaObject
-// =============================================================================
+#
+MediaObject
+#
 
 MediaObject CreativeWork & {
     ContentUrl Url
@@ -45,9 +45,9 @@ TextObject          MediaObject
 3DModel             MediaObject & { IsResizable Bool }
 AmpStory            MediaObject
 
-// =============================================================================
-// Film, TV, Radio & Music
-// =============================================================================
+#
+Film, TV, Radio & Music
+#
 
 Movie CreativeWork & { Actor List(Person), Director List(Person), MusicBy Agent, ProductionCompany Organization, CountryOfOrigin Country, Duration_, Trailer VideoObject, TitleEIDR String, SubtitleLanguage List(Language) }
 Clip  CreativeWork & { Actor List(Person), Director List(Person), ClipNumber String, PartOfEpisode Episode, PartOfSeason CreativeWorkSeason, StartOffset Real, EndOffset Real }
@@ -83,9 +83,9 @@ MusicPlaylist    CreativeWork & { NumTracks Count, Track List(MusicRecording) }
 MusicAlbum       MusicPlaylist & { AlbumProductionType MusicAlbumProductionType, AlbumReleaseType MusicAlbumReleaseType, ByArtist MusicGroup, AlbumRelease List(MusicRelease) }
 MusicRelease     MusicPlaylist & { CatalogNumber String, CreditedTo Agent, MusicReleaseFormat MusicReleaseFormatType, RecordLabel Organization, ReleaseOf MusicAlbum }
 
-// =============================================================================
-// Image Buffers (ImBuf / Vips) & Texture Filtering Pipeline
-// =============================================================================
+#
+Image Buffers (ImBuf / Vips) & Texture Filtering Pipeline
+#
 
 ReadAndWriteImageExt "jpg" | "jpeg" | "png" | "webp" | "gif" | "avif" | "tiff" | "tif" | "ico" | "heif" | "heic" | "exr" | "hdr" | "dds" | "tga" | "psd" | "jp2" | "dpx" | "cineon"
 OnlyReadImageExt     "svg" | "bmp"
@@ -144,9 +144,9 @@ RgbTextureFilter       ITextureFilter & { Red Float, Green Float, Blue Float }
 RgbaTextureFilter      RgbTextureFilter & { Alpha Float }
 UnsharpMaskFilter      ITextureFilter & { Sigma Float, X1 Float, Y2 Float }
 
-// =============================================================================
-// Video Sequence Editor (VSE) & Non-Linear Editing (NLE)
-// =============================================================================
+#
+Video Sequence Editor (VSE) & Non-Linear Editing (NLE)
+#
 
 StripType
   "Image" | "Meta" | "Scene" | "Movie" | "MovieClip" | "Mask" | "Sound"
@@ -198,9 +198,9 @@ SplitStripAtFrame(St Strip, SplitFrame Int) [
   }
 ]
 
-// =============================================================================
-// Media Transitions
-// =============================================================================
+#
+Media Transitions
+#
 
 Upload(M MediaObject, U Url) [ M & { ContentUrl U, UploadDate Now } ]
 Embed(M MediaObject, U Url) [ M & { EmbedUrl U } ]
