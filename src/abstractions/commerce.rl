@@ -4,6 +4,7 @@ _ intangible
 _ place
 _ organization
 _ product
+_ time
 
 #
 Offers, Pricing, Catalogs & Demand
