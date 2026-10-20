@@ -1,0 +1,52 @@
+#
+title character constants & lexemes
+order priority
+ 1. simplicity
+ 2. symmetry
+ 3. history
+ 4. keyboard
+#
+// split
+Space        ' '
+Tab          '\t'
+Newline      '\n'
+Carriage_ret '\r'
+Dot          '.'
+Comma        ','
+Colon        ':'
+Semicolon    ';'
+Equals       '='
+Pipe         '|'
+Percent      '%'
+// join
+Dash         '-'
+Underscore   '_'
+Plus         '+'
+Caret        '^'
+Tilde        '~'
+Asterisk     '*'
+Ampersand    '&'
+At_sign      '@'
+// group
+// mono
+Double_quote '"'
+// open
+Angle_open   '<'
+Paren_open   '('
+Bracket_open '['
+Brace_open   '{'
+// close
+Angle_close  '>'
+Paren_close  ')'
+Bracket_close ']'
+Brace_close  '}'
+// slash
+slash        '/'
+backslash    '\\'
+// prioroty
+Single_quote '\''
+Backtick     '`'
+exclamation  '!'
+question     '?'
+hash         '#'
+dollar       '$'

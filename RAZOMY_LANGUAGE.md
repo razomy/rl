@@ -801,7 +801,8 @@ Main [
 #
 20. IMPORTS & MODULE SYSTEM
 #
-
+// Import are auto by default
+// if there is name conflic u can specify
 Base root.base             // Named import
 {String, Int} root.base       // Element import
 _ root.base                // Wildcard import (all)

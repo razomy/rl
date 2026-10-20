@@ -1,0 +1,182 @@
+order
+ config
+ // primitive
+ primitive.rl
+ number.rl
+ string.rl
+ regex.rl
+ span.rl
+ list.rl
+ map.rl
+ tree.rl
+ tensor.rl
+ structure.rl
+ sync.rl
+ actor.rl
+ // parser
+ keyboard_char.rl
+ bracket.rl
+ operator.rl
+ lexeme.rl
+ syntax.rl
+ reflection.rl
+ semantic.rl
+ cst.rl
+ hir.rl
+ hir_nodes.rl
+ rl.lexeme.rl
+ rl.token.rl
+ rl.grammar.rl
+ // runtime
+ concurrency.rl
+ generators.rl
+ stream.rl
+ reactive.rl
+ history.rl
+ state.rl
+ // general
+ path.rl
+ path_ops.rl
+ vectors.rl
+ curves.rl
+ functions.rl
+ math.rl
+ units.rl
+ quantity.rl
+ calendar.rl
+ time.rl
+ coordinates.rl
+ shapes.rl
+ space.rl
+ flags.rl
+ attribute.rl
+ datatypes.rl
+ thing.rl
+ // graphics
+ textures.rl
+ shaders.rl
+ vulkan.rl
+ gpu.rl
+ themes.rl
+ layout.rl
+ components.rl
+ routing.rl
+ ui.rl
+ colors.rl
+ compositor.rl
+ rendering.rl
+ datablocks.rl
+ geometry.rl
+ rigging.rl
+ // computing
+ physics.rl
+ usd.rl
+ engine_3d.rl
+ input.rl
+ apps.rl
+ computing.rl
+ // io
+ git.rl
+ fs.rl
+ fs_ops.rl
+ shell.rl
+ shell_ops.rl
+ tls.rl
+ network.rl
+ queries.rl
+ columnar.rl
+ db.rl
+ protocols.rl
+ http.rl
+ // cloud
+ k8s.rl
+ containers.rl
+ cloud.rl
+ codecs.rl
+ format.rl
+ // system & interactive
+ values.rl
+ services.rl
+ intangible.rl
+ robotics.rl
+ iot.rl
+ board.rl
+ rpg.rl
+ game.rl
+ general.rl
+ media.rl
+ data.rl
+ // security
+ sessions.rl
+ middleware.rl
+ auth.rl
+ zkp.rl
+ firewalls.rl
+ security.rl
+ // ai & information
+ languages.rl
+ identifiers.rl
+ information.rl
+ subtypes.rl
+ transitions.rl
+ action.rl
+ cognition.rl
+ agent.rl
+ layers.rl
+ messages.rl
+ ai.rl
+ // natural world & science
+ grammar.rl
+ language.rl
+ celestial.rl
+ weather.rl
+ cosmos.rl
+ elements.rl
+ materials.rl
+ matter.rl
+ waves.rl
+ energy.rl
+ taxonomy.rl
+ organisms.rl
+ life.rl
+ neuro.rl
+ science.rl
+ calculations.rl
+ engineering.rl
+ anatomy.rl
+ medical.rl
+ // society & actors
+ groups.rl
+ society.rl
+ roles.rl
+ person.rl
+ business.rl
+ organization.rl
+ cities.rl
+ civic.rl
+ place.rl
+ types.rl
+ event.rl
+ // economy & commerce
+ markets.rl
+ economy.rl
+ defi.rl
+ web3.rl
+ fulfillment.rl
+ commerce.rl
+ domain.rl
+ company.rl
+ vehicles.rl
+ product.rl
+ kinds.rl
+ artifact.rl
+ // personal & creative works
+ text.rl
+ creative_work.rl
+ filters.rl
+ creative_work_media.rl
+ datasets.rl
+ creative_work_code.rl
+ // development & universal root
+ runner.rl
+ testing.rl

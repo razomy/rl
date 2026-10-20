@@ -1,11 +1,20 @@
 # Data
 
-**Vertical layers**
-From abstract to concrete:
+## Layers
 
-- Abstract categories in `/src/abstractions/*`
-- Concrete categories in `/src/*`
+- Order in `/src/config.rn`
+
+**Vertical layers**
+From abstract to concrete
+eg alive, user, Jack
 
 **Horizontal layers**
 From atomic to complex
-- Order in `/src/config.rn`
+eg user, payment
+
+
+## Naming
+- Everything has uniq name
+- Types PascalCase
+- Variations have prefix eg rl.parser.rl
+- Grouping by order in config file
