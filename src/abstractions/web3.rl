@@ -1,5 +1,4 @@
 _ primitive
-_ primitive
 _ structure
 _ string
 _ time

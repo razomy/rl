@@ -1,5 +1,4 @@
 _ primitive
-_ primitive
 _ structure
 _ quantity
 _ time
