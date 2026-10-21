@@ -1,20 +1,40 @@
 #
-Abstract Concurrency Primitives, Futures & Actor Contracts
+CSP Channels & Synchronization Primitives
 #
 
-ChannelClosed Object
+Channel(T) {
+  Capacity    Int
+  Send(val T) [ (Self, val) . native_chan_send ]
+  Recv()      [ Self . native_chan_recv ]
+  TryRecv()   [ Self . native_chan_try_recv ]
+  Close()     [ Self . native_chan_close ]
+}
 
-TaskPending      Object
-TaskRunning      Object
-TaskCompleted(T) { Value T }
-TaskFailed(E)    { Error E }
-TaskCancelled    Object
-TaskState(T, E)  TaskPending | TaskRunning | TaskCompleted(T) | TaskFailed(E) | TaskCancelled
+Mutex(T) {
+  Lock()           [ Self . native_mutex_lock ]
+  Unlock()         [ Self . native_mutex_unlock ]
+  WithLock(Action) [
+    Self . Mutex.Lock
+    . Action
+    .> [ Self . Mutex.Unlock ]
+  ]
+}
 
-RestartPolicy "always" | "on-failure" | "never" | "exponential-backoff"
+RwLock(T) {
+  ReadLock()  [ Self . native_rwlock_read ]
+  WriteLock() [ Self . native_rwlock_write ]
+  Unlock()    [ Self . native_rwlock_unlock ]
+}
 
-SupervisorSpec {
-  MaxRestarts   Int
-  WithinSeconds Int
-  Policy        RestartPolicy
+Semaphore {
+  Permits   Int
+  Acquire() [ Self . native_sem_acquire ]
+  Release() [ Self . native_sem_release ]
+}
+
+WaitGroup {
+  Count      Int
+  Add(n Int) [ (Self, n) . native_wg_add ]
+  Done()     [ Self . native_wg_done ]
+  Wait()     [ Self . native_wg_wait ]
 }

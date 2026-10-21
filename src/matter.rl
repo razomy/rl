@@ -1,5 +1,5 @@
 #
-Abstract Particle, Element, Atom, Molecule, Substance, Matter Phase, Material & Reaction
+Abstract Particle, Element, Atom, Molecule, Substance, matter Phase, Material & Reaction
 #
 
 Spin Real
@@ -77,8 +77,8 @@ Gas    { Substance, Temperature, Phase "gas" }
 Plasma { Substance, Temperature, Phase "plasma" }
 Matter Solid | Liquid | Gas | Plasma
 
-Mixture    { Components List(Substance), Proportions List(Fraction) }
-Solution   Mixture & { Solvent Liquid, Solute Substance }
+Mixture    { Components List(Substance), proportions List(Fraction) }
+Solution   Mixture & { Solvent Liquid, solute Substance }
 Alloy      Mixture & { Phase "solid" }
 Suspension Mixture
 Emulsion   Mixture

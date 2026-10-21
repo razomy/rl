@@ -33,41 +33,39 @@ RegexMatch {
 #
 String Operations Module
 #
-
-String {
-  Length(S String)                          [ S . native_str_len ]
-  IsEmpty(S String)                         [ S . Length == 0 ]
-  Trim(S String)                            [ S . native_str_trim ]
-  TrimStart(S String)                       [ S . native_str_trim_start ]
-  TrimEnd(S String)                         [ S . native_str_trim_end ]
-  ToUpper(S String)                         [ S . native_str_to_upper ]
-  ToLower(S String)                         [ S . native_str_to_lower ]
-  Capitalize(S String)                      [ S . native_str_capitalize ]
-  CamelCase(S String)                       [ S . native_str_camel_case ]
-  SnakeCase(S String)                       [ S . native_str_snake_case ]
-  KebabCase(S String)                       [ S . native_str_kebab_case ]
-  PascalCase(S String)                      [ S . native_str_pascal_case ]
-  Split(S String, Delim String)             [ (S, Delim) . native_str_split ]
-  Join(Items List(String), Sep String)      [ (Items, Sep) . native_str_join ]
-  Lines(S String)                           [ S . Split("\n") ]
-  Words(S String)                           [ S . Trim . Split(" ") ]
-  StartsWith(S String, Prefix String)       [ (S, Prefix) . native_str_starts_with ]
-  EndsWith(S String, Suffix String)         [ (S, Suffix) . native_str_ends_with ]
-  Contains(S String, Sub String)            [ (S, Sub) . native_str_contains ]
-  IndexOf(S String, Sub String)             [ (S, Sub) . native_str_index_of ]
-  Substring(S String, Start Int, End Int)   [ (S, Start, End) . native_str_substring ]
-  Replace(S String, From String, To String) [ (S, From, To) . native_str_replace ]
-  Repeat(S String, Count Int)               [ (S, Count) . native_str_repeat ]
-  PadStart(S String, Len Int, Pad String)   [ (S, Len, Pad) . native_str_pad_start ]
-  PadEnd(S String, Len Int, Pad String)     [ (S, Len, Pad) . native_str_pad_end ]
-  Reverse(S String)                         [ S . native_str_reverse ]
-  ToInt(S String)                           [ S . native_str_to_int ]
-  ToFloat(S String)                         [ S . native_str_to_float ]
+String Char & {
+  Length(s String)                          [ _ . native_str_len ]
+  IsEmpty(s String)                         [ _ . Length == 0 ]
+  Trim(s String)                            [ _ . native_str_trim ]
+  TrimStart(s String)                       [ _ . native_str_trim_start ]
+  TrimEnd(s String)                         [ _ . native_str_trim_end ]
+  ToUpper(s String)                         [ _ . native_str_to_upper ]
+  ToLower(s String)                         [ _ . native_str_to_lower ]
+  Capitalize(s String)                      [ _ . native_str_capitalize ]
+  CamelCase(s String)                       [ _ . native_str_camel_case ]
+  SnakeCase(s String)                       [ _ . native_str_snake_case ]
+  KebabCase(s String)                       [ _ . native_str_kebab_case ]
+  PascalCase(s String)                      [ _ . native_str_pascal_case ]
+  Split(s String, delim String)             [ _ . native_str_split ]
+  Join(items List(String), sep String)  [ _ . native_str_join ]
+  Lines(s String)                           [ _ . Split("\n") ]
+  Words(s String)                           [ _ . Trim . Split(" ") ]
+  StartsWith(s String, prefix String)       [ _ . native_str_starts_with ]
+  EndsWith(s String, suffix String)         [ _ . native_str_ends_with ]
+  Contains(s String, sub String)            [ _ . native_str_contains ]
+  IndexOf(s String, sub String)             [ _ . native_str_index_of ]
+  Substring(s String, start Int, end Int)   [ _ . native_str_substring ]
+  Replace(s String, from String, to String) [ _ . native_str_replace ]
+  Repeat(s String, count Int)               [ _ . native_str_repeat ]
+  PadStart(s String, len Int, pad String)   [ _ . native_str_pad_start ]
+  PadEnd(s String, len Int, pad String)     [ _ . native_str_pad_end ]
+  Reverse(s String)                         [ _ . native_str_reverse ]
+  ToInt(s String)                           [ _ . native_str_to_int ]
+  ToFloat(s String)                         [ _ . native_str_to_float ]
 }
 
-StringOps(First String, Last String) [
-  Full "{First} {Last}"
-  Full
+StringOps(first String, last String) [
+  "{First} {Last}"
   . Trim
   . ToUpper
   . Split(" ")

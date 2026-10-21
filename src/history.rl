@@ -8,33 +8,33 @@ HistoryState(T) {
   Future  List(T)
 }
 
-PushHistory(H HistoryState, NextVal) [
+PushHistory(h HistoryState, NextVal) [
   HistoryState {
-    Past    (Cons { Head H.Present, Tail H.Past })
+    Past    (Cons { Head H.Present, tail H.Past })
     Present NextVal
     Future  Nil
   }
 ]
 
-UndoHistory(H HistoryState) [
+UndoHistory(h HistoryState) [
   H.Past . {
     Nil  [ H ]
     Cons [
       HistoryState {
         Past    Tail
         Present Head
-        Future  (Cons { Head H.Present, Tail H.Future })
+        Future  (Cons { Head H.Present, tail H.Future })
       }
     ]
   }
 ]
 
-RedoHistory(H HistoryState) [
+RedoHistory(h HistoryState) [
   H.Future . {
     Nil  [ H ]
     Cons [
       HistoryState {
-        Past    (Cons { Head H.Present, Tail H.Past })
+        Past    (Cons { Head H.Present, tail H.Past })
         Present Head
         Future  Tail
       }
@@ -50,7 +50,7 @@ ContextTransitionMachine {
 Store(StateType, ActionType) {
   State   Atom(StateType)
   Reducer Any
-  Dispatch(Act ActionType) [
+  Dispatch(act ActionType) [
     State.Swap(Current [ Reducer(Current, Act) ])
   ]
 }
@@ -61,7 +61,7 @@ Decrement    { By Int }
 Reset        Object
 CounterMsg   Increment | Decrement | Reset
 
-UpdateCounter(State CounterState, Msg CounterMsg) [
+UpdateCounter(state CounterState, msg CounterMsg) [
   Msg . {
     Increment [ CounterState { Count (State.Count + By) } ]
     Decrement [ CounterState { Count (State.Count - By) } ]

@@ -44,7 +44,7 @@ Dataset CreativeWork & {
     TemporalCoverage Interval
 }
 
-DataCatalog CreativeWork & { Dataset List(Dataset), MeasurementTechnique String }
+DataCatalog CreativeWork & { Dataset List(Dataset), measurementTechnique String }
 
 Course CreativeWork & {
     CourseCode String

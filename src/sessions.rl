@@ -1,5 +1,5 @@
 #
-Concrete User Refinements, Auth Providers, Sessions, MFA & JWT/OAuth2 Tokens
+Concrete User Refinements, auth Providers, Sessions, MFA & JWT/OAuth2 Tokens
 #
 
 RoleType "guest" | "user" | "moderator" | "manager" | "admin" | "superadmin" | "service"

@@ -5,13 +5,13 @@ Transactional Memory, Signals, Pipelines & Reactive Stores
 Atom(T) {
   Read()                            [ Self . native_atom_read ]
   Swap(Transition)                  [ (Self, Transition) . native_atom_swap ]
-  Reset(NewVal T)                   [ (Self, NewVal) . native_atom_reset ]
-  CompareAndSet(Expected T, Next T) [ (Self, Expected, Next) . native_atom_cas ]
+  Reset(newVal T)                   [ (Self, NewVal) . native_atom_reset ]
+  CompareAndSet(expected T, next T) [ (Self, Expected, Next) . native_atom_cas ]
 }
 
 SignalState(T) {
   Get()         [ Self . native_signal_get ]
-  Set(Val T)    [ (Self, Val) . native_signal_set ]
+  Set(val T)    [ (Self, Val) . native_signal_set ]
   Subscribe(Fn) [ (Self, Fn) . native_signal_subscribe ]
 }
 

@@ -14,6 +14,6 @@ DegreeOfComparison "positive" | "comparative" | "superlative"
 MorphemeKind       "root" | "prefix" | "suffix" | "infix" | "ending" | "clitic"
 SyntacticRole      "subject" | "predicate" | "direct-object" | "indirect-object" | "adverbial" | "attribute" | "complement" | "determiner"
 
-ObjectActed(Object String, Acted String, Status String, Details String) [
+ObjectActed(object String, acted String, status String, details String) [
   "{Object} {Acted} {Status} {Details}"
 ]

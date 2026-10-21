@@ -1,10 +1,10 @@
 #
-Abstract Test Results, Test Suites, Benchmarks & Mock Functions
+Abstract Test Results, test Suites, Benchmarks & Mock Functions
 #
 
-TestPassed  { Name String, DurationMs Float }
-TestFailed  { Name String, Expected Any, Actual Any }
-TestSkipped { Name String, Reason String }
+TestPassed  { Name String, durationMs Float }
+TestFailed  { Name String, expected Any, actual Any }
+TestSkipped { Name String, reason String }
 TestResult  TestPassed | TestFailed | TestSkipped
 
 TestSuite {

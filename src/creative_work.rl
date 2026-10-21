@@ -70,13 +70,13 @@ CreativeWork Thing & {
     WordCount Count
 }
 
-Article            CreativeWork & { ArticleBody Text, ArticleSection String, PageStart Count, PageEnd Count, Pagination String, Speakable SpeakableSpecification }
-Book               CreativeWork & { Isbn, BookEdition String, BookFormat BookFormatType, Illustrator Person, NumberOfPages Count, Abridged Bool }
-CreativeWorkSeries CreativeWork & Series_ & { StartDate Date, EndDate Date }
-Review             CreativeWork & { ItemReviewed Thing, ReviewBody Text, ReviewRating Rating, ReviewAspect String, PositiveNotes ItemList, NegativeNotes ItemList }
-Comment            CreativeWork & { DownvoteCount Count, UpvoteCount Count, ParentItem CreativeWork }
-SchemaMessage      CreativeWork & { Sender Agent, Recipient List(Agent), DateSent DateTime, DateReceived DateTime, DateRead DateTime, MessageAttachment List(CreativeWork) }
+Article            CreativeWork & { ArticleBody Text, articleSection String, pageStart Count, pageEnd Count, pagination String, speakable SpeakableSpecification }
+Book               CreativeWork & { Isbn, bookEdition String, bookFormat BookFormatType, illustrator Person, numberOfPages Count, abridged Bool }
+CreativeWorkSeries CreativeWork & Series_ & { StartDate Date, endDate Date }
+Review             CreativeWork & { ItemReviewed Thing, reviewBody Text, reviewRating Rating, reviewAspect String, positiveNotes ItemList, negativeNotes ItemList }
+Comment            CreativeWork & { DownvoteCount Count, upvoteCount Count, parentItem CreativeWork }
+SchemaMessage      CreativeWork & { Sender Agent, recipient List(Agent), dateSent DateTime, dateReceived DateTime, dateRead DateTime, messageAttachment List(CreativeWork) }
 DigitalDocument    CreativeWork & { HasDigitalDocumentPermission List(DigitalDocumentPermission) }
 WebSite            CreativeWork & { Issn }
-WebPage            CreativeWork & { Breadcrumb BreadcrumbList, LastReviewed Date, MainContentOfPage WebPageElement, PrimaryImageOfPage Image, RelatedLink List(Url), Reviewer Agent, SignificantLink List(Url), Speakable SpeakableSpecification }
-WebPageElement     CreativeWork & { CssSelector CssSelectorType, Xpath XPathType }
+WebPage            CreativeWork & { Breadcrumb BreadcrumbList, lastReviewed Date, mainContentOfPage WebPageElement, primaryImageOfPage Image, relatedLink List(Url), reviewer Agent, significantLink List(Url), speakable SpeakableSpecification }
+WebPageElement     CreativeWork & { CssSelector CssSelectorType, xpath XPathType }

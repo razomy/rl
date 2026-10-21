@@ -31,6 +31,6 @@ ShamirSecretShare {
   ShareValue   HexStr
 }
 
-VerifyZkProof(P ZkProof) [
-  P & { Verified true }
+VerifyZkProof(p ZkProof) [
+  p & { Verified true }
 ]

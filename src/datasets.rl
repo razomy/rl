@@ -1,26 +1,26 @@
 #
-Concrete Software Applications, Data Feeds, Courses & Transitions
+Concrete Software Applications, data Feeds, Courses & Transitions
 #
 
 MobileApplication SoftwareApplication & { CarrierRequirements String }
 WebApplication    SoftwareApplication & { BrowserRequirements String }
-VideoGame         SoftwareApplication & Game & { GamePlatform String, GameServer, PlayMode GamePlayMode, CheatCode List(CreativeWork), GameTip List(CreativeWork) }
+VideoGame         SoftwareApplication & Game & { GamePlatform String, GameServer, playMode GamePlayMode, cheatCode List(CreativeWork), gameTip List(CreativeWork) }
 OperatingSystem_  SoftwareApplication
 
 DataFeed         Dataset & { DataFeedElement List(DataFeedItem) }
 CompleteDataFeed DataFeed
 
-CourseInstance { CourseMode "online" | "onsite" | "blended", CourseWorkload String, Instructor List(Person), StartDate Date, EndDate Date }
+CourseInstance { CourseMode "online" | "onsite" | "blended", courseWorkload String, instructor List(Person), startDate Date, endDate Date }
 Quiz           LearningResource
 SyllabusDoc    LearningResource
 
-Develop(T Agent, Name_ Name, L ProgrammingLanguage) [ SoftwareSourceCode { Name Name_, Author List1(T), ProgrammingLanguage L, DateCreated Now } ]
-Commit(S SoftwareSourceCode, T Text) [ S & { Text T, DateModified Now } ]
-Ship(S SoftwareApplication, V Version) [ S & { SoftwareVersion V, DatePublished Now } ]
-Patch(S SoftwareApplication, Notes Text) [ S & { ReleaseNotes Notes, DateModified Now } ]
-Deprecate(S SoftwareApplication) [ S & { CreativeWorkStatus "Obsolete" } ]
-CollectData(D Dataset, X DataDownload) [ D & { Distribution (Cons { Head X, Tail Distribution }) } ]
-Catalogue(C DataCatalog, D Dataset) [ C & { Dataset (Cons { Head D, Tail Dataset }) } ]
-Enroll(C Course, P Person) [ C & { TotalHistoricalEnrollment (TotalHistoricalEnrollment + 1) } ]
-Teach(C Course, I Person, Start Date) [ CourseInstance { Instructor List1(I), StartDate Start } ]
-Certify(P Person, C Course) [ C.EducationalCredentialAwarded & { RecognizedBy C.Provider } ]
+Develop(t Agent, name Name, l ProgrammingLanguage) [ SoftwareSourceCode { Name name, author List1(T), programmingLanguage L, dateCreated Now } ]
+Commit(s SoftwareSourceCode, t Text) [ s & { Text t, dateModified Now } ]
+Ship(s SoftwareApplication, v Version) [ s & { SoftwareVersion v, datePublished Now } ]
+Patch(s SoftwareApplication, notes Text) [ s & { ReleaseNotes notes, dateModified Now } ]
+Deprecate(s SoftwareApplication) [ s & { CreativeWorkStatus "Obsolete" } ]
+CollectData(d Dataset, x DataDownload) [ d & { Distribution (Cons { Head X, tail Distribution }) } ]
+Catalogue(c DataCatalog, d Dataset) [ c & { Dataset (Cons { Head d, tail Dataset }) } ]
+Enroll(c Course, p Person) [ c & { TotalHistoricalEnrollment (TotalHistoricalEnrollment + 1) } ]
+Teach(c Course, i Person, start Date) [ CourseInstance { Instructor List1(i), startDate start } ]
+Certify(p Person, c Course) [ c.EducationalCredentialAwarded & { RecognizedBy c.Provider } ]

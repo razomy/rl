@@ -2,8 +2,8 @@
 Maps, Dictionaries, Caches & Probabilistic Data Structures
 #
 
-KeyValue(K, V)      { Key K, Value V }
-KeyValueArray(K, V) { Key K, Values List(KvaOrValue(K, V)) }
+KeyValue(K, V)      { Key K, value V }
+KeyValueArray(K, V) { Key K, values List(KvaOrValue(K, V)) }
 KvaOrValue(K, V)    KeyValue(K, V) | KeyValueArray(K, V) | V
 
 Dict(T)          Map(String, T)

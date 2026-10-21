@@ -32,7 +32,7 @@ Device Artifact & {
 }
 
 Machine   Artifact & { MachineKind, Power, Efficiency }
-Component { Name, PartOf Artifact }
+Component { Name, partOf Artifact }
 
 Vehicle Artifact & Moving & {
     VehicleKind
@@ -43,10 +43,10 @@ Vehicle Artifact & Moving & {
     Vin
 }
 Parked  Object
-Driving { Driver Agent, Destination GeoCoordinate }
+Driving { Driver Agent, destination GeoCoordinate }
 
 Room   { RoomKind, Area }
-Floor_ { Level Int, Rooms List(Room) }
+Floor_ { Level Int, rooms List(Room) }
 Building Artifact & {
     BuildingKind
     Address
@@ -56,7 +56,7 @@ Building Artifact & {
     BuiltIn Year
 }
 
-Infrastructure Artifact & { InfrastructureKind, Route GeoPath }
+Infrastructure Artifact & { InfrastructureKind, route GeoPath }
 
 UnderConstruction { Progress Fraction }
 Completed_        { CompletedAt Instant }
@@ -77,11 +77,11 @@ Uninstalled Object
 Running     { Since Instant }
 Stopped     Object
 
-Garment Artifact & { GarmentKind, Size_ String, Color }
+Garment Artifact & { GarmentKind, size_ String, Color }
 Worn_   { Wearer Agent }
 
 Calories Measure(Real & NonNegative, Joule)
-Food     { Name, FoodKind, Calories, Ingredients List(Substance) }
+Food     { Name, FoodKind, Calories, ingredients List(Substance) }
 Raw      Object
 Cooked   { Method "boiled" | "fried" | "baked" | "grilled" | "steamed" | "roasted" }
 Spoiled  Object

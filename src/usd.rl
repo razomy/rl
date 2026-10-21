@@ -1,23 +1,23 @@
 #
-Universal Scene Description (USD), Procedural Content Generation (PCG) & 3D I/O
+Universal Scene Description (USD), procedural Content Generation (PCG) & 3D I/O
 #
 
 PrimvarInterpolation "constant" | "uniform" | "vertex" | "faceVarying" | "varying"
 UsdSpecifier         "def" | "over" | "class"
 UsdModelKind         "group" | "assembly" | "component" | "subcomponent"
 
-TimeSamplesIn  { Kind "TimeSamples", Samples Map(Float, Any), Interpolation String }
-AttributeIn    { Kind "Attribute", Name String, ShapeName String, Value Any, TimeSamples Option(IdRef(TimeSamplesIn)) }
-PrimvarIn      { Kind "Primvar", Name String, ShapeName String, Interpolation PrimvarInterpolation, ElementSize Int, Indices List(Int), Value Any }
-RelationshipIn { Kind "Relationship", Name String, Targets List(String) }
+TimeSamplesIn  { Kind "TimeSamples", samples Map(Float, Any), interpolation String }
+AttributeIn    { Kind "Attribute", name String, shapeName String, value Any, timeSamples Option(IdRef(TimeSamplesIn)) }
+PrimvarIn      { Kind "Primvar", name String, shapeName String, interpolation PrimvarInterpolation, elementSize Int, indices List(Int), value Any }
+RelationshipIn { Kind "Relationship", name String, targets List(String) }
 PropertyIn     AttributeIn | PrimvarIn | RelationshipIn
 
-SublayerArcIn    { Kind "SublayerArc", LayerRef IdRef(LayerIn), LayerPosition Int }
-InheritArcIn     { Kind "InheritArc", TargetPath String }
-VariantSetIn     { Kind "VariantSet", Name String, SelectedVariant String, Variants Map(String, IdRef(PrimIn)) }
-ReferenceArcIn   { Kind "ReferenceArc", AssetPath String, TargetPrim String, LayerOffsetTime Float, LayerScaleTime Float }
-PayloadArcIn     { Kind "PayloadArc", AssetPath String, TargetPrim String, IsLoaded Bool }
-SpecializeArcIn  { Kind "SpecializeArc", TargetPath String }
+SublayerArcIn    { Kind "SublayerArc", layerRef IdRef(LayerIn), layerPosition Int }
+InheritArcIn     { Kind "InheritArc", targetPath String }
+VariantSetIn     { Kind "VariantSet", name String, selectedVariant String, variants Map(String, IdRef(PrimIn)) }
+ReferenceArcIn   { Kind "ReferenceArc", assetPath String, targetPrim String, layerOffsetTime Float, layerScaleTime Float }
+PayloadArcIn     { Kind "PayloadArc", assetPath String, targetPrim String, isLoaded Bool }
+SpecializeArcIn  { Kind "SpecializeArc", targetPath String }
 CompositionArcIn SublayerArcIn | InheritArcIn | VariantSetIn | ReferenceArcIn | PayloadArcIn | SpecializeArcIn
 
 PrimIn {
@@ -33,7 +33,7 @@ PrimIn {
   CompositionArcs List(IdRef(CompositionArcIn))
 }
 
-InstanceablePrimIn PrimIn & { IsInstance Bool, MasterPrimPath String }
+InstanceablePrimIn PrimIn & { IsInstance Bool, masterPrimPath String }
 
 PointInstancerIn PrimIn & {
   Prototypes   List(IdRef(PrimIn))
@@ -216,14 +216,14 @@ GLTFExportParams IOBaseParams & {
   ExportCameras      Bool
 }
 
-ValidateMeshTopology(M Mesh3D) [
+ValidateMeshTopology(m Mesh3D) [
   VertsNum . {
-    [ _ >= 0 ] [ M & Evaluated { EvalTimestamp 1.0 } ]
+    [ _ >= 0 ] [ m & Evaluated { EvalTimestamp 1.0 } ]
     _          [ InvalidTopology { Reason "Negative vertex count" } ]
   }
 ]
 
-CreateMain(Path String) [
+CreateMain(path String) [
   Main {
     Filepath          Path
     VersionFile       400
@@ -234,7 +234,7 @@ CreateMain(Path String) [
   }
 ]
 
-CreateObject3D(NameStr String, Kind ObjectType, DataBlock Option(ID)) [
+CreateObject3D(nameStr String, kind ObjectType, dataBlock Option(ID)) [
   Object3D {
     Id     NameStr
     Name   NameStr
@@ -248,13 +248,13 @@ CreateObject3D(NameStr String, Kind ObjectType, DataBlock Option(ID)) [
   }
 ]
 
-LinkObjectToCollection(Coll Collection3D, Ob Object3D) [
+LinkObjectToCollection(coll Collection3D, ob Object3D) [
   Coll & {
     Gobject (Coll.Gobject + [CollectionObject { Ob Ob }])
   }
 ]
 
-SetObjectMode(Ob Object3D, TargetMode ObjectMode) [
+SetObjectMode(ob Object3D, targetMode ObjectMode) [
   TargetMode . {
     "Edit" [ Ob & InEditMode { ActiveTool "builtin.select_box" } & { Mode "Edit" } ]
     _      [ Ob & { Mode TargetMode } ]

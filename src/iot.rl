@@ -1,5 +1,5 @@
 #
-Abstract Embedded MCU, Sensor Reading, Actuator State, Control Theory & Robotics
+Abstract Embedded MCU, sensor Reading, actuator State, control Theory & Robotics
 #
 
 GpioPin {

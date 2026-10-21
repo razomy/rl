@@ -1,5 +1,5 @@
 #
-Abstract AI / ML Core Entities, MDP, Interaction Graph, Context & RAG
+Abstract AI / ML Core Entities, MDP, interaction Graph, Context & RAG
 #
 
 NeuralLayer {
@@ -116,7 +116,7 @@ AiResponse {
   Usage       Option(TokenUsage)
 }
 
-LlmException { ActualResult String, ExpectedResult String }
+LlmException { ActualResult String, expectedResult String }
 
 DocumentChunk {
   ChunkId   String

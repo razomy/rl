@@ -1,5 +1,5 @@
 #
-Concrete Landforms, Accommodations, Civic Structures & Place Transitions
+Concrete Landforms, Accommodations, civic Structures & Place Transitions
 #
 
 BodyOfWater      Landform_
@@ -22,7 +22,7 @@ Cave             Landform_
 Beach_           Landform_
 
 LandmarksOrHistoricalBuildings Place
-TouristAttraction              Place & { AvailableLanguage Language, TouristType Audience }
+TouristAttraction              Place & { AvailableLanguage Language, touristType Audience }
 TouristDestination             Place & { IncludesAttraction List(TouristAttraction) }
 
 Apartment               Accommodation
@@ -33,11 +33,11 @@ Room_                   Accommodation
 HotelRoom               Room_
 MeetingRoom             Room_
 Suite                   Accommodation
-ApartmentComplex        Residence & { NumberOfAccommodationUnits Count, PetsAllowed Bool }
+ApartmentComplex        Residence & { NumberOfAccommodationUnits Count, petsAllowed Bool }
 GatedResidenceCommunity Residence
 Store_                  Place
 
-Airport                         CivicStructure & { IataCode String, IcaoCode String }
+Airport                         CivicStructure & { IataCode String, icaoCode String }
 Aquarium                        CivicStructure
 Beach                           CivicStructure
 BoatTerminal                    CivicStructure
@@ -84,11 +84,11 @@ Zoo                             CivicStructure
 School_                         CivicStructure
 Library_                        CivicStructure
 
-Contain(Outer Place, Inner Place) [ Inner & { ContainedInPlace Outer } ]
-Relocate(P Place, G GeoCoordinates) [ P & { Geo G } ]
-OpenToPublic(P Place) [ P & { PublicAccess true } ]
-CloseToPublic(P Place) [ P & { PublicAccess false } ]
-Annex(C Country, A AdministrativeArea) [ A & { ContainedInPlace C } ]
-Open(C CivicStructure) [ C & { PublicAccess true } ]
-Close(C CivicStructure) [ C & { PublicAccess false } ]
-Consecrate(P PlaceOfWorship) [ P & { PublicAccess true } ]
+Contain(outer Place, inner Place) [ inner & { ContainedInPlace Outer } ]
+Relocate(p Place, g GeoCoordinates) [ p & { Geo G } ]
+OpenToPublic(p Place) [ p & { PublicAccess true } ]
+CloseToPublic(p Place) [ p & { PublicAccess false } ]
+Annex(c Country, a AdministrativeArea) [ a & { ContainedInPlace C } ]
+Open(c CivicStructure) [ c & { PublicAccess true } ]
+Close(c CivicStructure) [ c & { PublicAccess false } ]
+Consecrate(p PlaceOfWorship) [ p & { PublicAccess true } ]

@@ -3,13 +3,13 @@ Abstract Mechanical, Thermal, Electrical, Semiconductor & Aerospace Engineering 
 #
 
 StressTensor3D {
-  SigmaXX Float, SigmaYY Float, SigmaZZ Float
-  TauXY   Float, TauYZ   Float, TauZX   Float
+  SigmaXX Float, sigmaYY Float, sigmaZZ Float
+  TauXY   Float, tauYZ   Float, tauZX   Float
 }
 
 StrainTensor3D {
-  EpsilonXX Float, EpsilonYY Float, EpsilonZZ Float
-  GammaXY   Float, GammaYZ   Float, GammaZX   Float
+  EpsilonXX Float, epsilonYY Float, epsilonZZ Float
+  GammaXY   Float, gammaYZ   Float, gammaZX   Float
 }
 
 MechanicalMaterialProperties {

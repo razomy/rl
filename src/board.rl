@@ -1,5 +1,5 @@
 #
-Grid Boards, Puzzle Mechanics & Resource Generators
+Grid Boards, puzzle Mechanics & Resource Generators
 #
 
 EmpedoclesElements "None" | "Water" | "Earth" | "Fire" | "Air" | "Aether" | "Light" | "Dark" | "Lightning" | "Ice"
@@ -49,7 +49,7 @@ BoardStepEvent          IBoardEvent
 BoardStepUndoEvent      IBoardEvent
 AfterBoardStepUndoEvent IBoardEvent
 
-IsNeighborCell(Target VectorInt3, Neighbor VectorInt3) [
+IsNeighborCell(target VectorInt3, neighbor VectorInt3) [
   ((Target.X - Neighbor.X) . Math.Abs <= 1) &&
   ((Target.Y - Neighbor.Y) . Math.Abs <= 1) &&
   ((Target.Z - Neighbor.Z) . Math.Abs <= 1)
@@ -98,9 +98,9 @@ ProducingSystem {
   IsActive                Bool
 }
 
-OverheatSystem   { Cooling CoolingSystem, MaxHeat Float, IsActive Bool }
-OverGatherSystem { Gathering GatheringSystem, MaxCollect Float, IsActive Bool }
-DisposeSystem    { Producing ProducingSystem, DisposeAbility Float, IsActive Bool }
+OverheatSystem   { Cooling CoolingSystem, maxHeat Float, isActive Bool }
+OverGatherSystem { Gathering GatheringSystem, maxCollect Float, isActive Bool }
+DisposeSystem    { Producing ProducingSystem, disposeAbility Float, isActive Bool }
 
 CoolingZeroLevelException          { Reason String }
 OverheatException                  { Reason String }
@@ -108,11 +108,11 @@ OverGatherException                { Reason String }
 GatheringTakeMoreThenAbleException { Reason String }
 ProducingTakeMoreThenAbleException { Reason String }
 
-HeatCoolingSystem(Cs CoolingSystem, Amount Float) [
+HeatCoolingSystem(cs CoolingSystem, amount Float) [
   Cs & { HeatLevel (HeatLevel + Amount) }
 ]
 
-UpdateCoolingSystem(Cs CoolingSystem) [
+UpdateCoolingSystem(cs CoolingSystem) [
   CoolAmount (IsActive . { true [ CoolingAbility ], false [ PassiveCoolingAbility ] })
   NextHeat   (HeatLevel - CoolAmount)
   NextHeat . {
@@ -121,14 +121,14 @@ UpdateCoolingSystem(Cs CoolingSystem) [
   }
 ]
 
-CheckOverheat(Os OverheatSystem) [
+CheckOverheat(os OverheatSystem) [
   Os.Cooling.HeatLevel . {
     [ _ > Os.MaxHeat ] [ OverheatException { Reason "Max heat exceeded" } ]
     _                  [ Os ]
   }
 ]
 
-GatherResources(Gs GatheringSystem) [
+GatherResources(gs GatheringSystem) [
   Gain (IsActive . { true [ GatheringAbility ], false [ PassiveGatheringAbility ] })
   Gs & {
     Collect (Collect + Gain)
@@ -136,7 +136,7 @@ GatherResources(Gs GatheringSystem) [
   }
 ]
 
-ProduceResources(Ps ProducingSystem) [
+ProduceResources(ps ProducingSystem) [
   Ps.Gathering.Collect . {
     [ _ < ConsumingCapacity ] [ ProducingTakeMoreThenAbleException { Reason "Not enough gathered resources" } ]
     _ [

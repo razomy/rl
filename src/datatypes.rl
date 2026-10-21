@@ -15,7 +15,7 @@ Time_             TimeOfDay
 PronounceableText String
 DataType          Boolean_ | Text_ | Number_ | Integer | URL | DateTime_ | Date_ | Time_
 
-Describe(T Thing, D Text) [ T & { Description D } ]
-Rename(T Thing, N Name) [ T & { AlternateName Name, Name N } ]
-Link(T Thing, U Url) [ T & { SameAs (Cons { Head U, Tail SameAs }) } ]
-Identify(T Thing, I Identifier) [ T & { Identifier I } ]
+Describe(t Thing, d Text) [ t & { Description D } ]
+Rename(t Thing, n Name) [ t & { AlternateName Name, name N } ]
+Link(t Thing, u Url) [ t & { SameAs (Cons { Head U, tail SameAs }) } ]
+Identify(t Thing, i Identifier) [ t & { Identifier I } ]

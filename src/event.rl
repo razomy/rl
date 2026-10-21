@@ -1,5 +1,5 @@
 #
-Abstract Event, Lifecycle Typestates, Causation, Process & SchemaEvent
+Abstract Event, lifecycle Typestates, Causation, Process & SchemaEvent
 #
 
 EventKind "natural" | "social" | "biological" | "physical" | "economic" | "political"
@@ -19,19 +19,19 @@ Planned   { PlannedFor Interval }
 Active    { StartedAt Instant }
 Paused    { PausedAt Instant }
 Done      { FinishedAt Instant }
-Cancelled { CancelledAt Instant, Reason String }
+Cancelled { CancelledAt Instant, reason String }
 Postponed { NewTime Interval }
-Failed    { FailedAt Instant, Reason String }
+Failed    { FailedAt Instant, reason String }
 Lifecycle Planned | Active | Paused | Done | Cancelled | Postponed | Failed
 
 Probability Fraction
 Certainty   "impossible" | "unlikely" | "possible" | "likely" | "certain"
 
-Cause      { Event Event, Probability Probability }
-Effect     { Event Event, Delay Duration, Magnitude Real }
-Causation  { Cause Cause, Effect Effect }
-Condition_ { Predicate String, Holds Bool }
-Trigger    { Condition_ Condition_, Fires Event }
+Cause      { Event Event, probability Probability }
+Effect     { Event Event, delay Duration, magnitude Real }
+Causation  { Cause Cause, effect Effect }
+Condition_ { Predicate String, holds Bool }
+Trigger    { Condition_ Condition_, fires Event }
 
 Process {
   Name      Name
@@ -40,7 +40,7 @@ Process {
 }
 
 History   { Events List(Event) }
-Era_      { Name Name, Interval Interval }
+Era_      { Name Name, interval Interval }
 Epoch     Era_
 Milestone Event & { Significance String }
 

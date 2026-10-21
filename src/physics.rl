@@ -1,5 +1,5 @@
 #
-Objects, Modifiers, Physics, Scenes, Node Trees, Sculpt PBVH & Window Manager
+Objects, Modifiers, Physics, Scenes, node Trees, sculpt PBVH & Window Manager
 #
 
 ObjectType
@@ -150,7 +150,7 @@ Material3D ID & {
   SurfaceRenderMethod Int
   BlendMethod         Int
   AlphaThreshold      Float
-  R                   Float, G Float, B Float, A Float
+  R                   Float, g Float, b Float, a Float
   Metallic            Float
   Roughness           Float
   Nodetree            Option(bNodeTree)
@@ -162,7 +162,7 @@ LightType "Local" | "Sun" | "Spot" | "Area"
 Light3D ID & {
   Type        "LA"
   LaType      LightType
-  R           Float, G Float, B Float
+  R           Float, g Float, b Float
   Energy      Float
   Spotsize    Float
   Spotblend   Float
@@ -192,7 +192,7 @@ Camera3D ID & {
 
 World3D ID & {
   Type     "WO"
-  Horr     Float, Horg Float, Horb Float
+  Horr     Float, horg Float, horb Float
   Exposure Float
   Nodetree Option(bNodeTree)
 }
@@ -305,8 +305,8 @@ bNode {
   Identifier Int
   Flag       Int
   Color      Float3
-  Locx       Float, Locy Float
-  Width      Float, Height Float
+  Locx       Float, locy Float
+  Width      Float, height Float
   Parent     Option(bNode)
   Id         Option(ID)
   Storage    Any
@@ -386,8 +386,8 @@ wmWindow {
   Winid         Int
   Scene         Option(Scene3D)
   ViewLayerName String
-  Posx          Int, Posy Int
-  Sizex         Int, Sizey Int
+  Posx          Int, posy Int
+  Sizex         Int, sizey Int
   Windowstate   Int
   Active        Int
 }

@@ -1,4 +1,3 @@
-
 #
 Abstract Place, AdministrativeArea, Country, City, Landform, Accommodation & CivicStructure
 #
@@ -28,12 +27,12 @@ Place Thing & {
 }
 
 AdministrativeArea Place
-Country            AdministrativeArea & { CountryCode String, Currency Currency, OfficialLanguage Language }
+Country            AdministrativeArea & { CountryCode String, currency Currency, officialLanguage Language }
 State              AdministrativeArea
 City               AdministrativeArea & { Population Count }
 SchoolDistrict     AdministrativeArea
 
 Landform_      Place & { Landform Landform }
-Accommodation  Place & { FloorSize QuantitativeValue, NumberOfRooms Count, PetsAllowed Bool, Bed BedDetails, AccommodationCategory String }
+Accommodation  Place & { FloorSize QuantitativeValue, numberOfRooms Count, petsAllowed Bool, bed BedDetails, accommodationCategory String }
 Residence      Place
 CivicStructure Place & { OpeningHours String }

@@ -3,7 +3,7 @@ Color Management (OpenColorIO), Curves, Histograms & Scopes
 #
 
 CBData {
-  R   Float, G Float, B Float, A Float
+  R   Float, g Float, b Float, a Float
   Pos Float
   Cur Int
 }

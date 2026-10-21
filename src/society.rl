@@ -27,7 +27,7 @@ Relationship {
 }
 
 Single   Object
-Married  { Spouse Agent, Since Instant }
+Married  { Spouse Agent, since Instant }
 Divorced { Since Instant }
 Widowed  { Since Instant }
 MaritalStatus Single | Married | Divorced | Widowed
@@ -41,9 +41,9 @@ Membership {
 Member    { Membership }
 NonMember Object
 
-Jurisdiction { Name, Area GeoShape }
+Jurisdiction { Name, area GeoShape }
 
-Norm { Description Text, Enforced Bool }
+Norm { Description Text, enforced Bool }
 Law {
     Title
     Text
@@ -52,10 +52,10 @@ Law {
     LegalSystem
 }
 
-Right       { RightKind, Holder Agent, GrantedBy Law }
-Duty        { Description Text, Bearer Agent, ImposedBy Law }
-Permission  { Grantee Agent, Action_ String, Scope Any }
-Prohibition { Subject Agent, Action_ String }
+Right       { RightKind, holder Agent, grantedBy Law }
+Duty        { Description Text, bearer Agent, imposedBy Law }
+Permission  { Grantee Agent, action_ String, scope Any }
+Prohibition { Subject Agent, action_ String }
 
 Ownership {
     Owner Agent
@@ -66,8 +66,8 @@ Ownership {
 Owned   { Ownership }
 Unowned Object
 
-Crime     { Law, Offender Agent, At Instant }
-Sentence_ { Verdict, Penalty String, Duration }
+Crime     { Law, offender Agent, at Instant }
+Sentence_ { Verdict, penalty String, Duration }
 
 State_ {
     Name
@@ -78,11 +78,11 @@ State_ {
     Capital String
 }
 
-Election { Office String, Candidates List(Agent), Voters List(Agent), At Date }
-Vote     { Voter Agent, Choice Agent, Election }
-Office   { Title, Holder Agent, Term Interval }
+Election { Office String, candidates List(Agent), voters List(Agent), at Date }
+Vote     { Voter Agent, choice Agent, Election }
+Office   { Title, holder Agent, term Interval }
 
 Citizen    { State_ }
 Stateless  Object
 Free       Object
-Imprisoned { Since Instant, Until Instant }
+Imprisoned { Since Instant, until Instant }

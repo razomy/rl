@@ -1,4 +1,3 @@
-
 #
 Abstract Temporal Points, Intervals, Schedules & Typestates
 #

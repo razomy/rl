@@ -4,19 +4,19 @@ Concrete Anatomy, Diseases, Drugs, Procedures, Biochemistry & Transitions
 
 Bone               AnatomicalStructure
 BrainStructure     AnatomicalStructure
-Joint              AnatomicalStructure & { BiomechnicalClass String, FunctionalClass String, StructuralClass String }
+Joint              AnatomicalStructure & { BiomechnicalClass String, functionalClass String, structuralClass String }
 Ligament           AnatomicalStructure
-Muscle             AnatomicalStructure & { MuscleAction String, Antagonist Muscle, BloodSupply Vessel, Insertion AnatomicalStructure, Nerve Nerve }
-Nerve              AnatomicalStructure & { Branch AnatomicalStructure, SensoryUnit AnatomicalStructure }
+Muscle             AnatomicalStructure & { MuscleAction String, antagonist Muscle, bloodSupply Vessel, insertion AnatomicalStructure, nerve Nerve }
+Nerve              AnatomicalStructure & { Branch AnatomicalStructure, sensoryUnit AnatomicalStructure }
 Vessel             AnatomicalStructure
-Artery             Vessel & { ArterialBranch AnatomicalStructure, Supply_ AnatomicalStructure }
+Artery             Vessel & { ArterialBranch AnatomicalStructure, supply_ AnatomicalStructure }
 LymphaticVessel    Vessel
-Vein               Vessel & { DrainsTo Vessel, Tributary AnatomicalStructure }
+Vein               Vessel & { DrainsTo Vessel, tributary AnatomicalStructure }
 SuperficialAnatomy MedicalEntity
 
-InfectiousDisease    MedicalCondition & { InfectiousAgent String, InfectiousAgentClass, TransmissionMethod String }
+InfectiousDisease    MedicalCondition & { InfectiousAgent String, InfectiousAgentClass, transmissionMethod String }
 MedicalSignOrSymptom MedicalCondition & { PossibleTreatment List(MedicalTherapy) }
-MedicalSign          MedicalSignOrSymptom & { IdentifyingExam Option(PhysicalExam_), IdentifyingTest Option(MedicalTest) }
+MedicalSign          MedicalSignOrSymptom & { IdentifyingExam Option(PhysicalExam_), identifyingTest Option(MedicalTest) }
 VitalSign            MedicalSign
 MedicalSymptom       MedicalSignOrSymptom
 MedicalRiskFactor    MedicalEntity & { IncreasesRiskOf MedicalEntity }
@@ -66,8 +66,8 @@ Insulin     Drug & { NonProprietaryName "insulin",     PrescriptionStatus "Presc
 DiagnosticProcedure    MedicalProcedure
 PhysicalExam_          MedicalProcedure & { PhysicalExam }
 SurgicalProcedure      MedicalProcedure
-TherapeuticProcedure   MedicalProcedure & { AdverseOutcome MedicalEntity, DoseSchedule, Drug List(Drug) }
-MedicalTherapy         TherapeuticProcedure & { ContraindicationE Text, DuplicateTherapy MedicalTherapy, SeriousAdverseOutcome MedicalEntity }
+TherapeuticProcedure   MedicalProcedure & { AdverseOutcome MedicalEntity, DoseSchedule, drug List(Drug) }
+MedicalTherapy         TherapeuticProcedure & { ContraindicationE Text, duplicateTherapy MedicalTherapy, seriousAdverseOutcome MedicalEntity }
 OccupationalTherapy    MedicalTherapy
 PalliativeProcedure    MedicalTherapy
 PhysicalTherapy        MedicalTherapy
@@ -79,7 +79,7 @@ BloodTest        MedicalTest
 ImagingTest      MedicalTest & { ImagingTechnique "CT" | "MRI" | "PET" | "Ultrasound" | "XRay" }
 PathologyTest    MedicalTest & { TissueSample String }
 MedicalTestPanel MedicalTest & { SubTest List(MedicalTest) }
-MedicalDevice    MedicalEntity & Product & { AdverseOutcome MedicalEntity, Contraindication Text, PostOp Text, PreOp Text, Procedure Text }
+MedicalDevice    MedicalEntity & Product & { AdverseOutcome MedicalEntity, contraindication Text, postOp Text, preOp Text, procedure Text }
 
 MedicalObservationalStudy MedicalStudy & { StudyDesign String }
 MedicalTrial              MedicalStudy & { TrialDesign String, Phase_ "Phase1" | "Phase2" | "Phase3" | "Phase4" }
@@ -93,9 +93,9 @@ ApprovedIndication               MedicalIndication
 PreventionIndication             MedicalIndication
 TreatmentIndication              MedicalIndication
 LifestyleModification            MedicalEntity
-Diet_                            CreativeWork & MedicalEntity & LifestyleModification & { DietFeatures Text, Endorsers List(Agent), ExpertConsiderations Text, PhysiologicalBenefits Option(String), Risks Option(String) }
-PhysicalActivity                 LifestyleModification & { AssociatedAnatomy Option(AnatomicalStructure), Category_ PhysicalActivityCategory, Epidemiology Text }
-ExercisePlan_                    CreativeWork & PhysicalActivity & { ActivityDuration Duration_, ActivityFrequency String, ExerciseType String, Intensity_ String, Repetitions Count, RestPeriods String, Workload Energy_ }
+Diet_                            CreativeWork & MedicalEntity & LifestyleModification & { DietFeatures Text, endorsers List(Agent), expertConsiderations Text, physiologicalBenefits Option(String), risks Option(String) }
+PhysicalActivity                 LifestyleModification & { AssociatedAnatomy Option(AnatomicalStructure), category_ PhysicalActivityCategory, epidemiology Text }
+ExercisePlan_                    CreativeWork & PhysicalActivity & { ActivityDuration Duration_, activityFrequency String, exerciseType String, intensity_ String, repetitions Count, restPeriods String, workload Energy_ }
 
 MolecularEntity BioChemEntity & {
   InChI            Option(String)
@@ -111,14 +111,14 @@ ChemicalSubstance BioChemEntity & {
   ChemicalRole        Option(String)
 }
 
-Diagnose(P Patient, C MedicalCondition) [ P & { Diagnosis (Cons { Head C & { Status_ "Active" }, Tail Diagnosis }) } ]
-Prescribe(P Patient, D Drug) [ P & { Drug (Cons { Head D, Tail Drug }) } ]
-Treat(C MedicalCondition & { Status_ "Active" }, T MedicalTherapy) [ C & { Status_ "Remission" } ]
-Cure(C MedicalCondition) [ C & { Status_ "Resolved" } ]
-Relapse(C MedicalCondition & { Status_ "Remission" }) [ C & { Status_ "Active" } ]
-Chronify(C MedicalCondition & { Status_ "Active" }) [ C & { Status_ "Chronic" } ]
-RunTest(T MedicalTest, P Patient) [ T & { UsedToDiagnose P.HealthCondition } ]
-Operate(S SurgicalProcedure, P Patient) [ S & { Status_ "Completed" } ]
-Vaccinate(P Patient, D Drug) [ P & { Drug (Cons { Head D, Tail Drug }) } ]
-StartTrial(T MedicalTrial) [ T & { Status_ "Recruiting" } ]
-CompleteTrial(T MedicalTrial) [ T & { Status_ "Completed" } ]
+Diagnose(p Patient, c MedicalCondition) [ p & { Diagnosis (Cons { Head C & { Status_ "Active" }, tail Diagnosis }) } ]
+Prescribe(p Patient, d Drug) [ p & { Drug (Cons { Head D, tail Drug }) } ]
+Treat(c MedicalCondition & { Status_ "Active" }, t MedicalTherapy) [ c & { Status_ "Remission" } ]
+Cure(c MedicalCondition) [ c & { Status_ "Resolved" } ]
+Relapse(c MedicalCondition & { Status_ "Remission" }) [ c & { Status_ "Active" } ]
+Chronify(c MedicalCondition & { Status_ "Active" }) [ c & { Status_ "Chronic" } ]
+RunTest(t MedicalTest, p Patient) [ t & { UsedToDiagnose P.HealthCondition } ]
+Operate(s SurgicalProcedure, p Patient) [ s & { Status_ "Completed" } ]
+Vaccinate(p Patient, d Drug) [ p & { Drug (Cons { Head D, tail Drug }) } ]
+StartTrial(t MedicalTrial) [ t & { Status_ "Recruiting" } ]
+CompleteTrial(t MedicalTrial) [ t & { Status_ "Completed" } ]

@@ -2,24 +2,18 @@
 Abstract Semantic Types, Descriptors & Reflection Contracts
 #
 
-Any    Any
-Number Number
-String String
-RegExp RegExp
-None   None
-
 Property   Any
 Expression Any
+Record Any
 
-Tuple(T)   Any
-Array(T)   Tuple
-List(T)    Array
-Object     Tuple(Property)
 Function   Object & Tuple(Expression)
 Type       Tuple(Object | Function)
 
 return Any
 Self   Any
+
+# Type Relation From-To for auto type calculation #
+For(T) Any
 
 // Type-level Peano Naturals
 Zero    Object
@@ -46,7 +40,7 @@ TypeDescriptor {
   IsGeneric Bool
 }
 
-Deprecated   { Reason String, Since String }
+Deprecated   { Reason String, since String }
 Experimental { Feature String }
 ReadOnly     Object
 Serializable Object

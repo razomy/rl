@@ -3,10 +3,10 @@ Path Manipulation Operations
 #
 
 Path {
-  Join(Parts List(String)) [ Parts . native_path_join ]
-  Dirname(P String)        [ P . native_path_dirname ]
-  Basename(P String)       [ P . native_path_basename ]
-  Extension(P String)      [ P . native_path_ext ]
-  Resolve(P String)        [ P . native_path_resolve ]
-  IsAbsolute(P String)     [ P . native_path_is_abs ]
+  Join(parts List(String)) [ Parts . native_path_join ]
+  Dirname(p String)        [ P . native_path_dirname ]
+  Basename(p String)       [ P . native_path_basename ]
+  Extension(p String)      [ P . native_path_ext ]
+  Resolve(p String)        [ P . native_path_resolve ]
+  IsAbsolute(p String)     [ P . native_path_is_abs ]
 }

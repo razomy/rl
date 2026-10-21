@@ -1,11 +1,11 @@
 #
-Lists, Linked Lists, Queues, Deques & Buffers
+Lists, linked Lists, Queues, Deques & Buffers
 #
 
-List1(A)          Cons { Head A, Tail Nil }
-List2(A, B)       Cons { Head A, Tail List1(B) }
-List3(A, B, C)    Cons { Head A, Tail List2(B, C) }
-List4(A, B, C, D) Cons { Head A, Tail List3(B, C, D) }
+List1(A)          Cons { Head A, tail Nil }
+List2(A, B)       Cons { Head A, tail List1(B) }
+List3(A, B, C)    Cons { Head A, tail List2(B, C) }
+List4(A, B, C, D) Cons { Head A, tail List3(B, C, D) }
 
 NonEmptyList(T) {
   Head T
@@ -60,7 +60,7 @@ RingBuffer(T) {
   WriteIdx Int
 }
 
-PriorityNode(T) { Priority Float, Item T }
+PriorityNode(T) { Priority Float, item T }
 PriorityQueue(T) {
   Heap List(PriorityNode(T))
   Size Int

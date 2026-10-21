@@ -74,33 +74,33 @@ Schedule {
     Calendar
 }
 
-Elapse(I Instant, D Duration) [
+Elapse(i Instant, d Duration) [
     Instant { Timestamp (Timestamp + D.Value) }
 ]
 
-Span(I Interval) [
-    Duration { Value (End.Timestamp - Start.Timestamp), Unit Second }
+Span(i Interval) [
+    Duration { Value (End.Timestamp - Start.Timestamp), unit Second }
 ]
 
-Plan(X Unscheduled, S Slot) [
+Plan(x Unscheduled, s Slot) [
     X & Scheduled { Schedule { Slot S } }
 ]
 
-Reschedule(X Scheduled, S Slot) [
+Reschedule(x Scheduled, s Slot) [
     X & Scheduled { Schedule (Schedule & { Slot S }) }
 ]
 
-Unplan(X Scheduled) [
+Unplan(x Scheduled) [
     X / Scheduled & Unscheduled Object
 ]
 
-CheckDeadline(X Scheduled, D Deadline) [
+CheckDeadline(x Scheduled, d Deadline) [
     Now.Timestamp . {
-        [ _ > D.Timestamp ] [ X & Overdue { Deadline D } ]
+        [ _ > D.Timestamp ] [ x & Overdue { Deadline D } ]
         _                   [ X ]
     }
 ]
 
-Expire(X Any & { Deadline }) [
+Expire(x Any & { Deadline }) [
     X & Expired { At Now }
 ]

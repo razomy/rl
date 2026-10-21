@@ -1,5 +1,5 @@
 #
-Concrete Astronomical Units, Galaxies, Solar System Planets & Moons
+Concrete Astronomical Units, Galaxies, solar System Planets & Moons
 #
 
 AstronomicalUnit Unit & { UnitSymbol "au", Dimension "length", Factor 149597870700 }

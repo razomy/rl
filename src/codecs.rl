@@ -3,17 +3,17 @@ JSON, YAML & CSV Codecs
 #
 
 Json {
-  Parse(Raw String)     [ Raw . native_json_parse ]
-  Encode(Entity Any)    [ Entity . native_json_encode ]
-  FormatValue(Val Any)  [ Val . native_json_format_value ]
+  Parse(raw String)     [ Raw . native_json_parse ]
+  Encode(entity Any)    [ Entity . native_json_encode ]
+  FormatValue(val Any)  [ Val . native_json_format_value ]
 }
 
 Yaml {
-  Parse(Raw String)     [ Raw . native_yaml_parse ]
-  Encode(Entity Any)    [ Entity . native_yaml_encode ]
+  Parse(raw String)     [ Raw . native_yaml_parse ]
+  Encode(entity Any)    [ Entity . native_yaml_encode ]
 }
 
 Csv {
-  Parse(Raw String)     [ Raw . native_csv_parse ]
-  Encode(Rows List(Any))[ Rows . native_csv_encode ]
+  Parse(raw String)     [ Raw . native_csv_parse ]
+  Encode(rows List(Any))[ Rows . native_csv_encode ]
 }

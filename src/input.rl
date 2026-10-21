@@ -11,9 +11,9 @@ CursorState {
 ClickType "single" | "double" | "right" | "middle" | "long-press"
 
 ButtonElement   UIElement
-InputField      UIElement & { Placeholder Option(String), Value String, InputType "text" | "password" | "email" | "number" | "search" }
+InputField      UIElement & { Placeholder Option(String), value String, InputType "text" | "password" | "email" | "number" | "search" }
 CheckboxElement UIElement & { IsChecked Bool }
-SelectElement   UIElement & { Options List(String), SelectedOption Option(String) }
+SelectElement   UIElement & { Options List(String), selectedOption Option(String) }
 CanvasElement   UIElement
 
 UIEvent {

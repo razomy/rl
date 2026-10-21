@@ -1,5 +1,5 @@
 #
-Abstract MediaObject, Film/TV/Music Works, Image Buffers, Texture Filters & NLE Strip
+Abstract MediaObject, Film/TV/Music Works, image Buffers, texture Filters & NLE Strip
 #
 
 MediaObject CreativeWork & {
@@ -21,14 +21,14 @@ MediaObject CreativeWork & {
     Sha256 String
 }
 
-Movie              CreativeWork & { Actor List(Person), Director List(Person), MusicBy Agent, ProductionCompany Organization, CountryOfOrigin Country, Duration_, Trailer VideoObject, TitleEIDR String, SubtitleLanguage List(Language) }
-Clip               CreativeWork & { Actor List(Person), Director List(Person), ClipNumber String, PartOfEpisode Episode, PartOfSeason CreativeWorkSeason, StartOffset Real, EndOffset Real }
-CreativeWorkSeason CreativeWork & { Actor List(Person), Director Person, Episode List(Episode), NumberOfEpisodes Count, PartOfSeries CreativeWorkSeries, SeasonNumber String, StartDate Date, EndDate Date, Trailer VideoObject }
-Episode            CreativeWork & { Actor List(Person), Director List(Person), Duration_, EpisodeNumber String, PartOfSeason CreativeWorkSeason, PartOfSeries CreativeWorkSeries, Trailer VideoObject }
-BroadcastChannel   Intangible & { BroadcastChannelId String, BroadcastServiceTier String, InBroadcastLineup CableOrSatelliteService }
-MusicComposition   CreativeWork & { Composer List(Agent), Lyricist Person, Lyrics CreativeWork, MusicalKey String, MusicArrangement MusicComposition, IswcCode String }
-MusicRecording     CreativeWork & { ByArtist MusicGroup, Duration_, InAlbum MusicAlbum, InPlaylist MusicPlaylist, IsrcCode String, RecordingOf MusicComposition }
-MusicPlaylist      CreativeWork & { NumTracks Count, Track List(MusicRecording) }
+Movie              CreativeWork & { Actor List(Person), director List(Person), musicBy Agent, productionCompany Organization, countryOfOrigin Country, Duration_, trailer VideoObject, titleEIDR String, subtitleLanguage List(Language) }
+Clip               CreativeWork & { Actor List(Person), director List(Person), clipNumber String, partOfEpisode Episode, partOfSeason CreativeWorkSeason, startOffset Real, endOffset Real }
+CreativeWorkSeason CreativeWork & { Actor List(Person), director Person, episode List(Episode), numberOfEpisodes Count, partOfSeries CreativeWorkSeries, seasonNumber String, startDate Date, endDate Date, trailer VideoObject }
+Episode            CreativeWork & { Actor List(Person), director List(Person), Duration_, episodeNumber String, partOfSeason CreativeWorkSeason, partOfSeries CreativeWorkSeries, trailer VideoObject }
+BroadcastChannel   Intangible & { BroadcastChannelId String, broadcastServiceTier String, inBroadcastLineup CableOrSatelliteService }
+MusicComposition   CreativeWork & { Composer List(Agent), lyricist Person, lyrics CreativeWork, musicalKey String, musicArrangement MusicComposition, iswcCode String }
+MusicRecording     CreativeWork & { ByArtist MusicGroup, Duration_, inAlbum MusicAlbum, inPlaylist MusicPlaylist, isrcCode String, recordingOf MusicComposition }
+MusicPlaylist      CreativeWork & { NumTracks Count, track List(MusicRecording) }
 
 ImBuf {
   Width           Int

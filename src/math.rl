@@ -3,9 +3,9 @@ Abstract Mathematical Vectors, Curves & Probability Distributions
 #
 
 Vector1(T) { X T }
-Vector2(T) { X T, Y T }
-Vector3(T) { X T, Y T, Z T }
-Vector4(T) { X T, Y T, Z T, W T }
+Vector2(T) { X T, y T }
+Vector3(T) { X T, y T, z T }
+Vector4(T) { X T, y T, z T, w T }
 
 ICurve { Evaluate Any }
 

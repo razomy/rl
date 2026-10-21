@@ -8,7 +8,7 @@ Count    Natural
 Index    Natural
 Percent  Range(0, 100) & Double
 Fraction Range(0, 1) & Double
-Ratio    { Numerator Real, Denominator Real & Positive }
+Ratio    { Numerator Real, denominator Real & Positive }
 Sign     "negative" | "zero" | "positive"
 
 Name  String
@@ -35,4 +35,4 @@ Measure(T, U) {
     Unit  U
 }
 
-Tolerance { Lower Real, Upper Real }
+Tolerance { Lower Real, upper Real }

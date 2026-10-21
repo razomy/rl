@@ -1,5 +1,5 @@
 #
-Concrete Currency Codes, Asset Kinds, Commodities, Economic Sectors & Transitions
+Concrete Currency Codes, asset Kinds, Commodities, economic Sectors & Transitions
 #
 
 CurrencyCode "USD" | "EUR" | "GBP" | "JPY" | "CNY" | "CHF" | "CAD" | "AUD" | "NZD" | "SEK"
@@ -10,8 +10,8 @@ CurrencyCode "USD" | "EUR" | "GBP" | "JPY" | "CNY" | "CHF" | "CAD" | "AUD" | "NZ
 AssetKind "cash" | "deposit" | "stock" | "bond" | "real-estate" | "commodity" | "vehicle"
     | "equipment" | "intellectual-property" | "crypto" | "receivable" | "inventory"
 
-Share_ Asset & { AssetKind "stock", Ticker String }
-Bond_  Asset & { AssetKind "bond", Maturity Date, InterestRate }
+Share_ Asset & { AssetKind "stock", ticker String }
+Bond_  Asset & { AssetKind "bond", maturity Date, InterestRate }
 
 AccountKind "checking" | "savings" | "credit" | "loan" | "brokerage" | "wallet" | "ledger"
 
@@ -24,27 +24,27 @@ EconomicSector "agriculture" | "mining" | "manufacturing" | "construction" | "en
     | "transport" | "finance" | "healthcare" | "education" | "technology" | "media" | "hospitality"
     | "government" | "real-estate" | "telecom"
 
-Pay(From Account, To Account, M Money) [
+Pay(from Account, to Account, m Money) [
     From.Balance.Amount . {
-        [ _ >= M.Amount ] [ Transaction { TransactionKind "payment", TransactionStatus "settled", From, To, Money M, At Now } ]
-        _                 [ Insufficient { Needed M, Available From.Balance } ]
+        [ _ >= M.Amount ] [ Transaction { TransactionKind "payment", TransactionStatus "settled", From, To, money M, at Now } ]
+        _                 [ Insufficient { Needed M, available From.Balance } ]
     }
 ]
-Transfer(T Transaction & { TransactionStatus "authorized" }) [ T & { TransactionStatus "settled" } ]
-Authorize(T Transaction & { TransactionStatus "pending" }) [ T & { TransactionStatus "authorized" } ]
-Reverse(T Transaction & { TransactionStatus "settled" }) [ T & { TransactionStatus "reversed" } ]
-Deposit(A Account, M Money) [ A & { Balance { Amount (Balance.Amount + M.Amount), Currency } } ]
-Withdraw(A Account, M Money) [ A & { Balance { Amount (Balance.Amount - M.Amount), Currency } } ]
-Exchange(M Money, R ExchangeRate) [ Money { Amount (M.Amount * R.Rate), Currency R.To } ]
-OpenAccount(H Agent, K AccountKind, C Currency) [ Account { Holder H, AccountKind K, Currency C } & Open_ { OpenedAt Now } ]
-Freeze_(A Account & Open_, Reason String) [ A / Open_ & Frozen { Reason } ]
-CloseAccount(A Account & Open_) [ A / Open_ & Closed { ClosedAt Now } ]
-Offer_(C Contract & { ContractStatus "draft" }) [ C & { ContractStatus "offered" } ]
-Sign(C Contract & { ContractStatus "offered" }) [ C & { ContractStatus "signed" } ]
-Fulfill(C Contract & { ContractStatus "active" }) [ C & { ContractStatus "fulfilled" } ]
-Breach(C Contract & { ContractStatus "active" }) [ C & { ContractStatus "breached" } ]
-Employ(A Agent & Unemployed, E Employment) [ A / Unemployed & Employed { Employment E } ]
-Dismiss(A Agent & Employed) [ A / Employed & Unemployed Object ]
-Retire(A Agent & Employed) [ A / Employed & Retired { Since Now } ]
-Borrow(L Loan, A Account) [ A . Deposit(L.Principal) ]
-Invest(A Account, X Asset) [ X & { Ownership { Owner A.Holder, Since Now, Share 1 } } ]
+Transfer(t Transaction & { TransactionStatus "authorized" }) [ t & { TransactionStatus "settled" } ]
+Authorize(t Transaction & { TransactionStatus "pending" }) [ t & { TransactionStatus "authorized" } ]
+Reverse(t Transaction & { TransactionStatus "settled" }) [ t & { TransactionStatus "reversed" } ]
+Deposit(a Account, m Money) [ a & { Balance { Amount (Balance.Amount + M.Amount), Currency } } ]
+Withdraw(a Account, m Money) [ a & { Balance { Amount (Balance.Amount - M.Amount), Currency } } ]
+Exchange(m Money, r ExchangeRate) [ Money { Amount (M.Amount * R.Rate), currency R.To } ]
+OpenAccount(h Agent, k AccountKind, c Currency) [ Account { Holder H, accountKind K, currency C } & Open_ { OpenedAt Now } ]
+Freeze_(a Account & Open_, reason String) [ A / Open_ & Frozen { Reason } ]
+CloseAccount(a Account & Open_) [ A / Open_ & Closed { ClosedAt Now } ]
+Offer_(c Contract & { ContractStatus "draft" }) [ c & { ContractStatus "offered" } ]
+Sign(c Contract & { ContractStatus "offered" }) [ c & { ContractStatus "signed" } ]
+Fulfill(c Contract & { ContractStatus "active" }) [ c & { ContractStatus "fulfilled" } ]
+Breach(c Contract & { ContractStatus "active" }) [ c & { ContractStatus "breached" } ]
+Employ(a Agent & Unemployed, e Employment) [ A / Unemployed & Employed { Employment E } ]
+Dismiss(a Agent & Employed) [ A / Employed & Unemployed Object ]
+Retire(a Agent & Employed) [ A / Employed & Retired { Since Now } ]
+Borrow(l Loan, a Account) [ A . Deposit(L.Principal) ]
+Invest(a Account, x Asset) [ x & { Ownership { Owner A.Holder, since Now, Share 1 } } ]

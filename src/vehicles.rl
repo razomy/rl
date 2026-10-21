@@ -2,26 +2,26 @@
 Concrete Product Variants, Vehicles & Product Transitions
 #
 
-ProductModel      Product & { IsVariantOf ProductModel, PredecessorOf ProductModel, SuccessorOf ProductModel }
-ProductGroup      Product & { HasVariant List(Product), ProductGroupID String, VariesBy List(String) }
+ProductModel      Product & { IsVariantOf ProductModel, predecessorOf ProductModel, successorOf ProductModel }
+ProductGroup      Product & { HasVariant List(Product), productGroupID String, variesBy List(String) }
 IndividualProduct Product & { SerialNumber }
 SomeProducts      Product & { InventoryLevel QuantitativeValue }
 ProductCollection Product & { IncludesObject List(TypeAndQuantityNode) }
-DietarySupplement Product & { ActiveIngredient String, SafetyConsideration String }
+DietarySupplement Product & { ActiveIngredient String, safetyConsideration String }
 Drug_             Product
 
-Car              SchemaVehicle & { AcrissCode String, RoofLoad QuantitativeValue }
-BusOrCoach       SchemaVehicle & { AcrissCode String, RoofLoad QuantitativeValue }
+Car              SchemaVehicle & { AcrissCode String, roofLoad QuantitativeValue }
+BusOrCoach       SchemaVehicle & { AcrissCode String, roofLoad QuantitativeValue }
 Motorcycle       SchemaVehicle
 MotorizedBicycle SchemaVehicle
 RVParkVehicle    SchemaVehicle
 
-Manufacture(M Organization, Model ProductModel) [ IndividualProduct & Model & { Manufacturer M, ProductionDate Today, ItemCondition "NewCondition" } ]
-ReleaseProduct(P Product) [ P & { ReleaseDate Today } ]
-Purchase(P Product) [ P & { PurchaseDate Today } ]
-UseUp(P Product & { ItemCondition "NewCondition" }) [ P & { ItemCondition "UsedCondition" } ]
-Refurbish(P Product) [ P & { ItemCondition "RefurbishedCondition" } ]
-Damage(P Product) [ P & { ItemCondition "DamagedCondition" } ]
-Drive_(V SchemaVehicle, D QuantitativeValue) [ V & { MileageFromOdometer { Value (MileageFromOdometer.Value + D.Value) } } ]
-Register(V SchemaVehicle) [ V & { DateVehicleFirstRegistered Today } ]
-Resell(V SchemaVehicle) [ V & { NumberOfPreviousOwners (NumberOfPreviousOwners + 1) } ]
+Manufacture(m Organization, model ProductModel) [ IndividualProduct & Model & { Manufacturer M, productionDate Today, ItemCondition "NewCondition" } ]
+ReleaseProduct(p Product) [ p & { ReleaseDate Today } ]
+Purchase(p Product) [ p & { PurchaseDate Today } ]
+UseUp(p Product & { ItemCondition "NewCondition" }) [ p & { ItemCondition "UsedCondition" } ]
+Refurbish(p Product) [ p & { ItemCondition "RefurbishedCondition" } ]
+Damage(p Product) [ p & { ItemCondition "DamagedCondition" } ]
+Drive_(v SchemaVehicle, d QuantitativeValue) [ v & { MileageFromOdometer { Value (MileageFromOdometer.Value + D.Value) } } ]
+Register(v SchemaVehicle) [ v & { DateVehicleFirstRegistered Today } ]
+Resell(v SchemaVehicle) [ v & { NumberOfPreviousOwners (NumberOfPreviousOwners + 1) } ]

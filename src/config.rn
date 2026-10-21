@@ -5,14 +5,16 @@ order
  number.rl
  string.rl
  regex.rl
- span.rl
+ kv.rl
  list.rl
- map.rl
- tree.rl
- tensor.rl
+ span.rl
+ operation.rl
  structure.rl
- sync.rl
- actor.rl
+ graph.rl
+ tree.rl
+ concurrency.rl
+ future.rl
+ primitives.rl
  // parser
  keyboard_char.rl
  bracket.rl
@@ -28,7 +30,7 @@ order
  rl.token.rl
  rl.grammar.rl
  // runtime
- concurrency.rl
+ task.rl
  generators.rl
  stream.rl
  reactive.rl
@@ -39,8 +41,8 @@ order
  path_ops.rl
  vectors.rl
  curves.rl
- functions.rl
  math.rl
+ math_function.rl
  units.rl
  quantity.rl
  calendar.rl
@@ -179,4 +181,7 @@ order
  creative_work_code.rl
  // development & universal root
  runner.rl
+ documentation.rl
  testing.rl
+ // products
+ razomy_data.rl

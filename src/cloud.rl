@@ -154,7 +154,7 @@ Cli {
 LaunchCli {
   Launcher String
   Command  String
-  BuildCommand(Name String) [ "{Launcher} {Command} {Name}" ]
+  BuildCommand(name String) [ "{Launcher} {Command} {Name}" ]
 }
 
 LaunchCliAndCliSchema LaunchCli & Cli.Schema

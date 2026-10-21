@@ -1,5 +1,5 @@
 #
-Concrete Offers, Shipping Details, Reservations & Commerce Transitions
+Concrete Offers, shipping Details, Reservations & Commerce Transitions
 #
 
 AggregateOffer Offer & {
@@ -44,25 +44,25 @@ DefinedRegion StructuredValue & {
 
 BusReservation               Reservation
 EventReservation             Reservation
-FlightReservation            Reservation & { BoardingGroup Option(String), PassengerPriorityStatus Option(String), PassengerSequenceNumber Option(String), SecurityScreening Option(String) }
-FoodEstablishmentReservation Reservation & { PartySize Count, StartTime DateTime, EndTime DateTime }
-LodgingReservation           Reservation & { CheckinTime DateTime, CheckoutTime DateTime, LodgingUnitType Option(String), NumAdults Count, NumChildren Count }
-RentalCarReservation         Reservation & { PickupLocation Place, DropoffLocation Place, PickupTime DateTime, DropoffTime DateTime }
+FlightReservation            Reservation & { BoardingGroup Option(String), passengerPriorityStatus Option(String), passengerSequenceNumber Option(String), securityScreening Option(String) }
+FoodEstablishmentReservation Reservation & { PartySize Count, startTime DateTime, endTime DateTime }
+LodgingReservation           Reservation & { CheckinTime DateTime, checkoutTime DateTime, lodgingUnitType Option(String), numAdults Count, numChildren Count }
+RentalCarReservation         Reservation & { PickupLocation Place, dropoffLocation Place, pickupTime DateTime, dropoffTime DateTime }
 ReservationPackage           Reservation & { SubReservation List(Reservation) }
-TaxiReservation              Reservation & { PartySize Count, PickupLocation Place, PickupTime DateTime }
+TaxiReservation              Reservation & { PartySize Count, pickupLocation Place, pickupTime DateTime }
 TrainReservation             Reservation
 BoatReservation              Reservation
 
-ReserveStock(O Order) [
+ReserveStock(o Order) [
   Amount . {
-    [ _ > 0 ] [ O & Reserved { ReservedAt 1620000000 } ]
+    [ _ > 0 ] [ o & Reserved { ReservedAt 1620000000 } ]
     _         [ OutOfStock { Reason "Warehouse empty" } ]
   }
 ]
 
-ChargePayment(O Order) [
+ChargePayment(o Order) [
   Amount . {
-    [ _ < 50000 ] [ O & Paid { TransactionId "tx_001" } ]
+    [ _ < 50000 ] [ o & Paid { TransactionId "tx_001" } ]
     _             [ NoMoney { Reason "Insufficient funds" } ]
   }
 ]
@@ -77,24 +77,24 @@ ShipToCustomer(Order & Reserved & Paid) [
   "Shipping order {Id}. Transaction {TransactionId} confirmed." . Shell.Log
 ]
 
-MakeOffer(S Agent, I Thing, P Price) [ Offer { Seller S, ItemOffered I, Price P, Availability "InStock" } ]
-SellOut(O Offer & { Availability "InStock" }) [ O & { Availability "SoldOut" } ]
-Restock(O Offer) [ O & { Availability "InStock" } ]
-PlaceOrder(C Agent, O Offer) [ Order { Customer C, Seller O.Seller, AcceptedOffer List1(O), OrderDate Now, OrderStatus "OrderPaymentDue" } ]
-ProcessOrder(O Order & { OrderStatus "OrderPaymentDue" }) [ O & { OrderStatus "OrderProcessing" } ]
-ShipOrder(O Order & { OrderStatus "OrderProcessing" }, D ParcelDelivery) [ O & { OrderStatus "OrderInTransit", OrderDelivery D } ]
-DeliverOrder(O Order & { OrderStatus "OrderInTransit" }) [ O & { OrderStatus "OrderDelivered" } ]
-ReturnOrder(O Order & { OrderStatus "OrderDelivered" }) [ O & { OrderStatus "OrderReturned" } ]
-CancelOrder(O Order) [
+MakeOffer(s Agent, i Thing, p Price) [ Offer { Seller S, itemOffered I, price P, Availability "InStock" } ]
+SellOut(o Offer & { Availability "InStock" }) [ o & { Availability "SoldOut" } ]
+Restock(o Offer) [ o & { Availability "InStock" } ]
+PlaceOrder(c Agent, o Offer) [ Order { Customer C, seller O.Seller, acceptedOffer List1(O), orderDate Now, OrderStatus "OrderPaymentDue" } ]
+ProcessOrder(o Order & { OrderStatus "OrderPaymentDue" }) [ o & { OrderStatus "OrderProcessing" } ]
+ShipOrder(o Order & { OrderStatus "OrderProcessing" }, d ParcelDelivery) [ o & { OrderStatus "OrderInTransit", orderDelivery D } ]
+DeliverOrder(o Order & { OrderStatus "OrderInTransit" }) [ o & { OrderStatus "OrderDelivered" } ]
+ReturnOrder(o Order & { OrderStatus "OrderDelivered" }) [ o & { OrderStatus "OrderReturned" } ]
+CancelOrder(o Order) [
   OrderStatus . {
     "OrderDelivered" [ O ]
-    _                [ O & { OrderStatus "OrderCancelled" } ]
+    _                [ o & { OrderStatus "OrderCancelled" } ]
   }
 ]
-IssueInvoice(O Order) [ Invoice { Customer O.Customer, Provider O.Seller, ReferencesOrder List1(O), PaymentStatus "PaymentDue" } ]
-SettleInvoice(I Invoice & { PaymentStatus "PaymentDue" }) [ I & { PaymentStatus "PaymentComplete" } ]
-DeclineInvoice(I Invoice) [ I & { PaymentStatus "PaymentDeclined" } ]
-Reserve(A Agent, F Thing) [ Reservation { UnderName A, ReservationFor F, BookingTime Now, ReservationStatus "ReservationPending" } ]
-ConfirmReservation(R Reservation & { ReservationStatus "ReservationPending" }) [ R & { ReservationStatus "ReservationConfirmed" } ]
-CancelReservation(R Reservation) [ R & { ReservationStatus "ReservationCancelled", ModifiedTime Now } ]
-IssueTicket(R Reservation & { ReservationStatus "ReservationConfirmed" }) [ R & { ReservedTicket Ticket { UnderName R.UnderName, DateIssued Now } } ]
+IssueInvoice(o Order) [ Invoice { Customer O.Customer, provider O.Seller, referencesOrder List1(O), PaymentStatus "PaymentDue" } ]
+SettleInvoice(i Invoice & { PaymentStatus "PaymentDue" }) [ i & { PaymentStatus "PaymentComplete" } ]
+DeclineInvoice(i Invoice) [ i & { PaymentStatus "PaymentDeclined" } ]
+Reserve(a Agent, f Thing) [ Reservation { UnderName A, reservationFor F, bookingTime Now, ReservationStatus "ReservationPending" } ]
+ConfirmReservation(r Reservation & { ReservationStatus "ReservationPending" }) [ r & { ReservationStatus "ReservationConfirmed" } ]
+CancelReservation(r Reservation) [ r & { ReservationStatus "ReservationCancelled", modifiedTime Now } ]
+IssueTicket(r Reservation & { ReservationStatus "ReservationConfirmed" }) [ r & { ReservedTicket Ticket { UnderName R.UnderName, dateIssued Now } } ]

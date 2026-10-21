@@ -21,13 +21,13 @@ PriceSpecification StructuredValue & Price & {
   EligibleQuantity      QuantitativeValue
 }
 
-Rating Intangible & { RatingValue Real, BestRating Real, WorstRating Real, Author Agent, ReviewAspect String }
-Audience Intangible & { AudienceType String, GeographicArea String }
-Grant_ Intangible & { Funder Agent, FundedItem Thing }
-Role_ Intangible & { RoleName String, StartDate Date, EndDate Date }
+Rating Intangible & { RatingValue Real, bestRating Real, worstRating Real, author Agent, reviewAspect String }
+Audience Intangible & { AudienceType String, geographicArea String }
+Grant_ Intangible & { Funder Agent, fundedItem Thing }
+Role_ Intangible & { RoleName String, startDate Date, endDate Date }
 Series_ Intangible
-ItemList Intangible & { ItemListElement List(Thing), NumberOfItems Count, ItemListOrder "Ascending" | "Descending" | "Unordered" }
-ListItem Intangible & { Item Thing, Position Count, NextItem ListItem, PreviousItem ListItem }
-Permit Intangible & { IssuedBy Agent, ValidFor Duration_, ValidFrom DateTime, ValidUntil Date, PermitAudience Audience }
-Trip Intangible & { ArrivalTime DateTime, DepartureTime DateTime, Itinerary ItemList, Provider Agent }
-Service Intangible & { ServiceType String, Provider Agent, AreaServed String, Audience, Brand, AggregateRating, HoursAvailable OpeningHoursSpecification, Offers List(Thing) }
+ItemList Intangible & { ItemListElement List(Thing), numberOfItems Count, ItemListOrder "Ascending" | "Descending" | "Unordered" }
+ListItem Intangible & { Item Thing, position Count, nextItem ListItem, previousItem ListItem }
+Permit Intangible & { IssuedBy Agent, validFor Duration_, validFrom DateTime, validUntil Date, permitAudience Audience }
+Trip Intangible & { ArrivalTime DateTime, departureTime DateTime, itinerary ItemList, provider Agent }
+Service Intangible & { ServiceType String, provider Agent, areaServed String, Audience, Brand, AggregateRating, hoursAvailable OpeningHoursSpecification, offers List(Thing) }

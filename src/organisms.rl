@@ -22,7 +22,7 @@ OrganSystem "nervous" | "circulatory" | "respiratory" | "digestive" | "excretory
     | "immune" | "musculoskeletal" | "reproductive" | "integumentary" | "lymphatic"
 
 Microorganism Organism & { Body { Organs Nil } }
-Virus         { Name, Genome, Host Species }
+Virus         { Name, Genome, host Species }
 Bacterium     Organism & { Species & { Parent Bacteria } }
 Plant         Organism & { Diet "autotroph" }
 Fungus        Organism
@@ -35,42 +35,42 @@ Fish          Animal
 Insect        Animal
 Human         Mammal & { Species HomoSapiens }
 
-Born(O Organism) [ O & Alive { Since Now } & { LifeStage "infant", BirthDate Today } ]
-Germinate(S Plant & { LifeStage "seed" }) [ S & Alive { Since Now } & { LifeStage "juvenile" } ]
+Born(o Organism) [ o & Alive { Since Now } & { LifeStage "infant", birthDate Today } ]
+Germinate(s Plant & { LifeStage "seed" }) [ s & Alive { Since Now } & { LifeStage "juvenile" } ]
 
-Grow(O Organism & Alive) [
+Grow(o Organism & Alive) [
     LifeStage . {
-        "embryo"     [ O & { LifeStage "infant" } ]
-        "infant"     [ O & { LifeStage "juvenile" } ]
-        "juvenile"   [ O & { LifeStage "adolescent" } ]
-        "adolescent" [ O & { LifeStage "adult" } ]
-        "adult"      [ O & { LifeStage "elder" } ]
+        "embryo"     [ o & { LifeStage "infant" } ]
+        "infant"     [ o & { LifeStage "juvenile" } ]
+        "juvenile"   [ o & { LifeStage "adolescent" } ]
+        "adolescent" [ o & { LifeStage "adult" } ]
+        "adult"      [ o & { LifeStage "elder" } ]
         _            [ O ]
     }
 ]
 
-Metamorphose(L Insect & { LifeStage "larva" }) [ L & { LifeStage "pupa" } ]
-Emerge(P Insect & { LifeStage "pupa" }) [ P & { LifeStage "adult" } ]
+Metamorphose(l Insect & { LifeStage "larva" }) [ l & { LifeStage "pupa" } ]
+Emerge(p Insect & { LifeStage "pupa" }) [ p & { LifeStage "adult" } ]
 
-Conceive(Mother Organism & Alive & { Sex "female" }, Father Organism & Alive & { Sex "male" }) [
-    Mother & Pregnant { Since Now, Offspring List1(Organism { Species Mother.Species, LifeStage "embryo" }) }
+Conceive(mother Organism & Alive & { Sex "female" }, father Organism & Alive & { Sex "male" }) [
+    Mother & Pregnant { Since Now, offspring List1(Organism { Species Mother.Species, LifeStage "embryo" }) }
 ]
-GiveBirth(P Pregnant) [ P / Pregnant ]
-Reproduce(A Organism & Alive, B Organism & Alive) [
+GiveBirth(p Pregnant) [ P / Pregnant ]
+Reproduce(a Organism & Alive, b Organism & Alive) [
     A.Species . {
         B.Species [ Organism { Species A.Species, LifeStage "embryo" } ]
         _         [ None ]
     }
 ]
-Divide(C Cell) [ List2(C, C) ]
-Mutate(G Gene) [ G & { Dna Dna } ]
+Divide(c Cell) [ List2(C, C) ]
+Mutate(g Gene) [ g & { Dna Dna } ]
 
-Eat(H Organism & Hungry, Food Organism) [ H / Hungry & Fed Object ]
-Starve(F Organism & Fed) [ F / Fed & Hungry Object ]
-Sleep(A Organism & Awake) [ A / Awake & Asleep Object ]
-Wake(A Organism & Asleep) [ A / Asleep & Awake Object ]
-FallIll(H Organism & Healthy, Disease String) [ H / Healthy & Sick { Disease } ]
-Recover(S Organism & Sick) [ S / Sick & Healthy Object ]
-Die(O Organism & Alive, Cause String) [ O / Alive & Dead { DeathDate Today, Cause } ]
-Evolve(S Species) [ Species { Parent S } ]
-Extinct(P Population) [ P & { Size 0 } ]
+Eat(h Organism & Hungry, food Organism) [ H / Hungry & Fed Object ]
+Starve(f Organism & Fed) [ F / Fed & Hungry Object ]
+Sleep(a Organism & Awake) [ A / Awake & Asleep Object ]
+Wake(a Organism & Asleep) [ A / Asleep & Awake Object ]
+FallIll(h Organism & Healthy, disease String) [ H / Healthy & Sick { Disease } ]
+Recover(s Organism & Sick) [ S / Sick & Healthy Object ]
+Die(o Organism & Alive, cause String) [ O / Alive & Dead { DeathDate Today, Cause } ]
+Evolve(s Species) [ Species { Parent S } ]
+Extinct(p Population) [ p & { Size 0 } ]

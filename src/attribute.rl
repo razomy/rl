@@ -1,5 +1,5 @@
 #
-Core Traits, Identity References & Structural Mixins
+Core Traits, identity References & Structural Mixins
 #
 
 PrimaryId(T) { Id String }
@@ -10,9 +10,9 @@ IResource        Object
 IAttribute       Object
 IEntity          { Id String }
 Identifiable     { Id String }
-Auditable        { CreatedAt Int, UpdatedAt Int }
+Auditable        { CreatedAt Int, updatedAt Int }
 Versioned        { Version Int }
-SoftDeletable    { DeletedAt Option(Int), IsDeleted Bool }
+SoftDeletable    { DeletedAt Option(Int), isDeleted Bool }
 Timestamped      Auditable & SoftDeletable
 Named            { Name String }
 Tagged           { Tags List(String) }
@@ -28,7 +28,7 @@ HasDescription   { Description String }
 HasSlug          { Slug String }
 HasValue(T)      { Value T }
 HasCount         { Count Int }
-HasRange         { From Int, To Int }
+HasRange         { From Int, to Int }
 HasMetadata      { Metadata Any }
 
 ExtendsEntity(TBase, TSelf)      IEntity & HasPrimary(TSelf) & HasForeign(TBase)

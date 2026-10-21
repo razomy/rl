@@ -74,14 +74,14 @@ StorageClass       "STANDARD" | "INFREQUENT_ACCESS" | "GLACIER_INSTANT" | "GLACI
 MessageQueueBroker "Kafka" | "RabbitMQ" | "NATS" | "Pulsar" | "SQS" | "RedisStreams"
 DeliveryGuarantee  "AtMostOnce" | "AtLeastOnce" | "ExactlyOnce"
 
-ScaleDeployment(D K8sDeployment, TargetReplicas Int) [
+ScaleDeployment(d K8sDeployment, targetReplicas Int) [
   D & { Replicas TargetReplicas }
 ]
 
-StopComputeInstance(Inst ComputeInstance & { State "running" }) [
+StopComputeInstance(inst ComputeInstance & { State "running" }) [
   Inst & { State "stopped" }
 ]
 
-StartComputeInstance(Inst ComputeInstance & { State "stopped" }) [
+StartComputeInstance(inst ComputeInstance & { State "stopped" }) [
   Inst & { State "running" }
 ]

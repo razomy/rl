@@ -24,9 +24,9 @@ Species Taxon & { TaxonRank "species" }
 
 Dna     { Sequence List(Nucleotide) }
 Rna     { Sequence List(Nucleotide) }
-Gene    { Name, Locus String, Dna }
-Protein { Name, Chain List(AminoAcid) }
-Genome  { Genes List(Gene), Chromosomes Count }
+Gene    { Name, locus String, Dna }
+Protein { Name, chain List(AminoAcid) }
+Genome  { Genes List(Gene), chromosomes Count }
 
 Cell {
     CellKind
@@ -35,8 +35,8 @@ Cell {
     Genome
 }
 
-Tissue { TissueKind, Cells List(Cell) }
-Organ  { OrganKind, Tissues List(Tissue) }
+Tissue { TissueKind, cells List(Cell) }
+Organ  { OrganKind, tissues List(Tissue) }
 
 Body {
     Organs  List(Organ)
@@ -64,15 +64,15 @@ Organism {
 }
 
 Alive    { Since Instant }
-Dead     { DeathDate Date, Cause String }
+Dead     { DeathDate Date, cause String }
 Healthy  Object
 Sick     { Disease String }
-Pregnant { Since Instant, Offspring List(Organism) }
+Pregnant { Since Instant, offspring List(Organism) }
 Asleep   Object
 Awake    Object
 Hungry   Object
 Fed      Object
 
-Population { Species, Size Count, Habitat }
-Ecosystem  { Biome, Populations List(Population), Climate }
+Population { Species, size Count, Habitat }
+Ecosystem  { Biome, populations List(Population), Climate }
 FoodChain  List(Species)

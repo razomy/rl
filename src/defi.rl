@@ -1,5 +1,5 @@
 #
-Concrete Consensus Mechanisms, VMs, Token Standards, AMM Curves & Web3 Transitions
+Concrete Consensus Mechanisms, VMs, token Standards, aMM Curves & Web3 Transitions
 #
 
 ConsensusMechanism "ProofOfWork" | "ProofOfStake" | "DelegatedProofOfStake" | "ProofOfAuthority" | "ProofOfHistory" | "PBFT" | "Tendermint" | "DAG-Avalanche"
@@ -29,7 +29,7 @@ AmmCurveType     "ConstantProductXYK" | "StableSwapCurve" | "ConcentratedLiquidi
 RollupKind       "OptimisticRollup" | "ZkRollup" | "Validium" | "Volition" | "Sidechain"
 DaoProposalState "Pending" | "Active" | "Canceled" | "Defeated" | "Succeeded" | "Queued" | "Expired" | "Executed"
 
-SwapConstantProduct(Pool LiquidityPool, AmountInA Float) [
+SwapConstantProduct(pool LiquidityPool, amountInA Float) [
   AmountOutB ((Pool.ReserveB * AmountInA) / (Pool.ReserveA + AmountInA))
   Pool & {
     ReserveA (Pool.ReserveA + AmountInA)
@@ -37,10 +37,10 @@ SwapConstantProduct(Pool LiquidityPool, AmountInA Float) [
   }
 ]
 
-TransferNft(Nft NonFungibleToken, NewOwner WalletAddress) [
+TransferNft(nft NonFungibleToken, newOwner WalletAddress) [
   Nft & { Owner NewOwner }
 ]
 
-ExecuteDaoProposal(Prop DaoProposal & { State "Succeeded" }) [
+ExecuteDaoProposal(prop DaoProposal & { State "Succeeded" }) [
   Prop & { State "Executed" }
 ]

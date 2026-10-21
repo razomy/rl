@@ -24,54 +24,54 @@ Plastic  Material & { Name "plastic",  MaterialKind "plastic" }
 Concrete Material & { Name "concrete", MaterialKind "concrete" }
 Cotton   Material & { Name "cotton",   MaterialKind "fabric" }
 
-Melt(S Solid) [
+Melt(s Solid) [
     Temperature.Value . {
         [ _ >= Substance.MeltingPoint.Value ] [ Liquid { Substance, Temperature } ]
         _                                     [ S ]
     }
 ]
 
-Freeze(L Liquid) [
+Freeze(l Liquid) [
     Temperature.Value . {
         [ _ < Substance.MeltingPoint.Value ] [ Solid { Substance, Temperature } ]
         _                                    [ L ]
     }
 ]
 
-Boil(L Liquid) [
+Boil(l Liquid) [
     Temperature.Value . {
         [ _ >= Substance.BoilingPoint.Value ] [ Gas { Substance, Temperature } ]
         _                                     [ L ]
     }
 ]
 
-Condense(G Gas) [
+Condense(g Gas) [
     Temperature.Value . {
         [ _ < Substance.BoilingPoint.Value ] [ Liquid { Substance, Temperature } ]
         _                                    [ G ]
     }
 ]
 
-Sublimate(S Solid)  [ Gas { Substance, Temperature } ]
-Deposit(G Gas)      [ Solid { Substance, Temperature } ]
-Ionize(G Gas)       [ Plasma { Substance, Temperature } ]
-Recombine(P Plasma) [ Gas { Substance, Temperature } ]
+Sublimate(s Solid)  [ Gas { Substance, Temperature } ]
+Deposit(g Gas)      [ Solid { Substance, Temperature } ]
+Ionize(g Gas)       [ Plasma { Substance, Temperature } ]
+Recombine(p Plasma) [ Gas { Substance, Temperature } ]
 
-React(Reactants List(Substance), Released Energy) [
+React(reactants List(Substance), released Energy) [
     Reactants . {
         Nil [ NoReaction Object ]
-        _   [ Reaction { Reactants, Products List(Substance), Released } ]
+        _   [ Reaction { Reactants, products List(Substance), Released } ]
     }
 ]
 
-Dissolve(S Substance, L Liquid) [
-    Solution { Components List2(L.Substance, S), Solvent L, Solute S }
+Dissolve(s Substance, l Liquid) [
+    Solution { Components List2(L.Substance, S), solvent L, solute S }
 ]
 
-Decay(I Radioactive) [
+Decay(i Radioactive) [
     I & Atom { ProtonCount (ProtonCount - 2), NeutronCount (NeutronCount - 2) }
 ]
 
-Shatter(O PhysicalObject & Intact) [
+Shatter(o PhysicalObject & Intact) [
     O / Intact & Fragmented { Pieces List(PhysicalObject) }
 ]

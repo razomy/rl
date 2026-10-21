@@ -1,5 +1,5 @@
 #
-Concrete AI Providers, Neural Layers, Optimizers, Loss Functions & RL Algorithms
+Concrete AI Providers, neural Layers, Optimizers, loss Functions & RL Algorithms
 #
 
 ModelModality "text" | "vision" | "audio" | "video" | "multimodal" | "embedding" | "code" | "reinforcement" | "tabular" | "graph" | "3d"

@@ -1,13 +1,13 @@
 #
-Abstract UI Node, Layout Engine, Component Categories & Animation Contracts
+Abstract UI Node, layout Engine, component Categories & Animation Contracts
 #
 
 MetricType "px" | "rem" | "em" | "vh" | "vw" | "percent" | "m" | "cm" | "mm" | "pt" | "dp"
-MetricUnit { Value Float, Type MetricType }
+MetricUnit { Value Float, type MetricType }
 Vector2Metric Vector2(MetricUnit)
 
-Color4f        { R Float, G Float, B Float, A Float }
-Color4b        { R Byte, G Byte, B Byte, A Byte }
+Color4f        { R Float, g Float, b Float, a Float }
+Color4b        { R Byte, g Byte, b Byte, a Byte }
 Color3f        (Float, Float, Float)
 RgbaColorFloat Color4f
 ColorRGBA      Color4f
@@ -44,7 +44,7 @@ IAnimationTrack {
   To     Float
 }
 
-RouteValue   { Slug String, Payload Any }
+RouteValue   { Slug String, payload Any }
 RoutePath(T) { Segments List(T) }
 RouteChange  Change(RoutePath(RouteValue))
 IRouteEvent  IEvent & { Path RoutePath(RouteValue) }

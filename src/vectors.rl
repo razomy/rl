@@ -48,7 +48,7 @@ Mat4x4 Float4x4
 
 AngleRadian    { Radian Float }
 AngleDegree    { Degree Float }
-AngleCartesian { Cos Float, Sin Float }
+AngleCartesian { Cos Float, sin Float }
 
 Quaternion {
   W Float
@@ -59,7 +59,7 @@ Quaternion {
 Quat Quaternion
 
 EulerOrder "XYZ" | "XZY" | "YXZ" | "YZX" | "ZXY" | "ZYX"
-EulerXYZ   { X Float, Y Float, Z Float }
+EulerXYZ   { X Float, y Float, z Float }
 Euler      Float3
 
 AxisAngle {
@@ -88,9 +88,9 @@ SpaceTransform {
 }
 
 Quadric {
-  A2 Float, Ab Float, Ac Float, Ad Float
-  B2 Float, Bc Float, Bd Float
-  C2 Float, Cd Float
+  A2 Float, ab Float, ac Float, ad Float
+  B2 Float, bc Float, bd Float
+  C2 Float, cd Float
   D2 Float
 }
 

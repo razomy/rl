@@ -2,12 +2,12 @@
 UI Animations, Timelines & Declarative Routing
 #
 
-CurvedAnimationHandler { Handler IAnimationHandler, Curve ICurve }
-ColorHandler           IAnimationHandler & { From RgbaColorFloat, Delta RgbaColorFloat }
-VectorHandler          IAnimationHandler & { From VectorFloat3, Delta VectorFloat3 }
+CurvedAnimationHandler { Handler IAnimationHandler, curve ICurve }
+ColorHandler           IAnimationHandler & { From RgbaColorFloat, delta RgbaColorFloat }
+VectorHandler          IAnimationHandler & { From VectorFloat3, delta VectorFloat3 }
 
 DefaultAnimationTrack IAnimationTrack & { Handler IAnimationHandler }
-RepeatAnimationTrack  DefaultAnimationTrack & { TrackLength Float, RepeatCount Float }
+RepeatAnimationTrack  DefaultAnimationTrack & { TrackLength Float, repeatCount Float }
 
 AnimationTimeLine {
   CurrentTime Float
@@ -16,7 +16,7 @@ AnimationTimeLine {
   Tracks      List(IAnimationTrack)
 }
 
-UpdateTimeline(Tl AnimationTimeLine, Delta Float) [
+UpdateTimeline(tl AnimationTimeLine, delta Float) [
   IsPlaying . {
     false [ Tl ]
     true  [
@@ -29,7 +29,7 @@ UpdateTimeline(Tl AnimationTimeLine, Delta Float) [
   }
 ]
 
-RouteHistory       { ActiveHistory List(RoutePath(RouteValue)), Count Int }
+RouteHistory       { ActiveHistory List(RoutePath(RouteValue)), count Int }
 RouteInitEvent     IRouteEvent
 RouteEnterEvent    IRouteEvent
 RouteLeaveEvent    IRouteEvent
@@ -42,7 +42,7 @@ RouteNavigateState {
   Path      RoutePath(RouteValue)
 }
 
-NavigateToRoute(State RouteNavigateState, NextPath RoutePath(RouteValue)) [
+NavigateToRoute(state RouteNavigateState, nextPath RoutePath(RouteValue)) [
   State & {
     IsRouting false
     Path      NextPath

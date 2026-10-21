@@ -1,5 +1,5 @@
 #
-Core Data-Blocks (ID), Main Database, Undo & RNA Reflection
+Core Data-Blocks (ID), main Database, Undo & RNA Reflection
 #
 
 IDType

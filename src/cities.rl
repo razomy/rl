@@ -31,19 +31,19 @@ Switzerland        Country & { Name "Switzerland",          CountryCode "CH" }
 Singapore          Country & { Name "Singapore",            CountryCode "SG" }
 UnitedArabEmirates Country & { Name "United Arab Emirates", CountryCode "AE" }
 
-Kyiv         City & { Name "Kyiv",          ContainedInPlace Ukraine }
-Lviv         City & { Name "Lviv",          ContainedInPlace Ukraine }
-Warsaw       City & { Name "Warsaw",        ContainedInPlace Poland }
-Berlin       City & { Name "Berlin",        ContainedInPlace Germany }
-Paris        City & { Name "Paris",         ContainedInPlace France }
-Madrid       City & { Name "Madrid",        ContainedInPlace Spain }
-Rome         City & { Name "Rome",          ContainedInPlace Italy }
-London       City & { Name "London",        ContainedInPlace UnitedKingdom }
-NewYork      City & { Name "New York",      ContainedInPlace UnitedStates }
-SanFrancisco City & { Name "San Francisco", ContainedInPlace UnitedStates }
-Toronto      City & { Name "Toronto",       ContainedInPlace Canada }
-Tokyo        City & { Name "Tokyo",         ContainedInPlace Japan }
-Seoul        City & { Name "Seoul",         ContainedInPlace SouthKorea }
-Beijing      City & { Name "Beijing",       ContainedInPlace China }
-Sydney       City & { Name "Sydney",        ContainedInPlace Australia }
-Zurich       City & { Name "Zurich",        ContainedInPlace Switzerland }
+Kyiv         City & { Name "Kyiv",          containedInPlace Ukraine }
+Lviv         City & { Name "Lviv",          containedInPlace Ukraine }
+Warsaw       City & { Name "Warsaw",        containedInPlace Poland }
+Berlin       City & { Name "Berlin",        containedInPlace Germany }
+Paris        City & { Name "Paris",         containedInPlace France }
+Madrid       City & { Name "Madrid",        containedInPlace Spain }
+Rome         City & { Name "Rome",          containedInPlace Italy }
+London       City & { Name "London",        containedInPlace UnitedKingdom }
+NewYork      City & { Name "New York",      containedInPlace UnitedStates }
+SanFrancisco City & { Name "San Francisco", containedInPlace UnitedStates }
+Toronto      City & { Name "Toronto",       containedInPlace Canada }
+Tokyo        City & { Name "Tokyo",         containedInPlace Japan }
+Seoul        City & { Name "Seoul",         containedInPlace SouthKorea }
+Beijing      City & { Name "Beijing",       containedInPlace China }
+Sydney       City & { Name "Sydney",        containedInPlace Australia }
+Zurich       City & { Name "Zurich",        containedInPlace Switzerland }

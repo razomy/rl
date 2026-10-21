@@ -1,5 +1,5 @@
 #
-Concrete Embedded Buses, Wireless Protocols, Sensors, Actuators & Robotics
+Concrete Embedded Buses, wireless Protocols, Sensors, Actuators & Robotics
 #
 
 McuArchitecture      "AVR" | "ARM-Cortex-M0" | "ARM-Cortex-M4" | "ARM-Cortex-M7" | "RISC-V-RV32I" | "Xtensa-ESP32" | "MSP430"
@@ -36,23 +36,23 @@ LidarPointCloud {
 
 ActuatorKind "StepperMotor" | "BrushlessDC" | "BrushedDC" | "ServoMotor" | "LinearActuator" | "PneumaticValve" | "HydraulicCylinder" | "Solenoid" | "Relay" | "Piezoelectric"
 
-StepPid(Pid PidController, Measured Float, Dt Float) [
+StepPid(pid PidController, measured Float, dt Float) [
   Err        (Pid.Setpoint - Measured)
   NextInteg  (Pid.IntegralSum + (Err * Dt))
   Derivative ((Err - Pid.PrevError) / Dt)
   RawOutput  ((Pid.Kp * Err) + (Pid.Ki * NextInteg) + (Pid.Kd * Derivative))
   ClampedOut (RawOutput . Math.Clamp(Pid.OutputMin, Pid.OutputMax))
   {
-    Controller    (Pid & { IntegralSum NextInteg, PrevError Err })
+    Controller    (Pid & { IntegralSum NextInteg, prevError Err })
     ControlSignal ClampedOut
   }
 ]
 
-UpdateKalman1D(Kf KalmanFilter1D, Measurement Float) [
+UpdateKalman1D(kf KalmanFilter1D, measurement Float) [
   KalmanGain (Kf.ErrorCovarianceP / (Kf.ErrorCovarianceP + Kf.MeasurementNoiseR))
   NextX      (Kf.EstimateX + KalmanGain * (Measurement - Kf.EstimateX))
   NextP      ((1.0 - KalmanGain) * Kf.ErrorCovarianceP + Kf.ProcessNoiseQ)
-  Kf & { EstimateX NextX, ErrorCovarianceP NextP }
+  Kf & { EstimateX NextX, errorCovarianceP NextP }
 ]
 
 RobotJointType "Revolute" | "Continuous" | "Prismatic" | "Fixed" | "Floating" | "Planar"
@@ -101,10 +101,10 @@ AutonomousRobot Robot & {
   NavigationMode   "Manual" | "Teleoperated" | "AutonomousSLAM" | "WaypointFollowing" | "EmergencyStop"
 }
 
-TriggerEmergencyStop(Bot AutonomousRobot) [
+TriggerEmergencyStop(bot AutonomousRobot) [
   Bot & { NavigationMode "EmergencyStop" }
 ]
 
-ToggleGpioPin(Pin GpioPin & { Mode "OutputPushPull" }) [
+ToggleGpioPin(pin GpioPin & { Mode "OutputPushPull" }) [
   Pin & { LogicLevel (!Pin.LogicLevel) }
 ]

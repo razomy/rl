@@ -6,9 +6,6 @@ None None
 
 Object Any
 
-Number Object
-Char Object
-String { Length Number } & Char
 
 Null       None
 Undefined  None
@@ -30,7 +27,9 @@ Positive          [ _ > 0 ]
 NonNegative       [ _ >= 0 ]
 Negative          [ _ < 0 ]
 NonZero           [ _ != 0 ]
-Range(Min, Max)   [ _ >= Min ] & [ _ <= Max ]
+Min(min Number)          [ _ >= min ]
+Max(max Number)          [ _ <= max ]
+Range(Min, Max)   Min(Min) & Max(Max)
 NonEmpty          [ _.Length > 0 ]
 
 PositiveNumber    Number & Positive
@@ -42,4 +41,3 @@ EnumInt    Int
 EnumString String
 
 Primitive     String | Int | Float | Bool | Byte
-AllPrimitives StringPrimitive | NumberPrimitive | Bool | Null | Undefined | SymbolType | Byte

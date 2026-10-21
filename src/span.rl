@@ -2,6 +2,7 @@
 Spans, Indexing & Implicit Memory Sharing
 #
 
+{ List } src.semantic
 FixedVector(T, N) {
   Data   Tuple(T)
   Length N
@@ -50,8 +51,8 @@ ImplicitSharingInfoAndData {
   Data        Any
 }
 
-GPointer { Type String, Data Any }
-GSpan    { Type String, Data Any, Size Int }
+GPointer { Type String, data Any }
+GSpan    { Type String, data Any, size Int }
 GArray   GSpan & { Capacity Int }
 GVArray  GSpan & { IsSingle Bool }
-GList    { CppType String, Data Any, Size Int }
+GList    { CppType String, data Any, size Int }

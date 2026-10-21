@@ -1,9 +1,9 @@
 #
-Abstract 3D Data-Block (ID), Geometry Component & Evaluation Typestates
+Abstract 3D Data-Block (ID), geometry Component & Evaluation Typestates
 #
 
 SessionUID { Value Int }
-SubFrame   { Frame Int, Subframe Float }
+SubFrame   { Frame Int, subframe Float }
 
 ID Identifiable & {
   Name             String
@@ -55,7 +55,7 @@ IOBaseParams {
 // Ontological Typestates
 Evaluated         { EvalTimestamp Float }
 DepsgraphSynced   { SyncCount Int }
-Baked             { BakeDir String, BakedFrameRange Int2 }
+Baked             { BakeDir String, bakedFrameRange Int2 }
 LibOverridden     { ReferenceUid SessionUID }
 InEditMode        { ActiveTool String }
 InvalidTopology   { Reason String }

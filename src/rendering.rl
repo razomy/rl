@@ -1,5 +1,5 @@
 #
-Abstract Render Passes, Draw Engine & Ontological Rendering Typestates
+Abstract Render Passes, draw Engine & Ontological Rendering Typestates
 #
 
 EvaluationMode "Viewport" | "Render"
@@ -42,8 +42,8 @@ DrawEngine {
 }
 
 GpuReady            { VramAllocatedBytes Int }
-GpuCompiled         { ShaderHandle GPUShader, CompiledAt Int }
-RenderAllocated     { OffScreen GPUOffScreen, Viewport GPUViewport }
-ShaderCompileError  { ShaderName String, ErrorLog String }
-ShaderCompileFailed { Log String, Stage String }
-OutOfVram           { RequestedBytes Int, AvailableBytes Int }
+GpuCompiled         { ShaderHandle GPUShader, compiledAt Int }
+RenderAllocated     { OffScreen GPUOffScreen, viewport GPUViewport }
+ShaderCompileError  { ShaderName String, errorLog String }
+ShaderCompileFailed { Log String, stage String }
+OutOfVram           { RequestedBytes Int, availableBytes Int }

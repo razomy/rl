@@ -1,11 +1,11 @@
 #
-Universal UI Node (UIN), Layout Engines & Style Bags
+Universal UI Node (UIN), layout Engines & Style Bags
 #
 
 LayoutAlign "Start" | "Center" | "End" | "Stretch" | "SpaceBetween" | "SpaceAround" | "SpaceEvenly"
 RectGravity "Center" | "Bottom" | "Right" | "Top" | "Left"
 
-PaddingAttribute IAttribute & { XStart Float, XFinish Float, YStart Float, YFinish Float }
+PaddingAttribute IAttribute & { XStart Float, xFinish Float, yStart Float, yFinish Float }
 SpacingAttribute IAttribute & { Spacing Float }
 
 GridTrackSize {
@@ -100,17 +100,17 @@ UISizing {
   BoxSizing   String
 }
 
-UIPositioning { Mode String, Insets PaddingAttribute, ZIndex Int }
-UIOverflow    { X String, Y String }
+UIPositioning { Mode String, insets PaddingAttribute, zIndex Int }
+UIOverflow    { X String, y String }
 
-SolidPaint    { Kind "Solid", Color ColorRGBA, Opacity Float }
-GradientStop  { Offset Float, Color ColorRGBA }
-GradientPaint { Kind "Gradient", Angle Float, Stops List(GradientStop) }
-ImagePaint    { Kind "Image", Uri String, Fit String, Position Vector2Metric, Repeat String }
+SolidPaint    { Kind "Solid", color ColorRGBA, opacity Float }
+GradientStop  { Offset Float, color ColorRGBA }
+GradientPaint { Kind "Gradient", angle Float, stops List(GradientStop) }
+ImagePaint    { Kind "Image", uri String, fit String, position Vector2Metric, repeat String }
 UIPaint       SolidPaint | GradientPaint | ImagePaint
 
-BorderSide { Width MetricUnit, Style String, Color ColorRGBA }
-UIBorders  { Top BorderSide, Right BorderSide, Bottom BorderSide, Left BorderSide, Radii List(MetricUnit) }
+BorderSide { Width MetricUnit, style String, color ColorRGBA }
+UIBorders  { Top BorderSide, right BorderSide, bottom BorderSide, left BorderSide, radii List(MetricUnit) }
 
 UIShadow {
   Kind         String
@@ -184,20 +184,20 @@ UIStyleBag {
   Visible     Bool
 }
 
-UIEventBinding    { Event String, ActionId String, Payload Any }
-UIInteractionSpec { Focusable Bool, TabIndex Int, Events List(UIEventBinding) }
+UIEventBinding    { Event String, actionId String, payload Any }
+UIInteractionSpec { Focusable Bool, tabIndex Int, events List(UIEventBinding) }
 
-SurfaceUin        IUIBaseUin & { Kind "SurfaceUin", Width MetricUnit, Height MetricUnit, Dpi Int }
+SurfaceUin        IUIBaseUin & { Kind "SurfaceUin", width MetricUnit, height MetricUnit, dpi Int }
 ContainerUin      IUIBaseUin & { Kind "ContainerUin" }
-TextLeafUin       IUIBaseUin & { Kind "TextLeafUin", Content String, Typo Typography }
-VectorShapeUin    IUIBaseUin & { Kind "VectorShapeUin", PathCommands String, FillPaint Option(UIPaint), StrokePaint Option(UIPaint), StrokeWidth Option(MetricUnit) }
-MediaAssetUin     IUIBaseUin & { Kind "MediaAssetUin", SourceUri String, ImageFit "cover" | "contain" | "fill" | "none" }
-TableContainerUin IUIBaseUin & { Kind "TableContainerUin", ColumnWidths List(MetricUnit) }
-TableRowUin       IUIBaseUin & { Kind "TableRowUin", IsHeader Bool }
-TableCellUin      IUIBaseUin & { Kind "TableCellUin", ColSpan Int, RowSpan Int }
+TextLeafUin       IUIBaseUin & { Kind "TextLeafUin", content String, typo Typography }
+VectorShapeUin    IUIBaseUin & { Kind "VectorShapeUin", pathCommands String, fillPaint Option(UIPaint), strokePaint Option(UIPaint), strokeWidth Option(MetricUnit) }
+MediaAssetUin     IUIBaseUin & { Kind "MediaAssetUin", sourceUri String, ImageFit "cover" | "contain" | "fill" | "none" }
+TableContainerUin IUIBaseUin & { Kind "TableContainerUin", columnWidths List(MetricUnit) }
+TableRowUin       IUIBaseUin & { Kind "TableRowUin", isHeader Bool }
+TableCellUin      IUIBaseUin & { Kind "TableCellUin", colSpan Int, rowSpan Int }
 UIControlType     "button" | "text-input" | "checkbox" | "radio" | "select" | "slider"
-ControlUin        IUIBaseUin & { Kind "ControlUin", ControlType UIControlType, Value Any, Placeholder Option(String), Disabled Bool, ReadOnly Bool }
-ProjectionUin     IUIBaseUin & { Kind "ProjectionUin", SlotName Option(String), ComponentDefinitionId Option(String) }
+ControlUin        IUIBaseUin & { Kind "ControlUin", controlType UIControlType, value Any, placeholder Option(String), disabled Bool, readOnly Bool }
+ProjectionUin     IUIBaseUin & { Kind "ProjectionUin", slotName Option(String), componentDefinitionId Option(String) }
 
 UIUin SurfaceUin | ContainerUin | TextLeafUin | VectorShapeUin | MediaAssetUin | TableContainerUin | TableRowUin | TableCellUin | ControlUin | ProjectionUin
 

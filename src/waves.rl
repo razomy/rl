@@ -21,7 +21,7 @@ HeatTransfer "conduction" | "convection" | "radiation"
 ElectromagneticBand "radio" | "microwave" | "infrared" | "visible" | "ultraviolet" | "xray" | "gamma"
 
 Channel Range(0, 255) & Int
-Rgb     { Red Channel, Green Channel, Blue Channel }
+Rgb     { Red Channel, green Channel, blue Channel }
 Hex     String
 Color   "red" | "orange" | "yellow" | "green" | "cyan" | "blue" | "violet" | "purple" | "pink"
     | "brown" | "black" | "white" | "gray" | "gold" | "silver" | Rgb | Hex
@@ -31,47 +31,47 @@ Loudness Measure(Real, Decibel)
 Pitch    Frequency
 Timbre   String
 
-Silence Sound & { Loudness { Value 0, Unit Decibel } }
+Silence Sound & { Loudness { Value 0, unit Decibel } }
 Audible Sound & [ _.Pitch.Value >= 20 ] & [ _.Pitch.Value <= 20000 ]
 
 FieldKind "gravitational" | "electric" | "magnetic" | "electromagnetic" | "higgs"
 
-Heat(B Thermal, E Energy) [
-    B & Thermal { Temperature { Value (Temperature.Value + E.Value / HeatCapacity), Unit Kelvin } }
+Heat(b Thermal, e Energy) [
+    B & Thermal { Temperature { Value (Temperature.Value + E.Value / HeatCapacity), unit Kelvin } }
 ]
 
-Cool(B Thermal, E Energy) [
-    B & Thermal { Temperature { Value (Temperature.Value - E.Value / HeatCapacity), Unit Kelvin } }
+Cool(b Thermal, e Energy) [
+    B & Thermal { Temperature { Value (Temperature.Value - E.Value / HeatCapacity), unit Kelvin } }
 ]
 
-Emit(Source Any & Hot, L Light) [
+Emit(source Any & Hot, l Light) [
     Source & Radiating { Emission L }
 ]
 
-Absorb(B Thermal, L Light) [
-    B . Heat(Energy { Value L.Amplitude, Unit Joule })
+Absorb(b Thermal, l Light) [
+    B . Heat(Energy { Value L.Amplitude, unit Joule })
 ]
 
-Resonate(Source Any, S Sound) [
+Resonate(source Any, s Sound) [
     Source & Sounding { Emission S }
 ]
 
-SwitchOn(X Unpowered, P Power) [
+SwitchOn(x Unpowered, p Power) [
     X / Unpowered & Powered { Power P }
 ]
 
-SwitchOff(X Powered) [
+SwitchOff(x Powered) [
     X / Powered & Unpowered Object
 ]
 
-Recharge(S EnergyStore, E Energy) [
-    S & EnergyStore { Stored { Value (Stored.Value + E.Value), Unit Joule } }
+Recharge(s EnergyStore, e Energy) [
+    S & EnergyStore { Stored { Value (Stored.Value + E.Value), unit Joule } }
     . {
-        [ _.Stored.Value > _.Capacity.Value ] [ S & EnergyStore { Stored Capacity } ]
+        [ _.Stored.Value > _.Capacity.Value ] [ s & EnergyStore { Stored Capacity } ]
         _                                     [ _ ]
     }
 ]
 
-Discharge(S EnergyStore, E Energy) [
-    S & EnergyStore { Stored { Value (Stored.Value - E.Value), Unit Joule } }
+Discharge(s EnergyStore, e Energy) [
+    S & EnergyStore { Stored { Value (Stored.Value - E.Value), unit Joule } }
 ]

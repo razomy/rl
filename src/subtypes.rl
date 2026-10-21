@@ -4,14 +4,14 @@ Concrete Action Subtypes
 
 // Interact & Communicate
 BefriendAction    InteractAction
-CommunicateAction InteractAction & { About Thing, InLanguage Language, Recipient Agent }
+CommunicateAction InteractAction & { About Thing, inLanguage Language, recipient Agent }
 AskAction         CommunicateAction & { Question Question }
 CheckInAction     CommunicateAction
 CheckOutAction    CommunicateAction
 CommentAction     CommunicateAction & { ResultComment Comment }
 InformAction      CommunicateAction & { Event_ Thing }
 ConfirmAction     InformAction
-RsvpAction        InformAction & { RsvpResponse RsvpResponseType, AdditionalNumberOfGuests Count }
+RsvpAction        InformAction & { RsvpResponse RsvpResponseType, additionalNumberOfGuests Count }
 InviteAction      CommunicateAction & { Event_ Thing }
 ReplyAction       CommunicateAction & { ResultComment Comment }
 ShareAction       CommunicateAction
@@ -36,8 +36,8 @@ LikeAction     ReactAction
 WantAction     ReactAction
 ReviewAction   AssessAction & { ResultReview Review }
 
-// Create, Update, Move, Consume, Organize, Play, Search, Achieve, Control
-CookAction       CreateAction & { FoodEstablishment_ Thing, Recipe Recipe }
+// Create, Update, Move, Consume, Organize, Play, Search, Achieve, control
+CookAction       CreateAction & { FoodEstablishment_ Thing, recipe Recipe }
 DrawAction       CreateAction
 FilmAction       CreateAction
 PaintAction      CreateAction
@@ -49,7 +49,7 @@ InsertAction  AddAction & { ToLocation Place }
 AppendAction  InsertAction
 PrependAction InsertAction
 DeleteAction  UpdateAction
-ReplaceAction UpdateAction & { Replacee Thing, Replacer Thing }
+ReplaceAction UpdateAction & { Replacee Thing, replacer Thing }
 
 ArriveAction MoveAction
 DepartAction MoveAction
@@ -78,7 +78,7 @@ CancelAction    PlanAction
 ReserveAction   PlanAction
 ScheduleAction  PlanAction
 
-ExerciseAction PlayAction & { Course_ Place, Diet_ Diet_, Distance_ Distance_, ExercisePlan ExercisePlan, ExerciseType String, Opponent Agent, SportsActivityLocation_ Place }
+ExerciseAction PlayAction & { Course_ Place, diet_ Diet_, distance_ Distance_, exercisePlan ExercisePlan, exerciseType String, opponent Agent, sportsActivityLocation_ Place }
 PerformAction  PlayAction
 
 CheckAction    FindAction
@@ -104,15 +104,15 @@ OrderAction    TradeAction & { DeliveryMethod DeliveryMethod }
 PayAction      TradeAction & { Recipient Agent }
 PreOrderAction TradeAction
 QuoteAction    TradeAction
-RentAction     TradeAction & { Landlord Agent, RealEstateAgent Agent }
+RentAction     TradeAction & { Landlord Agent, realEstateAgent Agent }
 TipAction      TradeAction & { Recipient Agent }
 DonateAction   TradeAction & { Recipient Agent }
 
 BorrowAction   TransferAction & { Lender Agent }
 LendAction     TransferAction & { Borrower Agent }
 GiveAction     TransferAction & { Recipient Agent }
-ReceiveAction  TransferAction & { DeliveryMethod DeliveryMethod, Sender Agent }
+ReceiveAction  TransferAction & { DeliveryMethod DeliveryMethod, sender Agent }
 ReturnAction   TransferAction & { Recipient Agent }
-SendAction     TransferAction & { DeliveryMethod DeliveryMethod, Recipient Agent }
+SendAction     TransferAction & { DeliveryMethod DeliveryMethod, recipient Agent }
 TakeAction     TransferAction
 DownloadAction TransferAction

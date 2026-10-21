@@ -13,7 +13,7 @@ Vector3D { X, Y, Z }
 Origin   Point3D & { X 0, Y 0, Z 0 }
 
 Position    Point3D
-Orientation { Yaw Angle, Pitch Angle, Roll Angle }
+Orientation { Yaw Angle, pitch Angle, roll Angle }
 Pose        { Position, Orientation }
 
 Area     Measure(Real & NonNegative, SquareMetre)
@@ -30,8 +30,8 @@ Bounds(T) {
   Max T
 }
 
-BoundX(U)         { StartX U, FinishX U }
-BoundY(U)         { StartY U, FinishY U }
+BoundX(U)         { StartX U, finishX U }
+BoundY(U)         { StartY U, finishY U }
 BoundRectangle(U) BoundX(U) & BoundY(U)
 
 ISize1 { XLength Float }
@@ -48,5 +48,5 @@ Located    { Position }
 Bounded    { Shape }
 Contained  { Container Any }
 Adjacent   { Neighbor Any }
-Moving     { Position, Velocity Vector3D }
+Moving     { Position, velocity Vector3D }
 Stationary { Position }

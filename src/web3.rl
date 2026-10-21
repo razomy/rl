@@ -1,5 +1,5 @@
 #
-Abstract Blockchain Network, Block, Transaction, Smart Contract, Token, DeFi Pool & DAO
+Abstract Blockchain Network, Block, Transaction, smart Contract, Token, deFi Pool & DAO
 #
 
 WalletAddress HexStr

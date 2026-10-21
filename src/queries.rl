@@ -10,13 +10,13 @@ Cart {
 }
 
 Db {
-  Connect(Cfg DbConfig)                 [ Cfg . native_db_connect ]
-  Execute(Sql String, Params List(Any)) [ (Sql, Params) . native_db_execute ]
-  Query(Spec QuerySpec)                 [ Spec . native_db_query ]
+  Connect(cfg DbConfig)                 [ Cfg . native_db_connect ]
+  Execute(sql String, params List(Any)) [ (Sql, Params) . native_db_execute ]
+  Query(spec QuerySpec)                 [ Spec . native_db_query ]
 
-  BeginTx(Isolation IsolationLevel)     [ Isolation . native_db_begin_tx ]
-  CommitTx(Tx DbTransaction)            [ Tx . native_db_commit_tx ]
-  RollbackTx(Tx DbTransaction)          [ Tx . native_db_rollback_tx ]
+  BeginTx(isolation IsolationLevel)     [ Isolation . native_db_begin_tx ]
+  CommitTx(tx DbTransaction)            [ Tx . native_db_commit_tx ]
+  RollbackTx(tx DbTransaction)          [ Tx . native_db_rollback_tx ]
 
   FindUser(Id) [
     { Id Id, Name "Alice", Age 25 }

@@ -13,8 +13,8 @@ MachineKind "engine" | "motor" | "pump" | "generator" | "turbine" | "press" | "l
     | "crane" | "excavator" | "tractor" | "robot-arm" | "3d-printer" | "reactor"
 
 Battery   Component & EnergyStore
-Processor Component & { Cores Count, ClockSpeed Frequency }
-Display   Component & { Resolution, Diagonal Length }
+Processor Component & { Cores Count, clockSpeed Frequency }
+Display   Component & { Resolution, diagonal Length }
 Memory_   Component & { Capacity DataSize }
 
 VehicleKind "car" | "truck" | "bus" | "motorcycle" | "bicycle" | "scooter" | "train" | "tram"
@@ -43,33 +43,33 @@ GarmentKind "shirt" | "trousers" | "dress" | "skirt" | "coat" | "jacket" | "hat"
 FoodKind "fruit" | "vegetable" | "grain" | "meat" | "fish" | "dairy" | "egg" | "bread" | "sweet"
     | "beverage" | "spice" | "legume" | "nut"
 
-Make(A Agent, M Material, Purpose String) [ Artifact { Material M, Maker A, MadeAt Now, Condition "new", Purpose } & Working Object ]
-Assemble(Parts List(Component), A Agent) [ Artifact { Maker A, MadeAt Now, Condition "new" } & Working Object ]
-Use(X Artifact & Working, U Agent) [ X & InUse { User U } ]
-Release_(X Artifact & InUse) [ X / InUse ]
-Wear(X Artifact) [
+Make(a Agent, m Material, purpose String) [ Artifact { Material M, maker A, madeAt Now, Condition "new", Purpose } & Working Object ]
+Assemble(parts List(Component), a Agent) [ Artifact { Maker A, madeAt Now, Condition "new" } & Working Object ]
+Use(x Artifact & Working, u Agent) [ x & InUse { User U } ]
+Release_(x Artifact & InUse) [ X / InUse ]
+Wear(x Artifact) [
     Condition . {
-        "new"      [ X & { Condition "like-new" } ]
-        "like-new" [ X & { Condition "good" } ]
-        "good"     [ X & { Condition "worn" } ]
-        "worn"     [ X & { Condition "damaged" } ]
+        "new"      [ x & { Condition "like-new" } ]
+        "like-new" [ x & { Condition "good" } ]
+        "good"     [ x & { Condition "worn" } ]
+        "worn"     [ x & { Condition "damaged" } ]
         _          [ X ]
     }
 ]
-Break(X Artifact & Working, Fault String) [ X / Working & Broken_ { Fault } & { Condition "broken" } ]
-Repair(X Artifact & Broken_) [ X / Broken_ & Working Object & { Condition "good" } ]
-Discard(X Artifact) [ X & Discarded { At Now } ]
-Recycle(X Artifact & Discarded) [ X.Material ]
-Store(X Artifact, P Position) [ X & Stored { Location P } ]
-Build(B Building & UnderConstruction) [ B / UnderConstruction & Completed_ { CompletedAt Now } ]
-Demolish(B Building) [ B & Demolished { At Now } ]
-Park(V Vehicle & Driving) [ V / Driving & Parked Object ]
-Drive(V Vehicle & Parked, D Agent, To GeoCoordinate) [ V / Parked & Driving { Driver D, Destination To } ]
-Install(S Software & Uninstalled, D Device) [ S / Uninstalled & Installed { On D } ]
-Uninstall(S Software & Installed) [ S / Installed & Uninstalled Object ]
-Launch(S Software & Installed & Stopped) [ S / Stopped & Running { Since Now } ]
-Terminate(S Software & Running) [ S / Running & Stopped Object ]
-Upgrade(S Software, V Version) [ S & { Version V } ]
-Cook(F Food & Raw, Method String) [ F / Raw & Cooked { Method } ]
-Spoil(F Food) [ F & Spoiled Object ]
-Dress(G Garment, W Agent) [ G & Worn_ { Wearer W } ]
+Break(x Artifact & Working, fault String) [ X / Working & Broken_ { Fault } & { Condition "broken" } ]
+Repair(x Artifact & Broken_) [ X / Broken_ & Working Object & { Condition "good" } ]
+Discard(x Artifact) [ x & Discarded { At Now } ]
+Recycle(x Artifact & Discarded) [ X.Material ]
+Store(x Artifact, p Position) [ x & Stored { Location P } ]
+Build(b Building & UnderConstruction) [ B / UnderConstruction & Completed_ { CompletedAt Now } ]
+Demolish(b Building) [ b & Demolished { At Now } ]
+Park(v Vehicle & Driving) [ V / Driving & Parked Object ]
+Drive(v Vehicle & Parked, d Agent, to GeoCoordinate) [ V / Parked & Driving { Driver D, destination To } ]
+Install(s Software & Uninstalled, d Device) [ S / Uninstalled & Installed { On D } ]
+Uninstall(s Software & Installed) [ S / Installed & Uninstalled Object ]
+Launch(s Software & Installed & Stopped) [ S / Stopped & Running { Since Now } ]
+Terminate(s Software & Running) [ S / Running & Stopped Object ]
+Upgrade(s Software, v Version) [ s & { Version V } ]
+Cook(f Food & Raw, method String) [ F / Raw & Cooked { Method } ]
+Spoil(f Food) [ f & Spoiled Object ]
+Dress(g Garment, w Agent) [ g & Worn_ { Wearer W } ]

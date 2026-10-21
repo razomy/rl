@@ -22,7 +22,7 @@ ProductEntity IEntity & HasPrimary(ProductEntity) & HasName & HasTitle & {
   Image       ImageModel
 }
 
-ProductContainerItemModel { ProductId ForeignId(ProductEntity), Count Int }
+ProductContainerItemModel { ProductId ForeignId(ProductEntity), count Int }
 
 ProductContainerEntity IEntity & HasPrimary(ProductContainerEntity) & {
   Items List(ProductContainerItemModel)
@@ -76,7 +76,7 @@ TrophyEntity IEntity & HasPrimary(TrophyEntity) & HasTitle & {
 
 GridStepsTaskEntity     { Steps Int }
 RequiredSkillTaskEntity { RequiredSkill ForeignId(SkillEntity) }
-RewardedCountTaskEntity { Count Int, RewardId ForeignId(RewardEntity) }
+RewardedCountTaskEntity { Count Int, rewardId ForeignId(RewardEntity) }
 
 ObjectiveEntity IEntity & HasPrimary(ObjectiveEntity) & HasName & HasTitle & {
   RequiredSkill RequiredSkillTaskEntity
@@ -105,11 +105,11 @@ ChapterEntity IEntity & HasPrimary(ChapterEntity) & HasName & HasTitle & {
   ObjectivesIds List(ForeignId(ObjectiveEntity))
 }
 
-OpenObjective(Level UserNumberBoardObjectiveEntity) [
+OpenObjective(level UserNumberBoardObjectiveEntity) [
   Level & { IsOpened true, State "Opened" }
 ]
 
-MakeBoardStep(Level UserNumberBoardObjectiveEntity & { IsOpened true }) [
+MakeBoardStep(level UserNumberBoardObjectiveEntity & { IsOpened true }) [
   Level & {
     Steps     (Steps + 1)
     IsTouched true
@@ -118,14 +118,14 @@ MakeBoardStep(Level UserNumberBoardObjectiveEntity & { IsOpened true }) [
   }
 ]
 
-UndoBoardStep(Level UserNumberBoardObjectiveEntity & { State "InProgress" }) [
+UndoBoardStep(level UserNumberBoardObjectiveEntity & { State "InProgress" }) [
   Steps . {
     [ _ > 0 ] [ Level & { Steps (Steps - 1) } ]
     _         [ Level ]
   }
 ]
 
-CompleteObjective(Level UserNumberBoardObjectiveEntity, FinalScore Int, Objective ObjectiveEntity) [
+CompleteObjective(level UserNumberBoardObjectiveEntity, finalScore Int, objective ObjectiveEntity) [
   Level & {
     Score          FinalScore
     IsCompleted    true
@@ -136,19 +136,19 @@ CompleteObjective(Level UserNumberBoardObjectiveEntity, FinalScore Int, Objectiv
   }
 ]
 
-UnlockAchievement(Ua UserAchievementEntity) [
-  Ua & { IsAchieved true, IsOpened true, IsDirty true }
+UnlockAchievement(ua UserAchievementEntity) [
+  ua & { IsAchieved true, IsOpened true, IsDirty true }
 ]
 
-ClaimAchievementReward(Ua UserAchievementEntity & { IsAchieved true, IsReceived false }) [
-  Ua & { IsReceived true, IsViewed true, IsDirty false }
+ClaimAchievementReward(ua UserAchievementEntity & { IsAchieved true, IsReceived false }) [
+  ua & { IsReceived true, IsViewed true, IsDirty false }
 ]
 
-CompleteSkill(Us UserSkillEntity & { IsOpened true }) [
-  Us & { IsCompleted true, IsReceived true, IsDirty true }
+CompleteSkill(us UserSkillEntity & { IsOpened true }) [
+  us & { IsCompleted true, IsReceived true, IsDirty true }
 ]
 
-EvaluateUserRank(Ur UserRankEntity, CurrentScore Int, RankSpec RankEntity) [
+EvaluateUserRank(ur UserRankEntity, currentScore Int, rankSpec RankEntity) [
   CurrentScore . {
     [ _ >= RankSpec.RequiredScore ] [ Ur & { IsAchieved true, IsCompleted true, IsOpened true } ]
     _                               [ Ur ]

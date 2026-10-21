@@ -1,8 +1,8 @@
 #
-Concrete Organizations, Local Businesses, Retail Stores & Transitions
+Concrete Organizations, local Businesses, retail Stores & Transitions
 #
 
-Airline                  Organization & { IataCode String, BoardingPolicy BoardingPolicyType }
+Airline                  Organization & { IataCode String, boardingPolicy BoardingPolicyType }
 Consortium               Organization
 Corporation              Organization & { TickerSymbol String }
 Cooperative              Organization
@@ -16,16 +16,16 @@ School                   EducationalOrganization
 FundingScheme            Organization
 GovernmentOrganization   Organization
 LibrarySystem            Organization
-MedicalOrganization      Organization & { HealthPlanNetworkId String, IsAcceptingNewPatients Bool, MedicalSpecialty MedicalSpecialty }
+MedicalOrganization      Organization & { HealthPlanNetworkId String, isAcceptingNewPatients Bool, medicalSpecialty MedicalSpecialty }
 DiagnosticLab            MedicalOrganization
 VeterinaryCare           MedicalOrganization
 NGO                      Organization
-NewsMediaOrganization    Organization & { Masthead Url, CorrectionsPolicy Url, DiversityPolicy Url }
+NewsMediaOrganization    Organization & { Masthead Url, correctionsPolicy Url, diversityPolicy Url }
 OnlineBusiness           Organization
 OnlineStore              OnlineBusiness
 PerformingGroup          Organization
 DanceGroup               PerformingGroup
-MusicGroup               PerformingGroup & { Genre String, Album List(Thing), Track List(Thing) }
+MusicGroup               PerformingGroup & { Genre String, album List(Thing), track List(Thing) }
 TheaterGroup             PerformingGroup
 PoliticalParty           Organization
 Project                  Organization
@@ -34,7 +34,7 @@ ResearchProject          Project
 ResearchOrganization     Organization
 SearchRescueOrganization Organization
 SportsOrganization       Organization & { Sport String }
-SportsTeam               SportsOrganization & { Athlete List(Agent), Coach List(Agent) }
+SportsTeam               SportsOrganization & { Athlete List(Agent), coach List(Agent) }
 WorkersUnion             Organization
 
 AnimalShelter            LocalBusiness
@@ -85,7 +85,7 @@ AutomatedTeller   FinancialService
 BankOrCreditUnion FinancialService
 InsuranceAgency   FinancialService
 
-FoodEstablishment  LocalBusiness & { AcceptsReservations Bool, HasMenu Url, ServesCuisine List(String), StarRating Rating }
+FoodEstablishment  LocalBusiness & { AcceptsReservations Bool, hasMenu Url, servesCuisine List(String), starRating Rating }
 Bakery             FoodEstablishment
 BarOrPub           FoodEstablishment
 Brewery            FoodEstablishment
@@ -120,7 +120,7 @@ Notary              LegalService
 ProfessionalService LocalBusiness
 RealEstateAgent     LocalBusiness
 
-LodgingBusiness LocalBusiness & { CheckinTime TimeOfDay, CheckoutTime TimeOfDay, NumberOfRooms Count, PetsAllowed Bool, StarRating Rating }
+LodgingBusiness LocalBusiness & { CheckinTime TimeOfDay, checkoutTime TimeOfDay, numberOfRooms Count, petsAllowed Bool, starRating Rating }
 BedAndBreakfast LodgingBusiness
 Campground_     LodgingBusiness
 Hostel          LodgingBusiness
@@ -195,16 +195,16 @@ TireShop             Store
 ToyStore             Store
 WholesaleStore       Store
 
-Found(F Agent, N Name) [ Organization { Name N, Founder List1(F), FoundingDate Today } ]
-Dissolve_(O Organization) [ O & { DissolutionDate Today } ]
-Merge(A Organization, B Organization) [ Organization & A & B & { SubOrganization List2(A, B) } ]
-Acquire_(Parent Organization, Child Organization) [ Child & { ParentOrganization Parent } ]
-SpinOff(O Organization, N Name) [ Organization { Name N, ParentOrganization O, FoundingDate Today } ]
-Rebrand(O Organization, B Brand) [ O & { Brand B } ]
-GoPublic(C Corporation, Ticker String) [ C & { TickerSymbol Ticker } ]
-AddMember(O Organization, M Agent) [ O & { Member (Cons { Head M, Tail Member }) } ]
+Found(f Agent, n Name) [ Organization { Name N, founder List1(F), foundingDate Today } ]
+Dissolve_(o Organization) [ o & { DissolutionDate Today } ]
+Merge(a Organization, b Organization) [ Organization & A & B & { SubOrganization List2(A, B) } ]
+Acquire_(parent Organization, child Organization) [ Child & { ParentOrganization Parent } ]
+SpinOff(o Organization, n Name) [ Organization { Name N, parentOrganization O, foundingDate Today } ]
+Rebrand(o Organization, b Brand) [ o & { Brand B } ]
+GoPublic(c Corporation, ticker String) [ c & { TickerSymbol Ticker } ]
+AddMember(o Organization, m Agent) [ o & { Member (Cons { Head M, tail Member }) } ]
 
-OpenBusiness(B LocalBusiness, H String) [ B & { OpeningHours H, PublicAccess true } ]
-CloseBusiness(B LocalBusiness) [ B & { PublicAccess false, DissolutionDate Today } ]
-AcceptPayment(B LocalBusiness, M PaymentMethod) [ B & { PaymentAccepted (Cons { Head M, Tail PaymentAccepted }) } ]
-ChangePriceRange(B LocalBusiness, R PriceRange) [ B & { PriceRange R } ]
+OpenBusiness(b LocalBusiness, h String) [ b & { OpeningHours H, PublicAccess true } ]
+CloseBusiness(b LocalBusiness) [ b & { PublicAccess false, dissolutionDate Today } ]
+AcceptPayment(b LocalBusiness, m PaymentMethod) [ b & { PaymentAccepted (Cons { Head M, tail PaymentAccepted }) } ]
+ChangePriceRange(b LocalBusiness, r PriceRange) [ b & { PriceRange R } ]

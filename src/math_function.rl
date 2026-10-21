@@ -1,9 +1,8 @@
-
 #
 Arithmetic, Elementary, Trigonometric & Vector Functions
 #
 
-MathOps(A Int, B Int) [
+MathOps(a Int, b Int) [
   {
     Add (A + B)
     Sub (A - B)
@@ -20,7 +19,7 @@ MathOps(A Int, B Int) [
   }
 ]
 
-LogicOps(X Bool, Y Bool, Val Int) [
+LogicOps(x Bool, y Bool, val Int) [
   {
     And     (X && Y)
     Or      (X || Y)
@@ -39,14 +38,14 @@ LogicOps(X Bool, Y Bool, Val Int) [
 ]
 
 Math {
-  Abs(X Float) [
+  Abs(x Float) [
     X . {
       [ _ < 0.0 ] [ 0.0 - X ]
       _           [ X ]
     }
   ]
 
-  Sign(X Float) [
+  Sign(x Float) [
     X . {
       [ _ > 0.0 ] [ 1 ]
       [ _ < 0.0 ] [ -1 ]
@@ -54,85 +53,85 @@ Math {
     }
   ]
 
-  Min(A Float, B Float) [
+  Min(a Float, b Float) [
     (A < B) . {
       true  [ A ]
       false [ B ]
     }
   ]
 
-  Max(A Float, B Float) [
+  Max(a Float, b Float) [
     (A > B) . {
       true  [ A ]
       false [ B ]
     }
   ]
 
-  Clamp(Val Float, Low Float, High Float) [
+  Clamp(val Float, low Float, high Float) [
     Val . Math.Max(Low) . Math.Min(High)
   ]
 
-  Lerp(Start Float, End Float, T Float) [
+  Lerp(start Float, end Float, t Float) [
     Start + (End - Start) * T
   ]
 
-  InverseLerp(Start Float, End Float, Val Float) [
+  InverseLerp(start Float, end Float, val Float) [
     (Val - Start) / (End - Start)
   ]
 
-  Remap(Val Float, InMin Float, InMax Float, OutMin Float, OutMax Float) [
+  Remap(val Float, inMin Float, inMax Float, outMin Float, outMax Float) [
     Math.Lerp(OutMin, OutMax, Math.InverseLerp(InMin, InMax, Val))
   ]
 
-  Smoothstep(Edge0 Float, Edge1 Float, X Float) [
+  Smoothstep(edge0 Float, edge1 Float, x Float) [
     T (Math.Clamp((X - Edge0) / (Edge1 - Edge0), 0.0, 1.0))
     T * T * (3.0 - 2.0 * T)
   ]
 
-  Floor(X Float) [ X . native_math_floor ]
-  Ceil(X Float)  [ X . native_math_ceil ]
-  Round(X Float) [ X . native_math_round ]
-  Trunc(X Float) [ X . native_math_trunc ]
-  Sqrt(X Float)  [ X . native_math_sqrt ]
-  Cbrt(X Float)  [ X . native_math_cbrt ]
-  Exp(X Float)   [ X . native_math_exp ]
-  Ln(X Float)    [ X . native_math_ln ]
-  Log10(X Float) [ X . native_math_log10 ]
-  Log2(X Float)  [ X . native_math_log2 ]
+  Floor(x Float) [ X . native_math_floor ]
+  Ceil(x Float)  [ X . native_math_ceil ]
+  Round(x Float) [ X . native_math_round ]
+  Trunc(x Float) [ X . native_math_trunc ]
+  Sqrt(x Float)  [ X . native_math_sqrt ]
+  Cbrt(x Float)  [ X . native_math_cbrt ]
+  Exp(x Float)   [ X . native_math_exp ]
+  Ln(x Float)    [ X . native_math_ln ]
+  Log10(x Float) [ X . native_math_log10 ]
+  Log2(x Float)  [ X . native_math_log2 ]
 
-  Sin(X Float)            [ X . native_math_sin ]
-  Cos(X Float)            [ X . native_math_cos ]
-  Tan(X Float)            [ X . native_math_tan ]
-  Asin(X Float)           [ X . native_math_asin ]
-  Acos(X Float)           [ X . native_math_acos ]
-  Atan(X Float)           [ X . native_math_atan ]
-  Atan2(Y Float, X Float) [ (Y, X) . native_math_atan2 ]
-  Sinh(X Float)           [ X . native_math_sinh ]
-  Cosh(X Float)           [ X . native_math_cosh ]
-  Tanh(X Float)           [ X . native_math_tanh ]
+  Sin(x Float)            [ X . native_math_sin ]
+  Cos(x Float)            [ X . native_math_cos ]
+  Tan(x Float)            [ X . native_math_tan ]
+  Asin(x Float)           [ X . native_math_asin ]
+  Acos(x Float)           [ X . native_math_acos ]
+  Atan(x Float)           [ X . native_math_atan ]
+  Atan2(y Float, x Float) [ (Y, X) . native_math_atan2 ]
+  Sinh(x Float)           [ X . native_math_sinh ]
+  Cosh(x Float)           [ X . native_math_cosh ]
+  Tanh(x Float)           [ X . native_math_tanh ]
 
-  DegToRad(Deg Float) [ Deg * PI / 180.0 ]
-  RadToDeg(Rad Float) [ Rad * 180.0 / PI ]
+  DegToRad(deg Float) [ Deg * PI / 180.0 ]
+  RadToDeg(rad Float) [ Rad * 180.0 / PI ]
 
-  Factorial(N Int) [
+  Factorial(n Int) [
     N . {
       [ _ <= 1 ] [ 1 ]
       _          [ N * Math.Factorial(N - 1) ]
     }
   ]
 
-  Gcd(A Int, B Int) [
+  Gcd(a Int, b Int) [
     B . {
       0 [ A ]
       _ [ Math.Gcd(B, A % B) ]
     }
   ]
 
-  Lcm(A Int, B Int) [
+  Lcm(a Int, b Int) [
     (A * B) / Math.Gcd(A, B)
   ]
 
-  Fibonacci(N Int) [
+  Fibonacci(n Int) [
     N . {
       0 [ 0 ]
       1 [ 1 ]
@@ -141,23 +140,23 @@ Math {
   ]
 }
 
-AddVec3(A VectorFloat3, B VectorFloat3) [
+AddVec3(a VectorFloat3, b VectorFloat3) [
   VectorFloat3 { X (A.X + B.X), Y (A.Y + B.Y), Z (A.Z + B.Z) }
 ]
 
-SubVec3(A VectorFloat3, B VectorFloat3) [
+SubVec3(a VectorFloat3, b VectorFloat3) [
   VectorFloat3 { X (A.X - B.X), Y (A.Y - B.Y), Z (A.Z - B.Z) }
 ]
 
-ScaleVec3(V VectorFloat3, Factor Float) [
+ScaleVec3(v VectorFloat3, factor Float) [
   VectorFloat3 { X (V.X * Factor), Y (V.Y * Factor), Z (V.Z * Factor) }
 ]
 
-DotVec3(A VectorFloat3, B VectorFloat3) [
+DotVec3(a VectorFloat3, b VectorFloat3) [
   (A.X * B.X) + (A.Y * B.Y) + (A.Z * B.Z)
 ]
 
-CrossVec3(A VectorFloat3, B VectorFloat3) [
+CrossVec3(a VectorFloat3, b VectorFloat3) [
   VectorFloat3 {
     X (A.Y * B.Z - A.Z * B.Y)
     Y (A.Z * B.X - A.X * B.Z)
@@ -165,17 +164,17 @@ CrossVec3(A VectorFloat3, B VectorFloat3) [
   }
 ]
 
-ComplexAdd(A Complex, B Complex) [
+ComplexAdd(a Complex, b Complex) [
   Complex { Real (A.Real + B.Real), Imaginary (A.Imaginary + B.Imaginary) }
 ]
 
-ComplexMul(A Complex, B Complex) [
+ComplexMul(a Complex, b Complex) [
   Complex {
     Real      (A.Real * B.Real - A.Imaginary * B.Imaginary)
     Imaginary (A.Real * B.Imaginary + A.Imaginary * B.Real)
   }
 ]
 
-ComplexConjugate(C Complex) [
+ComplexConjugate(c Complex) [
   Complex { Real C.Real, Imaginary (0.0 - C.Imaginary) }
 ]

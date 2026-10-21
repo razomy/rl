@@ -1,5 +1,5 @@
 #
-Abstract Users, Access Policies, Sessions, Tokens & Auth Errors
+Abstract Users, access Policies, Sessions, Tokens & Auth Errors
 #
 
 PermissionScope {
@@ -43,4 +43,4 @@ AuthSession {
 }
 
 Unauthorized { Reason String }
-Forbidden    { Reason String, RequiredPermission String }
+Forbidden    { Reason String, requiredPermission String }

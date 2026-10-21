@@ -1,5 +1,5 @@
 #
-Messages, Tool Nodes, Multi-Agent Refactoring & Self-Healing Build Agent
+Messages, tool Nodes, Multi-Agent Refactoring & Self-Healing Build Agent
 #
 
 MessageRole      "system" | "user" | "assistant" | "tool" | "developer"
@@ -8,14 +8,14 @@ MessageTextType  "thinking" | "text" | "example"
 CodeLanguageType "ts" | "py" | "js" | "sh" | "rl" | "cs" | "rust" | "go" | "cpp"
 AgentTaskType    "do" | "goto" | "repeat" | "subtask"
 
-TextMn   IMessageNode & { Kind "TextMn", Text String, TextType MessageTextType, IsDone Bool }
-CodeMn   IMessageNode & { Kind "CodeMn", Text String, CodeLanguage CodeLanguageType }
-EntityMn IMessageNode & { Kind "EntityMn", Entity IdRef(IEntity) }
-TaskMn   IMessageNode & { Kind "TaskMn", TaskType AgentTaskType, IsDone Bool, SubTasks List(IdRef(TaskMn)) }
-SenderMn IMessageNode & { Kind "SenderMn", SenderType SenderType }
+TextMn   IMessageNode & { Kind "TextMn", text String, textType MessageTextType, isDone Bool }
+CodeMn   IMessageNode & { Kind "CodeMn", text String, codeLanguage CodeLanguageType }
+EntityMn IMessageNode & { Kind "EntityMn", entity IdRef(IEntity) }
+TaskMn   IMessageNode & { Kind "TaskMn", taskType AgentTaskType, isDone Bool, subTasks List(IdRef(TaskMn)) }
+SenderMn IMessageNode & { Kind "SenderMn", senderType SenderType }
 
-RequestMn IToolNode & { Kind "RequestMn", Args List(Any) }
-ResultMn  IToolNode & { Kind "ResultMn", Result Any }
+RequestMn IToolNode & { Kind "RequestMn", args List(Any) }
+ResultMn  IToolNode & { Kind "ResultMn", result Any }
 ToolMn    IToolNode & { Kind "ToolMn" }
 
 AnyMn TextMn | CodeMn | EntityMn | TaskMn | RequestMn | ResultMn | ToolMn
@@ -39,8 +39,8 @@ PanicAnswerLlmException LlmException
 TypedAnswerLlmException LlmException
 ToolExecuteLlmException LlmException
 
-DeveloperTask    { FileName String, Instructions String }
-ArchitecturePlan { GlobalStrategy String, Tasks List(DeveloperTask) }
+DeveloperTask    { FileName String, instructions String }
+ArchitecturePlan { GlobalStrategy String, tasks List(DeveloperTask) }
 
 FileOperationAction "CREATE" | "UPDATE" | "DELETE" | "RENAME"
 
@@ -71,9 +71,9 @@ RefactorConfig {
   BackupDirName        String
 }
 
-CompileError { Code Int, Log String }
-BuildSuccess { Status String, Artifact String }
-BuildError   { Text String, Size Int }
+CompileError { Code Int, log String }
+BuildSuccess { Status String, artifact String }
+BuildError   { Text String, size Int }
 BuildResult  BuildSuccess | CompileError | BuildError
 
 FatalError CompileError & [ _.Code >= 500 ]
@@ -90,14 +90,14 @@ StandardDevTools List2(
   ToolMessage { Name "write_file" }
 )
 
-BuildSystemPrompt(ErrorLog String) [
+BuildSystemPrompt(errorLog String) [
   TextMessage {
     Role "system"
     Text "You are an AI expert. Fix this build error: {ErrorLog}"
   }
 ]
 
-CreateAiContext(ErrorLog String) [
+CreateAiContext(errorLog String) [
   AiContext {
     SourceDir    "."
     SystemPrompt "You are an autonomous software engineer."
@@ -107,8 +107,8 @@ CreateAiContext(ErrorLog String) [
 
 Ai {
   Call(Query)          [ Query . native_ai_llm_request ]
-  Embed(Text String)   [ Text . native_ai_embed ]
-  Solve(Ctx AiContext) [ Ctx . native_ai_solve ]
+  Embed(text String)   [ Text . native_ai_embed ]
+  Solve(ctx AiContext) [ Ctx . native_ai_solve ]
 }
 
 RunCargoBuild [ "cargo build --release" . Shell.Exec ]
@@ -118,7 +118,7 @@ RunNpmBuild [
   . Shell.Exec
 ]
 
-AgentLoop(Err, Retries Int) [
+AgentLoop(Err, retries Int) [
   Retries . {
     [ _ == 0 ] [ "Retry limit reached. Human intervention required." . Shell.Log ]
 
@@ -146,7 +146,7 @@ AgentLoop(Err, Retries Int) [
   }
 ]
 
-AttemptFix(ErrorLog String) [
+AttemptFix(errorLog String) [
   ErrorLog
   . CreateAiContext
   . Ai.Solve
@@ -154,18 +154,18 @@ AttemptFix(ErrorLog String) [
   . RunNpmBuild
 ]
 
-CreateTaskByError(Err BuildError) [
+CreateTaskByError(err BuildError) [
   Err . {
     SmallError [ Task { Message Err.Text } ]
     LargeError [ Task { Message (Err.Text . Substring(0, 500)) } ]
   }
 ]
 
-DoTask(T Task) [
+DoTask(t Task) [
   T.Message . AttemptFix
 ]
 
-RetryLoop(T Task, Retries Int) [
+RetryLoop(t Task, retries Int) [
   Retries . {
     0 [ "Retry limit exceeded. Stopping." . Shell.Log ]
     _ [
@@ -185,7 +185,7 @@ RetryLoop(T Task, Retries Int) [
 SuccessText ObjectActed("Сборка", "собрана", "успешно", "с первого раза!")
 LogSuccessText [ SuccessText . Shell.Log ]
 
-HandleBuildFailure(Err BuildError) [
+HandleBuildFailure(err BuildError) [
   "Build failed (log bytes: {Err.Size}). Starting recovery pipeline..." . Shell.Log
   Err
   . CreateTaskByError
@@ -199,7 +199,7 @@ StartFixBuild [
   }
 ]
 
-NormalizeTextFlow(InputText String, AgentInstance) [
+NormalizeTextFlow(inputText String, AgentInstance) [
   InputText . {
     "1. Has typos or unknown words? (pymorphy3)"       [ AgentInstance . NormalizeTextFlow ]
     "2. Missing clear Subject+Verb structure? (SpaCy)" [ AgentInstance . NormalizeTextFlow ]

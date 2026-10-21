@@ -1,5 +1,5 @@
 #
-Concrete Identifier Schemes, Media Subtypes & Information Transitions
+Concrete Identifier Schemes, media Subtypes & Information Transitions
 #
 
 Uuid Identifier & { Scheme "uuid" }
@@ -14,14 +14,14 @@ Image Media & { MediaKind "image" }
 Audio Media & { MediaKind "audio" }
 Video Media & { MediaKind "video" }
 
-Write(A Agent, Content String, L Language) [ Text { Content, Language L } & Draft Object ]
-Publish(D Draft, U Url) [ D / Draft & Published { PublishedAt Now, Url U } ]
-Retract(P Published, Reason String) [ P / Published & Retracted { RetractedAt Now, Reason } ]
-Translate(T Text, Target Language) [ Text { Content T.Content, Language Target } ]
-Summarize(T Text) [ Summary { Content T.Content, Language T.Language } ]
-Send(M Message) [ M & Sent { SentAt Now } ]
-Deliver(M Message & Sent) [ M & Delivered { DeliveredAt Now } ]
-MarkRead(M Message & Delivered) [ M & Read { ReadAt Now } ]
-Encode(D Data, E Encoding) [ D & { Encoding E } ]
-Assign(X Any, I Identifier) [ X & { Identifier I } ]
-Archive_(R Record, C Catalog) [ C & { Records (Cons { Head R, Tail Records }) } ]
+Write(a Agent, content String, l Language) [ Text { Content, language L } & Draft Object ]
+Publish(d Draft, u Url) [ D / Draft & Published { PublishedAt Now, url U } ]
+Retract(p Published, reason String) [ P / Published & Retracted { RetractedAt Now, Reason } ]
+Translate(t Text, target Language) [ Text { Content T.Content, language Target } ]
+Summarize(t Text) [ Summary { Content T.Content, language T.Language } ]
+Send(m Message) [ m & Sent { SentAt Now } ]
+Deliver(m Message & Sent) [ m & Delivered { DeliveredAt Now } ]
+MarkRead(m Message & Delivered) [ m & Read { ReadAt Now } ]
+Encode(d Data, e Encoding) [ d & { Encoding E } ]
+Assign(x Any, i Identifier) [ x & { Identifier I } ]
+Archive_(r Record, c Catalog) [ c & { Records (Cons { Head R, tail Records }) } ]

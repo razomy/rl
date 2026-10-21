@@ -1,4 +1,4 @@
-.schema#
+#
 Concrete Config, Strategy, Operation, Company, Vision & Universe Schemas
 #
 

@@ -62,17 +62,17 @@ VoronoiOutput {
   Position Float4
 }
 
-NormalDistribution      { Mean Float, StdDev Float }
-LogNormalDistribution   { Mu Float, Sigma Float }
-UniformDistribution     { Min Float, Max Float }
+NormalDistribution      { Mean Float, stdDev Float }
+LogNormalDistribution   { Mu Float, sigma Float }
+UniformDistribution     { Min Float, max Float }
 ExponentialDistribution { Rate Float }
 PoissonDistribution     { Lambda Float }
-BinomialDistribution    { Trials Int, Probability Float }
-BetaDistribution        { Alpha Float, Beta Float }
-GammaDistribution       { Shape Float, Scale Float }
+BinomialDistribution    { Trials Int, probability Float }
+BetaDistribution        { Alpha Float, beta Float }
+GammaDistribution       { Shape Float, scale Float }
 ChiSquaredDistribution  { DegreesOfFreedom Int }
 StudentTDistribution    { DegreesOfFreedom Float }
-ParetoDistribution      { Scale Float, Shape Float }
+ParetoDistribution      { Scale Float, shape Float }
 
 Distribution
   NormalDistribution | LogNormalDistribution | UniformDistribution | ExponentialDistribution

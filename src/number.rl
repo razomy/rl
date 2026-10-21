@@ -3,6 +3,7 @@ Concrete Numeric Types & SIMD Buffers
 #
 
 // Signed Integers
+{ Byte } primitive
 I8         Number & [ _ >= -128 ] & [ _ <= 127 ]
 I16        Number & [ _ >= -32768 ] & [ _ <= 32767 ]
 I32        Number & [ _ >= -2147483648 ] & [ _ <= 2147483647 ]
@@ -35,7 +36,7 @@ Double     F64
 Decimal    Number
 FloatPrimitive F16 | F32 | F64 | F128 | Float | Double | Decimal
 
-Number     0
+Number Object
 NumberPrimitive IntPrimitive | UIntPrimitive | FloatPrimitive | Number
 
 EvenInt    Int & [ (_ % 2) == 0 ]

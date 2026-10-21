@@ -70,10 +70,10 @@ SiemAlert {
 
 IncidentStatus "Detected" | "Triaged" | "Contained" | "Eradicated" | "Recovered" | "PostMortemClosed"
 
-ContainIncident(Inc SecurityIncident & { Status "Triaged" }) [
+ContainIncident(inc SecurityIncident & { Status "Triaged" }) [
   Inc & { Status "Contained" }
 ]
 
-ResolveIncident(Inc SecurityIncident & { Status "Contained" }) [
+ResolveIncident(inc SecurityIncident & { Status "Contained" }) [
   Inc & { Status "Recovered", ResolvedAt (Some { Value Now }) }
 ]

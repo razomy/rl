@@ -1,5 +1,5 @@
 #
-Render Data, Realtime Compositor & Viewport Engines (EEVEE / Workbench / Overlay)
+Render Data, realtime Compositor & Viewport Engines (EEVEE / Workbench / Overlay)
 #
 
 RenderStats {
@@ -236,13 +236,13 @@ OverlayInstance DrawEngine & {
   ClippingEnabled Bool
 }
 
-CompileEEVEEShaders(E EEVEEInstance) [
+CompileEEVEEShaders(e EEVEEInstance) [
   E.SampleCount . {
-    [ _ > 0 ] [ E & GpuReady { VramAllocatedBytes 67108864 } ]
+    [ _ > 0 ] [ e & GpuReady { VramAllocatedBytes 67108864 } ]
     _         [ ShaderCompileError { ShaderName "eevee_deferred_light_eval", ErrorLog "Zero sample count" } ]
   }
 ]
 
-ExecuteEEVEEFrameRender(Engine EEVEEInstance & GpuReady) [
+ExecuteEEVEEFrameRender(engine EEVEEInstance & GpuReady) [
   "Rendering EEVEE frame (Sample {SampleIndex}/{SampleCount}, VRAM: {VramAllocatedBytes}B)" . Shell.Log
 ]

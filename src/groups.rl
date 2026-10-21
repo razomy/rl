@@ -11,7 +11,7 @@ Community Group & { GroupKind "community" }
 Team      Group & { GroupKind "team" }
 Nation    Group & { GroupKind "nation", Language }
 Ethnicity Group & { GroupKind "ethnicity" }
-Religion  Group & { GroupKind "religion", Beliefs List(Belief) }
+Religion  Group & { GroupKind "religion", beliefs List(Belief) }
 
 RoleKind "leader" | "member" | "founder" | "parent" | "child" | "sibling" | "spouse" | "partner"
     | "friend" | "neighbor" | "employer" | "employee" | "teacher" | "student" | "citizen"
@@ -26,7 +26,7 @@ LegalSystem "civil" | "common" | "religious" | "customary" | "mixed"
 
 Regulation   Law
 Constitution Law
-Treaty       { Title, Parties List(Agent), SignedAt Date }
+Treaty       { Title, parties List(Agent), signedAt Date }
 
 RightKind "life" | "liberty" | "property" | "speech" | "religion" | "assembly" | "privacy"
     | "vote" | "education" | "health" | "work" | "fair-trial" | "movement" | "asylum"
@@ -36,19 +36,19 @@ Verdict "guilty" | "not-guilty" | "dismissed"
 GovernmentForm "democracy" | "republic" | "monarchy" | "constitutional-monarchy" | "theocracy"
     | "dictatorship" | "oligarchy" | "federation" | "confederation" | "anarchy"
 
-Join(A Agent & NonMember, G Group, R Role) [ A / NonMember & Member { Membership { Member A, Group G, Role R, Since Now } } ]
-Leave(A Agent & Member) [ A / Member & NonMember Object ]
-Befriend(A Agent, B Agent) [ Relationship { RelationshipKind "friendship", From A, To B, Since Now } ]
-Marry(A Agent & Single, B Agent & Single) [ List2(A / Single & Married { Spouse B, Since Now }, B / Single & Married { Spouse A, Since Now }) ]
-Divorce(A Agent & Married) [ A / Married & Divorced { Since Now } ]
-Widow(A Agent & Married) [ A / Married & Widowed { Since Now } ]
-Adopt(Parent Agent, Child Agent) [ Relationship { RelationshipKind "kinship", From Parent, To Child, Since Now } ]
-Enact(L Law) [ L & { EnactedAt Today } ]
-Repeal(L Law) [ L & { Repealed Today } ]
-Grant(A Agent, K RightKind, L Law) [ Right { RightKind K, Holder A, GrantedBy L } ]
-Acquire(X Any & Unowned, A Agent) [ X / Unowned & Owned { Ownership { Owner A, Property X, Since Now, Share 1 } } ]
-Abandon_(X Any & Owned) [ X / Owned & Unowned Object ]
-Naturalize(A Agent & Stateless, S State_) [ A / Stateless & Citizen { State_ S } ]
-CastVote(V Agent, C Agent, E Election) [ Vote { Voter V, Choice C, Election E } ]
-Convict(C Crime) [ C.Offender & Imprisoned { Since Now } ]
-Release(P Agent & Imprisoned) [ P / Imprisoned & Free Object ]
+Join(a Agent & NonMember, g Group, r Role) [ A / NonMember & Member { Membership { Member A, group G, role R, since Now } } ]
+Leave(a Agent & Member) [ A / Member & NonMember Object ]
+Befriend(a Agent, b Agent) [ Relationship { RelationshipKind "friendship", from A, to B, since Now } ]
+Marry(a Agent & Single, b Agent & Single) [ List2(A / Single & Married { Spouse B, since Now }, B / Single & Married { Spouse A, since Now }) ]
+Divorce(a Agent & Married) [ A / Married & Divorced { Since Now } ]
+Widow(a Agent & Married) [ A / Married & Widowed { Since Now } ]
+Adopt(parent Agent, child Agent) [ Relationship { RelationshipKind "kinship", from Parent, to Child, since Now } ]
+Enact(l Law) [ l & { EnactedAt Today } ]
+Repeal(l Law) [ l & { Repealed Today } ]
+Grant(a Agent, k RightKind, l Law) [ Right { RightKind K, holder A, grantedBy L } ]
+Acquire(x Any & Unowned, a Agent) [ X / Unowned & Owned { Ownership { Owner A, property X, since Now, Share 1 } } ]
+Abandon_(x Any & Owned) [ X / Owned & Unowned Object ]
+Naturalize(a Agent & Stateless, s State_) [ A / Stateless & Citizen { State_ S } ]
+CastVote(v Agent, c Agent, e Election) [ Vote { Voter V, choice C, election E } ]
+Convict(c Crime) [ C.Offender & Imprisoned { Since Now } ]
+Release(p Agent & Imprisoned) [ P / Imprisoned & Free Object ]

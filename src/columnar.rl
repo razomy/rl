@@ -1,5 +1,5 @@
 #
-Columnar Storage, Chunked Grids, WAL, Graph Topology & Vector Search
+Columnar Storage, chunked Grids, WAL, graph Topology & Vector Search
 #
 
 NodeId  Int
@@ -93,7 +93,7 @@ GraphTopology {
 }
 
 EventActionType "Create" | "Read" | "Update" | "Delete"
-ConfigEvent     { Type EventActionType, Path List(String), Value Any }
+ConfigEvent     { Type EventActionType, path List(String), value Any }
 EventSourcing   { Events List(ConfigEvent) }
 
 DistanceMetric "Cosine" | "Euclidean" | "DotProduct" | "Manhattan" | "Hamming"
@@ -112,8 +112,8 @@ VectorIndexConfig {
   HnswEfConstruct Int
 }
 
-ChunkSection { Id String, Text String }
-ChunkFile    { FilePath String, Content String, CommitId String, Chunks List(ChunkSection) }
+ChunkSection { Id String, text String }
+ChunkFile    { FilePath String, content String, commitId String, chunks List(ChunkSection) }
 
 RagDbConfig {
   Neo4jUri       String

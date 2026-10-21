@@ -2,25 +2,25 @@
 Assertions & Test Suite Runner
 #
 
-AssertEq(Name String, Expected, Actual) [
+AssertEq(name String, Expected, Actual) [
   (Expected == Actual) . {
     true  [ TestPassed { Name Name, DurationMs 0.0 } ]
-    false [ TestFailed { Name Name, Expected Expected, Actual Actual } ]
+    false [ TestFailed { Name Name, expected Expected, actual Actual } ]
   }
 ]
 
-AssertNeq(Name String, Unexpected, Actual) [
+AssertNeq(name String, Unexpected, Actual) [
   (Unexpected != Actual) . {
     true  [ TestPassed { Name Name, DurationMs 0.0 } ]
-    false [ TestFailed { Name Name, Expected "!= {Unexpected}", Actual Actual } ]
+    false [ TestFailed { Name Name, Expected "!= {Unexpected}", actual Actual } ]
   }
 ]
 
-AssertTrue(Name String, Cond Bool) [
+AssertTrue(name String, cond Bool) [
   AssertEq(Name, true, Cond)
 ]
 
-AssertFalse(Name String, Cond Bool) [
+AssertFalse(name String, cond Bool) [
   AssertEq(Name, false, Cond)
 ]
 

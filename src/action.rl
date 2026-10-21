@@ -1,5 +1,5 @@
 #
-Abstract Action, Status Typestates & Top-Level Action Categories (schema.org)
+Abstract Action, status Typestates & Top-Level Action Categories (schema.org)
 #
 
 Action Thing & {
@@ -27,13 +27,13 @@ InteractAction Action
 AssessAction   Action
 CreateAction   Action
 UpdateAction   Action & { TargetCollection Thing }
-MoveAction     Action & { FromLocation Place, ToLocation Place }
-ConsumeAction  Action & { ActionAccessibilityRequirement Thing, ExpectsAcceptanceOf Thing }
+MoveAction     Action & { FromLocation Place, toLocation Place }
+ConsumeAction  Action & { ActionAccessibilityRequirement Thing, expectsAcceptanceOf Thing }
 OrganizeAction Action
-PlayAction     Action & { Audience Audience, Event_ Thing }
+PlayAction     Action & { Audience Audience, event_ Thing }
 SearchAction   Action & { Query String }
 FindAction     Action
 AchieveAction  Action
 ControlAction  Action
-TradeAction    Action & { Price Price, PriceCurrency Currency, PriceSpecification PriceSpecification }
-TransferAction Action & { FromLocation Place, ToLocation Place }
+TradeAction    Action & { Price Price, priceCurrency Currency, priceSpecification PriceSpecification }
+TransferAction Action & { FromLocation Place, toLocation Place }

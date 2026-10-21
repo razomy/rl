@@ -34,7 +34,7 @@ BTreeNode(K, V) {
   Children List(BTreeNode(K, V))
   IsLeaf   Bool
 }
-BTree(K, V) { Root Option(BTreeNode(K, V)), Degree Int }
+BTree(K, V) { Root Option(BTreeNode(K, V)), degree Int }
 
 TrieNode(V) {
   Value      Option(V)
@@ -43,14 +43,14 @@ TrieNode(V) {
 }
 Trie(V)      TrieNode(V)
 RadixTree(V) Trie(V)
-SuffixTree   { Text String, Root TrieNode(Int) }
+SuffixTree   { Text String, root TrieNode(Int) }
 
 HeapType       "MinHeap" | "MaxHeap" | "FibonacciHeap" | "PairingHeap" | "BinomialHeap"
-Heap(T)        { HeapType HeapType, Array List(T) }
-SegmentTree(T) { Array List(T), Size Int }
-FenwickTree(T) { Tree List(T), Size Int }
-MerkleNode     { Hash String, Left Option(MerkleNode), Right Option(MerkleNode) }
-MerkleTree     { Root Option(MerkleNode), Leaves List(String) }
+Heap(T)        { HeapType HeapType, array List(T) }
+SegmentTree(T) { Array List(T), size Int }
+FenwickTree(T) { Tree List(T), size Int }
+MerkleNode     { Hash String, left Option(MerkleNode), right Option(MerkleNode) }
+MerkleTree     { Root Option(MerkleNode), leaves List(String) }
 
 KDTreeNode(T) {
   Left  Int
@@ -67,11 +67,11 @@ KDTree(T) {
   IsBalanced   Bool
 }
 
-BVHTreeAxisRange { Min Float, Max Float }
-BVHTreeOverlap   { IndexA Int, IndexB Int }
-BVHTreeNearest   { Index Int, Co (Float, Float, Float), No (Float, Float, Float), DistSq Float, Flags Int }
-BVHTreeRay       { Origin (Float, Float, Float), Direction (Float, Float, Float), Radius Float }
-BVHTreeRayHit    { Index Int, Co (Float, Float, Float), No (Float, Float, Float), Dist Float }
+BVHTreeAxisRange { Min Float, max Float }
+BVHTreeOverlap   { IndexA Int, indexB Int }
+BVHTreeNearest   { Index Int, Co (Float, Float, Float), No (Float, Float, Float), distSq Float, flags Int }
+BVHTreeRay       { Origin (Float, Float, Float), Direction (Float, Float, Float), radius Float }
+BVHTreeRayHit    { Index Int, Co (Float, Float, Float), No (Float, Float, Float), dist Float }
 
 BVHTree {
   Epsilon  Float

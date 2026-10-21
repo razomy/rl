@@ -1,5 +1,5 @@
 #
-Abstract Energy, Power, Force, Thermal State, Wave, Light, Sound, Field & Circuit
+Abstract Energy, Power, Force, thermal State, Wave, Light, Sound, Field & Circuit
 #
 
 Energy        Measure(Real, Joule)

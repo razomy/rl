@@ -46,7 +46,7 @@ FsNode IEntity & HasPrimary(FsNode) & {
   Ancestors     List(IdRef(FsNode))
 }
 
-CycleDetectedError { Message String, NodeId String }
+CycleDetectedError { Message String, nodeId String }
 
 IoErrorKind "not_found" | "permission_denied" | "already_exists" | "invalid_data" | "timed_out" | "eof" | "unknown"
 IoError {

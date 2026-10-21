@@ -2,27 +2,27 @@
 Concrete Structured Values & Price Specifications
 #
 
-QuantitativeValue         StructuredValue & { Value Real, MinValue Real, MaxValue Real, UnitCode String, UnitText String }
-PropertyValue             StructuredValue & { PropertyID String, Value Any, UnitCode String }
+QuantitativeValue         StructuredValue & { Value Real, minValue Real, maxValue Real, unitCode String, unitText String }
+PropertyValue             StructuredValue & { PropertyID String, value Any, unitCode String }
 GeoCoordinates            StructuredValue & GeoCoordinate & { Address }
-GeoShape_                 StructuredValue & { Box String, Circle String, Line String, Polygon String }
-GeoCircle_                GeoShape_ & { GeoMidpoint GeoCoordinates, GeoRadius Distance_ }
-PostalAddress             StructuredValue & Address & { PostOfficeBoxNumber String, AddressCountry String }
-ContactPoint_             StructuredValue & ContactPoint & { ContactType String, AreaServed String, AvailableLanguage Language, HoursAvailable OpeningHoursSpecification }
-OpeningHoursSpecification StructuredValue & { DayOfWeek, Opens TimeOfDay, Closes TimeOfDay, ValidFrom Date, ValidThrough Date }
-MonetaryAmount            StructuredValue & Money & { MinValue Real, MaxValue Real, ValidFrom Date, ValidThrough Date }
-ExchangeRateSpecification StructuredValue & { Currency, CurrentExchangeRate UnitPriceSpecification }
-InteractionCounter        StructuredValue & { InteractionType String, UserInteractionCount Count }
-NutritionInformation      StructuredValue & { Calories, FatContent Mass_, ProteinContent Mass_, CarbohydrateContent Mass_, SugarContent Mass_, SodiumContent Mass_, ServingSize String }
-DatedMoneySpecification   StructuredValue & { Amount Real, Currency, StartDate Date, EndDate Date }
-EngineSpecification       StructuredValue & { FuelType String, EngineDisplacement QuantitativeValue, EnginePower QuantitativeValue, Torque QuantitativeValue }
-RepaymentSpecification    StructuredValue & { DownPayment MonetaryAmount, LoanPaymentAmount MonetaryAmount, NumberOfLoanPayments Count }
+GeoShape_                 StructuredValue & { Box String, circle String, line String, polygon String }
+GeoCircle_                GeoShape_ & { GeoMidpoint GeoCoordinates, geoRadius Distance_ }
+PostalAddress             StructuredValue & Address & { PostOfficeBoxNumber String, addressCountry String }
+ContactPoint_             StructuredValue & ContactPoint & { ContactType String, areaServed String, availableLanguage Language, hoursAvailable OpeningHoursSpecification }
+OpeningHoursSpecification StructuredValue & { DayOfWeek, opens TimeOfDay, closes TimeOfDay, validFrom Date, validThrough Date }
+MonetaryAmount            StructuredValue & Money & { MinValue Real, maxValue Real, validFrom Date, validThrough Date }
+ExchangeRateSpecification StructuredValue & { Currency, currentExchangeRate UnitPriceSpecification }
+InteractionCounter        StructuredValue & { InteractionType String, userInteractionCount Count }
+NutritionInformation      StructuredValue & { Calories, fatContent Mass_, proteinContent Mass_, carbohydrateContent Mass_, sugarContent Mass_, sodiumContent Mass_, servingSize String }
+DatedMoneySpecification   StructuredValue & { Amount Real, Currency, startDate Date, endDate Date }
+EngineSpecification       StructuredValue & { FuelType String, engineDisplacement QuantitativeValue, enginePower QuantitativeValue, torque QuantitativeValue }
+RepaymentSpecification    StructuredValue & { DownPayment MonetaryAmount, loanPaymentAmount MonetaryAmount, numberOfLoanPayments Count }
 WarrantyPromise           StructuredValue & { DurationOfWarranty QuantitativeValue, WarrantyScope }
-TypeAndQuantityNode       StructuredValue & { AmountOfThisGood Real, TypeOfGood Thing, UnitCode String }
-OwnershipInfo             StructuredValue & { AcquiredFrom Thing, OwnedFrom DateTime, OwnedThrough DateTime, TypeOfGood Thing }
-CDCPMDRecord              StructuredValue & { CvdCollectionDate DateTime, CvdNumBeds Count, CvdNumVent Count }
+TypeAndQuantityNode       StructuredValue & { AmountOfThisGood Real, typeOfGood Thing, unitCode String }
+OwnershipInfo             StructuredValue & { AcquiredFrom Thing, ownedFrom DateTime, ownedThrough DateTime, typeOfGood Thing }
+CDCPMDRecord              StructuredValue & { CvdCollectionDate DateTime, cvdNumBeds Count, cvdNumVent Count }
 
-UnitPriceSpecification      PriceSpecification & { BillingIncrement Real, ReferenceQuantity QuantitativeValue, PriceType String }
-DeliveryChargeSpecification PriceSpecification & { AppliesToDeliveryMethod DeliveryMethod, AreaServed String }
+UnitPriceSpecification      PriceSpecification & { BillingIncrement Real, referenceQuantity QuantitativeValue, priceType String }
+DeliveryChargeSpecification PriceSpecification & { AppliesToDeliveryMethod DeliveryMethod, areaServed String }
 PaymentChargeSpecification  PriceSpecification & { AppliesToPaymentMethod PaymentMethod }
 CompoundPriceSpecification  PriceSpecification & { PriceComponent List(UnitPriceSpecification) }

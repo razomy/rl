@@ -1,6 +1,5 @@
-
 #
-Attributes, Geometry Components, Mesh, BMesh, Curves, Volume & GreasePencil
+Attributes, geometry Components, Mesh, BMesh, Curves, Volume & GreasePencil
 #
 
 AttrStorageType "Array" | "Single"
@@ -19,23 +18,23 @@ AttributeStorage {
   Attributes List(Attribute)
 }
 
-MFDataType    { Category "Single" | "Vector", BaseType AttrType }
-MFParamType   { Category "SingleInput" | "VectorInput" | "SingleOutput" | "VectorOutput" | "SingleMutable" | "VectorMutable", DataType MFDataType }
-MFParamInfo   { Name String, Type MFParamType, Flag "None" | "SupportsUnusedOutput" }
-MFSignature   { FunctionName String, Params List(MFParamInfo) }
+MFDataType    { Category "Single" | "Vector", baseType AttrType }
+MFParamType   { Category "SingleInput" | "VectorInput" | "SingleOutput" | "VectorOutput" | "SingleMutable" | "VectorMutable", dataType MFDataType }
+MFParamInfo   { Name String, type MFParamType, Flag "None" | "SupportsUnusedOutput" }
+MFSignature   { FunctionName String, params List(MFParamInfo) }
 MultiFunction { Signature MFSignature }
 
 LFValueUsage "Used" | "Maybe" | "Unused"
-LFInput      { DebugName String, Type AttrType, Usage LFValueUsage }
-LFOutput     { DebugName String, Type AttrType }
-LazyFunction { DebugName String, Inputs List(LFInput), Outputs List(LFOutput), AllowMissingRequestedInputs Bool }
+LFInput      { DebugName String, type AttrType, usage LFValueUsage }
+LFOutput     { DebugName String, type AttrType }
+LazyFunction { DebugName String, inputs List(LFInput), outputs List(LFOutput), allowMissingRequestedInputs Bool }
 
-MeshComponent         GeometryComponent & { Type "Mesh", Mesh Option(Mesh3D) }
-PointCloudComponent   GeometryComponent & { Type "PointCloud", PointCloud Option(PointCloud) }
-CurveComponent        GeometryComponent & { Type "Curve", Curves Option(Curves) }
-InstancesComponent    GeometryComponent & { Type "Instance", Instances Option(Instances) }
-VolumeComponent       GeometryComponent & { Type "Volume", Volume Option(Volume3D) }
-GreasePencilComponent GeometryComponent & { Type "GreasePencil", GreasePencil Option(GreasePencil) }
+MeshComponent         GeometryComponent & { Type "Mesh", mesh Option(Mesh3D) }
+PointCloudComponent   GeometryComponent & { Type "PointCloud", pointCloud Option(PointCloud) }
+CurveComponent        GeometryComponent & { Type "Curve", curves Option(Curves) }
+InstancesComponent    GeometryComponent & { Type "Instance", instances Option(Instances) }
+VolumeComponent       GeometryComponent & { Type "Volume", volume Option(Volume3D) }
+GreasePencilComponent GeometryComponent & { Type "GreasePencil", greasePencil Option(GreasePencil) }
 
 InstanceReferenceType "None" | "Object" | "Collection" | "GeometrySet"
 
@@ -54,9 +53,9 @@ Instances {
   Attributes       AttributeStorage
 }
 
-bDeformWeight { DefNr Int, Weight Float }
-MDeformVert   { Dw List(bDeformWeight), Flag Int }
-bDeformGroup  { Name String, Flag Int }
+bDeformWeight { DefNr Int, weight Float }
+MDeformVert   { Dw List(bDeformWeight), flag Int }
+bDeformGroup  { Name String, flag Int }
 
 KeyBlock {
   Name      String
@@ -85,11 +84,11 @@ Key ID & {
   UidGen   Int
 }
 
-BMHeader { Index Int, Htype Int, Hflag Int }
-BMVert   { Head BMHeader, Co Float3, No Float3, Edge Option(BMEdge) }
-BMEdge   { Head BMHeader, V1 BMVert, V2 BMVert, Loop Option(BMLoop) }
-BMLoop   { Head BMHeader, V BMVert, E BMEdge, F BMFace, Next BMLoop, Prev BMLoop, RadialNext BMLoop, RadialPrev BMLoop }
-BMFace   { Head BMHeader, LFirst BMLoop, Len Int, No Float3, MatNr Int }
+BMHeader { Index Int, htype Int, hflag Int }
+BMVert   { Head BMHeader, co Float3, no Float3, edge Option(BMEdge) }
+BMEdge   { Head BMHeader, v1 BMVert, v2 BMVert, loop Option(BMLoop) }
+BMLoop   { Head BMHeader, v BMVert, e BMEdge, f BMFace, next BMLoop, prev BMLoop, radialNext BMLoop, radialPrev BMLoop }
+BMFace   { Head BMHeader, lFirst BMLoop, len Int, no Float3, matNr Int }
 BMElem   BMVert | BMEdge | BMLoop | BMFace
 
 BMesh {

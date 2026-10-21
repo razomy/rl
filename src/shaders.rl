@@ -1,5 +1,5 @@
 #
-Shader Creation, Ray Tracing AS, GPUMaterial & Shader Closures
+Shader Creation, ray Tracing AS, GPUMaterial & Shader Closures
 #
 
 GPUSpecializationConstant {
@@ -68,17 +68,17 @@ GPUNodeStack {
   SocketType Int
 }
 
-ClosureDiffuse          { Color Vec3f, Normal Vec3f }
-ClosureSubsurface       { Color Vec3f, Normal Vec3f, SssRadius Vec3f }
-ClosureTranslucent      { Color Vec3f, Normal Vec3f }
-ClosureReflection       { Color Vec3f, Normal Vec3f, Roughness Float }
-ClosureRefraction       { Color Vec3f, Normal Vec3f, Roughness Float, Ior Float }
-ClosureSheen            { Color Vec3f, Normal Vec3f, Roughness Float }
-ClosureHair             { Color Vec3f, Tangent Vec3f, RoughnessU Float, RoughnessV Float, Shift Float }
-ClosureVolumeScatter    { Scattering Vec3f, Anisotropy Float }
+ClosureDiffuse          { Color Vec3f, normal Vec3f }
+ClosureSubsurface       { Color Vec3f, normal Vec3f, sssRadius Vec3f }
+ClosureTranslucent      { Color Vec3f, normal Vec3f }
+ClosureReflection       { Color Vec3f, normal Vec3f, roughness Float }
+ClosureRefraction       { Color Vec3f, normal Vec3f, roughness Float, ior Float }
+ClosureSheen            { Color Vec3f, normal Vec3f, roughness Float }
+ClosureHair             { Color Vec3f, tangent Vec3f, roughnessU Float, roughnessV Float, shift Float }
+ClosureVolumeScatter    { Scattering Vec3f, anisotropy Float }
 ClosureVolumeAbsorption { Absorption Vec3f }
 ClosureEmission         { Emission Vec3f }
-ClosureTransparency     { Transmittance Vec3f, Holdout Float }
+ClosureTransparency     { Transmittance Vec3f, holdout Float }
 
 ShaderClosure
   ClosureDiffuse | ClosureSubsurface | ClosureTranslucent | ClosureReflection

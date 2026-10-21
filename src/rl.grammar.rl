@@ -14,7 +14,7 @@ PathRoot Identifier
 PathNode Identifier | NumberLiteral | (Minus & NumberLiteral)
 
 Path PathRoot & Kleene(Dot & PathNode)#
-2. Three Brackets: Slot (), Form Object, Flow []
+2. Three Brackets: Slot (), form Object, Flow []
 #
 
 SlotItem  Declaration

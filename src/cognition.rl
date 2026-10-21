@@ -1,10 +1,10 @@
 #
-Concrete Agent Subtypes, Maslow Needs, Big-Five Personality, Emotions & Transitions
+Concrete Agent Subtypes, maslow Needs, Big-Five Personality, Emotions & Transitions
 #
 
 HumanAgent    Agent & Human & { AgentKind "human" }
 AnimalAgent   Agent & Animal & { AgentKind "animal" }
-SoftwareAgent Agent & { AgentKind "software", Model String }
+SoftwareAgent Agent & { AgentKind "software", model String }
 Robot         Agent & { AgentKind "robot" }
 
 NeedLevel "physiological" | "safety" | "belonging" | "esteem" | "self-actualization"
@@ -32,34 +32,34 @@ EmotionKind "joy" | "sadness" | "anger" | "fear" | "surprise" | "disgust" | "tru
 
 SenseKind "sight" | "hearing" | "touch" | "taste" | "smell" | "balance" | "pain" | "proprioception"
 
-Perceive(A Agent & Mind, P Perception) [ A & { Memories (Cons { Head Memory { Content P, Recorded Now }, Tail Memories }) } ]
-Learn(A Agent & Mind, S Skill) [ A & { Skills (Cons { Head S, Tail Skills }) } ]
-Practice(S Skill, D Duration) [
+Perceive(a Agent & Mind, p Perception) [ a & { Memories (Cons { Head Memory { Content P, recorded Now }, tail Memories }) } ]
+Learn(a Agent & Mind, s Skill) [ a & { Skills (Cons { Head S, tail Skills }) } ]
+Practice(s Skill, d Duration) [
     Proficiency . {
-        "novice"       [ S & { Proficiency "beginner" } ]
-        "beginner"     [ S & { Proficiency "intermediate" } ]
-        "intermediate" [ S & { Proficiency "advanced" } ]
-        "advanced"     [ S & { Proficiency "expert" } ]
-        "expert"       [ S & { Proficiency "master" } ]
+        "novice"       [ s & { Proficiency "beginner" } ]
+        "beginner"     [ s & { Proficiency "intermediate" } ]
+        "intermediate" [ s & { Proficiency "advanced" } ]
+        "advanced"     [ s & { Proficiency "expert" } ]
+        "expert"       [ s & { Proficiency "master" } ]
         _              [ S ]
     }
 ]
-Believe(A Agent & Mind, B Belief) [ A & { Beliefs (Cons { Head B, Tail Beliefs }) } ]
-Forget(M Memory) [ M & { Strength 0 } ]
-Feel(A Agent & Mind, E Emotion) [ A & { Emotions (Cons { Head E, Tail Emotions }) } ]
-SetGoal(A Agent & Mind, G Goal) [ A & { Goals (Cons { Head G & { GoalStatus "active" }, Tail Goals }) } ]
-Achieve(G Goal & { GoalStatus "active" }) [ G & { GoalStatus "achieved", Progress 1 } ]
-Abandon(G Goal & { GoalStatus "active" }) [ G & { GoalStatus "abandoned" } ]
-Decide(A Agent, Options List(Any)) [
+Believe(a Agent & Mind, b Belief) [ a & { Beliefs (Cons { Head B, tail Beliefs }) } ]
+Forget(m Memory) [ m & { Strength 0 } ]
+Feel(a Agent & Mind, e Emotion) [ a & { Emotions (Cons { Head E, tail Emotions }) } ]
+SetGoal(a Agent & Mind, g Goal) [ a & { Goals (Cons { Head G & { GoalStatus "active" }, tail Goals }) } ]
+Achieve(g Goal & { GoalStatus "active" }) [ g & { GoalStatus "achieved", Progress 1 } ]
+Abandon(g Goal & { GoalStatus "active" }) [ g & { GoalStatus "abandoned" } ]
+Decide(a Agent, options List(Any)) [
     Options . {
-        Nil [ A & Idle Object ]
-        _   [ Choice { Options, Chosen Options.Head } ]
+        Nil [ a & Idle Object ]
+        _   [ Choice { Options, chosen Options.Head } ]
     }
 ]
-Satisfy(U Unsatisfied) [ U / Unsatisfied & Satisfied { Need } ]
-StartActivity(A Agent & Idle, Activity String) [ A / Idle & Busy { Activity } ]
-StopActivity(A Agent & Busy) [ A / Busy & Idle Object ]
-Rest(A Agent & Tired) [ A / Tired & Rested Object ]
+Satisfy(u Unsatisfied) [ U / Unsatisfied & Satisfied { Need } ]
+StartActivity(a Agent & Idle, activity String) [ A / Idle & Busy { Activity } ]
+StopActivity(a Agent & Busy) [ A / Busy & Idle Object ]
+Rest(a Agent & Tired) [ A / Tired & Rested Object ]
 
 Agent [
 LifeCycle {

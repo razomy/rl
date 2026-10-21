@@ -1,6 +1,5 @@
-
 #
-Abstract Linguistic Morpheme, Lexeme, Inflected Word & Syntax Phrase
+Abstract Linguistic Morpheme, Lexeme, inflected Word & Syntax Phrase
 #
 
 Morpheme {

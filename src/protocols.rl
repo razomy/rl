@@ -40,15 +40,15 @@ GraphQlResponse {
 }
 
 Http {
-  Get(Url String)             [ native_http_get(Url) ]
-  Post(Url String, Body String) [ native_http_post(Url, Body) ]
-  Put(Url String, Body String)  [ native_http_put(Url, Body) ]
-  Delete(Url String)          [ native_http_delete(Url) ]
-  Send(Req HttpRequest)       [ Req . native_http_send ]
-  Listen(Port Int, Handler)   [ (Port, Handler) . native_http_listen ]
+  Get(url String)             [ native_http_get(Url) ]
+  Post(url String, body String) [ native_http_post(Url, Body) ]
+  Put(url String, body String)  [ native_http_put(Url, Body) ]
+  Delete(url String)          [ native_http_delete(Url) ]
+  Send(req HttpRequest)       [ Req . native_http_send ]
+  Listen(port Int, Handler)   [ (Port, Handler) . native_http_listen ]
 }
 
-ApiRouter(Req HttpRequest) [
+ApiRouter(req HttpRequest) [
   Req . {
     { Method "GET", Path ["health"] } [
       HttpResponse { Status 200, Body "OK" }
@@ -56,10 +56,10 @@ ApiRouter(Req HttpRequest) [
 
     { Method "GET", Path ["users", Id] } [
       Req . AuthMiddleware . {
-        Unauthorized [ HttpResponse { Status 401, Body Reason } ]
+        Unauthorized [ HttpResponse { Status 401, body Reason } ]
         HttpRequest  [
           Id . Db.FindUser . Json.Encode . (JsonStr [
-            HttpResponse { Status 200, Body JsonStr }
+            HttpResponse { Status 200, body JsonStr }
           ])
         ]
       }

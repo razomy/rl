@@ -24,7 +24,7 @@ ShiftR      ">>"
 Plus        "+"
 Minus       "-"
 Mul         "*"
-Slash       "/"                   // Division (Math) & Subtraction (Type Algebra)
+Slash       "/"                   // Division (Math) & Subtraction (type Algebra)
 Mod         "%"
 Pipe        "|"                   // Union (Types & Flows)
 Amp         "&"                   // Intersection / Merge (Types & Flows)

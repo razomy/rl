@@ -1,5 +1,5 @@
 #
-Concrete Engineering Types, Semiconductor Nodes, Propulsion & Calculations
+Concrete Engineering Types, semiconductor Nodes, Propulsion & Calculations
 #
 
 BeamSupportType   "Cantilever" | "SimplySupported" | "FixedBothEnds" | "Overhanging" | "Continuous"
@@ -33,15 +33,15 @@ ManufacturingProcess
 
 GeometricToleranceType "Flatness" | "Straightness" | "Circularity" | "Cylindricity" | "Perpendicularity" | "Parallelism" | "Concentricity" | "TruePosition" | "SurfaceProfile"
 
-ComputeReynoldsNumber(Density Float, Velocity Float, CharacteristicLength Float, DynamicViscosity Float) [
+ComputeReynoldsNumber(density Float, velocity Float, characteristicLength Float, dynamicViscosity Float) [
   (Density * Velocity * CharacteristicLength) / DynamicViscosity
 ]
 
-ComputeRocketDeltaV(IspSeconds Float, InitialMassKg Float, FinalDryMassKg Float) [
+ComputeRocketDeltaV(ispSeconds Float, initialMassKg Float, finalDryMassKg Float) [
   G0 9.80665
   (IspSeconds * G0) * Math.Ln(InitialMassKg / FinalDryMassKg)
 ]
 
-TripSubstationBreaker(Sub PowerGridSubstation & { BreakerClosed true }) [
+TripSubstationBreaker(sub PowerGridSubstation & { BreakerClosed true }) [
   Sub & { BreakerClosed false, ActivePowerMw 0.0 }
 ]

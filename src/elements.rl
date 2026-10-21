@@ -12,7 +12,7 @@ Electron Particle & { ParticleKind "electron", ParticleFamily "lepton" }
 Proton   Particle & { ParticleKind "proton",   ParticleFamily "hadron" }
 Neutron  Particle & { ParticleKind "neutron",  ParticleFamily "hadron" }
 Photon   Particle & { ParticleKind "photon",   ParticleFamily "gauge-boson" }
-AntiParticle(P Particle) Particle & { ParticleKind P.ParticleKind, Charge (0 - P.Charge.Value) }
+AntiParticle(p Particle) Particle & { ParticleKind P.ParticleKind, Charge (0 - P.Charge.Value) }
 
 ElementCategory "alkali-metal" | "alkaline-earth-metal" | "transition-metal" | "post-transition-metal"
     | "metalloid" | "nonmetal" | "halogen" | "noble-gas" | "lanthanide" | "actinide" | "unknown"

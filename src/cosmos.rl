@@ -23,8 +23,8 @@ Orbit {
 }
 Orbiting { Orbit }
 
-Universe      { Age Duration, Galaxies List(Galaxy) }
-GalaxyCluster { Name, Galaxies List(Galaxy) }
+Universe      { Age Duration, galaxies List(Galaxy) }
+GalaxyCluster { Name, galaxies List(Galaxy) }
 
 Galaxy CelestialBody & {
     GalaxyType
@@ -59,8 +59,8 @@ Comet     CelestialBody & Orbiting & { Tail Length }
 Meteor    CelestialBody & { Entering Planet }
 Meteorite CelestialBody & { LandedOn Planet }
 
-PlanetarySystem { Star, Planets List(Planet) }
-Eclipse         { EclipseKind "solar" | "lunar", At Instant, Totality Fraction }
+PlanetarySystem { Star, planets List(Planet) }
+Eclipse         { EclipseKind "solar" | "lunar", at Instant, totality Fraction }
 
 Precipitation Measure(Real & NonNegative, Metre)
 Humidity      Percent

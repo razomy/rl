@@ -2,7 +2,7 @@
 Stream Generators & Examples
 #
 
-FizzBuzz(Limit Int) [
+FizzBuzz(limit Int) [
   (1..Limit) . Map(N [
     (N % 3, N % 5) . {
       (0, 0) [ "FizzBuzz" ]
@@ -13,6 +13,6 @@ FizzBuzz(Limit Int) [
   ])
 ]
 
-RangeSum(Start Int, End Int) [
+RangeSum(start Int, end Int) [
   (Start..End) . Sum
 ]

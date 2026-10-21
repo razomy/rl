@@ -1,5 +1,5 @@
 #
-SI Base & Derived Units, Physical Measures & Transitions
+SI Base & Derived Units, physical Measures & Transitions
 #
 
 Metre    Unit & { UnitSymbol "m",   Dimension "length",      Factor 1 }
@@ -28,7 +28,7 @@ Radian          Unit & { UnitSymbol "rad",   Dimension "angle",         Factor 1
 Degree          Unit & { UnitSymbol "deg",   Dimension "angle",         Factor 0.0174533 }
 KilogramPerM3   Unit & { UnitSymbol "kg/m3", Dimension "density",       Factor 1 }
 Bit             Unit & { UnitSymbol "bit",   Dimension "information",   Factor 1 }
-Byte            Unit & { UnitSymbol "B",     Dimension "information",   Factor 8 }
+ByteU            Unit & { UnitSymbol "B",     Dimension "information",   Factor 8 }
 One             Unit & { UnitSymbol "1",     Dimension "dimensionless", Factor 1 }
 SiDerivedUnit SquareMetre | CubicMetre | Litre | MetrePerSecond | MetrePerSecond2 | Newton | Joule
     | Watt | Pascal | Hertz | Coulomb | Volt | Ohm | Radian | Degree | KilogramPerM3 | Bit | Byte | One
@@ -47,19 +47,19 @@ Density           Measure(Real & Positive, KilogramPerM3)
 DataSize          Measure(Natural, Byte)
 AmountOfSubstance Measure(Real & NonNegative, Mole)
 
-Convert(M Measure(Real, Unit), Target Unit) [
+Convert(m Measure(Real, Unit), target Unit) [
     Measure(Real, Unit) {
         Value (Value * Unit.Factor / Target.Factor)
         Unit  Target
     }
 ]
 
-Scale(M Measure(Real, Unit), K Real) [
+Scale(m Measure(Real, Unit), k Real) [
     M & { Value (Value * K) }
 ]
 
-Increment(C Count) [ C + 1 ]
-Decrement(C Count) [
+Increment(c Count) [ C + 1 ]
+Decrement(c Count) [
     C . {
         0 [ 0 ]
         _ [ C - 1 ]

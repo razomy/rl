@@ -1,5 +1,5 @@
 #
-Abstract Game Boards, Generators, RPG Stats & Progression Entities
+Abstract Game Boards, Generators, rPG Stats & Progression Entities
 #
 
 GridCellModel {

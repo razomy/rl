@@ -1,5 +1,5 @@
 #
-Earth Systems, Biomes, Continents, Weather Conditions & Cosmic Transitions
+Earth Systems, Biomes, Continents, weather Conditions & Cosmic Transitions
 #
 
 Hemisphere  "northern" | "southern" | "eastern" | "western"
@@ -21,19 +21,19 @@ WaterBody "ocean" | "sea" | "lake" | "river" | "stream" | "pond" | "bay" | "gulf
 Continent "africa" | "antarctica" | "asia" | "australia" | "europe" | "north-america" | "south-america"
 Ocean     "pacific" | "atlantic" | "indian" | "southern" | "arctic"
 
-Revolve(B Orbiting, D Duration) [ B & { Position (Position . Translate(Velocity)) } ]
-Ignite(C CelestialBody) [ Star & C & { StarStage "main-sequence" } ]
-Expand(S Star & { StarStage "main-sequence" }) [ S & { StarStage "red-giant" } ]
-Collapse(S Star) [
+Revolve(b Orbiting, d Duration) [ b & { Position (Position . Translate(Velocity)) } ]
+Ignite(c CelestialBody) [ Star & C & { StarStage "main-sequence" } ]
+Expand(s Star & { StarStage "main-sequence" }) [ s & { StarStage "red-giant" } ]
+Collapse(s Star) [
     Mass.Value . {
         [ _ > 6e31 ] [ BlackHole & S ]
-        [ _ > 3e30 ] [ S & { StarStage "neutron-star" } ]
-        _            [ S & { StarStage "white-dwarf" } ]
+        [ _ > 3e30 ] [ s & { StarStage "neutron-star" } ]
+        _            [ s & { StarStage "white-dwarf" } ]
     }
 ]
-Explode(S Star & { StarStage "supergiant" }) [ S & { StarStage "supernova" } ]
-Impact(A Asteroid, P Planet) [ Meteorite { LandedOn P } & A ]
-ChangeSeason(S Season) [
+Explode(s Star & { StarStage "supergiant" }) [ s & { StarStage "supernova" } ]
+Impact(a Asteroid, p Planet) [ Meteorite { LandedOn P } & A ]
+ChangeSeason(s Season) [
     S . {
         "spring" [ "summer" ]
         "summer" [ "autumn" ]
@@ -41,4 +41,4 @@ ChangeSeason(S Season) [
         "winter" [ "spring" ]
     }
 ]
-Forecast(W Weather, D Duration) [ Weather & W & { At (W.At . Elapse(D)) } ]
+Forecast(w Weather, d Duration) [ Weather & W & { At (W.At . Elapse(D)) } ]

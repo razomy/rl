@@ -1,4 +1,3 @@
-
 #
 Abstract Database Config, Transactions & Query Specifications
 #

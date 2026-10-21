@@ -1,8 +1,8 @@
 #
-Concrete Text Works, Reviews, Comments, Web Pages & Authoring Transitions
+Concrete Text Works, Reviews, Comments, web Pages & Authoring Transitions
 #
 
-NewsArticle            Article & { Dateline String, PrintColumn String, PrintEdition String, PrintPage String, PrintSection String }
+NewsArticle            Article & { Dateline String, printColumn String, printEdition String, printPage String, printSection String }
 AnalysisNewsArticle    NewsArticle
 AskPublicNewsArticle   NewsArticle
 BackgroundNewsArticle  NewsArticle
@@ -15,30 +15,30 @@ ScholarlyArticle       Article
 MedicalScholarlyArticle ScholarlyArticle & { PublicationType String }
 SocialMediaPosting     Article & { SharedContent CreativeWork }
 BlogPosting            SocialMediaPosting
-LiveBlogPosting        BlogPosting & { CoverageStartTime DateTime, CoverageEndTime DateTime, LiveBlogUpdate List(BlogPosting) }
+LiveBlogPosting        BlogPosting & { CoverageStartTime DateTime, coverageEndTime DateTime, liveBlogUpdate List(BlogPosting) }
 DiscussionForumPosting SocialMediaPosting
-TechArticle            Article & { Dependencies String, ProficiencyLevel String }
-APIReference           TechArticle & { ProgrammingModel String, TargetPlatform String }
+TechArticle            Article & { Dependencies String, proficiencyLevel String }
+APIReference           TechArticle & { ProgrammingModel String, targetPlatform String }
 
 Audiobook         Book & AudioObject_ & { ReadBy List(Person) }
-Chapter           CreativeWork & { PageStart Count, PageEnd Count }
+Chapter           CreativeWork & { PageStart Count, pageEnd Count }
 Poem              CreativeWork
 Thesis            CreativeWork & { InSupportOf String }
 Manuscript        CreativeWork
 Letter_           CreativeWork
 Quotation         CreativeWork & { SpokenByCharacter Agent }
-Claim             CreativeWork & { Appearance CreativeWork, FirstAppearance CreativeWork }
-Legislation       CreativeWork & { LegislationIdentifier String, LegislationJurisdiction AdministrativeArea, LegislationLegalForce LegalForceStatus, LegislationDate Date }
+Claim             CreativeWork & { Appearance CreativeWork, firstAppearance CreativeWork }
+Legislation       CreativeWork & { LegislationIdentifier String, legislationJurisdiction AdministrativeArea, legislationLegalForce LegalForceStatus, legislationDate Date }
 Statement         CreativeWork
-HowTo             CreativeWork & { Step List(HowToStep), Supply List(HowToSupply), Tool List(HowToTool), TotalTime Duration_, PrepTime Duration_, PerformTime Duration_, EstimatedCost MonetaryAmount, Yield String }
-Recipe            HowTo & { RecipeIngredient List(String), RecipeInstructions List(HowToStep), RecipeYield String, RecipeCategory String, RecipeCuisine String, CookTime Duration_, CookingMethod String, NutritionInformation, SuitableForDiet RestrictedDiet }
+HowTo             CreativeWork & { Step List(HowToStep), supply List(HowToSupply), tool List(HowToTool), totalTime Duration_, prepTime Duration_, performTime Duration_, estimatedCost MonetaryAmount, yield String }
+Recipe            HowTo & { RecipeIngredient List(String), recipeInstructions List(HowToStep), recipeYield String, recipeCategory String, recipeCuisine String, cookTime Duration_, cookingMethod String, NutritionInformation, suitableForDiet RestrictedDiet }
 Guide             CreativeWork & { ReviewAspect String }
-Menu              CreativeWork & { HasMenuItem List(MenuItem), HasMenuSection List(MenuSection) }
+Menu              CreativeWork & { HasMenuItem List(MenuItem), hasMenuSection List(MenuSection) }
 MenuSection       CreativeWork & { HasMenuItem List(MenuItem) }
 
 Periodical        CreativeWorkSeries & { Issn }
 BookSeries        CreativeWorkSeries
-PublicationIssue  CreativeWork & { IssueNumber String, PageStart Count, PageEnd Count }
+PublicationIssue  CreativeWork & { IssueNumber String, pageStart Count, pageEnd Count }
 PublicationVolume CreativeWork & { VolumeNumber String }
 
 ClaimReview    Review & { ClaimReviewed String }
@@ -50,7 +50,7 @@ UserReview     Review
 
 Answer            Comment & { AnswerExplanation Comment }
 CorrectionComment Comment
-Question          Comment & { AcceptedAnswer Answer, SuggestedAnswer List(Answer), AnswerCount Count }
+Question          Comment & { AcceptedAnswer Answer, suggestedAnswer List(Answer), answerCount Count }
 
 EmailMessage  SchemaMessage
 Conversation  CreativeWork
@@ -60,18 +60,18 @@ Drawing       CreativeWork
 Painting      CreativeWork
 Photograph    CreativeWork
 Sculpture     CreativeWork
-VisualArtwork CreativeWork & { ArtMedium String, Artform String, Artist Person, Height QuantitativeValue, Width QuantitativeValue }
+VisualArtwork CreativeWork & { ArtMedium String, artform String, artist Person, height QuantitativeValue, width QuantitativeValue }
 Season_       CreativeWork
 Episode_      CreativeWork
-Game          CreativeWork & { NumberOfPlayers QuantitativeValue, CharacterAttribute Thing, GameItem Thing, GameLocation Place, Quest Thing }
-Certification CreativeWork & { CertificationIdentification String, CertificationStatus String, IssuedBy Organization, ValidFrom Date, Expires Date }
-EducationalOccupationalCredential CreativeWork & { CredentialCategory String, RecognizedBy Organization, ValidFor Duration_ }
+Game          CreativeWork & { NumberOfPlayers QuantitativeValue, characterAttribute Thing, gameItem Thing, gameLocation Place, quest Thing }
+Certification CreativeWork & { CertificationIdentification String, certificationStatus String, issuedBy Organization, validFrom Date, expires Date }
+EducationalOccupationalCredential CreativeWork & { CredentialCategory String, recognizedBy Organization, validFor Duration_ }
 
 NoteDigitalDocument         DigitalDocument
 PresentationDigitalDocument DigitalDocument
 SpreadsheetDigitalDocument  DigitalDocument
 TextDigitalDocument         DigitalDocument
-ArchiveComponent            CreativeWork & { HoldingArchive Organization, ItemLocation Place }
+ArchiveComponent            CreativeWork & { HoldingArchive Organization, itemLocation Place }
 Atlas                       CreativeWork
 Blog                        CreativeWork & { BlogPost List(BlogPosting) }
 Chapter_                    Chapter
@@ -106,16 +106,16 @@ WPFooter              WebPageElement
 WPHeader              WebPageElement
 WPSideBar             WebPageElement
 
-Author(A Agent, T Text) [ CreativeWork { Author List1(A), Text T, DateCreated Now, CreativeWorkStatus "Draft" } ]
-Edit(W CreativeWork, T Text) [ W & { Text T, DateModified Now } ]
-PublishWork(W CreativeWork & { CreativeWorkStatus "Draft" }, P Agent) [ W & { CreativeWorkStatus "Published", DatePublished Now, Publisher P } ]
-Obsolete(W CreativeWork & { CreativeWorkStatus "Published" }) [ W & { CreativeWorkStatus "Obsolete" } ]
-Cite(W CreativeWork, Source CreativeWork) [ W & { Citation (Cons { Head Source, Tail Citation }) } ]
-Adapt(Source CreativeWork, A Agent) [ CreativeWork { IsBasedOn Source, Author List1(A), DateCreated Now } ]
-WriteReview(A Agent, I Thing, R Rating, B Text) [ Review { Author List1(A), ItemReviewed I, ReviewRating R, ReviewBody B, DatePublished Now } ]
-AddComment(W CreativeWork, C Comment) [ W & { Comment (Cons { Head C, Tail Comment }), CommentCount (CommentCount + 1) } ]
-AskQuestion(A Agent, T Text) [ Question { Author List1(A), Text T, AnswerCount 0 } ]
-AnswerQuestion(Q Question, A Answer) [ Q & { SuggestedAnswer (Cons { Head A, Tail SuggestedAnswer }), AnswerCount (AnswerCount + 1) } ]
-AcceptAnswer(Q Question, A Answer) [ Q & { AcceptedAnswer A } ]
-Upvote(C Comment) [ C & { UpvoteCount (UpvoteCount + 1) } ]
-Downvote(C Comment) [ C & { DownvoteCount (DownvoteCount + 1) } ]
+Author(a Agent, t Text) [ CreativeWork { Author List1(A), text T, dateCreated Now, CreativeWorkStatus "Draft" } ]
+Edit(w CreativeWork, t Text) [ w & { Text T, dateModified Now } ]
+PublishWork(w CreativeWork & { CreativeWorkStatus "Draft" }, p Agent) [ w & { CreativeWorkStatus "Published", datePublished Now, publisher P } ]
+Obsolete(w CreativeWork & { CreativeWorkStatus "Published" }) [ w & { CreativeWorkStatus "Obsolete" } ]
+Cite(w CreativeWork, source CreativeWork) [ w & { Citation (Cons { Head Source, tail Citation }) } ]
+Adapt(source CreativeWork, a Agent) [ CreativeWork { IsBasedOn Source, author List1(A), dateCreated Now } ]
+WriteReview(a Agent, i Thing, r Rating, b Text) [ Review { Author List1(A), itemReviewed I, reviewRating R, reviewBody B, datePublished Now } ]
+AddComment(w CreativeWork, c Comment) [ w & { Comment (Cons { Head C, tail Comment }), CommentCount (CommentCount + 1) } ]
+AskQuestion(a Agent, t Text) [ Question { Author List1(A), text T, AnswerCount 0 } ]
+AnswerQuestion(q Question, a Answer) [ q & { SuggestedAnswer (Cons { Head A, tail SuggestedAnswer }), AnswerCount (AnswerCount + 1) } ]
+AcceptAnswer(q Question, a Answer) [ q & { AcceptedAnswer A } ]
+Upvote(c Comment) [ c & { UpvoteCount (UpvoteCount + 1) } ]
+Downvote(c Comment) [ c & { DownvoteCount (DownvoteCount + 1) } ]

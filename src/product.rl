@@ -1,4 +1,3 @@
-
 #
 Abstract Product & SchemaVehicle (schema.org)
 #

@@ -15,7 +15,7 @@ Language {
     LanguageFamily
 }
 
-Symbol    { Glyph Char, Meaning String }
+Symbol    { Glyph Char, meaning String }
 Word      { Spelling String, Language }
 Sentence  { Words List(Word) }
 Text      { Content String, Language }
@@ -27,7 +27,7 @@ Keyword   String
 PartOfSpeech "noun" | "verb" | "adjective" | "adverb" | "pronoun" | "preposition" | "conjunction"
     | "interjection" | "article" | "numeral"
 
-Identifier { Scheme String, Value String }
+Identifier { Scheme String, value String }
 
 Email      String
 Phone      String
@@ -57,7 +57,7 @@ Data {
 }
 
 MediaKind  "text" | "image" | "audio" | "video" | "3d" | "interactive"
-Resolution { Width Count, Height Count }
+Resolution { Width Count, height Count }
 
 Media {
     MediaKind
@@ -68,7 +68,7 @@ Media {
     Resolution
 }
 
-Signal   { Frequency, Payload Data }
+Signal   { Frequency, payload Data }
 Channel_ "speech" | "writing" | "gesture" | "mail" | "phone" | "email" | "chat" | "broadcast" | "web"
 
 Message {
@@ -81,12 +81,12 @@ Message {
 
 Draft     Object
 Published { PublishedAt Instant, Url }
-Retracted { RetractedAt Instant, Reason String }
+Retracted { RetractedAt Instant, reason String }
 Sent      { SentAt Instant }
 Delivered { DeliveredAt Instant }
 Read      { ReadAt Instant }
 
-Information { Content Any, Source Agent, Confidence Fraction }
-Record      { Identifier, Fields Any, Created Instant }
+Information { Content Any, source Agent, confidence Fraction }
+Record      { Identifier, fields Any, created Instant }
 Catalog     { Records List(Record) }
 Archive     Catalog

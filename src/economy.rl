@@ -19,7 +19,7 @@ Revenue      Money
 Profit       Money
 Debt         Money
 Wage         Money & { Per TimeUnit }
-ExchangeRate { From Currency, To Currency, Rate Real & Positive, At Instant }
+ExchangeRate { From Currency, to Currency, rate Real & Positive, at Instant }
 TaxRate      Percent
 Tax          { Name, TaxRate, Jurisdiction }
 InterestRate Percent
@@ -45,7 +45,7 @@ Open_  { OpenedAt Instant }
 Frozen { Reason String }
 Closed { ClosedAt Instant }
 
-Loan { Principal Money, InterestRate, Term Duration, Borrower Agent, Lender Agent }
+Loan { Principal Money, InterestRate, term Duration, borrower Agent, lender Agent }
 
 TransactionStatus "pending" | "authorized" | "settled" | "failed" | "reversed"
 
@@ -59,8 +59,8 @@ Transaction {
     At   Instant
 }
 
-Good     { Name, Price, Quantity_ Count }
-Service_ { Name, Price, Provider Agent }
+Good     { Name, Price, quantity_ Count }
+Service_ { Name, Price, provider Agent }
 
 Market {
     Name
@@ -68,8 +68,8 @@ Market {
     Participants List(Agent)
     Currency
 }
-Supply { Good, Quantity_ Count }
-Demand { Good, Quantity_ Count }
+Supply { Good, quantity_ Count }
+Demand { Good, quantity_ Count }
 
 ContractStatus "draft" | "offered" | "signed" | "active" | "fulfilled" | "breached" | "terminated"
 Contract {
@@ -81,13 +81,13 @@ Contract {
     Value Money
 }
 
-Invoice_ { Identifier, Issuer Agent, Payer Agent, Money, DueDate Date }
-Receipt  { Transaction, IssuedAt Instant }
+Invoice_ { Identifier, issuer Agent, payer Agent, Money, dueDate Date }
+Receipt  { Transaction, issuedAt Instant }
 
-Employment { Employer Agent, Employee Agent, Wage, Interval, Title }
+Employment { Employer Agent, employee Agent, Wage, Interval, Title }
 Employed   { Employment }
 Unemployed Object
 Retired    { Since Instant }
 
-Insufficient { Needed Money, Available Balance }
+Insufficient { Needed Money, available Balance }
 Rejected     { Reason String }

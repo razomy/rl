@@ -1,5 +1,5 @@
 #
-Levels 3-6: File System, Web Operations, Digital Communication & Applied Tasks
+Levels 3-6: File System, web Operations, digital Communication & Applied Tasks
 #
 
 ContentStream {

@@ -33,8 +33,8 @@ Goal {
     Serves List(Need)
     Progress Fraction
 }
-Plan_     { Goal, Steps List(String) }
-Intention { Goal, Committed Bool }
+Plan_     { Goal, steps List(String) }
+Intention { Goal, committed Bool }
 
 Skill {
     Name
@@ -43,7 +43,7 @@ Skill {
     Experience Duration
 }
 
-Knowledge  { Topic String, Confidence Fraction }
+Knowledge  { Topic String, confidence Fraction }
 Confidence Fraction
 
 Belief {
@@ -63,11 +63,11 @@ Emotion {
     Valence
     Since Instant
 }
-Mood { Valence, Arousal Fraction }
+Mood { Valence, arousal Fraction }
 
-Attention  { Focus Any, Span Duration }
-Memory     { Content Any, Recorded Instant, Strength Fraction }
-Perception { Sense SenseKind, Stimulus Any }
+Attention  { Focus Any, span Duration }
+Memory     { Content Any, recorded Instant, strength Fraction }
+Perception { Sense SenseKind, stimulus Any }
 
 Mind {
     Beliefs  List(Belief)
@@ -79,7 +79,7 @@ Mind {
     Mood
 }
 
-Choice { Options List(Any), Chosen Any, Reason String }
+Choice { Options List(Any), chosen Any, reason String }
 Idle   Object
 Busy   { Activity String }
 Tired  { Fatigue Fraction }

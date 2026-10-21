@@ -1,5 +1,5 @@
 #
-Concrete Quantum Gates, Neurotransmitters, Geological Eras, Crystal Systems & Transitions
+Concrete Quantum Gates, Neurotransmitters, geological Eras, crystal Systems & Transitions
 #
 
 QuantumGateType
@@ -12,9 +12,9 @@ Neurotransmitter "Dopamine" | "Serotonin" | "Norepinephrine" | "Acetylcholine" |
 BrainWaveBand    "Delta" | "Theta" | "Alpha" | "Beta" | "Gamma"
 CorticalLobe     "Frontal" | "Parietal" | "Temporal" | "Occipital" | "Insular" | "Limbic" | "Cerebellum" | "Brainstem"
 
-FireActionPotential(N SpikingNeuron) [
+FireActionPotential(n SpikingNeuron) [
   (N.MembranePotentialMv >= N.ThresholdPotentialMv) . {
-    true  [ N & { MembranePotentialMv N.RestingPotentialMv } ]
+    true  [ n & { MembranePotentialMv N.RestingPotentialMv } ]
     false [ N ]
   }
 ]
@@ -31,6 +31,6 @@ TrophicLevel   "PrimaryProducer" | "PrimaryConsumerHerbivore" | "SecondaryConsum
 SoilTexture    "Sand" | "LoamySand" | "SandyLoam" | "Loam" | "SiltLoam" | "Silt" | "ClayLoam" | "Clay" | "Peat" | "Chalk"
 CropCycleStage "Fallow" | "SeedbedPrepared" | "Sown" | "Germinating" | "VegetativeGrowth" | "Flowering" | "Ripening" | "Harvested"
 
-HarvestField(F AgriculturalField & { Stage "Ripening" }) [
+HarvestField(f AgriculturalField & { Stage "Ripening" }) [
   F & { Stage "Harvested" }
 ]
